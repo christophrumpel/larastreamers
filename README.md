@@ -17,6 +17,7 @@ In order to import videos from  YouTube you need:
 * [ ] User can make suggestions for streams
 * [ ] User can add event to cal
 * [ ] User can subscribe to notifications (newsletter list?)
+* [ ] Automatically check for updates on stored streams (hourly?)
 
 ## Contribute
 
