@@ -14,6 +14,8 @@ In order to import videos from  YouTube you need:
 
 ## Roadmap
 
+* [ ] Backup DB
+* [ ] RSS Feed
 * [ ] User can make suggestions for streams to add
 * [ ] User can add event to cal
 * [ ] User can subscribe to notifications (newsletter list?)
