@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Larastreamers</title>
     <meta name="description" content="Larastreamers is an overview of who is streaming next in the Laravel world.">
