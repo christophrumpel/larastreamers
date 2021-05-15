@@ -18,6 +18,9 @@
           content="{{ asset('images/larastreamers_social.png') }}"/>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+    <script src="{{ asset('js/app.js') }}" />
+
+    @include('feed::links')
     @livewireStyles
 
     <!-- Fathom - beautiful, simple website analytics -->
@@ -37,7 +40,6 @@
                     code
                     <b>live</b>. Find out who is streaming next in the Laravel world.</p>
             </div>
-            <livewire:timezone-switcher :timezones="$timezones" :currentTimezone="$currentTimezone"/>
         </div>
 
         <main class="bg-gray-800 py-16">
