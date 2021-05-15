@@ -47,6 +47,37 @@
                 {{$slot ?? ''}}
             </div>
         </main>
+
+        <footer class="bg-gray-900 flex justify-center px-4 text-gray-100">
+            <div class="container py-6">
+                <h1 class="text-center text-lg font-bold lg:text-2xl">
+                    Want to know when a Laravel Stream start?<br> Join our Newsletter!
+                </h1>
+
+                <div class="flex justify-center mt-6">
+                    <div class="bg-white rounded-lg">
+                        <div class="flex flex-wrap justify-between md:flex-row">
+                            <input type="email" class="m-1 p-2 appearance-none text-gray-700 text-sm focus:outline-none" placeholder="Enter your email">
+                            <button class="w-full m-1 p-2 text-sm bg-gray-800 rounded-lg font-semibold uppercase lg:w-auto">subscribe</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="h-px mt-6 bg-gray-700 border-none">
+
+                <div class="flex flex-col items-center justify-between mt-6 md:flex-row">
+                    <div>
+                        <a href="#" class="text-xl font-bold">Larastreamers</a>
+                    </div>
+                    <div class="flex mt-4 md:m-0">
+                        <div class="-mx-4">
+                            <a href="https://twitter.com/christophrumpel" class="px-4 text-sm">Twitter</a>
+                            <a href="https://github.com/christophrumpel/larastreamers" class="px-4 text-sm">Github</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>
 @livewireScripts
