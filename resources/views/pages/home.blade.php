@@ -1,4 +1,4 @@
-<x-layout :timezones="$timezones" :currentTimezone="$currentTimezone">
+<x-layout>
     <div class="space-y-16">
         @foreach($streamsByDate as $date => $streams)
             <article>

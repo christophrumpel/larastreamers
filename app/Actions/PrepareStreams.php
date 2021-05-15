@@ -10,16 +10,9 @@ use Illuminate\Support\Collection;
 
 class PrepareStreams
 {
-    public function handle(Collection $streams, string $currentTimezone): Collection
+    public function handle(Collection $streams): Collection
     {
         return $streams
-            ->map(function (Stream $stream) use ($currentTimezone) {
-                ray($currentTimezone);
-
-                $stream->scheduled_start_time = $stream->scheduled_start_time->timezone($currentTimezone);
-
-                return $stream;
-            })
             ->sortBy('scheduled_start_time')
             ->groupBy(function ($item) {
                 return $item->scheduled_start_time->format('D d.m.Y');
