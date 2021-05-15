@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "abraham/twitteroauth": "^2.0",
         "alaouy/youtube": "^2.2",
         "christophrumpel/missing-livewire-assertions": "0.*",
         "fideloper/proxy": "^4.4",
