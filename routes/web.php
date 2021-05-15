@@ -21,7 +21,7 @@ Route::get('/', PageHomeController::class)
     ->name('home');
 
 Route::get('/calendar.ics', CalendarController::class)
-    ->name('home');
+    ->name('calendar.ics');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
