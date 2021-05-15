@@ -32,4 +32,4 @@ In order to import videos from  YouTube you need:
 
 ## Contribute
 
-We welcome everyone to contribute to this project. Just make sure to suggest bigger features first, before you spend a lot of time.
+We welcome everyone to contribute to this project. Just make sure to suggest bigger features first, before you spend a lot of time. Please also make sure to `write tests` for what you implement. I only merge PRs with tests :-)
