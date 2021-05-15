@@ -17,7 +17,7 @@ In order to import videos from  YouTube you need:
 
 ## Roadmap
 
-* [ ] Backup DB
+* [x] Backup DB (Laravel Backup)
 * [ ] RSS Feed
 * [ ] User can make suggestions for streams to add
 * [ ] User can add event to cal
