@@ -12,18 +12,14 @@ class PagesResponseTest extends TestCase
     /** @test */
     public function it_shows_successful_response_for_home_page(): void
     {
-        $this->withoutExceptionHandling();
-
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->get('/')
+             ->assertOk();
     }
 
     /** @test */
     public function it_can_show_the_feed(): void
     {
-        $response = $this->get('/feed');
-
-        $response->assertStatus(200);
+        $this->get('/feed')
+            ->assertOk();
     }
 }

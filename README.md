@@ -11,7 +11,8 @@ It shows you who is live coding next in the Laravel world.
 
 In order to import videos from  YouTube you need:
 
-* `YOUTUBE_API_KEY` in your `.env` file
+* Run `composer install` then `composer setup`
+* Fill `YOUTUBE_API_KEY` in your `.env` file
 * The video needs to be in the future (at least today)
 * The video needs to be a scheduled live stream
 
