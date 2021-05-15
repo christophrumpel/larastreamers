@@ -19,6 +19,10 @@ In order to import videos from  YouTube you need:
 
 * [x] Backup DB (Laravel Backup)
 * [ ] RSS Feed
+* [ ] Twitter integration (tweet when added, tweet when X minutes before)
+* [ ] Better timezone support
+* [ ] Calendar link
+* [ ] Approval flow
 * [ ] User can make suggestions for streams to add
 * [ ] User can add event to cal
 * [ ] User can subscribe to notifications (newsletter list?)
