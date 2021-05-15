@@ -14,9 +14,11 @@ class Stream extends Model implements Feedable
 {
     use HasFactory;
 
-    protected $dates = ['scheduled_start_time'];
-
     protected $fillable = ['channel_title', 'youtube_id', 'title', 'thumbnail_url', 'scheduled_start_time'];
+
+    protected $casts = [
+        'scheduled_start_time' => 'datetime',
+    ];
 
     public function scopeUpcoming(Builder $query): Builder
     {
