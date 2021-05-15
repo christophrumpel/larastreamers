@@ -1,3 +1,6 @@
+![larastreamers_social_small](https://user-images.githubusercontent.com/1394539/118348006-a0340000-b547-11eb-8359-1bb8649d9602.png)
+
+
 # Larastreamers
 
 This is the repository of [https://larastreamers.com](https://larastreamers.com/).
@@ -20,6 +23,7 @@ In order to import videos from  YouTube you need:
 * [ ] User can add event to cal
 * [ ] User can subscribe to notifications (newsletter list?)
 * [ ] Automatically check for updates on stored streams (hourly?)
+* [ ] Show when I stream is currently live
 
 ## Contribute
 
