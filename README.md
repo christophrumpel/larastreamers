@@ -19,13 +19,17 @@ In order to import videos from  YouTube you need:
 ## Roadmap
 
 * [x] Backup DB (Laravel Backup)
-* [ ] RSS Feed
+* [x] RSS Feed
+* [x] Better timezone support (using timezone through browser
+* [x] Automatically check for updates on stored streams
+* [ ] Twitter integration (tweet when added, tweet when X minutes before)
+* [ ] Calendar link
+* [ ] Approval flow
 * [ ] User can make suggestions for streams to add
 * [ ] User can add event to cal
 * [ ] User can subscribe to notifications (newsletter list?)
-* [ ] Automatically check for updates on stored streams (Christoph working on it already)
 * [ ] Show when I stream is currently live
 
 ## Contribute
 
-We welcome everyone to contribute to this project. Just make sure to suggest bigger features first, before you spend a lot of time.
+We welcome everyone to contribute to this project. Just make sure to suggest bigger features first, before you spend a lot of time. Please also make sure to `write tests` for what you implement. I only merge PRs with tests :-)

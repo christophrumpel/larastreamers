@@ -27,14 +27,11 @@ class PageHomeTest extends TestCase
     	// Act & Assert
         $this->get('/?timezone=Europe/Vienna')
             ->assertSee('Stream #1')
-            ->assertSee($scheduledStartTime1->format('gA'))
             ->assertSee('https://www.youtube.com/watch?v=1234')
             ->assertSee('My Channel')
             ->assertSee('Stream #2')
-            ->assertSee($scheduledStartTime2->format('gA'))
             ->assertSee('https://www.youtube.com/watch?v=12345')
             ->assertSee('Stream #3')
-            ->assertSee($scheduledStartTime3->format('gA'))
             ->assertSee('https://www.youtube.com/watch?v=123456');
     }
 
@@ -88,37 +85,5 @@ class PageHomeTest extends TestCase
             ->assertSee('Stream #2')
             ->assertSee('Stream #3')
             ->assertDontSee('Stream #1');
-    }
-
-    /** @test **/
-    public function it_shows_times_based_on_time_zone(): void
-    {
-        // Arrange
-        Http::fake([
-            'freegeoip.app/*' => Http::response(['time_zone' => 'Europe/Lisbon']),
-        ]);
-        $tomorrow = Carbon::createFromFormat('Y-m-d H:i', Carbon::tomorrow()->format('Y-m-d') .' 18:00');
-        Stream::factory()->create(['scheduled_start_time' => $tomorrow]);
-
-    	// Act & Assert
-        $this->get('/')
-            ->assertDontSee('6PM')
-            ->assertSee('5PM');
-    }
-
-    /** @test **/
-    public function it_overrides_timezone_if_given_in_url(): void
-    {
-        // Arrange
-        Http::fake();
-        $tomorrow = Carbon::createFromFormat('Y-m-d H:i', Carbon::tomorrow()->format('Y-m-d') .' 18:00');
-        Stream::factory()->create(['scheduled_start_time' => $tomorrow]);
-
-        // Act & Assert
-        $this->get('/?timezone=Europe/London')
-            ->assertDontSee('6PM')
-            ->assertSee('5PM');
-
-        Http::assertNothingSent();
     }
 }

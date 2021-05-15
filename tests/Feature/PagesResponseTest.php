@@ -15,4 +15,11 @@ class PagesResponseTest extends TestCase
         $this->get('/')
              ->assertOk();
     }
+
+    /** @test */
+    public function it_can_show_the_feed(): void
+    {
+        $this->get('/feed')
+            ->assertOk();
+    }
 }

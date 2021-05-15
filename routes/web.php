@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::feeds('feed');
+
 Route::get('/', PageHomeController::class)
     ->name('home');
 
