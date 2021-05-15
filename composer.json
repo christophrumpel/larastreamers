@@ -16,7 +16,9 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
-        "pragmarx/countries": "^0.7.2"
+        "pragmarx/countries": "^0.7.2",
+        "spatie/laravel-backup": "^7.5",
+        "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

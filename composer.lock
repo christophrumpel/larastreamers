@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fce986084b0bae67f13b6af58db647fa",
+    "content-hash": "5a364e7b35ed0f8833d2d997b746cd34",
     "packages": [
         {
             "name": "alaouy/youtube",
@@ -3911,6 +3911,165 @@
             "time": "2020-08-18T17:17:46+00:00"
         },
         {
+            "name": "spatie/db-dumper",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/db-dumper.git",
+                "reference": "1364325f3f3c5b7cdafd46bca5e9d422227a34d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/db-dumper/zipball/1364325f3f3c5b7cdafd46bca5e9d422227a34d2",
+                "reference": "1364325f3f3c5b7cdafd46bca5e9d422227a34d2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symfony/process": "^5.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DbDumper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dump databases",
+            "homepage": "https://github.com/spatie/db-dumper",
+            "keywords": [
+                "database",
+                "db-dumper",
+                "dump",
+                "mysqldump",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/db-dumper/issues",
+                "source": "https://github.com/spatie/db-dumper/tree/3.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-01T07:28:47+00:00"
+        },
+        {
+            "name": "spatie/laravel-backup",
+            "version": "7.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-backup.git",
+                "reference": "61296bfd8ada78893f926ab6df47d56e0ea3b419"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/61296bfd8ada78893f926ab6df47d56e0ea3b419",
+                "reference": "61296bfd8ada78893f926ab6df47d56e0ea3b419",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pcntl": "*",
+                "ext-zip": "^1.14.0",
+                "illuminate/console": "^8.36",
+                "illuminate/contracts": "^8.36",
+                "illuminate/events": "^8.36",
+                "illuminate/filesystem": "^8.36",
+                "illuminate/notifications": "^8.36",
+                "illuminate/support": "^8.36",
+                "league/flysystem": "^1.0.49|^2.0",
+                "php": "^8.0",
+                "spatie/db-dumper": "^3.0",
+                "spatie/laravel-package-tools": "^1.6.2",
+                "spatie/laravel-signal-aware-command": "^1.1",
+                "spatie/temporary-directory": "^2.0",
+                "symfony/console": "^5.2.6",
+                "symfony/finder": "^5.2"
+            },
+            "require-dev": {
+                "composer-runtime-api": "^2.0",
+                "laravel/slack-notification-channel": "^2.3",
+                "league/flysystem-aws-s3-v3": "^1.0.29",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.17",
+                "phpunit/phpunit": "^9.5.4"
+            },
+            "suggest": {
+                "laravel/slack-notification-channel": "Required for sending notifications via Slack"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Backup\\BackupServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Backup\\": "src"
+                },
+                "files": [
+                    "src/Helpers/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package to backup your application",
+            "homepage": "https://github.com/spatie/laravel-backup",
+            "keywords": [
+                "backup",
+                "database",
+                "laravel-backup",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-backup/issues",
+                "source": "https://github.com/spatie/laravel-backup/tree/7.5.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/spatie",
+                    "type": "github"
+                },
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "other"
+                }
+            ],
+            "time": "2021-04-21T21:26:06+00:00"
+        },
+        {
             "name": "spatie/laravel-package-tools",
             "version": "1.7.0",
             "source": {
@@ -3969,6 +4128,141 @@
                 }
             ],
             "time": "2021-05-06T21:49:32+00:00"
+        },
+        {
+            "name": "spatie/laravel-signal-aware-command",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-signal-aware-command.git",
+                "reference": "8c605808028943da9f6c0064d3fd16358526bcad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-signal-aware-command/zipball/8c605808028943da9f6c0064d3fd16358526bcad",
+                "reference": "8c605808028943da9f6c0064d3fd16358526bcad",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.35",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.4.3"
+            },
+            "require-dev": {
+                "brianium/paratest": "^6.2",
+                "ext-pcntl": "*",
+                "nunomaduro/collision": "^5.3",
+                "orchestra/testbench": "^6.16",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.17",
+                "vimeo/psalm": "^4.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\SignalAwareCommand\\SignalAwareCommandServiceProvider"
+                    ],
+                    "aliases": {
+                        "Signal": "Spatie\\SignalAwareCommand\\Facades\\Signal"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\SignalAwareCommand\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handle signals in artisan commands",
+            "homepage": "https://github.com/spatie/laravel-signal-aware-command",
+            "keywords": [
+                "laravel",
+                "laravel-signal-aware-command",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-signal-aware-command/issues",
+                "source": "https://github.com/spatie/laravel-signal-aware-command/tree/1.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-04-14T20:35:49+00:00"
+        },
+        {
+            "name": "spatie/temporary-directory",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/temporary-directory.git",
+                "reference": "06fe0f10d068fdf145c9b2235030e568c913bb61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/06fe0f10d068fdf145c9b2235030e568c913bb61",
+                "reference": "06fe0f10d068fdf145c9b2235030e568c913bb61",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\TemporaryDirectory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily create, use and destroy temporary directories",
+            "homepage": "https://github.com/spatie/temporary-directory",
+            "keywords": [
+                "php",
+                "spatie",
+                "temporary-directory"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/temporary-directory/issues",
+                "source": "https://github.com/spatie/temporary-directory/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-03-30T19:46:13+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -6479,6 +6773,50 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "wildbit/swiftmailer-postmark",
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wildbit/swiftmailer-postmark.git",
+                "reference": "44ccab7834de8b220d292647ecb2cb683f9962ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wildbit/swiftmailer-postmark/zipball/44ccab7834de8b220d292647ecb2cb683f9962ee",
+                "reference": "44ccab7834de8b220d292647ecb2cb683f9962ee",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "swiftmailer/swiftmailer": "^6.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Postmark\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Postmark",
+                    "email": "support@postmarkapp.com"
+                }
+            ],
+            "description": "A Swiftmailer Transport for Postmark.",
+            "support": {
+                "issues": "https://github.com/wildbit/swiftmailer-postmark/issues",
+                "source": "https://github.com/wildbit/swiftmailer-postmark/tree/3.3.0"
+            },
+            "time": "2020-09-10T10:54:20+00:00"
         }
     ],
     "packages-dev": [

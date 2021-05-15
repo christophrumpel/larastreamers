@@ -35,6 +35,13 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'backupFolder' => [
+            'driver'   => 'ftp',
+            'host'     => 'nomoreencore.com',
+            'username' => env('BACKUP_FTP_USER'),
+            'password' => env('BACKUP_FTP_PW')
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
