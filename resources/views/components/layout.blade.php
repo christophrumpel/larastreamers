@@ -18,6 +18,7 @@
           content="{{ asset('images/larastreamers_social.png') }}"/>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
+    @include('feed::links')
     @livewireStyles
 
     <!-- Fathom - beautiful, simple website analytics -->
