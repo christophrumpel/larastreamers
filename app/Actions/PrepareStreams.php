@@ -14,6 +14,8 @@ class PrepareStreams
     {
         return $streams
             ->map(function (Stream $stream) use ($currentTimezone) {
+                ray($currentTimezone);
+
                 $stream->scheduled_start_time = $stream->scheduled_start_time->timezone($currentTimezone);
 
                 return $stream;

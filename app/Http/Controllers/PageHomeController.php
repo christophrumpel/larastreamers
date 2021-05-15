@@ -31,6 +31,14 @@ class PageHomeController extends Controller
 
     private function getCurrentTimezone(Request $request): mixed
     {
-        return $request->get('timezone') ?? Http::get("https://freegeoip.app/json/{$request->ip()}")->json('time_zone');
+        $timezone =
+            $request->get('timezone')
+            ?? Http::get("https://freegeoip.app/json/{$request->ip()}")->json('time_zone');
+
+        if (empty($timezone)) {
+            $timezone = 'Europe/Vienna';
+        }
+
+        return $timezone;
     }
 }
