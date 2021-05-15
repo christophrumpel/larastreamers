@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\UpdateGivenStreams;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,19 +14,17 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        UpdateGivenStreams::class,
     ];
 
     /**
      * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule->command('backup:clean')->daily()->at('01:00');
         $schedule->command('backup:run --only-db --disable-notifications')->daily()->at('02:00');
+        $schedule->command('larastreamers:update-streams')->hourly();
     }
 
     /**
@@ -33,7 +32,7 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 
