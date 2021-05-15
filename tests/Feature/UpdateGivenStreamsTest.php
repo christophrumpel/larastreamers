@@ -47,6 +47,17 @@ class UpdateGivenStreamsTest extends TestCase
     }
 
     /** @test **/
+    public function it_does_not_update_old_streams(): void
+    {
+        Stream::factory()->create(['scheduled_start_time' => Carbon::yesterday()]);
+
+        // Act & Expect
+        $this->artisan('larastreamers:update-streams')
+            ->expectsOutput('There are no streams in the database.')
+            ->assertExitCode(0);
+    }
+
+    /** @test **/
     public function it_tells_how_many_streams_were_updated(): void
     {
         // Arrange

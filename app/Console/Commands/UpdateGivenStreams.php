@@ -15,7 +15,7 @@ class UpdateGivenStreams extends Command
 
     public function handle()
     {
-        $streams = Stream::all();
+        $streams = Stream::upcoming()->get();
 
         if($streams->isEmpty()) {
             return $this->info('There are no streams in the database.');
