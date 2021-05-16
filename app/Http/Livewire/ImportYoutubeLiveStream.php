@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\YoutubeException;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -22,7 +21,6 @@ class ImportYoutubeLiveStream extends Component
 
     public function importStream()
     {
-
         try {
             $video = Youtube::video($this->youtubeId);
         } catch (YoutubeException $exception) {

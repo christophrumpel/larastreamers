@@ -25,7 +25,7 @@ class YoutubeClient
             name: data_get($result, 'snippet.title'),
             description: data_get($result, 'snippet.description'),
             since: $this->toCarbon(data_get($result, 'snippet.publishedAt')),
-            thumbnailUrl: data_get($result, 'snippet.thumbnails.high.url'),
+            thumbnailUrl: last(data_get($result, 'snippet.thumbnails'))['url'] ?? null,
             country: data_get($result, 'snippet.country'),
         );
     }
@@ -44,7 +44,7 @@ class YoutubeClient
             return collect();
         }
 
-        return $this->videos(collect($videoIds)->implode(','));
+        return $this->videos($videoIds);
     }
 
     public function video(string $id): StreamData
