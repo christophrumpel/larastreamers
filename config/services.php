@@ -27,6 +27,10 @@ return [
         'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
     ],
 
+    'youtube' => [
+        'key' => env('YOUTUBE_API_KEY'),
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
