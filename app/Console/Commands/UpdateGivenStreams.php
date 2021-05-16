@@ -13,12 +13,14 @@ class UpdateGivenStreams extends Command
 
     protected $description = 'Command description';
 
-    public function handle()
+    public function handle(): int
     {
         $streams = Stream::all()->keyBy('youtube_id');
 
         if($streams->isEmpty()) {
-            return $this->info('There are no streams in the database.');
+            $this->info('There are no streams in the database.');
+
+            return self::SUCCESS;
         }
 
         $updatesCount = Youtube::videos($streams->keys())
@@ -34,5 +36,7 @@ class UpdateGivenStreams extends Command
             ->count();
 
         $this->info($updatesCount . ' stream(s) were updated.');
+
+        return self::SUCCESS;
     }
 }

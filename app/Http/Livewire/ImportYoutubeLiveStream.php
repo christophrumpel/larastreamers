@@ -5,8 +5,6 @@ namespace App\Http\Livewire;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\YoutubeException;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
@@ -14,7 +12,7 @@ class ImportYoutubeLiveStream extends Component
 {
     public $youtubeId;
 
-    public function render(): Factory|View|Application
+    public function render(): View
     {
         return view('livewire.import-youtube-live-stream');
     }
@@ -26,8 +24,6 @@ class ImportYoutubeLiveStream extends Component
         } catch (YoutubeException $exception) {
             return $this->addError('stream', $exception->getMessage());
         }
-
-        //return $this->addError('stream', 'This video is not an upcoming stream');
 
         Stream::updateOrCreate(['youtube_id' => $video->videoId], [
             'channel_title' => $video->channelTitle,
