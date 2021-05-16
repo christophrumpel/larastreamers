@@ -1,0 +1,23 @@
+name: Format (PHP)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.php'
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install
+        run: composer install
+
+      - name: Run php-cs-fixer
+        run: ./vendor/bin/php-cs-fixer fix
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply php-cs-fixer changes

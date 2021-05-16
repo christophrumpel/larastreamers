@@ -39,7 +39,7 @@ class YoutubeClient
             'type' => 'video',
             'part' => 'id',
             'maxResults' => 25,
-        ],'items.*.id.videoId');
+        ], 'items.*.id.videoId');
 
         if (empty($videoIds)) {
             return collect();
@@ -58,9 +58,9 @@ class YoutubeClient
     public function videos(iterable|string $videoIds): Collection
     {
         return collect($this->fetch('videos', [
-                'id' => is_string($videoIds) ? $videoIds : collect($videoIds)->implode(','),
-                'part' => 'snippet,statistics,liveStreamingDetails',
-            ],'items'))
+            'id' => is_string($videoIds) ? $videoIds : collect($videoIds)->implode(','),
+            'part' => 'snippet,statistics,liveStreamingDetails',
+        ], 'items'))
             ->map(fn(array $item) => new StreamData(
                 videoId: data_get($item, 'id'),
                 title: data_get($item, 'snippet.title'),

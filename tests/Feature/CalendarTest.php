@@ -9,25 +9,24 @@ use Tests\TestCase;
 
 class CalendarTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test **/
     public function it_shows_all_streams_in_calendar(): void
     {
-    	// Arrange
+        // Arrange
         $scheduledStartTime1 = Carbon::yesterday();
         $scheduledStartTime2 = Carbon::today();
         $scheduledStartTime3 = Carbon::now()->addDays();
         $scheduledStartTime4 = Carbon::now()->addDays(2);
         $scheduledStartTime5 = Carbon::now()->addDays(3);
-    	Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1, 'youtube_id' => '1111']);
-    	Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2, 'youtube_id' => '2222']);
-    	Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3, 'youtube_id' => '3333']);
-    	Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => $scheduledStartTime4, 'youtube_id' => '4444']);
-    	Stream::factory()->create(['title' => 'Stream #5', 'scheduled_start_time' => $scheduledStartTime5, 'youtube_id' => '5555']);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1, 'youtube_id' => '1111']);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2, 'youtube_id' => '2222']);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3, 'youtube_id' => '3333']);
+        Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => $scheduledStartTime4, 'youtube_id' => '4444']);
+        Stream::factory()->create(['title' => 'Stream #5', 'scheduled_start_time' => $scheduledStartTime5, 'youtube_id' => '5555']);
 
-    	// Act & Assert
+        // Act & Assert
         $this->get('/calendar.ics')
             ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
             ->assertSeeInOrder([

@@ -1,57 +1,41 @@
 name: Run tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    types: [ready_for_review, synchronize, opened]
 
 jobs:
   run-tests:
     name: Run tests
     runs-on: ubuntu-latest
-    services:
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: --entrypoint redis-server
     steps:
-      -   uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      -   name: Setup PHP
-          uses: shivammathur/setup-php@v1
-          with:
-            php-version: '8.0'
-            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-            coverage: none
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          tools: composer:v2
+          coverage: none
 
-      -   name: create db
-          run: |
-            sudo /etc/init.d/mysql start
-            mysql  -u root -proot -e 'CREATE DATABASE IF NOT EXISTS christophrumpel_test;'
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-      -   name: Cache yarn dependencies
-          uses: actions/cache@v1
-          with:
-            path: node_modules
-            key: yarn-${{ hashFiles('yarn.lock') }}
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: composer-${{ hashFiles('composer.json') }}
+          restore-keys: composer-
 
-      -   name: Run yarn
-          run: yarn && yarn dev
+      - name: Run composer install
+        run: composer update --prefer-dist --no-interaction --no-suggest
 
-      -   name: Cache composer dependencies
-          uses: actions/cache@v1
-          with:
-            path: vendor
-            key: composer-${{ hashFiles('composer.lock') }}
-
-      -   name: Run composer install
-          run: composer install -n --prefer-dist
-
-      -   name: Prepare Laravel Application
-          run: |
-            cp .env.example .env
-            php artisan key:generate
-
-      -   name: Run tests
-          run: ./vendor/bin/phpunit
-          env:
-            DB_PASSWORD: root
-            REDIS_PORT: ${{ job.services.redis.ports[6379] }}
+      - name: Run tests
+        run: ./vendor/bin/phpunit

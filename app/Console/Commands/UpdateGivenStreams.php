@@ -17,7 +17,7 @@ class UpdateGivenStreams extends Command
     {
         $streams = Stream::all()->keyBy('youtube_id');
 
-        if($streams->isEmpty()) {
+        if ($streams->isEmpty()) {
             $this->info('There are no streams in the database.');
 
             return self::SUCCESS;
@@ -35,7 +35,7 @@ class UpdateGivenStreams extends Command
             ->filter()
             ->count();
 
-        $this->info($updatesCount . ' stream(s) were updated.');
+        $this->info($updatesCount.' stream(s) were updated.');
 
         return self::SUCCESS;
     }
