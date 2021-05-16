@@ -32,6 +32,7 @@ jobs:
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: composer-${{ hashFiles('composer.json') }}
+          restore-keys: composer-
 
       - name: Run composer install
         run: composer update --prefer-dist --no-interaction --no-suggest
