@@ -72,7 +72,6 @@
         "setup": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi",
-            "touch database/database.sqlite",
             "@php artisan migrate:fresh --seed --ansi"
         ],
         "cs": [

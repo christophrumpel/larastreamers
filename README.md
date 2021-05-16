@@ -7,14 +7,21 @@ This is the repository of [https://larastreamers.com](https://larastreamers.com/
 
 It shows you who is live coding next in the Laravel world.
 
+## Installation Steps
+
+* clone repository
+* Create DB `larastreamers`
+* `composer install`
+* `composer setup` (copies `env` file, generates key, and migrates DB)
+
 ## Setup
 
 In order to import videos from  YouTube you need:
 
-* Run `composer install` then `composer setup`
 * Fill `YOUTUBE_API_KEY` in your `.env` file
-* The video needs to be in the future (at least today)
-* The video needs to be a scheduled live stream
+* Visit `/` and login with a user from `UserTableSeeder` or create your own one
+* Import a stream by providing the video `id` 
+* The video needs to be a scheduled live stream in the future
 
 ## Roadmap
 
