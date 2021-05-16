@@ -64,7 +64,7 @@ class YoutubeClient
             ->map(fn(array $item) => new StreamData(
                 videoId: data_get($item, 'id'),
                 title: data_get($item, 'snippet.title'),
-                channelTitle: data_get($item, 'snippet.channelTitle'),
+                channelTitle: data_get($item, 'snippet.title'),
                 description: data_get($item, 'snippet.description'),
                 thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
                 publishedAt: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
