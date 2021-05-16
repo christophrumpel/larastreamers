@@ -13,7 +13,7 @@ class PageHomeTest extends TestCase
 
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test */
     public function it_shows_given_streams_on_home_page(): void
     {
     	// Arrange
@@ -35,7 +35,7 @@ class PageHomeTest extends TestCase
             ->assertSee('https://www.youtube.com/watch?v=123456');
     }
 
-    /** @test **/
+    /** @test */
     public function it_shows_from_closest_to_farthest(): void
     {
         // Arrange
@@ -51,7 +51,7 @@ class PageHomeTest extends TestCase
             ->assertSeeInOrder(['Stream #1', 'Stream #2', 'Stream #3']);
     }
 
-    /** @test **/
+    /** @test */
     public function it_shows_unique_names_for_today_and_tomorrow_instead_of_whole_date(): void
     {
         $this->withoutExceptionHandling();
@@ -69,7 +69,7 @@ class PageHomeTest extends TestCase
             ->assertSee('Tomorrow');
     }
 
-    /** @test **/
+    /** @test */
     public function it_does_not_show_old_streams(): void
     {
         // Arrange

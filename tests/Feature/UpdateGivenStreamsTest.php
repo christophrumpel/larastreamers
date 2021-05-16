@@ -12,7 +12,7 @@ class UpdateGivenStreamsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test */
     public function it_updates_given_stream_with_new_details(): void
     {
     	// Arrange
@@ -37,7 +37,7 @@ class UpdateGivenStreamsTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test */
     public function it_tells_if_there_are_no_streams_to_update(): void
     {
         // Act & Expect
@@ -46,7 +46,7 @@ class UpdateGivenStreamsTest extends TestCase
             ->assertExitCode(0);
     }
 
-    /** @test **/
+    /** @test */
     public function it_tells_how_many_streams_were_updated(): void
     {
         // Arrange

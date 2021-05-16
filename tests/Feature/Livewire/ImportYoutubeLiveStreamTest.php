@@ -14,7 +14,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test */
     public function it_imports_upcoming_stream_from_youtube_url(): void
     {
         // Arrange
@@ -41,7 +41,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
         ]);
     }
 
-    /** @test **/
+    /** @test */
     public function it_does_not_import_streams_which_are_not_upcoming(): void
     {
         // Arrange
@@ -57,7 +57,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
         $this->assertDatabaseCount((new Stream())->getTable(), 0);
     }
 
-    /** @test **/
+    /** @test */
     public function it_overrides_if_a_stream_is_already_given(): void
     {
         // Arrange
@@ -73,7 +73,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
         $this->assertDatabaseCount((new Stream())->getTable(), 1);
     }
 
-    /** @test **/
+    /** @test */
     public function it_checks_properties_and_method_wired_to_the_view(): void
     {
     	// Arrange & Act & Assert
