@@ -14,10 +14,8 @@ class PrepareStreams
     {
         return $streams
             ->sortBy('scheduled_start_time')
-            ->groupBy(function ($item) {
-                return $item->scheduled_start_time->format('D d.m.Y');
-            })
-            ->mapWithKeys(function ($item, $date) {
+            ->groupBy(static fn (Stream $item): string => $item->scheduled_start_time->format('D d.m.Y'))
+            ->mapWithKeys(static function (Collection $item, string $date): array {
                 $dateObject = Carbon::createFromFormat('D d.m.Y', $date);
 
                 if ($dateObject->isToday()) {
