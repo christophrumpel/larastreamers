@@ -18,7 +18,9 @@ class UpdateGivenStreams extends Command
         $streams = Stream::all()->keyBy('youtube_id');
 
         if($streams->isEmpty()) {
-            return $this->info('There are no streams in the database.');
+            $this->info('There are no streams in the database.');
+
+            return self::SUCCESS;
         }
 
         $updatesCount = Youtube::videos($streams->keys())
