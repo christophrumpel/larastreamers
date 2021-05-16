@@ -60,7 +60,7 @@ class PageHomeTest extends TestCase
             ->assertSee('Tomorrow');
     }
 
-    /** @test * /
+    /** @test */
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
