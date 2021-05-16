@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
+use Spatie\IcalendarGenerator\Components\Event;
 
 class Stream extends Model implements Feedable
 {
@@ -39,6 +40,20 @@ class Stream extends Model implements Feedable
             ->updated($this->updated_at)
             ->link($this->link())
             ->author($this->channel_title) ; //TODO: implement
+    }
+
+    public function toCalendarItem(): Event
+    {
+        return Event::create()
+            ->uniqueIdentifier($this->youtube_id)
+            ->name($this->title)
+            ->description(implode(PHP_EOL, [
+                $this->title,
+                $this->channel_title,
+                $this->link(),
+            ]))
+            ->startsAt($this->scheduled_start_time)
+            ->createdAt($this->created_at);
     }
 
     public function link(): string
