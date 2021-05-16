@@ -19,11 +19,10 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
     <script src="{{ asset('js/app.js') }}"></script>
+@include('feed::links')
+@livewireStyles
 
-    @include('feed::links')
-    @livewireStyles
-
-    <!-- Fathom - beautiful, simple website analytics -->
+<!-- Fathom - beautiful, simple website analytics -->
     <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
     <!-- / Fathom -->
 </head>
@@ -47,6 +46,9 @@
                 {{$slot ?? ''}}
             </div>
         </main>
+
+        @include('pages.partials.footer')
+
     </div>
 </div>
 @livewireScripts
