@@ -15,13 +15,10 @@ class PageHomeTest extends TestCase
     /** @test * */
     public function it_shows_given_streams_on_home_page(): void
     {
-        // Arrange
-        $scheduledStartTime1 = Carbon::now()->addDays();
-        $scheduledStartTime2 = Carbon::now()->addDays(2);
-        $scheduledStartTime3 = Carbon::now()->addDays(3);
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1, 'youtube_id' => '1234', 'channel_title' => 'My Channel']);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2, 'youtube_id' => '12345']);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3, 'youtube_id' => '123456']);
+    	// Arrange
+    	Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'channel_title' => 'My Channel']);
+    	Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345']);
+    	Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456']);
 
         // Act & Assert
         $this->get('/?timezone=Europe/Vienna')
@@ -38,12 +35,9 @@ class PageHomeTest extends TestCase
     public function it_shows_from_closest_to_farthest(): void
     {
         // Arrange
-        $scheduledStartTime1 = Carbon::tomorrow()->format('d.m.Y');
-        $scheduledStartTime2 = Carbon::tomorrow()->addDay()->format('d.m.Y');
-        $scheduledStartTime3 = Carbon::tomorrow()->addDays(2)->format('d.m.Y');
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2]);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3]);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::tomorrow()]);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::tomorrow()->addDays(2)]);
 
         // Act & Assert
         $this->get('/')
@@ -55,10 +49,8 @@ class PageHomeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         // Arrange
-        $scheduledStartTime1 = Carbon::today()->format('d.m.Y');
-        $scheduledStartTime2 = Carbon::tomorrow()->format('d.m.Y');
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2]);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today()->hour(2)]);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
 
         // Act & Assert
         $this->get('/?timezone=Europe/Vienna')
@@ -72,17 +64,14 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        $scheduledStartTime1 = Carbon::yesterday();
-        $scheduledStartTime2 = Carbon::today();
-        $scheduledStartTime3 = Carbon::now()->addDays();
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2]);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3]);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::yesterday()->hour(8)]);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays()]);
 
         // Act & Assert
-        $this->get('/?timezone=Europe/Vienna')
-            ->assertSee('Stream #2')
+        $this->get('/')
             ->assertSee('Stream #3')
+            ->assertDontSee('Stream #2')
             ->assertDontSee('Stream #1');
     }
 

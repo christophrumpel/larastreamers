@@ -18,8 +18,7 @@
           content="{{ asset('images/larastreamers_social.png') }}"/>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
-    <script src="{{ asset('js/app.js') }}"/>
-
+    <script src="{{ asset('js/app.js') }}"></script>
 @include('feed::links')
 @livewireStyles
 
