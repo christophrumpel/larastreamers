@@ -1,8 +1,9 @@
 name: Format (PHP)
 
 on:
-  pull_request:
   push:
+  pull_request:
+  pull_request_target:
     branches: [ main ]
     paths:
       - '**.php'
@@ -12,8 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
 
       - name: Run php-cs-fixer
         uses: docker://oskarstark/php-cs-fixer-ga
