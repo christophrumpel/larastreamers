@@ -14,8 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install
+        run: composer install
+
       - name: Run php-cs-fixer
-        uses: docker://oskarstark/php-cs-fixer-ga
+        run: ./vendor/bin/php-cs-fixer fix
 
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
