@@ -12,7 +12,7 @@ class PageHomeTest extends TestCase
 
     use RefreshDatabase;
 
-    /** @test */
+    /** @test * /
     public function it_shows_given_streams_on_home_page(): void
     {
     	// Arrange
@@ -20,7 +20,7 @@ class PageHomeTest extends TestCase
     	Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345']);
     	Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456']);
 
-    	// Act & Assert
+        // Act & Assert
         $this->get('/?timezone=Europe/Vienna')
             ->assertSee('Stream #1')
             ->assertSee('https://www.youtube.com/watch?v=1234')
@@ -31,7 +31,7 @@ class PageHomeTest extends TestCase
             ->assertSee('https://www.youtube.com/watch?v=123456');
     }
 
-    /** @test */
+    /** @test * /
     public function it_shows_from_closest_to_farthest(): void
     {
         // Arrange
@@ -44,7 +44,7 @@ class PageHomeTest extends TestCase
             ->assertSeeInOrder(['Stream #1', 'Stream #2', 'Stream #3']);
     }
 
-    /** @test */
+    /** @test * /
     public function it_shows_unique_names_for_today_and_tomorrow_instead_of_whole_date(): void
     {
         $this->withoutExceptionHandling();
@@ -60,7 +60,7 @@ class PageHomeTest extends TestCase
             ->assertSee('Tomorrow');
     }
 
-    /** @test */
+    /** @test * /
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
@@ -73,5 +73,18 @@ class PageHomeTest extends TestCase
             ->assertSee('Stream #3')
             ->assertDontSee('Stream #2')
             ->assertDontSee('Stream #1');
+    }
+
+    /** @test */
+    public function it_shows_footer_links(): void
+    {
+        // Arrange
+        $twitterLink = "https://twitter.com/larastreamers";
+        $githubLink = "https://github.com/christophrumpel/larastreamers";
+
+        // Act & Assert
+        $this->get('/')
+            ->assertSee($twitterLink)
+            ->assertSee($githubLink);
     }
 }
