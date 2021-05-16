@@ -27,6 +27,7 @@
         "christophrumpel/missing-livewire-assertions": "0.*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -72,6 +73,9 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate --ansi",
             "@php artisan migrate:fresh --seed --ansi"
+        ],
+        "cs": [
+            "./vendor/bin/php-cs-fixer fix"
         ]
     }
 }
