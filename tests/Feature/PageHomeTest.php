@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class PageHomeTest extends TestCase
@@ -87,16 +86,16 @@ class PageHomeTest extends TestCase
             ->assertDontSee('Stream #1');
     }
 
-    /** @test * */
-    public function it_shows_newsletter_on_footer()
+    /** @test */
+    public function it_shows_footer_links(): void
     {
         // Arrange
-        $expectNewsletter = "Join our Newsletter!";
-        $expectGithub = "https://github.com/christophrumpel/larastreamers";
+        $twitterLink = "https://twitter.com/larastreamers";
+        $githubLink = "https://github.com/christophrumpel/larastreamers";
 
         // Act & Assert
         $this->get('/')
-            ->assertSee($expectNewsletter)
-            ->assertSee($expectGithub);
+            ->assertSee($twitterLink)
+            ->assertSee($githubLink);
     }
 }
