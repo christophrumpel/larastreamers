@@ -25,6 +25,7 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
@@ -59,6 +60,9 @@
             "@php artisan key:generate --ansi",
             "touch database/database.sqlite",
             "@php artisan migrate:fresh --seed --ansi"
+        ],
+        "cs": [
+            "./vendor/bin/php-cs-fixer fix"
         ]
     },
     "extra": {
