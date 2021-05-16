@@ -11,7 +11,7 @@ class PageDashboardTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test */
     public function it_includes_livewire_youtube_import_stream_component(): void
     {
         $this->actingAs(User::factory()->create())
