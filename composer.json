@@ -1,7 +1,7 @@
 {
     "name": "christophrumpel/larastreamers",
     "type": "project",
-    "description": "",
+    "description": "There is no better way to learn than by watching other developers code live. Find out who is streaming next in the Laravel world.",
     "keywords": [],
     "homepage": "https://larastreamers.com",
     "license": "MIT",
