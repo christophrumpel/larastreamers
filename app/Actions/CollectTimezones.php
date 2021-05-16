@@ -10,7 +10,7 @@ class CollectTimezones
 {
     public function handle(): array
     {
-        return Cache::rememberForever('timezones', function () {
+        return Cache::rememberForever('timezones', function() {
             $countries = new Countries(new Config([
                 'hydrate' => [
                     'elements' => [
@@ -23,11 +23,11 @@ class CollectTimezones
 
             return $countries
                 ->all()
-                ->map(function ($country) {
+                ->map(function($country) {
                     return $country->timezones->first()->zone_name ?? null;
                 })
                 ->sort()
-                ->filter(fn($timezone) => !is_null($timezone))
+                ->filter(fn($timezone) => ! is_null($timezone))
                 ->toArray();
         });
     }

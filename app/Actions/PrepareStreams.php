@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Actions;
-
 
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
@@ -14,8 +12,8 @@ class PrepareStreams
     {
         return $streams
             ->sortBy('scheduled_start_time')
-            ->groupBy(static fn (Stream $item): string => $item->scheduled_start_time->format('D d.m.Y'))
-            ->mapWithKeys(static function (Collection $item, string $date): array {
+            ->groupBy(static fn(Stream $item): string => $item->scheduled_start_time->format('D d.m.Y'))
+            ->mapWithKeys(static function(Collection $item, string $date): array {
                 $dateObject = Carbon::createFromFormat('D d.m.Y', $date);
 
                 if ($dateObject->isToday()) {
