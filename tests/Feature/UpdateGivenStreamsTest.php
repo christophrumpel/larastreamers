@@ -6,8 +6,8 @@ use App\Console\Commands\UpdateGivenStreams;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
-use Illuminate\Support\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class UpdateGivenStreamsTest extends TestCase

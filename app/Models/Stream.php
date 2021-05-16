@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -39,7 +39,7 @@ class Stream extends Model implements Feedable
             ->summary('Dummy summary') //TODO: use real summary
             ->updated($this->updated_at)
             ->link($this->link())
-            ->author($this->channel_title) ; //TODO: implement
+            ->author($this->channel_title); //TODO: implement
     }
 
     public function toCalendarItem(): Event

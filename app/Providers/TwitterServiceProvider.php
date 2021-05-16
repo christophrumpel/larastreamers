@@ -8,10 +8,9 @@ use Illuminate\Support\ServiceProvider;
 
 class TwitterServiceProvider extends ServiceProvider
 {
-
     public function register()
     {
-        $this->app->bind(Twitter::class, function () {
+        $this->app->bind(Twitter::class, function() {
             $connection = new TwitterOAuth(
                 config('services.twitter.consumer_key'),
                 config('services.twitter.consumer_secret'),

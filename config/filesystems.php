@@ -39,7 +39,7 @@ return [
             'driver'   => 'ftp',
             'host'     => 'nomoreencore.com',
             'username' => env('BACKUP_FTP_USER'),
-            'password' => env('BACKUP_FTP_PW')
+            'password' => env('BACKUP_FTP_PW'),
         ],
 
         'public' => [

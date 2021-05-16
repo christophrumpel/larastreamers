@@ -9,16 +9,15 @@ use Tests\TestCase;
 
 class PageHomeTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
     public function it_shows_given_streams_on_home_page(): void
     {
-    	// Arrange
-    	Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'channel_title' => 'My Channel']);
-    	Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345']);
-    	Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456']);
+        // Arrange
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'channel_title' => 'My Channel']);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345']);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456']);
 
         // Act & Assert
         $this->get('/?timezone=Europe/Vienna')
@@ -79,8 +78,8 @@ class PageHomeTest extends TestCase
     public function it_shows_footer_links(): void
     {
         // Arrange
-        $twitterLink = "https://twitter.com/larastreamers";
-        $githubLink = "https://github.com/christophrumpel/larastreamers";
+        $twitterLink = 'https://twitter.com/larastreamers';
+        $githubLink = 'https://github.com/christophrumpel/larastreamers';
 
         // Act & Assert
         $this->get('/')

@@ -32,7 +32,6 @@ class ImportYoutubeLiveStreamTest extends TestCase
                    plannedStart: $scheduledStartTime,
                )]));
 
-
         $this->assertDatabaseCount((new Stream())->getTable(), 0);
 
         // Act
@@ -46,7 +45,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
             'channel_title' => 'My Test Channel',
             'title' => 'My Test Stream',
             'thumbnail_url' => 'my-test-thumbnail-url',
-            'scheduled_start_time' => $scheduledStartTime
+            'scheduled_start_time' => $scheduledStartTime,
         ]);
     }
 
@@ -58,7 +57,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // it passes because the video was not found because
         $this->assertDatabaseCount((new Stream())->getTable(), 0);
 
-    	// Arrange & Act & Assert
+        // Arrange & Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
             ->set('youtubeId', 'bcnR4NYOw2o')
             ->call('importStream')
@@ -95,7 +94,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
     /** @test */
     public function it_checks_properties_and_method_wired_to_the_view(): void
     {
-    	// Arrange & Act & Assert
+        // Arrange & Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
             ->assertPropertyWired('youtubeId')
             ->assertMethodWiredToForm('importStream');
