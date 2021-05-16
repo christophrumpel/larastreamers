@@ -13,28 +13,29 @@ class UpdateGivenStreams extends Command
 
     protected $description = 'Command description';
 
-    public function handle()
+    public function handle(): int
     {
-        $streams = Stream::all();
+        if(Stream::count() === 0) {
+            $this->info('There are no streams in the database.');
 
-        if($streams->isEmpty()) {
-            return $this->info('There are no streams in the database.');
+            return self::SUCCESS;
         }
 
-        $updatesCount = $streams
-            ->map(function (Stream $stream) {
-            $video = Youtube::getVideoInfo($stream->youtube_id, ['snippet', 'liveStreamingDetails']);
+        $updatesCount = Stream::lazy()
+            ->map(static function (Stream $stream): bool {
+                $video = Youtube::getVideoInfo($stream->youtube_id, ['snippet', 'liveStreamingDetails']);
 
-            return $stream->update([
-                'channel_title' => $video->snippet->channelTitle,
-                'title' => $video->snippet->title,
-                'thumbnail_url' => $video->snippet->thumbnails->maxres->url,
-                'scheduled_start_time' => Carbon::create($video->liveStreamingDetails->scheduledStartTime)->timezone('Europe/Vienna')
-            ]);
-        })
-            ->filter(fn(bool $updated) => $updated)
+                return $stream->update([
+                    'channel_title' => $video->snippet->channelTitle,
+                    'title' => $video->snippet->title,
+                    'thumbnail_url' => $video->snippet->thumbnails->maxres->url,
+                    'scheduled_start_time' => Carbon::create($video->liveStreamingDetails->scheduledStartTime)->timezone('Europe/Vienna')
+                ]);
+            })->filter(static fn(bool $updated): bool => $updated)
             ->count();
 
         $this->info($updatesCount . ' stream(s) were updated.');
+
+        return self::SUCCESS;
     }
 }
