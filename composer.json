@@ -1,14 +1,14 @@
 {
-    "name": "laravel/laravel",
+    "name": "christophrumpel/larastreamers",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "",
+    "keywords": [],
+    "homepage": "https://larastreamers.com",
     "license": "MIT",
     "require": {
         "php": "^8.0",
         "abraham/twitteroauth": "^2.0",
         "alaouy/youtube": "^2.2",
-        "christophrumpel/missing-livewire-assertions": "0.*",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -18,11 +18,13 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
         "pragmarx/countries": "^0.7.2",
+        "spatie/icalendar-generator": "^2.1",
         "spatie/laravel-backup": "^7.5",
         "spatie/laravel-feed": "^3.1",
         "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {
+        "christophrumpel/missing-livewire-assertions": "0.*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -31,6 +33,16 @@
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
         "spatie/laravel-ray": "^1.17"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
     },
     "autoload": {
         "psr-4": {
@@ -44,6 +56,8 @@
             "Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -64,17 +78,5 @@
         "cs": [
             "./vendor/bin/php-cs-fixer fix"
         ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
