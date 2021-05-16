@@ -10,6 +10,10 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <livewire:import-youtube-live-stream />
             </div>
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <livewire:import-youtube-channel />
+            </div>
         </div>
     </div>
 </x-app-layout>

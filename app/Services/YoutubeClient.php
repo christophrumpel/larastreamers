@@ -21,10 +21,11 @@ class YoutubeClient
         }
 
         return new ChannelData(
+            platformId: data_get($result, 'id'),
             slug: data_get($result, 'snippet.customUrl'),
             name: data_get($result, 'snippet.title'),
             description: data_get($result, 'snippet.description'),
-            since: $this->toCarbon(data_get($result, 'snippet.publishedAt')),
+            onPlatformSince: $this->toCarbon(data_get($result, 'snippet.publishedAt')),
             thumbnailUrl: last(data_get($result, 'snippet.thumbnails'))['url'] ?? null,
             country: data_get($result, 'snippet.country'),
         );
