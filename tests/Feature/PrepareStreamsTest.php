@@ -13,7 +13,7 @@ class PrepareStreamsTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test **/
+    /** @test */
     public function it_groups_streams_by_date(): void
     {
     	// Arrange
