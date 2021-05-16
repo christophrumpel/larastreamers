@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\JetStream;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -10,11 +10,11 @@ use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class DeleteApiTokenTest extends TestCase
+class ApiTokenPermissionsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_api_tokens_can_be_deleted()
+    public function test_api_token_permissions_can_be_updated()
     {
         if (! Features::hasApiFeatures()) {
             return $this->markTestSkipped('API support is not enabled.');
@@ -33,9 +33,17 @@ class DeleteApiTokenTest extends TestCase
         ]);
 
         Livewire::test(ApiTokenManager::class)
-                    ->set(['apiTokenIdBeingDeleted' => $token->id])
-                    ->call('deleteApiToken');
+                    ->set(['managingPermissionsFor' => $token])
+                    ->set(['updateApiTokenForm' => [
+                        'permissions' => [
+                            'delete',
+                            'missing-permission',
+                        ],
+                    ]])
+                    ->call('updateApiToken');
 
-        $this->assertCount(0, $user->fresh()->tokens);
+        $this->assertTrue($user->fresh()->tokens->first()->can('delete'));
+        $this->assertFalse($user->fresh()->tokens->first()->can('read'));
+        $this->assertFalse($user->fresh()->tokens->first()->can('missing-permission'));
     }
 }
