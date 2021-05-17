@@ -27,7 +27,7 @@ class PrepareStreamsTest extends TestCase
         $prepareStreamsAction = new PrepareStreams;
 
         // Act
-        $preparedStreams = $prepareStreamsAction->handle($streams, 'Europe/Vienna');
+        $preparedStreams = $prepareStreamsAction->handle($streams);
 
         // Assert
         $this->assertEquals('Today', $preparedStreams->keys()[0]);
