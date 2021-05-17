@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Stream;
+use App\Services\Youtube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -11,12 +12,7 @@ class StreamFactory extends Factory
 {
     protected $model = Stream::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
             'channel_title' => $this->faker->title,
@@ -24,6 +20,7 @@ class StreamFactory extends Factory
             'youtube_id' => Str::random(10),
             'thumbnail_url' => '',
             'scheduled_start_time' => Carbon::tomorrow()->toIso8601String(),
+            'status' => StreamData::STATUS_UPCOMING,
         ];
     }
 }
