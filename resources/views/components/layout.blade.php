@@ -54,23 +54,27 @@
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
-    <section class="py-16">
+    <section class="py-12 md:py-16">
         <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-            <header class="grid md:grid-cols-[3fr,2fr] items-center gap-8">
-                <aside class="space-y-2">
-                    <h1 class="text-4xl font-bold tracking-tight">
+            <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
+                <aside class="max-w-xl space-y-2">
+                    <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
                         📺 Larastreamers
                     </h1>
 
-                    <p class="text-xl text-gray-500">
+                    <p class="text-gray-500 md:text-xl">
                         There is no better way to learn than by watching other developers
                         code live. Find out who is streaming next in the Laravel world.
                     </p>
                 </aside>
+
+                <a class="px-3 py-2 text-sm font-medium text-white transition bg-red-600 rounded-md shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none"
+                    href="{{ route('calendar.ics') }}">
+                    Add streams to calendar
+                </a>
             </header>
         </div>
     </section>
-
 
     <main class="flex-1 text-white bg-gray-700">
         {{ $slot ?? '' }}
