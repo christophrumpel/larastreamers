@@ -24,7 +24,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
         $streams = Youtube::upcomingStreams($this->youtubeChannelId);
 
         $streams->map(function (StreamData $streamData){
-           Stream::create([
+           Stream::updateOrCreate(['youtube_id' => $streamData->videoId],[
                'youtube_id' => $streamData->videoId,
                'title' => $streamData->title,
                'channel_title' => $streamData->channelTitle,

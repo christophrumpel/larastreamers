@@ -15,6 +15,11 @@
                 <form action="#" method="POST">
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
+                            @if (session()->has('channel-message'))
+                                <div class="mb-4 px-4 py-2 text-sm text-green-800 bg-green-200">
+                                    {{ session('channel-message') }}
+                                </div>
+                            @endif
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="youtubeStreamId" class="block text-sm font-medium text-gray-700">YouTube

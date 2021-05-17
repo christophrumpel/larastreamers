@@ -42,16 +42,45 @@ class ImportYoutubeChannelTest extends TestCase
     /** @test */
     public function it_dispatches_job_to_import_upcoming_streams(): void
     {
-        // Arrange & Act
+        // Arrange
         Queue::fake();
         Http::fake(fn() => Http::response($this->channelResponse()));
 
+        // Act
         Livewire::test(ImportYoutubeChannel::class)
             ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel');
 
         // Assert
        Queue::assertPushed(ImportYoutubeChannelStreamsJob::class);
+    }
+
+    /** @test */
+    public function it_shows_success_message(): void
+    {
+        // Arrange
+        Queue::fake();
+        Http::fake(fn() => Http::response($this->channelResponse()));
+
+        // Act & Assert
+        Livewire::test(ImportYoutubeChannel::class)
+            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+            ->call('importChannel')
+            ->assertSee('Channel "UCdtd5QYBx9MUVXHm7qgEpxA" was added successfully.');
+    }
+
+    /** @test */
+    public function it_clears_form_after_successful_import(): void
+    {
+        // Arrange
+        Queue::fake();
+        Http::fake(fn() => Http::response($this->channelResponse()));
+
+        // Act & Assert
+        Livewire::test(ImportYoutubeChannel::class)
+            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+            ->call('importChannel')
+            ->assertSet('youtubeChannelId', '');
     }
 
 

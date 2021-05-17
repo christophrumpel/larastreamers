@@ -17,5 +17,9 @@ class ImportYoutubeChannel extends Component
         Channel::updateOrCreate($response->prepareForModel());
 
         dispatch(new ImportYoutubeChannelStreamsJob($this->youtubeChannelId));
+
+        session()->flash('channel-message', 'Channel "'. $this->youtubeChannelId . '" was added successfully.');
+
+        $this->reset(['youtubeChannelId']);
     }
 }
