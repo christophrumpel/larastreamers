@@ -19,7 +19,7 @@ class UserTableSeeder extends Seeder
         User::create([
             'name' => 'Christoph',
             'email' => 'christoph@christoph-rumpel.com',
-            'password' => bcrypt('test-password-which-is-not-used-live-at-least-not-anymore'),
+            'password' => bcrypt('password'),
         ]);
     }
 }
