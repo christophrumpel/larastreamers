@@ -5,16 +5,23 @@ namespace App\Http\Livewire;
 use App\Facades\Youtube;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
+use App\Services\Youtube\YoutubeException;
 use Livewire\Component;
 
 class ImportYoutubeChannel extends Component
 {
     public $youtubeChannelId;
 
-    public function importChannel(): void
+    public function importChannel()
     {
-        $response = Youtube::channel($this->youtubeChannelId);
-        Channel::updateOrCreate($response->prepareForModel());
+        try {
+            $channelData = Youtube::channel($this->youtubeChannelId);
+        } catch (YoutubeException $exception) {
+            return $this->addError('channel', $exception->getMessage());
+        }
+
+
+        Channel::updateOrCreate($channelData->prepareForModel());
 
         dispatch(new ImportYoutubeChannelStreamsJob($this->youtubeChannelId));
 

@@ -70,6 +70,19 @@ class ImportYoutubeChannelTest extends TestCase
     }
 
     /** @test */
+    public function it_shows_youtube_client_error_message(): void
+    {
+        // Arrange
+        Http::fake(fn() => Http::response([], 500));
+
+        // Arrange & Act & Assert
+        Livewire::test(ImportYoutubeChannel::class)
+            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+            ->call('importChannel')
+            ->assertSee('YouTube API error: 500');
+    }
+
+    /** @test */
     public function it_clears_form_after_successful_import(): void
     {
         // Arrange
