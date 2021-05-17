@@ -32,6 +32,7 @@ In order to import videos from  YouTube you need:
 * [x] Automatically fix styles on PRs (after PR is merged)
 * [x] Add Twitter channel import to load its upcoming live streams
 * [ ] Twitter integration (tweet when added, tweet when X minutes before)
+* [ ] Mocking Twitter so we can get off the production check
 * [ ] Calendar link for every event
 * [ ] Approval flow
 * [ ] User can make suggestions for streams to add
