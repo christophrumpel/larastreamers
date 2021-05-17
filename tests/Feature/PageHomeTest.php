@@ -64,17 +64,16 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_NONE]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::yesterday()->subDay(), 'status' => StreamData::STATUS_NONE]);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->subMinutes(10), 'status' => StreamData::STATUS_LIVE]);
-        Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+        Stream::factory()->create(['title' => 'Stream none', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream live', 'scheduled_start_time' => Carbon::now()->subMinutes(10), 'status' => StreamData::STATUS_LIVE]);
+        Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
 
         // Act & Assert
-        $this->get('/')
-            ->assertSee('Stream #3')
-            ->assertSee('Stream #4')
-            ->assertDontSee('Stream #2')
-            ->assertDontSee('Stream #1');
+        $this
+            ->get('/')
+            ->assertSee('Stream live')
+            ->assertSee('Stream upcoming')
+            ->assertDontSee('Stream none');
     }
 
     /** @test */
