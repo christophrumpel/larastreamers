@@ -12,12 +12,14 @@ class ImportYoutubeChannel extends Component
 {
     public $youtubeChannelId;
 
-    public function importChannel()
+    public function importChannel(): void
     {
         try {
             $channelData = Youtube::channel($this->youtubeChannelId);
         } catch (YoutubeException $exception) {
-            return $this->addError('channel', $exception->getMessage());
+            $this->addError('channel', $exception->getMessage());
+
+            return;
         }
 
 
