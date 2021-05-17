@@ -64,5 +64,4 @@ class YoutubeTest extends TestCase
         $this->assertNull($upcomingStream->actualStart);
         $this->assertNull($upcomingStream->actualEnd);
     }
-
 }

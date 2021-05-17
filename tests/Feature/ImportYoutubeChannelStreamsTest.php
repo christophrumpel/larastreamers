@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Stream;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ImportYoutubeChannelStreamsTest extends TestCase
 {
@@ -30,9 +30,8 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         $this->assertDatabaseCount((new Stream())->getTable(), 3);
         $this->assertDatabaseHas((new Stream())->getTable(), [
             'youtube_id' => 'gzqJZQyfkaI',
-            'channel_title' => 'Freek Van der Herten'
+            'channel_title' => 'Freek Van der Herten',
         ]);
-
     }
 
     /** @test */
@@ -50,6 +49,5 @@ class ImportYoutubeChannelStreamsTest extends TestCase
 
         // Assert
         $this->assertDatabaseCount((new Stream())->getTable(), 3);
-
     }
 }
