@@ -30,7 +30,7 @@ class UpdateGivenStreams extends Command
                     'title' => $streamData->title,
                     'channel_title' => $streamData->channelTitle,
                     'thumbnail_url' => $streamData->thumbnailUrl,
-                    'scheduled_start_time' => $streamData->plannedStart->timezone('Europe/Vienna'),
+                    'scheduled_start_time' => $streamData->plannedStart->timezone('UTC'),
                 ]))
             ->filter()
             ->count();

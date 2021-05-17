@@ -30,7 +30,7 @@ In order to import videos from  YouTube you need:
 * [x] Better timezone support (using timezone through browser
 * [x] Automatically check for updates on stored streams
 * [x] Automatically fix styles on PRs (after PR is merged)
-* [ ] Add Twitter channel and all its upcoming live streams (almost finished)
+* [x] Add Twitter channel import to load its upcoming live streams
 * [ ] Twitter integration (tweet when added, tweet when X minutes before)
 * [ ] Calendar link for every event
 * [ ] Approval flow

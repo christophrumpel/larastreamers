@@ -20,7 +20,7 @@ class PageHomeTest extends TestCase
         Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456']);
 
         // Act & Assert
-        $this->get('/?timezone=Europe/Vienna')
+        $this->get('/')
             ->assertSee('Stream #1')
             ->assertSee('https://www.youtube.com/watch?v=1234')
             ->assertSee('My Channel')
@@ -52,7 +52,7 @@ class PageHomeTest extends TestCase
         Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
 
         // Act & Assert
-        $this->get('/?timezone=Europe/Vienna')
+        $this->get('/')
             ->assertDontSee(today()->format('D d.m.Y'))
             ->assertSee('Today')
             ->assertDontSee(Carbon::tomorrow()->format('D d.m.Y'))

@@ -1,4 +1,4 @@
-<div class="bg-blue-100 rounded-md overflow-hidden">
+<div class="bg-blue-100 rounded-md overflow-hidden mb-1">
     <a class="grid grid-cols-1 md:grid-cols-3" target="_blank"
        href="{{ $stream->link() }}">
         <img class="md:col-span-1 md:border-r-8 md:border-gray-800" src="{{ $stream->thumbnail_url }}"

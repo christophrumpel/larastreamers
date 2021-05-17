@@ -7,29 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <livewire:import-youtube-live-stream/>
+            <livewire:import-youtube-live-stream/>
 
-                <livewire:import-youtube-channel />
-
-            <!--
-  This example requires Tailwind CSS v2.0+
-
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ]
-  }
-  ```
--->
-
-
-
+            <livewire:import-youtube-channel/>
         </div>
     </div>
 </x-app-layout>

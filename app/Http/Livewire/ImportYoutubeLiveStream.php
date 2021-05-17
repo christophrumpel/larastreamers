@@ -29,7 +29,7 @@ class ImportYoutubeLiveStream extends Component
             'channel_title' => $video->channelTitle,
             'title' => $video->title,
             'thumbnail_url' => $video->thumbnailUrl,
-            'scheduled_start_time' => $video->plannedStart->timezone('Europe/Vienna'),
+            'scheduled_start_time' => $video->plannedStart->timezone('UTC'),
         ]);
 
         session()->flash('stream-message', 'Stream "'.$this->youtubeId.'" was added successfully.');
