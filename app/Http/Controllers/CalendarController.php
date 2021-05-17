@@ -15,7 +15,7 @@ class CalendarController extends Controller
             ->name('Larastreamers')
             ->description('There is no better way to learn than by watching other developers code live. Find out who is streaming next in the Laravel world.');
 
-        Stream::query()->each(fn(Stream $stream) => $calendar->event(
+        Stream::upcoming()->each(fn(Stream $stream) => $calendar->event(
             $stream->toCalendarItem()
         ));
 

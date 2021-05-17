@@ -23,7 +23,7 @@ class Stream extends Model implements Feedable
 
     public function scopeUpcoming(Builder $query): Builder
     {
-        return $query->where('scheduled_start_time', '>', Carbon::today());
+        return $query->where('scheduled_start_time', '>=', Carbon::today());
     }
 
     public static function getFeedItems(): Collection
