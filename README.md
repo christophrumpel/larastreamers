@@ -29,14 +29,13 @@ In order to import videos from  YouTube you need:
 * [x] RSS Feed
 * [x] Better timezone support (using timezone through browser
 * [x] Automatically check for updates on stored streams
-* [ ] Automatically fix styles on PRs
+* [x] Automatically fix styles on PRs (after PR is merged)
+* [ ] Add Twitter channel and all its upcoming live streams (almost finished)
 * [ ] Twitter integration (tweet when added, tweet when X minutes before)
-* [ ] Calendar link
+* [ ] Calendar link for every event
 * [ ] Approval flow
 * [ ] User can make suggestions for streams to add
-* [ ] User can add event to cal
-* [ ] User can subscribe to notifications (newsletter list?)
-* [ ] Show when I stream is currently live
+* [ ] Show when a stream is currently live
 
 ## Contribute
 
