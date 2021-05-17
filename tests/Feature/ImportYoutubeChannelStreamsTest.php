@@ -23,11 +23,15 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         // Assert
         $this->assertDatabaseCount((new Stream())->getTable(), 0);
 
-    	// Act
+        // Act
         (new ImportYoutubeChannelStreamsJob('UCdtd5QYBx9MUVXHm7qgEpxA'))->handle();
 
-    	// Assert
+        // Assert
         $this->assertDatabaseCount((new Stream())->getTable(), 3);
+        $this->assertDatabaseHas((new Stream())->getTable(), [
+            'youtube_id' => 'gzqJZQyfkaI',
+            'channel_title' => 'Freek Van der Herten'
+        ]);
 
     }
 
