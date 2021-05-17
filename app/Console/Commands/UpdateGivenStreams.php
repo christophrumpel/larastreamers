@@ -11,7 +11,7 @@ class UpdateGivenStreams extends Command
 {
     protected $signature = 'larastreamers:update-streams';
 
-    protected $description = 'Command description';
+    protected $description = 'Update all today/upcoming streams';
 
     public function handle(): int
     {

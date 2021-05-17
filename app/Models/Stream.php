@@ -28,7 +28,7 @@ class Stream extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return Stream::query()->upcoming()->get();
+        return static::query()->upcoming()->get();
     }
 
     public function toFeedItem(): FeedItem
