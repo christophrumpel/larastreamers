@@ -15,7 +15,7 @@ class UpdateGivenStreams extends Command
 
     public function handle(): int
     {
-        $streams = Stream::all()->keyBy('youtube_id');
+        $streams = Stream::query()->upcoming()->get()->keyBy('youtube_id');
 
         if ($streams->isEmpty()) {
             $this->info('There are no streams in the database.');
