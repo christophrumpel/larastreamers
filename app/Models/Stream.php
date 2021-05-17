@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Actions\PublishPostAction;
+use App\Jobs\TweetStreamIsLiveJob;
 use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,11 +17,47 @@ class Stream extends Model implements Feedable
 {
     use HasFactory;
 
-    protected $fillable = ['channel_title', 'youtube_id', 'title', 'thumbnail_url', 'scheduled_start_time', 'status'];
+    protected $fillable = [
+        'channel_title',
+        'youtube_id',
+        'title',
+        'thumbnail_url',
+        'scheduled_start_time',
+        'status',
+        'tweeted_at',
+    ];
 
     protected $casts = [
         'scheduled_start_time' => 'datetime',
+        'tweeted_at' => 'datetime',
     ];
+
+    public static function booted()
+    {
+        self::saved(function(Stream $stream) {
+            if ($stream->hasBeenTweeted()) {
+                return;
+            }
+
+            if (! $stream->isLive()) {
+                return;
+            }
+
+            dispatch(new TweetStreamIsLiveJob($stream));
+        });
+    }
+
+    public function hasBeenTweeted(): bool
+    {
+        return ! is_null($this->tweeted_at);
+    }
+
+    public function markAsTweeted(): self
+    {
+        static::withoutEvents(fn() => $this->update(['tweeted_at' => now()]));
+
+        return $this;
+    }
 
     public function isLive(): bool
     {
@@ -46,7 +84,7 @@ class Stream extends Model implements Feedable
             ->title($this->title)
             ->summary('Dummy summary') //TODO: use real summary
             ->updated($this->updated_at)
-            ->link($this->link())
+            ->link($this->url())
             ->author($this->channel_title); //TODO: implement
     }
 
@@ -58,13 +96,13 @@ class Stream extends Model implements Feedable
             ->description(implode(PHP_EOL, [
                 $this->title,
                 $this->channel_title,
-                $this->link(),
+                $this->url(),
             ]))
             ->startsAt($this->scheduled_start_time)
             ->createdAt($this->created_at);
     }
 
-    public function link(): string
+    public function url(): string
     {
         return "https://www.youtube.com/watch?v={$this->youtube_id}";
     }
