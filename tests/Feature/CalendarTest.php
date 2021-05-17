@@ -29,7 +29,7 @@ class CalendarTest extends TestCase
         // Act & Assert
         $this->get('/calendar.ics')
             ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
-            ->assertSeeInOrder([
+            ->assertDontSee([
                 'SUMMARY:Stream #1',
                 'DESCRIPTION:Stream #1',
                 'https://www.youtube.com/watch?v=1111',
@@ -38,11 +38,6 @@ class CalendarTest extends TestCase
                 'SUMMARY:Stream #2',
                 'DESCRIPTION:Stream #2',
                 'https://www.youtube.com/watch?v=2222',
-            ])
-            ->assertSeeInOrder([
-                'SUMMARY:Stream #3',
-                'DESCRIPTION:Stream #3',
-                'https://www.youtube.com/watch?v=3333',
             ])
             ->assertSeeInOrder([
                 'SUMMARY:Stream #3',
