@@ -27,9 +27,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
         $status = "🔴 A new stream just started: {$this->stream->title}" . PHP_EOL . $this->stream->url();
 
-        if (app()->environment('production')) {
-            $twitter->tweet($status);
-        }
+        $twitter->tweet($status);
 
         $this->stream->markAsTweeted();
     }
