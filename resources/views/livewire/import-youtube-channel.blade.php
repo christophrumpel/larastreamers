@@ -1,13 +1,13 @@
 <div class="mt-12">
-    <form wire:submit.prevent="importStream">
-        @error('stream') <span class="error">{{ $message }}</span> @enderror
+    <form wire:submit.prevent="importChannel">
+        @error('channel') <span class="error">{{ $message }}</span> @enderror
 
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Import Youtube Live Stream</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Import YouTube Channel</h3>
                     <p class="mt-1 text-sm text-gray-600">
-                        Import a specific upcoming live stream.
+                        Import a channel and all its upcoming live streams.
                     </p>
                 </div>
             </div>
@@ -15,16 +15,16 @@
                 <form action="#" method="POST">
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
-                            @if (session()->has('stream-message'))
+                            @if (session()->has('channel-message'))
                                 <div class="mb-4 px-4 py-2 text-sm text-green-800 bg-green-200">
-                                    {{ session('stream-message') }}
+                                    {{ session('channel-message') }}
                                 </div>
                             @endif
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="youtubeStreamId" class="block text-sm font-medium text-gray-700">YouTube
-                                        Stream ID</label>
-                                    <input type="text" wire:model.defer="youtubeId" id="youtubeStreamId"
+                                        Channel ID</label>
+                                    <input type="text" wire:model.defer="youtubeChannelId" id="youtubeStreamId"
                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
 
@@ -42,3 +42,4 @@
         </div>
     </form>
 </div>
+
