@@ -7,13 +7,29 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <livewire:import-youtube-live-stream />
-            </div>
+                <livewire:import-youtube-live-stream/>
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <livewire:import-youtube-channel />
-            </div>
+
+            <!--
+  This example requires Tailwind CSS v2.0+
+
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ]
+  }
+  ```
+-->
+
+
+
         </div>
     </div>
 </x-app-layout>

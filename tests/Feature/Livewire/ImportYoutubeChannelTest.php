@@ -18,6 +18,9 @@ class ImportYoutubeChannelTest extends TestCase
     /** @test */
     public function it_adds_channel_to_database(): void
     {
+        // Arrange
+        Queue::fake();
+
         // Assert
         $this->assertDatabaseCount((new Channel())->getTable(), 0);
 
