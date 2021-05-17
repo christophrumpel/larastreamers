@@ -78,6 +78,24 @@ class PageHomeTest extends TestCase
     }
 
     /** @test */
+    public function it_marks_live_streams(): void
+    {
+        // Arrange
+        $stream = Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+
+        // Act & Assert
+        $this->get('/')
+            ->assertSee('Stream #1')
+            ->assertDontSee('live</span>', false);
+
+        $stream->update(['status' => StreamData::STATUS_LIVE]);
+
+        $this->get('/')
+             ->assertSee('Stream #1')
+             ->assertSee('live</span>', false);
+    }
+
+    /** @test */
     public function it_shows_footer_links(): void
     {
         // Arrange
