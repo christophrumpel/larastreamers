@@ -1,4 +1,4 @@
-<div class="bg-blue-100 rounded-md overflow-hidden">
+<div class="bg-blue-100 rounded-md overflow-hidden mb-1">
     <a class="block flex flex-col md:flex-row" target="_blank"
        href="{{ $stream->link() }}">
         <div>
