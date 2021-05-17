@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
+use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -63,13 +64,15 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::yesterday()->hour(8)]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays()]);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::yesterday()->subDay(), 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->subMinutes(10), 'status' => StreamData::STATUS_LIVE]);
+        Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
 
         // Act & Assert
         $this->get('/')
             ->assertSee('Stream #3')
+            ->assertSee('Stream #4')
             ->assertDontSee('Stream #2')
             ->assertDontSee('Stream #1');
     }

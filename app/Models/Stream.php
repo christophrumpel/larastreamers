@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\Youtube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,15 +16,23 @@ class Stream extends Model implements Feedable
 {
     use HasFactory;
 
-    protected $fillable = ['channel_title', 'youtube_id', 'title', 'thumbnail_url', 'scheduled_start_time'];
+    protected $fillable = ['channel_title', 'youtube_id', 'title', 'thumbnail_url', 'scheduled_start_time', 'status'];
 
     protected $casts = [
         'scheduled_start_time' => 'datetime',
     ];
 
+    public function isLive(): bool
+    {
+        return $this->status === StreamData::STATUS_LIVE;
+    }
+
     public function scopeUpcoming(Builder $query): Builder
     {
-        return $query->where('scheduled_start_time', '>=', Carbon::today());
+        return $query->whereIn('status', [
+            StreamData::STATUS_LIVE,
+            StreamData::STATUS_UPCOMING,
+        ]);
     }
 
     public static function getFeedItems(): Collection
