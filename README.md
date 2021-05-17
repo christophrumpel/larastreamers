@@ -36,6 +36,7 @@ In order to import videos from  YouTube you need:
 * [ ] Approval flow
 * [ ] User can make suggestions for streams to add
 * [ ] Show when a stream is currently live
+* [ ] Add calendar subscriptions
 
 ## Contribute
 
