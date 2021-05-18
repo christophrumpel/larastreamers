@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Actions\PublishPostAction;
 use App\Jobs\TweetStreamIsLiveJob;
 use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +20,7 @@ class Stream extends Model implements Feedable
         'channel_title',
         'youtube_id',
         'title',
+        'description',
         'thumbnail_url',
         'scheduled_start_time',
         'status',

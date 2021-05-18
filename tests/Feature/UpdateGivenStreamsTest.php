@@ -22,10 +22,10 @@ class UpdateGivenStreamsTest extends TestCase
         Youtube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
-                StreamData::fake(videoId: '1234', title: 'My New Test Stream', channelTitle: 'My New Channel Name', plannedStart: Carbon::tomorrow()),
+                StreamData::fake(videoId: '1234', title: 'My New Test Stream', description: 'My New Description', channelTitle: 'My New Channel Name', plannedStart: Carbon::tomorrow()),
             ]));
 
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today(), 'youtube_id' => '1234', 'channel_title' => 'My Channel']);
+        Stream::factory()->create(['youtube_id' => '1234',]);
 
         // Act
         $this->artisan(UpdateGivenStreams::class);
@@ -34,6 +34,7 @@ class UpdateGivenStreamsTest extends TestCase
         $this->assertDatabaseCount((new Stream)->getTable(), 1);
         $this->assertDatabaseHas((new Stream)->getTable(), [
             'title' => 'My New Test Stream',
+            'description' => 'My New Description',
             'channel_title' => 'My New Channel Name',
             'thumbnail_url' => 'my-new-thumbnail-url',
             'scheduled_start_time' => Carbon::tomorrow(),

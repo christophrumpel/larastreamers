@@ -28,6 +28,7 @@ class UpdateGivenStreams extends Command
                 ->get($streamData->videoId))
                 ->update([
                     'title' => $streamData->title,
+                    'description' => $streamData->description,
                     'channel_title' => $streamData->channelTitle,
                     'thumbnail_url' => $streamData->thumbnailUrl,
                     'scheduled_start_time' => $streamData->plannedStart,
