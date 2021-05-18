@@ -12,7 +12,7 @@
                 </header>
 
                 <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-                    <ul class="space-y-4">
+                    <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
                         @foreach ($streams as $stream)
                             @include('pages.partials.stream')
                         @endforeach

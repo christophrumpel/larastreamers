@@ -57,8 +57,8 @@
     <section class="py-12 md:py-16">
         <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
             <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
-                <aside class="max-w-xl space-y-2">
-                    <h1 class="text-3xl font-bold tracking-tight md:text-4xl">
+                <aside class="max-w-xl space-y-4">
+                    <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
                         📺 Larastreamers
                     </h1>
 
