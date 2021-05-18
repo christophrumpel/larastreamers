@@ -63,4 +63,15 @@ class YoutubeTest extends TestCase
         $this->assertEquals('2021-05-21T09:00:00+00:00', $upcomingStream->plannedStart->toIso8601String());
         $this->assertEquals(StreamData::STATUS_UPCOMING, $upcomingStream->status);
     }
+
+    /** @test */
+    public function it_uses_real_api_key_when_needed(): void
+    {
+        $this->assertEquals('FAKE-KEY', config()->get('services.youtube.key'));
+
+        $this->useRealYoutubeApi();
+
+        config()->set('services.youtube.key', 'REAL-API-KEY');
+        $this->assertEquals('REAL-API-KEY', config()->get('services.youtube.key'));
+    }
 }

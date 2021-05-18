@@ -1,59 +1,111 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1">
 
     <title>Larastreamers</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
-    <link rel="alternate icon" href="/images/favicon-tv.png">
-    
-    <meta name="description" content="Larastreamers is an overview of who is streaming next in the Laravel world.">
-    <meta name="author" content="Christoph Rumpel">
 
-    <meta property="og:url" content="{{ url('') }}"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:title" content="Larastreamers"/>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
+
+    <link rel="alternate icon"
+        href="/images/favicon-tv.png">
+
+    <meta name="description"
+        content="Larastreamers is an overview of who is streaming next in the Laravel world.">
+
+    <meta name="author"
+        content="Christoph Rumpel">
+
+    <meta property="og:url"
+        content="{{ url('') }}" />
+
+    <meta property="og:type"
+        content="website" />
+
+    <meta property="og:title"
+        content="Larastreamers" />
+
     <meta property="og:description"
-          content="Larastreamers is an overview of who is live-coding next in the Laravel world."/>
+        content="Larastreamers is an overview of who is live-coding next in the Laravel world." />
+
     <meta property="og:image"
-          content="{{ asset('images/larastreamers_social.png') }}"/>
+        content="{{ asset('images/larastreamers_social.png') }}" />
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"/>
-    <script src="{{ asset('js/app.js') }}"></script>
-@include('feed::links')
-@livewireStyles
+    <link href="{{ mix('css/app.css') }}"
+        rel="stylesheet" />
 
-<!-- Fathom - beautiful, simple website analytics -->
-    <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
+    <script src="{{ mix('js/app.js') }}"></script>
+
+    @include('feed::links')
+
+    @livewireStyles
+
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://cdn.usefathom.com/script.js"
+        data-site="POMKLANK"
+        defer></script>
     <!-- / Fathom -->
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
+    <section class="py-12 md:py-16">
+        <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+            <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
+                <aside class="max-w-xl space-y-4">
+                    <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
+                        📺 Larastreamers
+                    </h1>
 
-<div>
-    <div class="bg-white">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8 lg:flex lg:justify-between">
-            <div class="max-w-xl">
-                <h2 class="text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl">📺
-                    Larastreamers</h2>
-                <p class="mt-5 text-xl text-gray-500">There is no better way to learn than by watching other developers
-                    code
-                    <b>live</b>. Find out who is streaming next in the Laravel world.</p>
-            </div>
+                    <p class="text-gray-500 md:text-xl">
+                        There is no better way to learn than by watching other developers
+                        code live. Find out who is streaming next in the Laravel world.
+                    </p>
+                </aside>
+
+                <a class="px-3 py-2 text-sm font-medium text-white transition bg-red-600 rounded-md shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none"
+                    href="{{ route('calendar.ics') }}">
+                    Add streams to calendar
+                </a>
+            </header>
         </div>
+    </section>
 
-        <main class="bg-gray-800 py-16">
-            <div class="max-w-7xl mx-auto pb-12 px-4 sm:px-6 lg:px-8">
-                {{$slot ?? ''}}
-            </div>
-        </main>
+    <main class="flex-1 text-white bg-gray-700">
+        {{ $slot ?? '' }}
+    </main>
 
-        @include('pages.partials.footer')
+    <footer class="text-white bg-gray-700">
+        <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+            <nav class="flex flex-col justify-between gap-4 py-8 border-t border-gray-600 md:items-center md:flex-row">
+                <p class="text-sm text-gray-300">
+                    <b class="text-white">Larastreamers</b> - A project by <a target="_blank"
+                        href="https://christoph-rumpel.com">Christoph Rumpel</a>
+                </p>
 
-    </div>
-</div>
-@livewireScripts
+                <ul class="flex items-center space-x-6 text-sm">
+                    <li>
+                        <a class="hover:underline"
+                            target="_blank"
+                            href="https://twitter.com/larastreamers">Twitter</a>
+                    </li>
+
+                    <li>
+                        <a class="hover:underline"
+                            target="_blank"
+                            href="https://github.com/christophrumpel/larastreamers">GitHub</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    @livewireScripts
 </body>
+
 </html>

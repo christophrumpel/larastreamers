@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddSingleStreamToCalendarController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ Route::get('/', PageHomeController::class)
 
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');
+
+Route::get('/calendar.ics/{stream}', AddSingleStreamToCalendarController::class)
+    ->name('calendar.ics.stream');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function() {
     return view('dashboard');

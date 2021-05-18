@@ -17,6 +17,7 @@ class StreamFactory extends Factory
         return [
             'channel_title' => $this->faker->title,
             'title' => $this->faker->title,
+            'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
             'thumbnail_url' => '',
             'scheduled_start_time' => Carbon::tomorrow()->toIso8601String(),

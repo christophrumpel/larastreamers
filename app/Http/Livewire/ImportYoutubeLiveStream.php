@@ -28,6 +28,7 @@ class ImportYoutubeLiveStream extends Component
         Stream::updateOrCreate(['youtube_id' => $video->videoId], [
             'channel_title' => $video->channelTitle,
             'title' => $video->title,
+            'description' => $video->description,
             'thumbnail_url' => $video->thumbnailUrl,
             'scheduled_start_time' => $video->plannedStart,
             'status' => $video->status,
