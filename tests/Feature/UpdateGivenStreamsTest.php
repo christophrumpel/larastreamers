@@ -8,6 +8,7 @@ use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class UpdateGivenStreamsTest extends TestCase
@@ -70,6 +71,9 @@ class UpdateGivenStreamsTest extends TestCase
     /** @test */
     public function it_only_update_specific_streams_when_frequent_option_is_given(): void
     {
+        // Arrange
+        Http::fake();
+
         // Arrange
         Stream::factory()->create(['youtube_id' => 'ended', 'status' => StreamData::STATUS_NONE]);
         Stream::factory()->create(['youtube_id' => 'live', 'status' => StreamData::STATUS_LIVE]);
