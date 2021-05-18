@@ -32,7 +32,8 @@
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3",
-        "spatie/laravel-ray": "^1.17"
+        "spatie/laravel-ray": "^1.17",
+        "spatie/test-time": "^1.2"
     },
     "config": {
         "optimize-autoloader": true,

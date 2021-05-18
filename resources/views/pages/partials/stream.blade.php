@@ -1,6 +1,6 @@
 <div class="bg-blue-100 rounded-md overflow-hidden mb-1">
     <a class="grid grid-cols-1 md:grid-cols-3" target="_blank"
-       href="{{ $stream->link() }}">
+       href="{{ $stream->url() }}">
         <div class="relative md:col-span-1 md:border-r-8 md:border-gray-800">
             <img class="object-cover" src="{{ $stream->thumbnail_url }}"
                  alt="Youtube Live Stream Preview image"/>
