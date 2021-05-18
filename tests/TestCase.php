@@ -12,14 +12,23 @@ abstract class TestCase extends BaseTestCase
 
     protected TwitterFake $twitterFake;
 
+    private string $originalYoutubeApiKey;
+
     public function setUp(): void
     {
         parent::setUp();
 
+        $this->originalYoutubeApiKey = config('services.youtube.key');
+        config()->set('services.youtube.key', 'FAKE-KEY');
         $this->twitterFake = new TwitterFake();
         $this->app->instance(Twitter::class, $this->twitterFake);
 
         ray()->newScreen($this->getName());
+    }
+
+    protected function useRealYoutubeApi(): void
+    {
+        config()->set('services.youtube.key', $this->originalYoutubeApiKey);
     }
 
     protected function channelResponse(): array
