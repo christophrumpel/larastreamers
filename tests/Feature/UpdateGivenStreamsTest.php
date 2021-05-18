@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Console\Commands\UpdateGivenStreams;
 use App\Facades\Youtube;
+use App\Jobs\TweetStreamIsLiveJob;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
