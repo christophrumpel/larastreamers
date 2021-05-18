@@ -15,16 +15,6 @@ class TweetTest extends TestCase
 {
     use RefreshDatabase;
 
-    private TwitterFake $twitterFake;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        $this->twitterFake = new TwitterFake();
-        $this->app->instance(Twitter::class, $this->twitterFake);
-    }
-
     /** @test */
     public function it_only_tweets_streams_that_are_going_live(): void
     {
