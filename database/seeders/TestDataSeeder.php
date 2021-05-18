@@ -22,10 +22,6 @@ class TestDataSeeder extends Seeder
             'password' => bcrypt('test'),
         ]);
 
-        Channel::factory()
-            ->count(10)
-            ->create();
-
         Stream::factory()
             ->count(10)
             ->create();

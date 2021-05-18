@@ -56,4 +56,18 @@ class CalendarTest extends TestCase
                 'https://www.youtube.com/watch?v=5555',
             ]);
     }
+
+    /** @test */
+    public function it_can_download_one_calendar_item(): void
+    {
+        $stream = Stream::factory()->create([
+            'title' => 'Stream',
+            'scheduled_start_time' => Carbon::now(),
+            'youtube_id' => '2222'
+        ]);
+
+        $this
+            ->get(route('calendar.ics.stream', $stream))
+            ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8');
+    }
 }
