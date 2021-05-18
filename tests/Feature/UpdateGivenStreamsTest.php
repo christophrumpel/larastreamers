@@ -70,7 +70,7 @@ class UpdateGivenStreamsTest extends TestCase
     }
 
     /** @test */
-    public function it_only_update_specific_streams_when_frequent_option_is_given(): void
+    public function it_only_updates_specific_streams_when_frequent_option_is_given(): void
     {
         // Arrange
         Http::fake();
