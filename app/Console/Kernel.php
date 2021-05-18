@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(CleanupCommand::class)->daily()->at('01:00');
         $schedule->command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');
         $schedule->command(UpdateGivenStreams::class)->hourly();
-        $schedule->command(UpdateGivenStreams::class, ['--frequent'])->everyFiveMinutes();
+        $schedule->command(UpdateGivenStreams::class, ['--soon-live-only'])->everyFiveMinutes();
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
     }
 
