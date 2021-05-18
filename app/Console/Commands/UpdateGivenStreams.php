@@ -10,14 +10,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UpdateGivenStreams extends Command
 {
-    protected $signature = 'larastreamers:update-streams {--frequent}';
+    protected $signature = 'larastreamers:update-streams {--soon-live-only}';
 
     protected $description = 'Update all today/upcoming streams';
 
     public function handle(): int
     {
         $streams = Stream::query()
-            ->when($this->option('frequent'),
+            ->when($this->option('soon-live-only'),
                 fn(Builder $query) => $query
                     ->where('status', StreamData::STATUS_LIVE)
                     ->orWhere('scheduled_start_time', '<=', now()->addMinutes(10)),

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Console\Commands\TweetStreamsCommand;
+use App\Console\Commands\TweetAboutLiveStreams;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Artisan;
@@ -23,7 +23,7 @@ class TweetTest extends TestCase
         $this->twitterFake->assertNoTweetsWereSent();
 
         // Act
-        Artisan::call(TweetStreamsCommand::class);
+        Artisan::call(TweetAboutLiveStreams::class);
 
         // Assert
         $this->twitterFake->assertTweetWasSent();
@@ -41,7 +41,7 @@ class TweetTest extends TestCase
         $this->assertFalse($streamDontTweet->hasBeenTweeted());
 
         // Act
-        Artisan::call(TweetStreamsCommand::class);
+        Artisan::call(TweetAboutLiveStreams::class);
 
         // Assert
         $this->assertTrue($streamToTweet->refresh()->hasBeenTweeted());
@@ -55,7 +55,7 @@ class TweetTest extends TestCase
         Stream::factory()->create(['status' => StreamData::STATUS_LIVE, 'tweeted_at' => now()]);
 
         // Act
-        Artisan::call(TweetStreamsCommand::class);
+        Artisan::call(TweetAboutLiveStreams::class);
 
         // Assert
         $this->twitterFake->assertNoTweetsWereSent();

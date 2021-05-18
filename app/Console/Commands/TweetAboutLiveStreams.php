@@ -7,7 +7,7 @@ use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Console\Command;
 
-class TweetStreamsCommand extends Command
+class TweetAboutLiveStreams extends Command
 {
     protected $signature = 'larastreamers:tweet-live';
 

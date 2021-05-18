@@ -82,7 +82,7 @@ class UpdateGivenStreamsTest extends TestCase
         Stream::factory()->create(['youtube_id' => 'tomorrow', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addDay()]);
 
         // Act & Expect
-        $this->artisan('larastreamers:update-streams --frequent')
+        $this->artisan('larastreamers:update-streams --soon-live-only')
              ->expectsOutput('Fetching 2 stream(s) from API.')
              ->assertExitCode(0);
 
