@@ -97,6 +97,7 @@ class Stream extends Model implements Feedable
                 $this->title,
                 $this->channel_title,
                 $this->url(),
+                $this->description,
             ]))
             ->startsAt($this->scheduled_start_time)
             ->createdAt($this->created_at);
