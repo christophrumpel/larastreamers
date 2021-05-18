@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Console\Commands\UpdateGivenStreams;
 use App\Facades\Youtube;
-use App\Jobs\TweetStreamIsLiveJob;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -45,7 +44,7 @@ class UpdateGivenStreamsTest extends TestCase
     {
         // Act & Expect
         $this->artisan(UpdateGivenStreams::class)
-            ->expectsOutput('There are no streams in the database.')
+            ->expectsOutput('There are no streams to update.')
             ->assertExitCode(0);
     }
 
@@ -66,5 +65,24 @@ class UpdateGivenStreamsTest extends TestCase
         $this->artisan(UpdateGivenStreams::class)
             ->expectsOutput('2 stream(s) were updated.')
             ->assertExitCode(0);
+    }
+
+    /** @test */
+    public function it_only_update_specific_streams_when_frequent_option_is_given(): void
+    {
+        // Arrange
+        Stream::factory()->create(['youtube_id' => 'ended', 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['youtube_id' => 'live', 'status' => StreamData::STATUS_LIVE]);
+        Stream::factory()->create(['youtube_id' => 'soon', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addMinutes(9)]);
+        Stream::factory()->create(['youtube_id' => 'tomorrow', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addDay()]);
+
+        // Act & Expect
+        $this->artisan('larastreamers:update-streams --frequent')
+             ->expectsOutput('Fetching 2 stream(s) from API.')
+             ->assertExitCode(0);
+
+        $this->artisan(UpdateGivenStreams::class)
+            ->expectsOutput('Fetching 3 stream(s) from API.')
+             ->assertExitCode(0);
     }
 }

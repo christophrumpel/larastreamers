@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Console\Commands\TweetStreamsCommand;
 use App\Models\Stream;
-use App\Services\Twitter;
 use App\Services\Youtube\StreamData;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Artisan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\TestTime\TestTime;
-use Tests\Fakes\TwitterFake;
 use Tests\TestCase;
 
 class TweetTest extends TestCase
@@ -16,19 +14,16 @@ class TweetTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_only_tweets_streams_that_are_going_live(): void
+    public function it_only_tweets_streams_that_are_live(): void
     {
         // Arrange
-        TestTime::freeze();
-        $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_UPCOMING
-        ]);
+        Stream::factory()->create(['status' => StreamData::STATUS_LIVE]);
 
         // Assert
         $this->twitterFake->assertNoTweetsWereSent();
 
         // Act
-        $stream->update(['status' => StreamData::STATUS_LIVE]);
+        Artisan::call(TweetStreamsCommand::class);
 
         // Assert
         $this->twitterFake->assertTweetWasSent();
@@ -38,41 +33,31 @@ class TweetTest extends TestCase
     public function it_correctly_sets_tweeted_at_timestamp(): void
     {
         // Arrange
-        TestTime::freeze();
-        $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_UPCOMING
-        ]);
+        $streamToTweet = Stream::factory()->create(['status' => StreamData::STATUS_LIVE]);
+        $streamDontTweet = Stream::factory()->create(['status' => StreamData::STATUS_UPCOMING]);
 
         // Assert
-        $this->assertFalse($stream->refresh()->hasBeenTweeted());
+        $this->assertFalse($streamToTweet->hasBeenTweeted());
+        $this->assertFalse($streamDontTweet->hasBeenTweeted());
 
         // Act
-        $stream->update(['status' => StreamData::STATUS_LIVE]);
+        Artisan::call(TweetStreamsCommand::class);
 
         // Assert
-        $this->assertTrue($stream->refresh()->hasBeenTweeted());
+        $this->assertTrue($streamToTweet->refresh()->hasBeenTweeted());
+        $this->assertFalse($streamDontTweet->refresh()->hasBeenTweeted());
     }
 
     /** @test */
     public function it_only_tweets_streams_that_are_going_live_once(): void
     {
         // Arrange
-        TestTime::freeze();
-        $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_LIVE
-        ]);
+        Stream::factory()->create(['status' => StreamData::STATUS_LIVE, 'tweeted_at' => now()]);
+
+        // Act
+        Artisan::call(TweetStreamsCommand::class);
 
         // Assert
-        $this->assertTrue($stream->refresh()->hasBeenTweeted());
-
-        // Arrange
-        $originallyTweetedAt = $stream->tweeted_at;
-        TestTime::addMinute();
-        $stream->update(['status' => StreamData::STATUS_LIVE]);
-
-        // Assert
-        $this->assertEquals($stream->refresh()->tweeted_at->timestamp, $originallyTweetedAt->timestamp);
+        $this->twitterFake->assertNoTweetsWereSent();
     }
-
-
 }

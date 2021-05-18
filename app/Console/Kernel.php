@@ -2,9 +2,12 @@
 
 namespace App\Console;
 
+use App\Console\Commands\TweetStreamsCommand;
 use App\Console\Commands\UpdateGivenStreams;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Spatie\Backup\Commands\BackupCommand;
+use Spatie\Backup\Commands\CleanupCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,6 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        TweetStreamsCommand::class,
         UpdateGivenStreams::class,
     ];
 
@@ -22,9 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('backup:clean')->daily()->at('01:00');
-        $schedule->command('backup:run --only-db --disable-notifications')->daily()->at('02:00');
-        $schedule->command(UpdateGivenStreams::class)->everyFiveMinutes();
+        $schedule->command(CleanupCommand::class)->daily()->at('01:00');
+        $schedule->command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');
+        $schedule->command(UpdateGivenStreams::class)->hourly();
+        $schedule->command(UpdateGivenStreams::class, ['--frequent'])->everyFiveMinutes();
+        $schedule->command(TweetStreamsCommand::class)->everyMinute();
     }
 
     /**
