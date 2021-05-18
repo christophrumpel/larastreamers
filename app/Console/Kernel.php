@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\TweetAboutLiveStreams;
+use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\UpdateGivenStreams;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        TweetAboutLiveStreams::class,
+        TweetAboutLiveStreamsCommand::class,
         UpdateGivenStreams::class,
     ];
 
@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');
         $schedule->command(UpdateGivenStreams::class)->hourly();
         $schedule->command(UpdateGivenStreams::class, ['--frequent'])->everyFiveMinutes();
-        $schedule->command(TweetAboutLiveStreams::class)->everyMinute();
+        $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
     }
 
     /**
