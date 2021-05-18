@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Tests\Fakes;
 
 use PHPUnit\Framework\Assert as PHPUnit;
 
 class TwitterFake
 {
-
     private int $tweetsSent = 0;
 
     public function tweet(): void

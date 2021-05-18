@@ -60,7 +60,7 @@ class CalendarTest extends TestCase
             'title' => 'Single Stream',
             'channel_title' => 'My Channel',
             'scheduled_start_time' => Carbon::now(),
-            'youtube_id' => '1234'
+            'youtube_id' => '1234',
         ]);
 
         $this

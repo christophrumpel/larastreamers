@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Console\Commands\UpdateGivenStreams;
 use App\Facades\Youtube;
-use App\Jobs\TweetStreamIsLiveJob;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,7 +24,7 @@ class UpdateGivenStreamsTest extends TestCase
                 StreamData::fake(videoId: '1234', title: 'My New Test Stream', description: 'My New Description', channelTitle: 'My New Channel Name', plannedStart: Carbon::tomorrow()),
             ]));
 
-        Stream::factory()->create(['youtube_id' => '1234',]);
+        Stream::factory()->create(['youtube_id' => '1234']);
 
         // Act
         $this->artisan(UpdateGivenStreams::class);

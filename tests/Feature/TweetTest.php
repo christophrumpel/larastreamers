@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
-use App\Services\Twitter;
 use App\Services\Youtube\StreamData;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\TestTime\TestTime;
-use Tests\Fakes\TwitterFake;
 use Tests\TestCase;
 
 class TweetTest extends TestCase
@@ -21,7 +18,7 @@ class TweetTest extends TestCase
         // Arrange
         TestTime::freeze();
         $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_UPCOMING
+            'status' => StreamData::STATUS_UPCOMING,
         ]);
 
         // Assert
@@ -40,7 +37,7 @@ class TweetTest extends TestCase
         // Arrange
         TestTime::freeze();
         $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_UPCOMING
+            'status' => StreamData::STATUS_UPCOMING,
         ]);
 
         // Assert
@@ -59,7 +56,7 @@ class TweetTest extends TestCase
         // Arrange
         TestTime::freeze();
         $stream = Stream::factory()->create([
-            'status' => StreamData::STATUS_LIVE
+            'status' => StreamData::STATUS_LIVE,
         ]);
 
         // Assert
@@ -73,6 +70,4 @@ class TweetTest extends TestCase
         // Assert
         $this->assertEquals($stream->refresh()->tweeted_at->timestamp, $originallyTweetedAt->timestamp);
     }
-
-
 }

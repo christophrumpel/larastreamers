@@ -73,6 +73,5 @@ class YoutubeTest extends TestCase
 
         config()->set('services.youtube.key', 'REAL-API-KEY');
         $this->assertEquals('REAL-API-KEY', config()->get('services.youtube.key'));
-
     }
 }

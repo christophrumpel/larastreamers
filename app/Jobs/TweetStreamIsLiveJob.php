@@ -16,7 +16,8 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
     public function __construct(
         public Stream $stream,
-    ) {}
+    ) {
+    }
 
     public function handle()
     {
@@ -25,7 +26,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
             return;
         }
 
-        $status = "🔴 A new stream just started: {$this->stream->title}" . PHP_EOL . $this->stream->url();
+        $status = "🔴 A new stream just started: {$this->stream->title}".PHP_EOL.$this->stream->url();
 
         $twitter->tweet($status);
 
