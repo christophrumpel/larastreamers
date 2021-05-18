@@ -5,7 +5,6 @@ namespace App\Jobs;
 use App\Models\Stream;
 use App\Services\Twitter;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,8 +18,9 @@ class TweetStreamIsLiveJob implements ShouldQueue
         public Stream $stream,
     ) {}
 
-    public function handle(Twitter $twitter)
+    public function handle()
     {
+        $twitter = app(Twitter::class);
         if ($this->stream->hasBeenTweeted()) {
             return;
         }
