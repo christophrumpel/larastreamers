@@ -16,16 +16,11 @@ class CalendarTest extends TestCase
     public function it_shows_all_streams_in_calendar(): void
     {
         // Arrange
-        $scheduledStartTime1 = Carbon::yesterday();
-        $scheduledStartTime2 = Carbon::today();
-        $scheduledStartTime3 = Carbon::now()->addDays();
-        $scheduledStartTime4 = Carbon::now()->addDays(2);
-        $scheduledStartTime5 = Carbon::now()->addDays(3);
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => $scheduledStartTime1, 'youtube_id' => '1111', 'status' => StreamData::STATUS_NONE]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => $scheduledStartTime2, 'youtube_id' => '2222']);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => $scheduledStartTime3, 'youtube_id' => '3333']);
-        Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => $scheduledStartTime4, 'youtube_id' => '4444']);
-        Stream::factory()->create(['title' => 'Stream #5', 'scheduled_start_time' => $scheduledStartTime5, 'youtube_id' => '5555']);
+        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '1111', 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::today(), 'youtube_id' => '2222']);
+        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '3333']);
+        Stream::factory()->create(['title' => 'Stream #4', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '4444']);
+        Stream::factory()->create(['title' => 'Stream #5', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '5555']);
 
         // Act & Assert
         $this->get('/calendar.ics')
@@ -54,6 +49,25 @@ class CalendarTest extends TestCase
                 'SUMMARY:Stream #5',
                 'DESCRIPTION:Stream #5',
                 'https://www.youtube.com/watch?v=5555',
+            ]);
+    }
+
+    /** @test */
+    public function it_can_download_one_calendar_item(): void
+    {
+        $stream = Stream::factory()->create([
+            'title' => 'Single Stream',
+            'scheduled_start_time' => Carbon::now(),
+            'youtube_id' => '2222'
+        ]);
+
+        $this
+            ->get(route('calendar.ics.stream', $stream))
+            ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
+            ->assertSeeInOrder([
+                'SUMMARY:Single Stream',
+                'DESCRIPTION:Single Stream',
+                'https://www.youtube.com/watch?v=2222',
             ]);
     }
 }
