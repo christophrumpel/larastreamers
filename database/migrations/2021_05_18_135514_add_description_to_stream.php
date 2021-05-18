@@ -9,7 +9,7 @@ class AddDescriptionToStream extends Migration
     public function up(): void
     {
         Schema::table('streams', function (Blueprint $table) {
-            $table->text('description')->default('')->after('title');
+            $table->text('description')->nullable()->after('title');
         });
     }
 }
