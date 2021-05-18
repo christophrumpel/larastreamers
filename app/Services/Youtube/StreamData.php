@@ -7,6 +7,10 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class StreamData extends DataTransferObject
 {
+    public const STATUS_UPCOMING = 'upcoming';
+    public const STATUS_LIVE = 'live';
+    public const STATUS_NONE = 'none';
+
     public string $videoId;
     public string $title;
     public string $channelTitle;
@@ -14,8 +18,12 @@ class StreamData extends DataTransferObject
     public string $thumbnailUrl;
     public Carbon $publishedAt;
     public Carbon $plannedStart;
-    public ?Carbon $actualStart;
-    public ?Carbon $actualEnd;
+    public string $status;
+
+    public function isLive(): bool
+    {
+        return $this->status === self::STATUS_LIVE;
+    }
 
     public static function fake(...$args): self
     {
@@ -31,6 +39,7 @@ class StreamData extends DataTransferObject
                 'thumbnailUrl' => 'my-new-thumbnail-url',
                 'publishedAt' => Carbon::tomorrow(),
                 'plannedStart' => Carbon::tomorrow(),
+                'status' => static::STATUS_UPCOMING,
             ], $args)
         );
     }

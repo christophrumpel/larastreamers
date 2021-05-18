@@ -68,10 +68,15 @@ class YoutubeClient
                 description: data_get($item, 'snippet.description'),
                 thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
                 publishedAt: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
-                plannedStart: $this->toCarbon(data_get($item, 'liveStreamingDetails.scheduledStartTime')),
-                actualStart: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
-                actualEnd: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualEndTime')),
+                plannedStart: $this->getPlannedStart($item),
+                status: data_get($item, 'snippet.liveBroadcastContent'),
             ));
+    }
+
+    protected function getPlannedStart(array $data): Carbon
+    {
+        return $this->toCarbon(data_get($data, 'liveStreamingDetails.scheduledStartTime'))
+            ?? $this->toCarbon(data_get($data, 'snippet.publishedAt'));
     }
 
     protected function fetch(string $url, array $params = [], string $key = null): array

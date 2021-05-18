@@ -11,11 +11,11 @@ class UpdateGivenStreams extends Command
 {
     protected $signature = 'larastreamers:update-streams';
 
-    protected $description = 'Command description';
+    protected $description = 'Update all today/upcoming streams';
 
     public function handle(): int
     {
-        $streams = Stream::all()->keyBy('youtube_id');
+        $streams = Stream::query()->upcoming()->get()->keyBy('youtube_id');
 
         if ($streams->isEmpty()) {
             $this->info('There are no streams in the database.');
@@ -30,7 +30,8 @@ class UpdateGivenStreams extends Command
                     'title' => $streamData->title,
                     'channel_title' => $streamData->channelTitle,
                     'thumbnail_url' => $streamData->thumbnailUrl,
-                    'scheduled_start_time' => $streamData->plannedStart->timezone('UTC'),
+                    'scheduled_start_time' => $streamData->plannedStart,
+                    'status' => $streamData->status,
                 ]))
             ->filter()
             ->count();
