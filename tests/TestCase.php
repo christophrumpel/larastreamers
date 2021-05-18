@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
 
     protected TwitterFake $twitterFake;
 
-    private string $originalYoutubeApiKey;
+    private string $originalYoutubeApiKey = '';
 
     public function setUp(): void
     {
