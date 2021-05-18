@@ -27,6 +27,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
                ->andReturn(collect([StreamData::fake(
                    videoId: 'bcnR4NYOw2o',
                    title: 'My Test Stream',
+                   description: 'Test Description',
                    channelTitle: 'My Test Channel',
                    thumbnailUrl: 'my-test-thumbnail-url',
                    plannedStart: $scheduledStartTime,
@@ -44,6 +45,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
             'youtube_id' => 'bcnR4NYOw2o',
             'channel_title' => 'My Test Channel',
             'title' => 'My Test Stream',
+            'description' => 'Test Description',
             'thumbnail_url' => 'my-test-thumbnail-url',
             'scheduled_start_time' => $scheduledStartTime,
         ]);
