@@ -29,7 +29,11 @@
 
         <header class="flex-1">
             <h3 class="text-2xl font-bold tracking-tight">
-                {{ $stream->title }}
+               <a  title="Open on YouTube"
+                   target="_blank"
+                   href="https://www.youtube.com/watch?v={{ $stream->youtube_id }}">
+                    {{ $stream->title }}
+                </a>
             </h3>
 
             <p class="text-lg font-medium text-gray-300">
