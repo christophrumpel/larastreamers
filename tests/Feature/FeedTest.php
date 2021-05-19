@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Stream;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class FeedTest extends TestCase
 {
@@ -14,23 +14,23 @@ class FeedTest extends TestCase
     /** @test */
     public function it_provides_streams_in_rss_feed(): void
     {
-    	// Arrange
-    	Stream::factory()->create([
-    	    'title' => 'Stream tomorrow',
+        // Arrange
+        Stream::factory()->create([
+            'title' => 'Stream tomorrow',
             'channel_title' => 'Channel one',
             'description' => 'Stream description',
-            'scheduled_start_time' => Carbon::tomorrow()
+            'scheduled_start_time' => Carbon::tomorrow(),
         ]);
-    	Stream::factory()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::today()]);
-    	Stream::factory()->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday()]);
+        Stream::factory()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::today()]);
+        Stream::factory()->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday()]);
 
-    	// Act
+        // Act
         $response = $this->get('feed');
 
-    	// Assert
+        // Assert
         $response->assertSeeInOrder([
             'Stream tomorrow',
-            'Stream description'
+            'Stream description',
         ]);
 
         $response->assertSeeInOrder([
