@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use Illuminate\Support\Stringable;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\IcalendarGenerator\Components\Event;
@@ -81,9 +83,11 @@ class Stream extends Model implements Feedable
                 $this->title,
                 $this->channel_title,
                 $this->url(),
-                $this->description,
+                Str::of($this->description)
+                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),
             ]))
             ->startsAt($this->scheduled_start_time)
+            ->endsAt($this->scheduled_start_time->clone()->addHour())
             ->createdAt($this->created_at);
     }
 
