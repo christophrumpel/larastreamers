@@ -19,7 +19,7 @@ class CalendarController extends Controller
             ->productIdentifier('larastreamers.com');
 
         Stream::query()
-            ->where('scheduled_start_time', '>=', now()->subYear()->startOfYear())
+            ->notOlderThanAYear()
             ->each(fn(Stream $stream) => $calendar->event(
                 $stream->toCalendarItem()
             ));

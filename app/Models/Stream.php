@@ -58,6 +58,15 @@ class Stream extends Model implements Feedable
         ]);
     }
 
+    public function scopeNotOlderThanAYear(Builder $query): Builder
+    {
+        return $query->where(
+            'scheduled_start_time',
+            '>=',
+            now()->subYear()->startOfYear()
+        );
+    }
+
     public static function getFeedItems(): Collection
     {
         return static::query()->upcoming()->get();
