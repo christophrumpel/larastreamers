@@ -18,8 +18,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->originalYoutubeApiKey = config('services.youtube.key');
-        config()->set('services.youtube.key', 'FAKE-KEY');
+        $this->originalYoutubeApiKey = config()->get('services.youtube.key', 'REAL-YOUTUBE-API-KEY') ?? '';
+        config()->set('services.youtube.key', 'FAKE-YOUTUBE-KEY');
         $this->twitterFake = new TwitterFake();
         $this->app->instance(Twitter::class, $this->twitterFake);
 

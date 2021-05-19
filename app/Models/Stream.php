@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Jobs\TweetStreamIsLiveJob;
 use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,21 +31,6 @@ class Stream extends Model implements Feedable
         'tweeted_at' => 'datetime',
     ];
 
-    public static function booted()
-    {
-        self::saved(function(Stream $stream) {
-            if ($stream->hasBeenTweeted()) {
-                return;
-            }
-
-            if (! $stream->isLive()) {
-                return;
-            }
-
-            dispatch(new TweetStreamIsLiveJob($stream));
-        });
-    }
-
     public function hasBeenTweeted(): bool
     {
         return ! is_null($this->tweeted_at);
@@ -54,7 +38,7 @@ class Stream extends Model implements Feedable
 
     public function markAsTweeted(): self
     {
-        static::withoutEvents(fn() => $this->update(['tweeted_at' => now()]));
+        $this->update(['tweeted_at' => now()]);
 
         return $this;
     }

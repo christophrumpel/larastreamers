@@ -67,7 +67,7 @@ class YoutubeTest extends TestCase
     /** @test */
     public function it_uses_real_api_key_when_needed(): void
     {
-        $this->assertEquals('FAKE-KEY', config()->get('services.youtube.key'));
+        $this->assertEquals('FAKE-YOUTUBE-KEY', config()->get('services.youtube.key'));
 
         $this->useRealYoutubeApi();
 
