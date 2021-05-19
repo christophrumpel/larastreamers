@@ -2,7 +2,7 @@
     <a class="relative transition focus:ring-4 focus:ring-red-400 focus:outline-none rounded-t-xl lg:rounded-xl"
         title="Open on YouTube"
         target="_blank"
-        href="https://www.youtube.com/watch?v={{ $stream->youtube_id }}">
+        href="{{ $stream->url() }}">
         @if ($stream->isLive())
             <div class="absolute top-2.5 right-2.5 z-10">
                 <div
