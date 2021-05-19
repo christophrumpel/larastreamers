@@ -66,7 +66,7 @@ class Stream extends Model implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary('Dummy summary') //TODO: use real summary
+            ->summary($this->description)
             ->updated($this->updated_at)
             ->link($this->url())
             ->author($this->channel_title); //TODO: implement
