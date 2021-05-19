@@ -16,19 +16,16 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
     public function __construct(
         public Stream $stream,
-    ) {
-    }
+    ) {}
 
-    public function handle()
+    public function handle(): void
     {
-        $twitter = app(Twitter::class);
         if ($this->stream->hasBeenTweeted()) {
             return;
         }
 
-        $status = "🔴 A new stream just started: {$this->stream->title}".PHP_EOL.$this->stream->url();
-
-        $twitter->tweet($status);
+        app(Twitter::class)
+            ->tweet("🔴 A new stream just started: {$this->stream->title}" . PHP_EOL . $this->stream->url());
 
         $this->stream->markAsTweeted();
     }
