@@ -24,7 +24,7 @@ Route::get('/', PageHomeController::class)
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');
 
-Route::get('/calendar.ics/{stream}', AddSingleStreamToCalendarController::class)
+Route::get('/stream-{stream}.ics', AddSingleStreamToCalendarController::class)
     ->name('calendar.ics.stream');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function() {
