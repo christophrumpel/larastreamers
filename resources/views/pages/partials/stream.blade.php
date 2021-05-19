@@ -31,7 +31,7 @@
             <h3 class="text-2xl font-bold tracking-tight">
                <a  title="Open on YouTube"
                    target="_blank"
-                   href="https://www.youtube.com/watch?v={{ $stream->youtube_id }}">
+                   href="{{ $stream->url() }}">
                     {{ $stream->title }}
                 </a>
             </h3>
