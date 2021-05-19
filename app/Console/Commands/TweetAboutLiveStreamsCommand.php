@@ -19,7 +19,7 @@ class TweetAboutLiveStreamsCommand extends Command
             ->where('status', StreamData::STATUS_LIVE)
             ->whereNull('tweeted_at')
             ->get()
-            ->each(function (Stream $stream) {
+            ->each(function(Stream $stream) {
                 dispatch(new TweetStreamIsLiveJob($stream));
             });
 

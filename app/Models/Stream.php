@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Jobs\TweetStreamIsLiveJob;
 use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
