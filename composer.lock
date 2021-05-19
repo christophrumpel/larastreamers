@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fc7ae7c831d084eab6623ddc112d4b9",
+    "content-hash": "613f89c8b16fb88e0dee5ed31f0b57be",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1435,16 +1435,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.41.0",
+            "version": "v8.42.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "05417155d886df8710e55c84e12622b52d83c47c"
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/05417155d886df8710e55c84e12622b52d83c47c",
-                "reference": "05417155d886df8710e55c84e12622b52d83c47c",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/55b886683e0a019bcad0d9d70bb781a3de1a6755",
+                "reference": "55b886683e0a019bcad0d9d70bb781a3de1a6755",
                 "shasum": ""
             },
             "require": {
@@ -1599,20 +1599,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-05-11T14:00:02+00:00"
+            "time": "2021-05-18T15:37:44+00:00"
         },
         {
             "name": "laravel/jetstream",
-            "version": "v2.3.5",
+            "version": "v2.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/jetstream.git",
-                "reference": "53b107cab39ec19c07b0daf53ebb57d1fb7dead5"
+                "reference": "c1f1f4e4a7a690eda215286e2e56bb8acd626160"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/jetstream/zipball/53b107cab39ec19c07b0daf53ebb57d1fb7dead5",
-                "reference": "53b107cab39ec19c07b0daf53ebb57d1fb7dead5",
+                "url": "https://api.github.com/repos/laravel/jetstream/zipball/c1f1f4e4a7a690eda215286e2e56bb8acd626160",
+                "reference": "c1f1f4e4a7a690eda215286e2e56bb8acd626160",
                 "shasum": ""
             },
             "require": {
@@ -1666,7 +1666,7 @@
                 "issues": "https://github.com/laravel/jetstream/issues",
                 "source": "https://github.com/laravel/jetstream"
             },
-            "time": "2021-05-11T20:43:25+00:00"
+            "time": "2021-05-18T15:34:01+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4283,16 +4283,16 @@
         },
         {
             "name": "spatie/laravel-feed",
-            "version": "3.1.3",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-feed.git",
-                "reference": "2fcbb3684e4c141b821de842c03f71ff8715e89e"
+                "reference": "1a9cbeb21de25b8a4f6a30ddc53e038fb5ae1651"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/2fcbb3684e4c141b821de842c03f71ff8715e89e",
-                "reference": "2fcbb3684e4c141b821de842c03f71ff8715e89e",
+                "url": "https://api.github.com/repos/spatie/laravel-feed/zipball/1a9cbeb21de25b8a4f6a30ddc53e038fb5ae1651",
+                "reference": "1a9cbeb21de25b8a4f6a30ddc53e038fb5ae1651",
                 "shasum": ""
             },
             "require": {
@@ -4355,7 +4355,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-feed/issues",
-                "source": "https://github.com/spatie/laravel-feed/tree/3.1.3"
+                "source": "https://github.com/spatie/laravel-feed/tree/3.2.0"
             },
             "funding": [
                 {
@@ -4363,7 +4363,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-03-12T16:15:31+00:00"
+            "time": "2021-05-17T21:00:38+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -4559,73 +4559,6 @@
                 }
             ],
             "time": "2021-03-30T19:46:13+00:00"
-        },
-        {
-            "name": "spatie/test-time",
-            "version": "1.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/test-time.git",
-                "reference": "b3e1ccf967e74cf29dcc783d501c174bd5174584"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/test-time/zipball/b3e1ccf967e74cf29dcc783d501c174bd5174584",
-                "reference": "b3e1ccf967e74cf29dcc783d501c174bd5174584",
-                "shasum": ""
-            },
-            "require": {
-                "nesbot/carbon": "^2.19",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.2|^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\TestTime\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alex Vanderbist",
-                    "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A small package to control the flow time",
-            "homepage": "https://github.com/spatie/test-time",
-            "keywords": [
-                "spatie",
-                "test-time"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/test-time/issues",
-                "source": "https://github.com/spatie/test-time/tree/1.2.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/spatie",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2020-11-03T09:30:20+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -7185,16 +7118,16 @@
     "packages-dev": [
         {
             "name": "christophrumpel/missing-livewire-assertions",
-            "version": "v0.3.3",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/christophrumpel/missing-livewire-assertions.git",
-                "reference": "238a56f4e85961fb45a1d9ead0450a9f829440ab"
+                "reference": "d816ffb2ae0bf932b27041576a74c387ed9ff543"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/christophrumpel/missing-livewire-assertions/zipball/238a56f4e85961fb45a1d9ead0450a9f829440ab",
-                "reference": "238a56f4e85961fb45a1d9ead0450a9f829440ab",
+                "url": "https://api.github.com/repos/christophrumpel/missing-livewire-assertions/zipball/d816ffb2ae0bf932b27041576a74c387ed9ff543",
+                "reference": "d816ffb2ae0bf932b27041576a74c387ed9ff543",
                 "shasum": ""
             },
             "require": {
@@ -7244,9 +7177,9 @@
             ],
             "support": {
                 "issues": "https://github.com/christophrumpel/missing-livewire-assertions/issues",
-                "source": "https://github.com/christophrumpel/missing-livewire-assertions/tree/v0.3.3"
+                "source": "https://github.com/christophrumpel/missing-livewire-assertions/tree/v0.4.0"
             },
-            "time": "2021-05-13T13:55:08+00:00"
+            "time": "2021-05-18T18:26:30+00:00"
         },
         {
             "name": "composer/semver",
@@ -7395,16 +7328,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "03cb2123a67d4be806554fe670d0adc298199808"
+                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/03cb2123a67d4be806554fe670d0adc298199808",
-                "reference": "03cb2123a67d4be806554fe670d0adc298199808",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
+                "reference": "e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f",
                 "shasum": ""
             },
             "require": {
@@ -7417,7 +7350,7 @@
                 "doctrine/cache": "^1.11 || ^2.0",
                 "doctrine/coding-standard": "^6.0 || ^8.1",
                 "phpstan/phpstan": "^0.12.20",
-                "phpunit/phpunit": "^7.5 || ^9.1.5",
+                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.1.5",
                 "symfony/cache": "^4.4 || ^5.2"
             },
             "type": "library",
@@ -7461,9 +7394,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/annotations/issues",
-                "source": "https://github.com/doctrine/annotations/tree/1.13.0"
+                "source": "https://github.com/doctrine/annotations/tree/1.13.1"
             },
-            "time": "2021-04-29T07:39:39+00:00"
+            "time": "2021-05-16T18:07:53+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -7955,16 +7888,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.5.1",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "695f616c228c9df923a10282e4989feeae212c52"
+                "reference": "5d23474cd411b07f46980d05f9c38e7dc0d17460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/695f616c228c9df923a10282e4989feeae212c52",
-                "reference": "695f616c228c9df923a10282e4989feeae212c52",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/5d23474cd411b07f46980d05f9c38e7dc0d17460",
+                "reference": "5d23474cd411b07f46980d05f9c38e7dc0d17460",
                 "shasum": ""
             },
             "require": {
@@ -8011,7 +7944,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-05-11T21:00:37+00:00"
+            "time": "2021-05-18T15:44:02+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -10247,6 +10180,73 @@
                 }
             ],
             "time": "2021-04-28T09:47:47+00:00"
+        },
+        {
+            "name": "spatie/test-time",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/test-time.git",
+                "reference": "b3e1ccf967e74cf29dcc783d501c174bd5174584"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/test-time/zipball/b3e1ccf967e74cf29dcc783d501c174bd5174584",
+                "reference": "b3e1ccf967e74cf29dcc783d501c174bd5174584",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^2.19",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.2|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\TestTime\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A small package to control the flow time",
+            "homepage": "https://github.com/spatie/test-time",
+            "keywords": [
+                "spatie",
+                "test-time"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/test-time/issues",
+                "source": "https://github.com/spatie/test-time/tree/1.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/spatie",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2020-11-03T09:30:20+00:00"
         },
         {
             "name": "symfony/filesystem",

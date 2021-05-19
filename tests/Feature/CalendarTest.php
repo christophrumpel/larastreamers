@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -16,7 +15,8 @@ class CalendarTest extends TestCase
     public function it_shows_all_streams_in_calendar(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'channel_title' => 'Channel 1', 'description' => 'Description 1', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '1111', 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream #0', 'channel_title' => 'Channel 0', 'description' => 'Description 0', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '0000']);
+        Stream::factory()->create(['title' => 'Stream #1', 'channel_title' => 'Channel 1', 'description' => 'Description 1', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '1111']);
         Stream::factory()->create(['title' => 'Stream #2', 'channel_title' => 'Channel 2', 'description' => 'Description 2', 'scheduled_start_time' => Carbon::today(), 'youtube_id' => '2222']);
         Stream::factory()->create(['title' => 'Stream #3', 'channel_title' => 'Channel 3', 'description' => 'Description 3', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '3333']);
         Stream::factory()->create(['title' => 'Stream #4', 'channel_title' => 'Channel 4', 'description' => 'Description 4', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '4444']);
@@ -26,9 +26,13 @@ class CalendarTest extends TestCase
         $this->get('/calendar.ics')
             ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
             ->assertDontSee([
+                'SUMMARY:Stream #0',
+                'DESCRIPTION:Stream #0',
+                'https://www.youtube.com/watch?v=0000',
+            ])
+            ->assertSeeInOrder([
                 'SUMMARY:Stream #1',
-                'DESCRIPTION:Stream #1',
-                'https://www.youtube.com/watch?v=1111',
+                'DESCRIPTION:Stream #1\nChannel 1\nhttps://www.youtube.com/watch?v=1111\n',
             ])
             ->assertSeeInOrder([
                 'SUMMARY:Stream #2',
@@ -51,6 +55,7 @@ class CalendarTest extends TestCase
         // after a specific length, the generated output cuts of the the string
         // so we cannot assert this string anymore
         // that's why the description is not in the string.
+        /** @see \Spatie\IcalendarGenerator\Builders\ComponentBuilder::chipLine() */
     }
 
     /** @test */
