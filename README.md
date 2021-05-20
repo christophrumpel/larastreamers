@@ -36,11 +36,9 @@ In order to import videos from  YouTube you need:
 * [x] Calendar link for every event
 * [x] Twitter integration (tweet when stream is live)
 * [x] Mocking Twitter so we can get off the production check
-* [ ] Archive with old streams
-* [ ] Approval flow
-* [ ] User can make suggestions for streams to add
-* [ ] Add calendar subscriptions
+* [ ] Archive with old streams (in the making)
+* [ ] Approval flow (use can make suggestions)
 
 ## Contribute
 
-We welcome everyone to contribute to this project. Just make sure to suggest bigger features first, before you spend a lot of time. Please also make sure to `write tests` for what you implement. I only merge PRs with tests :-)
+We welcome everyone to contribute to this project. Just make sure to suggest bigger features first in the issues, before you spend a lot of time. Please also make sure to `write tests` for what you implement. I only merge PRs with tests :-)
