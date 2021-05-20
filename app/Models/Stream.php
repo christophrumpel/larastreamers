@@ -104,4 +104,11 @@ class Stream extends Model implements Feedable
     {
         return "https://www.youtube.com/watch?v={$this->youtube_id}";
     }
+
+    public function toWebcalLink(): string
+    {
+        $url = parse_url(route('calendar.ics.stream', $this));
+
+        return "webcal://{$url['host']}{$url['path']}";
+    }
 }
