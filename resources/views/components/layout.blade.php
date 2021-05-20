@@ -68,10 +68,7 @@
                     </p>
                 </aside>
 
-                <a class="px-3 py-2 text-sm font-medium text-white transition bg-red-600 rounded-md shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none"
-                    href="{{ route('calendar.ics') }}">
-                    Add streams to calendar
-                </a>
+                <x-add-streams-to-calendar />
             </header>
         </div>
     </section>

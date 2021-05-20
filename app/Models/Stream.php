@@ -6,6 +6,7 @@ use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
@@ -26,12 +27,18 @@ class Stream extends Model implements Feedable
         'scheduled_start_time',
         'status',
         'tweeted_at',
+        'language_code',
     ];
 
     protected $casts = [
         'scheduled_start_time' => 'datetime',
         'tweeted_at' => 'datetime',
     ];
+
+    public static function getFeedItems(): Collection
+    {
+        return static::query()->upcoming()->get();
+    }
 
     public function hasBeenTweeted(): bool
     {
@@ -67,11 +74,6 @@ class Stream extends Model implements Feedable
         );
     }
 
-    public static function getFeedItems(): Collection
-    {
-        return static::query()->upcoming()->get();
-    }
-
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
@@ -81,6 +83,11 @@ class Stream extends Model implements Feedable
             ->updated($this->updated_at)
             ->link($this->url())
             ->author($this->channel_title); //TODO: implement
+    }
+
+    public function url(): string
+    {
+        return "https://www.youtube.com/watch?v={$this->youtube_id}";
     }
 
     public function toCalendarItem(): Event
@@ -100,8 +107,15 @@ class Stream extends Model implements Feedable
             ->createdAt($this->created_at);
     }
 
-    public function url(): string
+    public function language(): HasOne
     {
-        return "https://www.youtube.com/watch?v={$this->youtube_id}";
+        return $this->hasOne(Language::class, 'code', 'language_code');
+    }
+
+    public function toWebcalLink(): string
+    {
+        $url = parse_url(route('calendar.ics.stream', $this));
+
+        return "webcal://{$url['host']}{$url['path']}";
     }
 }

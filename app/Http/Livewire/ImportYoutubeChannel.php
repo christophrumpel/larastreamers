@@ -11,6 +11,7 @@ use Livewire\Component;
 class ImportYoutubeChannel extends Component
 {
     public $youtubeChannelId;
+    public $language = 'en';
 
     public function importChannel(): void
     {
@@ -24,10 +25,10 @@ class ImportYoutubeChannel extends Component
 
         Channel::updateOrCreate($channelData->prepareForModel());
 
-        dispatch(new ImportYoutubeChannelStreamsJob($this->youtubeChannelId));
+        dispatch(new ImportYoutubeChannelStreamsJob($this->youtubeChannelId, $this->language));
 
         session()->flash('channel-message', 'Channel "'.$this->youtubeChannelId.'" was added successfully.');
 
-        $this->reset(['youtubeChannelId']);
+        $this->reset(['youtubeChannelId', 'language']);
     }
 }
