@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
-use Carbon\Carbon;
+use App\Services\Youtube\StreamData;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -12,27 +12,18 @@ class ArchiveTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_shows_past_streams(): void
+    public function it_shows_only_finished_streams(): void
     {
     	// Arrange
-        Stream::factory()->create(['title' => 'Very old stream', 'scheduled_start_time' => Carbon::today()->subYear()]);
-        Stream::factory()->create(['title' => 'Yesterdays stream', 'scheduled_start_time' => Carbon::yesterday()->hours(12)->minutes(59)]);
+        Stream::factory()->create(['title' => 'Finished stream', 'status' => StreamData::STATUS_FINISHED]);
+        Stream::factory()->create(['title' => 'Live stream', 'status' => StreamData::STATUS_LIVE]);
+        Stream::factory()->create(['title' => 'Upcoming stream', 'status' => StreamData::STATUS_UPCOMING]);
 
     	// Act & Assert
         $this->get(route('archive'))
-            ->assertSee('Yesterdays stream')
-            ->assertSee('Very old stream');
-    }
-
-    /** @test */
-    public function it_does_not_show_upcoming_streams_including_today(): void
-    {
-        // Arrange
-        Stream::factory()->create(['title' => 'Todays stream', 'scheduled_start_time' => Carbon::today()]);
-
-        // Act & Assert
-        $this->get(route('archive'))
-            ->assertDontSee('Todays stream');
+            ->assertDontSee('Live stream')
+            ->assertDontSee('Upcoming stream')
+            ->assertSee('Finished stream');
     }
 
 }

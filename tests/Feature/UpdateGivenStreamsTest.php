@@ -76,7 +76,7 @@ class UpdateGivenStreamsTest extends TestCase
         Http::fake();
 
         // Arrange
-        Stream::factory()->create(['youtube_id' => 'ended', 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['youtube_id' => 'ended', 'status' => StreamData::STATUS_FINISHED]);
         Stream::factory()->create(['youtube_id' => 'live', 'status' => StreamData::STATUS_LIVE]);
         Stream::factory()->create(['youtube_id' => 'soon', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addMinutes(9)]);
         Stream::factory()->create(['youtube_id' => 'tomorrow', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addDay()]);

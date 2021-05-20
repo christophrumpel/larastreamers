@@ -58,13 +58,9 @@ class Stream extends Model implements Feedable
         ]);
     }
 
-    public function scopePast(Builder $query): Builder
+    public function scopeFinished(Builder $query): Builder
     {
-        return $query->where(
-            'scheduled_start_time',
-            '<',
-            today()
-        );
+        return $query->where('status', StreamData::STATUS_FINISHED);
     }
 
     public function scopeNotOlderThanAYear(Builder $query): Builder

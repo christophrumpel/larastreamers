@@ -10,7 +10,7 @@ class ArchiveController extends Controller
 {
     public function __invoke(): View
     {
-        $pastStreams = (new PrepareStreams())->handle(Stream::past()->get());
+        $pastStreams = (new PrepareStreams())->handle(Stream::finished()->get());
 
         return view('pages.archive', ['pastStreamsByDate' => $pastStreams]);
     }
