@@ -9,7 +9,7 @@ class AddLanguageCodeToStreamsTable extends Migration
     public function up()
     {
         Schema::table('streams', function (Blueprint $table) {
-            $table->string('language_code')->default('en');
+            $table->string('language_code')->default('en')->after('status');
         });
     }
 }

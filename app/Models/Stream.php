@@ -118,4 +118,11 @@ class Stream extends Model implements Feedable
 
         return "webcal://{$url['host']}{$url['path']}";
     }
+
+    public function toWebcalLink(): string
+    {
+        $url = parse_url(route('calendar.ics.stream', $this));
+
+        return "webcal://{$url['host']}{$url['path']}";
+    }
 }
