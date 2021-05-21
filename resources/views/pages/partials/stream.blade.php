@@ -47,7 +47,7 @@
                    class="inline-flex items-center space-x-2 transition hover:text-gray-300">
                     <x-icons.calendar />
 
-                    <span class="text-sm font-medium">Add to calendar</span>
+                    <span class="text-sm font-medium pr-10">Add to calendar</span>
                 </a>
             </li>
 
