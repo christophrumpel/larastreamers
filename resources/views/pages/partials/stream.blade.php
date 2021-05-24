@@ -58,15 +58,6 @@
             <li>
                 <a href="{{ route('calendar.ics.stream', $stream) }}"
                    class="inline-flex items-center space-x-2 transition hover:text-gray-300">
-                    <x-icons.download/>
-
-                    <span class="text-sm font-medium">Download .ics file</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('calendar.ics.stream', $stream) }}"
-                   class="inline-flex items-center space-x-2 transition hover:text-gray-300">
                     <x-icons.download />
 
                     <span class="text-sm font-medium">Download .ics file</span>
