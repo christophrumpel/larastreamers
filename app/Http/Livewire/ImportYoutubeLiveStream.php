@@ -11,6 +11,7 @@ use Livewire\Component;
 class ImportYoutubeLiveStream extends Component
 {
     public $youtubeId;
+    public $language = 'en';
 
     public function render(): View
     {
@@ -31,6 +32,7 @@ class ImportYoutubeLiveStream extends Component
             'description' => $video->description,
             'thumbnail_url' => $video->thumbnailUrl,
             'scheduled_start_time' => $video->plannedStart,
+            'language_code' => $this->language,
             'status' => $video->status,
         ]);
 
