@@ -27,7 +27,15 @@
                                     <input type="text" wire:model.defer="youtubeChannelId" id="youtubeStreamId"
                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
-
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
+                                    <select wire:model.defer="language" id="language"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        @foreach(\App\Models\Language::all() as $country)
+                                            <option value="{{ $country->code }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
