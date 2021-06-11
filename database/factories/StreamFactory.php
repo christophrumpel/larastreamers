@@ -18,13 +18,22 @@ class StreamFactory extends Factory
     {
         return [
             'channel_title' => $this->faker->title,
-            'title' => $this->faker->title,
+            'title' => $this->faker->sentence,
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
-            'thumbnail_url' => '',
+            'thumbnail_url' => 'https://i.ytimg.com/vi/s9s7O7_jQh8/maxresdefault_live.jpg',
             'scheduled_start_time' => Carbon::tomorrow()->toIso8601String(),
             'status' => StreamData::STATUS_UPCOMING,
             'language_code' => Arr::shuffle(Language::all()->map->code->toArray())[0],
         ];
+    }
+
+    public function finished(): StreamFactory
+    {
+        return $this->state(function () {
+            return [
+                'status' => StreamData::STATUS_FINISHED,
+            ];
+        });
     }
 }
