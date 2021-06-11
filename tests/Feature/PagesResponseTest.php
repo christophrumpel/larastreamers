@@ -22,4 +22,11 @@ class PagesResponseTest extends TestCase
         $this->get('/feed')
             ->assertOk();
     }
+
+    /** @test */
+    public function it_can_show_the_archive(): void
+    {
+        $this->get(route('archive'))
+            ->assertOk();
+    }
 }

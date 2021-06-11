@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddSingleStreamToCalendarController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ Route::feeds('feed');
 
 Route::get('/', PageHomeController::class)
     ->name('home');
+
+Route::get('/archive', ArchiveController::class)
+    ->name('archive');
 
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');

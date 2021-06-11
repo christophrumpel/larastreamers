@@ -65,6 +65,16 @@ class Stream extends Model implements Feedable
         ]);
     }
 
+    public function scopeFromLatestToOldest(Builder $query): Builder
+    {
+        return $query->orderByDesc('scheduled_start_time');
+    }
+
+    public function scopeFinished(Builder $query): Builder
+    {
+        return $query->where('status', StreamData::STATUS_FINISHED);
+    }
+
     public function scopeNotOlderThanAYear(Builder $query): Builder
     {
         return $query->where(

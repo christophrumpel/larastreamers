@@ -15,13 +15,22 @@ class TestDataSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Christoph',
-            'email' => 'test@test.at',
-            'password' => bcrypt('test'),
-        ]);
+        if (!User::count()) {
+            User::create([
+                'name' => 'Christoph',
+                'email' => 'test@test.at',
+                'password' => bcrypt('test'),
+            ]);
+        }
+
+        Stream::truncate();
 
         Stream::factory()
+            ->count(10)
+            ->create();
+
+        Stream::factory()
+            ->finished()
             ->count(10)
             ->create();
     }

@@ -1,6 +1,6 @@
 <div class="mt-12">
     <form wire:submit.prevent="importStream">
-        @error('stream') <span class="error">{{ $message }}</span> @enderror
+        @error('stream') <span class="mb-4 px-4 py-2 text-sm text-red-800 bg-red-200">{{ $message }}</span> @enderror
 
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">

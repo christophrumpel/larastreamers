@@ -3,7 +3,7 @@
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">
-        @if ($stream->isLive())
+        @if (!$isArchive && $stream->isLive())
             <div class="absolute top-2.5 right-2.5 z-10">
                 <div
                     class="flex px-2 py-1 space-x-2 bg-gray-900 rounded bg-opacity-80 backdrop-filter backdrop-blur-xl backdrop-saturate-150 place-items-center">
@@ -46,23 +46,25 @@
             </p>
         </header>
 
-        <ul class="flex flex-wrap gap-6">
-            <li>
-                <a href="{{ $stream->toWebcalLink() }}"
-                   class="inline-flex items-center space-x-2 transition hover:text-gray-300">
-                    <x-icons.calendar/>
-                    <span class="text-sm font-medium">Add to calendar</span>
-                </a>
-            </li>
+        @if (!$isArchive)
+            <ul class="flex flex-wrap gap-6">
+                <li>
+                    <a href="{{ $stream->toWebcalLink() }}"
+                       class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                        <x-icons.calendar/>
+                        <span class="text-sm font-medium">Add to calendar</span>
+                    </a>
+                </li>
 
-            <li>
-                <a href="{{ route('calendar.ics.stream', $stream) }}"
-                   class="inline-flex items-center space-x-2 transition hover:text-gray-300">
-                    <x-icons.download />
+                <li>
+                    <a href="{{ route('calendar.ics.stream', $stream) }}"
+                       class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                        <x-icons.download/>
 
-                    <span class="text-sm font-medium">Download .ics file</span>
-                </a>
-            </li>
-        </ul>
+                        <span class="text-sm font-medium">Download .ics file</span>
+                    </a>
+                </li>
+            </ul>
+        @endif
     </article>
 </li>

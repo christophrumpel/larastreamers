@@ -66,7 +66,7 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream none', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_NONE]);
+        Stream::factory()->create(['title' => 'Stream none', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_FINISHED]);
         Stream::factory()->create(['title' => 'Stream live', 'scheduled_start_time' => Carbon::now()->subMinutes(10), 'status' => StreamData::STATUS_LIVE]);
         Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
 

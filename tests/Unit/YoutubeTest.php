@@ -51,7 +51,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals('https://i.ytimg.com/vi/gzqJZQyfkaI/maxresdefault.jpg', $finishedStream->thumbnailUrl);
         $this->assertEquals('2021-05-15T12:51:18+00:00', $finishedStream->publishedAt->toIso8601String());
         $this->assertEquals('2021-05-15T11:00:00+00:00', $finishedStream->plannedStart->toIso8601String());
-        $this->assertEquals(StreamData::STATUS_NONE, $finishedStream->status);
+        $this->assertEquals(StreamData::STATUS_FINISHED, $finishedStream->status);
 
         /** @var \App\Services\Youtube\StreamData $upcomingStream */
         $upcomingStream = $streams->last();
