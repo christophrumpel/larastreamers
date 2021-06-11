@@ -34,4 +34,57 @@ class PrepareStreamsTest extends TestCase
         $this->assertEquals('Tomorrow', $preparedStreams->keys()[1]);
         $this->assertEquals(Carbon::tomorrow()->addDay()->format('D d.m.Y'), $preparedStreams->keys()[2]);
     }
+
+    /** @test */
+    public function it_orders_streams_from_current_to_upcoming(): void
+    {
+        $this->travelTo(Carbon::parse('2021-06-11 00:00'));
+
+        // Arrange
+        $streams = Stream::factory()->count(3)
+            ->state(new Sequence(
+                ['scheduled_start_time' => Carbon::today()],
+                ['scheduled_start_time' => Carbon::tomorrow()],
+                ['scheduled_start_time' => Carbon::tomorrow()->addDay()],
+            ))->create();
+
+        $prepareStreamsAction = new PrepareStreams;
+
+        // Act
+        $preparedStreams = $prepareStreamsAction->handle($streams);
+
+        $this->assertEquals([
+            'Today',
+            'Tomorrow',
+            'Sun 13.06.2021'
+        ], $preparedStreams->keys()->toArray());
+    }
+
+    /** @test */
+    public function it_orders_past_streams_from_latest_to_oldest(): void
+    {
+        $this->travelTo(Carbon::parse('2021-06-11 00:00'));
+
+        // Arrange
+        $streams = Stream::factory()->count(3)
+            ->state(new Sequence(
+                ['scheduled_start_time' => Carbon::yesterday()],
+                ['scheduled_start_time' => Carbon::yesterday()->subDay()],
+                ['scheduled_start_time' => Carbon::yesterday()->subDays(2)],
+            ))->create();
+
+        $prepareStreamsAction = new PrepareStreams;
+
+        // Act
+        $preparedStreams = $prepareStreamsAction
+            ->fromLatestToOldest()
+            ->handle($streams);
+
+        $this->assertEquals([
+            'Yesterday',
+            'Wed 09.06.2021',
+            'Tue 08.06.2021'
+        ], $preparedStreams->keys()->toArray());
+    }
+
 }

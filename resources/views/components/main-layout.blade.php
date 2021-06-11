@@ -52,6 +52,11 @@
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
+
+
+@include('pages.partials.nav')
+
+
 <section class="py-12 md:py-16">
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
         <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
