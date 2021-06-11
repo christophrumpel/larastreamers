@@ -32,6 +32,7 @@ class StreamFactory extends Factory
     {
         return $this->state(function () {
             return [
+                'scheduled_start_time' => Carbon::yesterday()->subDays(random_int(0,10))->toIso8601String(),
                 'status' => StreamData::STATUS_FINISHED,
             ];
         });
