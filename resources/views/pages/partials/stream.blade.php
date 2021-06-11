@@ -24,6 +24,13 @@
     </a>
 
     <article class="flex flex-col items-start p-6 space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
+        <div class="flex items-center">
+            <x-local-time class="font-bold tracking-tight text-red-400" :date="$stream->scheduled_start_time"/>
+            @if ($stream->language->shouldRender())
+                <span class="block mx-2 text-gray-500">&bull;</span>
+                <span class="font-semibold tracking-wider uppercase text-white">{{ $stream->language->name }}</span>
+            @endif
+        </div>
         <x-local-time class="inline-block font-bold tracking-tight text-red-400"
                       :date="$stream->scheduled_start_time"/>
 
@@ -41,6 +48,19 @@
             </p>
         </header>
 
+        <ul class="flex flex-wrap gap-6">
+            <li>
+                <a href="{{ $stream->toWebcalLink() }}"
+                   class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                    <x-icons.calendar/>
+                    <span class="text-sm font-medium">Add to calendar</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('calendar.ics.stream', $stream) }}"
+                   class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                    <x-icons.download />
         @if(!$isArchive)
             <ul class="flex flex-wrap gap-6">
                 <li>

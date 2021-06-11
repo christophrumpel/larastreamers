@@ -1107,6 +1107,17 @@ select {
 .aspect-h-9 {
 	--tw-aspect-h: 9;
 }
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
 .pointer-events-none {
 	pointer-events: none;
 }
@@ -1175,6 +1186,10 @@ select {
 .-mx-4 {
 	margin-left: -1rem;
 	margin-right: -1rem;
+}
+.mx-2 {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
 }
 .ml-3 {
 	margin-left: 0.75rem;
@@ -1358,6 +1373,9 @@ select {
 }
 .w-2 {
 	width: 0.5rem;
+}
+.w-56 {
+	width: 14rem;
 }
 .min-w-0 {
 	min-width: 0px;
@@ -1588,6 +1606,10 @@ select {
 .rounded-b-xl {
 	border-bottom-right-radius: 0.75rem;
 	border-bottom-left-radius: 0.75rem;
+}
+.rounded-r-none {
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 .border {
 	border-width: 1px;
@@ -2102,6 +2124,9 @@ select {
 .duration-300 {
 	transition-duration: 300ms;
 }
+.duration-100 {
+	transition-duration: 100ms;
+}
 .ease-in-out {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2110,6 +2135,9 @@ select {
 }
 .ease-in {
 	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+[x-cloak] {
+    display: none;
 }
 .hover\:border-gray-300:hover {
 	--tw-border-opacity: 1;
@@ -2626,4 +2654,3 @@ select {
 		padding-right: 2rem;
 	}
 }
-
