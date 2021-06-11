@@ -22,7 +22,7 @@ class StreamFactory extends Factory
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
             'thumbnail_url' => 'https://i.ytimg.com/vi/s9s7O7_jQh8/maxresdefault_live.jpg',
-            'scheduled_start_time' => Carbon::tomorrow()->addDays(random_int(0,10))->toIso8601String(),
+            'scheduled_start_time' => Carbon::tomorrow()->addDays(random_int(0, 10))->toIso8601String(),
             'status' => StreamData::STATUS_UPCOMING,
             'language_code' => Arr::shuffle(Language::all()->map->code->toArray())[0],
         ];
@@ -30,9 +30,9 @@ class StreamFactory extends Factory
 
     public function finished(): StreamFactory
     {
-        return $this->state(function () {
+        return $this->state(function() {
             return [
-                'scheduled_start_time' => Carbon::yesterday()->subDays(random_int(0,10))->toIso8601String(),
+                'scheduled_start_time' => Carbon::yesterday()->subDays(random_int(0, 10))->toIso8601String(),
                 'status' => StreamData::STATUS_FINISHED,
             ];
         });

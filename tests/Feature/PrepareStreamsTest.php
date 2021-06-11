@@ -56,7 +56,7 @@ class PrepareStreamsTest extends TestCase
         $this->assertEquals([
             'Today',
             'Tomorrow',
-            'Sun 13.06.2021'
+            'Sun 13.06.2021',
         ], $preparedStreams->keys()->toArray());
     }
 
@@ -83,8 +83,7 @@ class PrepareStreamsTest extends TestCase
         $this->assertEquals([
             'Yesterday',
             'Wed 09.06.2021',
-            'Tue 08.06.2021'
+            'Tue 08.06.2021',
         ], $preparedStreams->keys()->toArray());
     }
-
 }

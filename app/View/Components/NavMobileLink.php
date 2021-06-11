@@ -9,7 +9,9 @@ class NavMobileLink extends Component
 {
     public bool $isCurrentRoute = false;
 
-    public function __construct(public string $link, public string $name, public string $routeName){}
+    public function __construct(public string $link, public string $name, public string $routeName)
+    {
+    }
 
     public function render(): View
     {

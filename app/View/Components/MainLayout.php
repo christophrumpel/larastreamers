@@ -7,7 +7,9 @@ use Illuminate\View\Component;
 
 class MainLayout extends Component
 {
-    public function __construct(public bool $showCalendarDownloads = true) {}
+    public function __construct(public bool $showCalendarDownloads = true)
+    {
+    }
 
     public function render(): View
     {

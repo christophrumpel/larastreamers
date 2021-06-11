@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ArchiveTest extends TestCase
 {
@@ -40,9 +40,7 @@ class ArchiveTest extends TestCase
             ->assertSeeInOrder([
                 'Finished one day ago',
                 'Finished two days ago',
-                'Finished three days ago'
+                'Finished three days ago',
             ]);
     }
-
-
 }

@@ -15,7 +15,7 @@ class TestDataSeeder extends Seeder
      */
     public function run()
     {
-        if (!User::count()) {
+        if (! User::count()) {
             User::create([
                 'name' => 'Christoph',
                 'email' => 'test@test.at',

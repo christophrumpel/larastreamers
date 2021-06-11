@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class StreamList extends Component
 {
-
     public $streamsByDate;
 
     public $isArchive = false;
