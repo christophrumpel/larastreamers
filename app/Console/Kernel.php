@@ -33,6 +33,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(UpdateGivenStreams::class)->hourly();
         $schedule->command(UpdateGivenStreams::class, ['--soon-live-only'])->everyFiveMinutes();
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
+        $schedule->command(ImportChannelStreamsCommand::class)->hourly();
     }
 
     /**
