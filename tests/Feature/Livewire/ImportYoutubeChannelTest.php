@@ -22,7 +22,7 @@ class ImportYoutubeChannelTest extends TestCase
         Queue::fake();
 
         // Assert
-        $this->assertDatabaseCount((new Channel())->getTable(), 0);
+        $this->assertDatabaseCount(Channel::class, 0);
 
         // Arrange & Act
         Http::fake(fn() => Http::response($this->channelResponse()));
@@ -32,8 +32,8 @@ class ImportYoutubeChannelTest extends TestCase
             ->call('importChannel');
 
         // Assert
-        $this->assertDatabaseCount((new Channel())->getTable(), 1);
-        $this->assertDatabaseHas((new Channel())->getTable(), [
+        $this->assertDatabaseCount(Channel::class, 1);
+        $this->assertDatabaseHas(Channel::class, [
             'platform' => 'youtube',
             'platform_id' => 'UCdtd5QYBx9MUVXHm7qgEpxA',
         ]);

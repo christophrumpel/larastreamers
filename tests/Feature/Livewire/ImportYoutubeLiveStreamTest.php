@@ -33,7 +33,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
                    plannedStart: $scheduledStartTime,
                )]));
 
-        $this->assertDatabaseCount((new Stream())->getTable(), 0);
+        $this->assertDatabaseCount(Stream::class, 0);
 
         // Act
         Livewire::test(ImportYoutubeLiveStream::class)
@@ -41,7 +41,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
             ->call('importStream');
 
         // Assert
-        $this->assertDatabaseHas((new Stream)->getTable(), [
+        $this->assertDatabaseHas(Stream::class, [
             'youtube_id' => 'bcnR4NYOw2o',
             'channel_title' => 'My Test Channel',
             'title' => 'My Test Stream',
@@ -57,7 +57,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // Arrange
         Http::fake();
         // it passes because the video was not found because
-        $this->assertDatabaseCount((new Stream())->getTable(), 0);
+        $this->assertDatabaseCount(Stream::class, 0);
 
         // Arrange & Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
@@ -65,7 +65,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
             ->call('importStream')
             ->assertHasErrors(['stream']);
 
-        $this->assertDatabaseCount((new Stream())->getTable(), 0);
+        $this->assertDatabaseCount(Stream::class, 0);
     }
 
     /** @test */
@@ -79,15 +79,15 @@ class ImportYoutubeLiveStreamTest extends TestCase
                 title: 'My New Test Stream',
             )]));
         Stream::factory()->create(['youtube_id' => '1234', 'title' => 'Old title']);
-        $this->assertDatabaseCount((new Stream())->getTable(), 1);
+        $this->assertDatabaseCount(Stream::class, 1);
 
         // Arrange & Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
             ->set('youtubeId', '1234')
             ->call('importStream');
 
-        $this->assertDatabaseCount((new Stream())->getTable(), 1);
-        $this->assertDatabaseHas((new Stream())->getTable(), [
+        $this->assertDatabaseCount(Stream::class, 1);
+        $this->assertDatabaseHas(Stream::class, [
             'youtube_id' => '1234',
             'title' => 'My New Test Stream',
         ]);

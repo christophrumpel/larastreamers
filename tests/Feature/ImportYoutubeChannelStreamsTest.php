@@ -21,14 +21,14 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         ]);
 
         // Assert
-        $this->assertDatabaseCount((new Stream())->getTable(), 0);
+        $this->assertDatabaseCount(Stream::class, 0);
 
         // Act
         (new ImportYoutubeChannelStreamsJob('UCdtd5QYBx9MUVXHm7qgEpxA', 'en'))->handle();
 
         // Assert
-        $this->assertDatabaseCount((new Stream())->getTable(), 3);
-        $this->assertDatabaseHas((new Stream())->getTable(), [
+        $this->assertDatabaseCount(Stream::class, 3);
+        $this->assertDatabaseHas(Stream::class, [
             'youtube_id' => 'gzqJZQyfkaI',
             'channel_title' => 'Freek Van der Herten',
             'language_code' => 'en',
@@ -49,6 +49,6 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         (new ImportYoutubeChannelStreamsJob('UCdtd5QYBx9MUVXHm7qgEpxA', 'en'))->handle();
 
         // Assert
-        $this->assertDatabaseCount((new Stream())->getTable(), 3);
+        $this->assertDatabaseCount(Stream::class, 3);
     }
 }

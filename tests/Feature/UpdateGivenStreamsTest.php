@@ -31,8 +31,8 @@ class UpdateGivenStreamsTest extends TestCase
         $this->artisan(UpdateGivenStreams::class);
 
         // Assert
-        $this->assertDatabaseCount((new Stream)->getTable(), 1);
-        $this->assertDatabaseHas((new Stream)->getTable(), [
+        $this->assertDatabaseCount(Stream::class, 1);
+        $this->assertDatabaseHas(Stream::class, [
             'title' => 'My New Test Stream',
             'description' => 'My New Description',
             'channel_title' => 'My New Channel Name',
