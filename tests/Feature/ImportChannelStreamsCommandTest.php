@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ImportChannelStreamsCommandTest extends TestCase
 {
