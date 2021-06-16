@@ -15,6 +15,7 @@ class ChannelFactory extends Factory
         return [
             'platform' => 'youtube',
             'platform_id' => $this->faker->word,
+            'language_code' => 'en',
             'slug' => $this->faker->slug,
             'name' => $this->faker->name,
             'description' => $this->faker->text,

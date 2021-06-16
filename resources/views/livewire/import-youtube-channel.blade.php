@@ -28,8 +28,8 @@
                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
-                                    <select wire:model.defer="language" id="language"
+                                    <label for="language_code" class="block text-sm font-medium text-gray-700">Language</label>
+                                    <select wire:model.defer="languageCode" id="language_code"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         @foreach(\App\Models\Language::all() as $country)
                                             <option value="{{ $country->code }}">{{ $country->name }}</option>

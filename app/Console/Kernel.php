@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\UpdateGivenStreams;
 use Illuminate\Console\Scheduling\Schedule;
@@ -19,6 +20,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         TweetAboutLiveStreamsCommand::class,
         UpdateGivenStreams::class,
+        ImportChannelStreamsCommand::class,
     ];
 
     /**

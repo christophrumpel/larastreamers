@@ -15,7 +15,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(public string $youtubeChannelId, public string $language)
+    public function __construct(public string $youtubeChannelId, public string $languageCode = 'en')
     {
     }
 
@@ -31,7 +31,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
                 'channel_title' => $streamData->channelTitle,
                 'thumbnail_url' => $streamData->thumbnailUrl,
                 'scheduled_start_time' => $streamData->plannedStart,
-                'language_code' => $this->language,
+                'language_code' => $this->languageCode,
                 'status' => $streamData->status,
             ]);
         });
