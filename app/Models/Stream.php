@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Spatie\Feed\Feedable;
@@ -28,12 +29,20 @@ class Stream extends Model implements Feedable
         'status',
         'tweeted_at',
         'language_code',
+        'submitted_by_email',
+        'approved_at',
     ];
 
     protected $casts = [
+        'approved_at' => 'datetime',
         'scheduled_start_time' => 'datetime',
         'tweeted_at' => 'datetime',
     ];
+
+    public function scopeApproved(Builder $query): void
+    {
+        $query->whereNotNull('approved_at');
+    }
 
     public static function getFeedItems(): Collection
     {
@@ -127,5 +136,28 @@ class Stream extends Model implements Feedable
         $url = parse_url(route('calendar.ics.stream', $this));
 
         return "webcal://{$url['host']}{$url['path']}";
+    }
+
+    public function approveUrl(): string
+    {
+        return URL::temporarySignedRoute(
+            'stream.approve',
+            now()->addMonth(),
+            ['stream' => $this],
+        );
+    }
+
+    public function rejectUrl(): string
+    {
+        return URL::temporarySignedRoute(
+            'stream.reject',
+            now()->addMonth(),
+            ['stream' => $this],
+        );
+    }
+
+    public function isApproved(): bool
+    {
+        return ! is_null($this->approved_at);
     }
 }

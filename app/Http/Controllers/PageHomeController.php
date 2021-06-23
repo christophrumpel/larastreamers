@@ -11,7 +11,7 @@ class PageHomeController extends Controller
     public function __invoke(PrepareStreams $prepareStreams): View
     {
         return view('pages.home', [
-            'streamsByDate' => $prepareStreams->handle(Stream::upcoming()->get()),
+            'streamsByDate' => $prepareStreams->handle(Stream::approved()->upcoming()->get()),
         ]);
     }
 }

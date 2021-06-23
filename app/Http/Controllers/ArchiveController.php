@@ -12,7 +12,7 @@ class ArchiveController extends Controller
     {
         $pastStreams = (new PrepareStreams())
             ->fromLatestToOldest()
-            ->handle(Stream::finished()->latest()->get());
+            ->handle(Stream::query()->approved()->finished()->latest()->get());
 
         return view('pages.archive', ['pastStreamsByDate' => $pastStreams]);
     }

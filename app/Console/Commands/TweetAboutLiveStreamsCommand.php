@@ -16,6 +16,7 @@ class TweetAboutLiveStreamsCommand extends Command
     public function handle(): int
     {
         $streams = Stream::query()
+            ->approved()
             ->where('status', StreamData::STATUS_LIVE)
             ->whereNull('tweeted_at')
             ->get()
