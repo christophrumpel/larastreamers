@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Submission;
 
-use App\Actions\Submission\ApproveStream;
-use App\Actions\Submission\RejectStream;
+use App\Actions\Submission\RejectStreamAction;
 use App\Models\Stream;
 
 class RejectStreamController
 {
-    public function __invoke(Stream $stream, RejectStream $rejectStream)
+    public function __invoke(Stream $stream, RejectStreamAction $rejectStream)
     {
         $rejectStream->handle($stream);
 

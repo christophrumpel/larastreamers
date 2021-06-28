@@ -6,7 +6,7 @@ use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
 
-class ApproveStream
+class ApproveStreamAction
 {
     public function handle(Stream $stream)
     {

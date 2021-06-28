@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Facades\Youtube;
 use App\Models\Stream;
 
-class ImportVideo
+class ImportVideoAction
 {
     public function handle(
         string $youTubeId,

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Submission;
 
-use App\Actions\Submission\SubmitStream;
+use App\Actions\Submission\SubmitStreamAction;
 use App\Http\Requests\SubmitStreamRequest;
 
 class SubmitStreamController
 {
-    public function __invoke(SubmitStreamRequest $request, SubmitStream $submitStream)
+    public function __invoke(SubmitStreamRequest $request, SubmitStreamAction $submitStream)
     {
         $submitStream->handle($request->youtube_id, $request->email);
 

@@ -4,7 +4,7 @@ namespace App\Actions\Submission;
 
 use App\Models\Stream;
 
-class RejectStream
+class RejectStreamAction
 {
     public function handle(Stream $stream)
     {

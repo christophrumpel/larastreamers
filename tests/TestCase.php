@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Services\Twitter;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Tests\Fakes\InteractsWithActions;
 use Tests\Fakes\TwitterFake;
 
 abstract class TestCase extends BaseTestCase

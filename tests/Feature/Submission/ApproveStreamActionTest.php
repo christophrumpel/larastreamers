@@ -2,18 +2,18 @@
 
 namespace Tests\Feature\Submission;
 
-use App\Actions\Submission\ApproveStream;
+use App\Actions\Submission\ApproveStreamAction;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class ApproveStreamTest extends TestCase
+class ApproveStreamActionTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected ApproveStream $approveStream;
+    protected ApproveStreamAction $approveStream;
 
     public function setUp(): void
     {
@@ -21,12 +21,12 @@ class ApproveStreamTest extends TestCase
 
         Mail::fake();
 
-        $this->approveStream = app(ApproveStream::class);
+        $this->approveStream = app(ApproveStreamAction::class);
 
     }
 
     /** @test */
-    public function the_action_can_approve_a_stream()
+    public function the_action_can_approve_a_stream(): void
     {
         $stream = Stream::factory()->create([
             'approved_at' => null,

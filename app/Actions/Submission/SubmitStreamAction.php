@@ -2,15 +2,15 @@
 
 namespace App\Actions\Submission;
 
-use App\Actions\ImportVideo;
+use App\Actions\ImportVideoAction;
 use App\Mail\StreamSubmittedMail;
 use Illuminate\Support\Facades\Mail;
 
-class SubmitStream
+class SubmitStreamAction
 {
     public function handle(string $youTubeId, string $submittedByEmail)
     {
-        $stream = (new ImportVideo())->handle(
+        $stream = app(ImportVideoAction::class)->handle(
             $youTubeId,
             approved: false,
             submittedByEmail: $submittedByEmail,
