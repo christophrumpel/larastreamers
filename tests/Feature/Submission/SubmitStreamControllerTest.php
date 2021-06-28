@@ -1,14 +1,15 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Submission;
 
-use App\Http\Controllers\SubmitStreamController;
+use App\Http\Controllers\Submission\SubmitStreamController;
 use App\Mail\StreamSubmittedMail;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
+use function action;
 
 class SubmitStreamControllerTest extends TestCase
 {
@@ -34,7 +35,9 @@ class SubmitStreamControllerTest extends TestCase
     {
         $submittedByEmail = 'john@example.com';
 
-        $response = $this->post(action(SubmitStreamController::class), [
+        $url = action(SubmitStreamController::class);
+
+        $response = $this->post($url, [
             'youtube_id' => $this->youTubeId,
             'email' => $submittedByEmail,
         ]);
@@ -42,7 +45,6 @@ class SubmitStreamControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         $stream = Stream::firstWhere('youtube_id', $this->youTubeId);
-
         $this->assertNotNull($stream);
 
         $this->assertFalse($stream->isApproved());

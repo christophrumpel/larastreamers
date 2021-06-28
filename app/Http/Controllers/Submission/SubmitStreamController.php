@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Submission;
 
 use App\Actions\Submission\SubmitStream;
 use App\Http\Requests\SubmitStreamRequest;

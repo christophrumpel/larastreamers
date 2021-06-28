@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Submission;
 
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class RejectStreamControllerTest extends TestCase
+class ApproveStreamControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function it_can_reject_a_stream_using_a_signed_url()
+    public function it_can_approve_a_stream_using_a_signed_url()
     {
         Mail::fake();
 
@@ -25,8 +25,10 @@ class RejectStreamControllerTest extends TestCase
 
         $this->assertFalse($stream->isApproved());
 
-        $this->get($stream->rejectUrl())->assertStatus(Response::HTTP_OK);
+        $this->get($stream->approveUrl())->assertStatus(Response::HTTP_OK);
 
-        $this->assertFalse($stream->refresh()->isApproved());
+        $this->assertTrue($stream->refresh()->isApproved());
+
+        Mail::assertQueued(StreamApprovedMail::class);
     }
 }
