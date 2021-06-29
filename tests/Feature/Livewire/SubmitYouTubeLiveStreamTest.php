@@ -21,18 +21,16 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange
         $this->mock(SubmitStreamAction::class)
             ->shouldReceive('handle')
+            ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
             ->once();
 
-        Youtube::partialMock()
-            ->shouldReceive('videos')
-            ->andReturn(collect([StreamData::fake(
-                videoId: 'bcnR4NYOw2o',
-            )]));
+       $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->set('youTubeId', 'bcnR4NYOw2o')
             ->set('submittedByEmail', 'test@test.at')
+            ->set('languageCode', 'de')
             ->call('submit');
     }
 
@@ -47,7 +45,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->set('youTubeId', 'bcnR4NYOw2o')
             ->set('submittedByEmail', 'test@test.at')
             ->call('submit')
-            ->assertSee('You successfully submitted your stream.');
+            ->assertSee('You successfully submitted your stream. You will receive an email, if it gets approved.');
     }
 
     /** @test */
@@ -122,6 +120,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->assertPropertyWired('youTubeId')
             ->assertPropertyWired('submittedByEmail')
+            ->assertPropertyWired('languageCode')
             ->assertMethodWiredToForm('submit');
     }
 

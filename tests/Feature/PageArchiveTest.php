@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ArchiveTest extends TestCase
+class PageArchiveTest extends TestCase
 {
     use RefreshDatabase;
 

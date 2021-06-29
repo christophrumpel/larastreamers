@@ -6,6 +6,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
 use App\Http\Controllers\Submission\ApproveStreamController;
 use App\Http\Controllers\Submission\RejectStreamController;
+use App\Http\Controllers\Submission\SubmissionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +27,9 @@ Route::get('/', PageHomeController::class)
 
 Route::get('/archive', ArchiveController::class)
     ->name('archive');
+
+Route::get('/submission', SubmissionController::class)
+    ->name('submission');
 
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');

@@ -9,7 +9,7 @@ class ImportVideoAction
 {
     public function handle(
         string $youTubeId,
-        string $language = 'en',
+        string $languageCode = 'en',
         $approved = false,
         ?string $submittedByEmail = null,
 
@@ -23,7 +23,7 @@ class ImportVideoAction
             'description' => $video->description,
             'thumbnail_url' => $video->thumbnailUrl,
             'scheduled_start_time' => $video->plannedStart,
-            'language_code' => $language,
+            'language_code' => $languageCode,
             'status' => $video->status,
             'approved_at' => $approved ? now() : null,
             'submitted_by_email' => $submittedByEmail,

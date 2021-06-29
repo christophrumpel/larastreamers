@@ -4,15 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Actions\Submission\SubmitStreamAction;
 use App\Rules\YouTubeRule;
+use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class SubmitYouTubeLiveStream extends Component
 {
-
     public $youTubeId;
 
     public $submittedByEmail;
+
+    public string $languageCode = 'en';
 
     protected $messages = [
         'youTubeId.required' => 'The YouTube ID field cannot be empty.',
@@ -28,7 +30,7 @@ class SubmitYouTubeLiveStream extends Component
         ];
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.submit-you-tube-live-stream');
     }
@@ -38,9 +40,9 @@ class SubmitYouTubeLiveStream extends Component
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
-        $action->handle($this->youTubeId, $this->submittedByEmail);
+        $action->handle($this->youTubeId, $this->languageCode, $this->submittedByEmail);
 
-        session()->flash('message', 'You successfully submitted your stream.');
+        session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
 
     }
 }

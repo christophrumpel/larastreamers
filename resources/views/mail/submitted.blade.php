@@ -1,16 +1,16 @@
 @component('mail::message')
-    Hi,
+Hi,
 
-    A stream titled "[{{ $stream->title }}]({{ $stream->url() }})" was submitted by {{ $stream->submitted_by_email }}.
+A new stream was submitted:
+* title: "[{{ $stream->title }}]({{ $stream->url() }})"
+* by: {{ $stream->submitted_by_email }}
+* language: {{ $stream->language_code }}
 
-    [Approve]({{ $stream->approveUrl() }})
+🟢 [Approve]({{ $stream->approveUrl() }})
 
-    [Reject]({{ $stream->rejectUrl() }})
+🔴 [Reject]({{ $stream->rejectUrl() }})
 
-    Kr,
+Greets,
 
-
-
-
-    Larastreamers
+Larastreamers
 @endcomponent
