@@ -6,7 +6,6 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
 use App\Http\Controllers\Submission\ApproveStreamController;
 use App\Http\Controllers\Submission\RejectStreamController;
-use App\Http\Controllers\Submission\SubmitStreamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +36,6 @@ Route::get('/stream-{stream}.ics', AddSingleStreamToCalendarController::class)
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function() {
     return view('dashboard');
 })->name('dashboard');
-
-Route::post('submit', SubmitStreamController::class)->name('stream.submit');
 
 Route::middleware('signed')->group(function() {
     Route::get('submission/{stream}/approve', ApproveStreamController::class)->name('stream.approve');

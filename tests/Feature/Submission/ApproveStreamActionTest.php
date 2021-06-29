@@ -43,7 +43,7 @@ class ApproveStreamActionTest extends TestCase
     }
 
     /** @test */
-    public function it_will_not_send_a_mail_for_a_link_that_was_already_approved()
+    public function it_will_not_send_a_mail_for_a_link_that_was_already_approved(): void
     {
 
         $stream = Stream::factory()->create([

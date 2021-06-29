@@ -10,24 +10,24 @@ class YouTubeRule implements Rule
 {
     protected $message = '';
 
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         try {
             $video = Youtube::video($value);
         } catch (YoutubeException) {
-            $this->message = 'This is not a valid YouTube video id';
+            $this->message = 'This is not a valid YouTube video id.';
 
             return false;
         }
 
         if (is_null($video)) {
-            $this->message = 'This is not a valid YouTube video id';
+            $this->message = 'This is not a valid YouTube video id.';
 
             return false;
         }
 
         if (! $video->plannedStart->isFuture()) {
-            $this->message = 'We only accept streams that have not started yet';
+            $this->message = 'We only accept streams that have not started yet.';
 
             return false;
         }
@@ -35,7 +35,7 @@ class YouTubeRule implements Rule
         return true;
     }
 
-    public function message()
+    public function message(): string
     {
         return $this->message;
     }
