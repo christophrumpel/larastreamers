@@ -18,6 +18,5 @@ class SubmitStreamAction
         );
 
         Mail::to('christoph@christoph-rumpel.com')->queue(new StreamSubmittedMail($stream));
-
     }
 }

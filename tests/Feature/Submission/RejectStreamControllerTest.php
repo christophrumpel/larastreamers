@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Submission;
 
-use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;

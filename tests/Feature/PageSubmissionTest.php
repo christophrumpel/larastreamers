@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\SubmitYouTubeLiveStream;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class PageSubmissionTest extends TestCase
 {
@@ -13,7 +13,7 @@ class PageSubmissionTest extends TestCase
     /** @test */
     public function it_includes_the_submission_livewire_component(): void
     {
-    	$this->get(route('submission'))
+        $this->get(route('submission'))
             ->assertSeeLivewire(SubmitYouTubeLiveStream::class);
     }
 }

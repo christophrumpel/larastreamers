@@ -26,7 +26,7 @@ class SubmitYouTubeLiveStream extends Component
     {
         return [
             'youTubeId' => ['required', Rule::unique('streams', 'youtube_id'), new YouTubeRule()],
-            'submittedByEmail' => 'required'
+            'submittedByEmail' => 'required',
         ];
     }
 

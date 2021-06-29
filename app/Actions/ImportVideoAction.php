@@ -12,9 +12,7 @@ class ImportVideoAction
         string $languageCode = 'en',
         $approved = false,
         ?string $submittedByEmail = null,
-
-    ): Stream
-    {
+    ): Stream {
         $video = Youtube::video($youTubeId);
 
         return Stream::updateOrCreate(['youtube_id' => $video->videoId], [

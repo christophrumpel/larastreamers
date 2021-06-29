@@ -7,9 +7,9 @@ use App\Facades\Youtube;
 use App\Mail\StreamSubmittedMail;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SubmitActionTest extends TestCase
 {
@@ -27,7 +27,7 @@ class SubmitActionTest extends TestCase
             ->andReturn(collect([
                 StreamData::fake(
                     videoId: $this->youTubeId,
-                )
+                ),
             ]));
 
         // Act
@@ -44,5 +44,4 @@ class SubmitActionTest extends TestCase
 
         Mail::assertQueued(fn(StreamSubmittedMail $mail) => $mail->hasTo('christoph@christoph-rumpel.com'));
     }
-
 }

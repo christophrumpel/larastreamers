@@ -7,9 +7,9 @@ use App\Facades\Youtube;
 use App\Http\Livewire\SubmitYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SubmitYouTubeLiveStreamTest extends TestCase
 {
@@ -24,7 +24,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
             ->once();
 
-       $this->mockYouTubVideoCall();
+        $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
@@ -101,7 +101,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
                 StreamData::fake(
                     videoId: 'bcnR4NYOw2o',
                     plannedStart: now()->subDay()
-                )
+                ),
             ]));
 
         // Arrange & Act & Assert
@@ -118,7 +118,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange
         $this->mockYouTubVideoCall();
 
-    	// Arrange & Act & Assert
+        // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->set('youTubeId', 'bcnR4NYOw2o')
             ->set('submittedByEmail', 'test@test.at')
@@ -147,8 +147,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->andReturn(collect([
                 StreamData::fake(
                     videoId: $videoId,
-                )
+                ),
             ]));
     }
-
 }

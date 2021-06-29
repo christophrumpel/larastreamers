@@ -22,7 +22,6 @@ class ApproveStreamActionTest extends TestCase
         Mail::fake();
 
         $this->approveStream = app(ApproveStreamAction::class);
-
     }
 
     /** @test */
@@ -45,7 +44,6 @@ class ApproveStreamActionTest extends TestCase
     /** @test */
     public function it_will_not_send_a_mail_for_a_link_that_was_already_approved(): void
     {
-
         $stream = Stream::factory()->create([
             'approved_at' => now(),
             'submitted_by_email' => 'john@example.com',
@@ -54,6 +52,5 @@ class ApproveStreamActionTest extends TestCase
         $this->approveStream->handle($stream);
 
         Mail::assertNothingQueued();
-
     }
 }

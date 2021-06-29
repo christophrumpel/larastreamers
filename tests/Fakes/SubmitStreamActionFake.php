@@ -1,10 +1,8 @@
 <?php
 
-
 namespace Tests\Fakes;
 
 use PHPUnit\Framework\Assert as PHPUnit;
-
 
 class SubmitStreamActionFake
 {

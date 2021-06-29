@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Tests\Fakes;
-
 
 use PHPUnit\Framework\Assert as PHPUnit;
 
 trait InteractsWithActions
 {
-
     protected array $expectedActions = [];
 
     protected array $handleActions = [];
@@ -19,9 +16,9 @@ trait InteractsWithActions
 
         $this->mock($actionClassName)
             ->shouldReceive('handle')
-            ->andReturnUsing(function () use ($actionClassName) {
-                if(isset($this->handleActions[$actionClassName])) {
-                    ++$this->handleActions[$actionClassName];
+            ->andReturnUsing(function() use ($actionClassName) {
+                if (isset($this->handleActions[$actionClassName])) {
+                    $this->handleActions[$actionClassName]++;
                 } else {
                     $this->handleActions[$actionClassName] = 1;
                 }
