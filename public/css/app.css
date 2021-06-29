@@ -1666,9 +1666,9 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(75, 85, 99, var(--tw-border-opacity));
 }
-.border-indigo-500 {
+.border-red-600 {
 	--tw-border-opacity: 1;
-	border-color: rgba(99, 102, 241, var(--tw-border-opacity));
+	border-color: rgba(220, 38, 38, var(--tw-border-opacity));
 }
 .border-gray-400 {
 	--tw-border-opacity: 1;
@@ -1767,9 +1767,6 @@ select {
 }
 .p-6 {
 	padding: 1.5rem;
-}
-.p-12 {
-	padding: 3rem;
 }
 .px-4 {
 	padding-left: 1rem;
