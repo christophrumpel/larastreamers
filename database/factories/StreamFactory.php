@@ -25,6 +25,7 @@ class StreamFactory extends Factory
             'scheduled_start_time' => Carbon::tomorrow()->addDays(random_int(0, 10))->toIso8601String(),
             'status' => StreamData::STATUS_UPCOMING,
             'language_code' => Arr::shuffle(Language::all()->map->code->toArray())[0],
+            'approved_at' => now(),
         ];
     }
 

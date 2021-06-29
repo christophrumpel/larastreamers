@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Facades\Youtube;
-use App\Models\Stream;
+use App\Actions\ImportVideoAction;
 use App\Services\Youtube\YoutubeException;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -21,20 +20,10 @@ class ImportYoutubeLiveStream extends Component
     public function importStream()
     {
         try {
-            $video = Youtube::video($this->youtubeId);
+            (new ImportVideoAction())->handle($this->youtubeId, $this->language, approved: true);
         } catch (YoutubeException $exception) {
             return $this->addError('stream', $exception->getMessage());
         }
-
-        Stream::updateOrCreate(['youtube_id' => $video->videoId], [
-            'channel_title' => $video->channelTitle,
-            'title' => $video->title,
-            'description' => $video->description,
-            'thumbnail_url' => $video->thumbnailUrl,
-            'scheduled_start_time' => $video->plannedStart,
-            'language_code' => $this->language,
-            'status' => $video->status,
-        ]);
 
         session()->flash('stream-message', 'Stream "'.$this->youtubeId.'" was added successfully.');
 

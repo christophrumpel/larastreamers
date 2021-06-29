@@ -50,7 +50,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals("Christoph Rumpel created a nice new project: https://larastreamers.com/\nIn this stream, I'm going to add some features to Christoph's app.", $finishedStream->description);
         $this->assertEquals('https://i.ytimg.com/vi/gzqJZQyfkaI/maxresdefault.jpg', $finishedStream->thumbnailUrl);
         $this->assertEquals('2021-05-15T12:51:18+00:00', $finishedStream->publishedAt->toIso8601String());
-        $this->assertEquals('2021-05-15T11:00:00+00:00', $finishedStream->plannedStart->toIso8601String());
+        $this->assertEquals('2031-05-15T11:00:00+00:00', $finishedStream->plannedStart->toIso8601String());
         $this->assertEquals(StreamData::STATUS_FINISHED, $finishedStream->status);
 
         /** @var \App\Services\Youtube\StreamData $upcomingStream */
