@@ -112,6 +112,22 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->assertSee('We only accept streams that have not started yet.');
     }
 
+    /** @test */
+    public function it_clears_out_the_form_after_submission(): void
+    {
+        // Arrange
+        $this->mockYouTubVideoCall();
+
+    	// Arrange & Act & Assert
+        Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('submittedByEmail', 'test@test.at')
+            ->set('languageCode', 'de')
+            ->call('submit')
+            ->assertSet('youTubeId', '')
+            ->assertSet('languageCode', 'en')
+            ->assertSet('submittedByEmail', '');
+    }
 
     /** @test */
     public function it_wires_properties_and_methods(): void
