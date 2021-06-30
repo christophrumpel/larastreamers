@@ -27,7 +27,7 @@
                                 <label for="youTubeId" class="block text-sm font-medium text-gray-700">YouTube
                                     ID</label>
                                 <input id="youTubeId" type="text" wire:model="youTubeId" placeholder="YouTube Stream ID"
-                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600"/>
+                                       class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600"/>
                                 @error('youTubeId')
                                 <x-input-error :message="$message"/>
                                 @enderror
@@ -39,7 +39,7 @@
                                 <label for="languageCode"
                                        class="block text-sm font-medium text-gray-700">Language</label>
                                 <select wire:model.defer="languageCode" id="languageCode"
-                                        class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600">
+                                        class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600">
                                     @foreach(\App\Models\Language::query()->orderBy('name')->get() as $country)
                                         <option value="{{ $country->code }}"
                                                 @if($country->code === 'en') selected @endif> {{ $country->name }}</option>
@@ -56,7 +56,7 @@
                                 <label for="submittedByEmail" class="block text-sm font-medium text-gray-700">Your
                                     E-Mail</label>
                                 <input wire:model="submittedByEmail" type="text" id="submittedByEmail"
-                                       class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600"
+                                       class="mt-1 focus:ring-red-500 focus:border-red-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600"
                                        placeholder="Your E-Mail address"/>
                                 @error('submittedByEmail')
                                 <x-input-error :message="$message"/>
