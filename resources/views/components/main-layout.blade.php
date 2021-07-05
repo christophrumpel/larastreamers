@@ -53,9 +53,7 @@
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
 
-
 @include('pages.partials.nav')
-
 
 <section class="py-12 md:py-16">
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
@@ -71,11 +69,9 @@
                 </p>
             </aside>
 
+
             @if($showCalendarDownloads)
-                <a class="px-3 py-2 text-sm font-medium text-white transition bg-red-600 rounded-md shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none"
-                   href="{{ route('calendar.ics') }}">
-                    Add streams to calendar
-                </a>
+                <x-add-streams-to-calendar />
             @endif
         </header>
     </div>

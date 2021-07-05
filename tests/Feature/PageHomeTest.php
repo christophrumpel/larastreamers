@@ -108,4 +108,11 @@ class PageHomeTest extends TestCase
             ->assertSee($twitterLink)
             ->assertSee($githubLink);
     }
+
+    /** @test */
+    public function it_adds_button_webcal_link(): void
+    {
+        $this->get(route('home'))
+            ->assertSee('webcal://');
+    }
 }
