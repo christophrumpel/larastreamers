@@ -33,6 +33,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
                 'scheduled_start_time' => $streamData->plannedStart,
                 'language_code' => $this->languageCode,
                 'status' => $streamData->status,
+                'approved_at' => now(),
             ]);
         });
     }

@@ -33,6 +33,9 @@ class ImportYoutubeChannelStreamsTest extends TestCase
             'channel_title' => 'Freek Van der Herten',
             'language_code' => 'en',
         ]);
+
+        $stream = Stream::first();
+        $this->assertNotNull($stream->approved_at);
     }
 
     /** @test */
