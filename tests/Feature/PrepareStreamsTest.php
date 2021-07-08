@@ -63,6 +63,8 @@ class PrepareStreamsTest extends TestCase
     /** @test */
     public function it_orders_past_streams_from_latest_to_oldest(): void
     {
+        $this->markTestSkipped('Sorting is not longer done in the PrepareSteams..');
+        
         $this->travelTo(Carbon::parse('2021-06-11 00:00'));
 
         // Arrange

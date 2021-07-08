@@ -2,17 +2,32 @@
 
 namespace App\Http\Livewire;
 
+use App\Actions\PrepareStreams;
+use App\Models\Stream;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class StreamList extends Component
 {
-    public $streamsByDate;
+    use WithPagination;
 
-    public $isArchive = false;
+    public bool $isArchive = false;
 
     public function render(): View
     {
-        return view('livewire.stream-list');
+        $streams = Stream::approved()
+            ->when($this->isArchive, function($builder) {
+                $builder->finished()->fromLatestToOldest();
+            }, function($builder) {
+                $builder->upcoming()->orderBy('scheduled_start_time');
+            })
+            ->paginate(10);
+
+        return view('livewire.stream-list', [
+            'streamsByDate' => $streams->setCollection(
+                (new PrepareStreams())->handle($streams->getCollection())
+            ),
+        ]);
     }
 }
