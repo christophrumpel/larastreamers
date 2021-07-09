@@ -16,7 +16,7 @@ class IndexController extends Controller
     {
         return new JsonResponse(
             data: StreamResource::collection(
-                resource: Stream::query()->approved()->latest()->get(),
+                resource: Stream::query()->approved()->latest()->paginate(),
             ),
             status: Response::HTTP_OK,
             headers: [
