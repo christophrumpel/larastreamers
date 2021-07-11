@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Actions\PrepareStreams;
+use App\Actions\SortStreamsByDateAction;
 use App\Models\Stream;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -26,7 +26,7 @@ class StreamList extends Component
 
         return view('livewire.stream-list', [
             'streamsByDate' => $streams->setCollection(
-                (new PrepareStreams())->handle($streams->getCollection())
+                (new SortStreamsByDateAction())->handle($streams->getCollection())
             ),
         ]);
     }

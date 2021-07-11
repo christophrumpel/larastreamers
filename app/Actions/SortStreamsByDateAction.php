@@ -6,7 +6,7 @@ use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
-class PrepareStreams
+class SortStreamsByDateAction
 {
     public function handle(Collection $streams): Collection
     {

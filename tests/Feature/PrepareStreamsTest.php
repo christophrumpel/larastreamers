@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Actions\PrepareStreams;
+use App\Actions\SortStreamsByDateAction;
 use App\Models\Stream;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,7 +24,7 @@ class PrepareStreamsTest extends TestCase
                 ['scheduled_start_time' => Carbon::tomorrow()->addDay()],
             ))->create();
 
-        $prepareStreamsAction = new PrepareStreams;
+        $prepareStreamsAction = new SortStreamsByDateAction;
 
         // Act
         $preparedStreams = $prepareStreamsAction->handle($streams);
@@ -48,7 +48,7 @@ class PrepareStreamsTest extends TestCase
                 ['scheduled_start_time' => Carbon::tomorrow()->addDay()],
             ))->create();
 
-        $prepareStreamsAction = new PrepareStreams;
+        $prepareStreamsAction = new SortStreamsByDateAction;
 
         // Act
         $preparedStreams = $prepareStreamsAction->handle($streams);
@@ -64,7 +64,7 @@ class PrepareStreamsTest extends TestCase
     public function it_orders_past_streams_from_latest_to_oldest(): void
     {
         $this->markTestSkipped('Sorting is not longer done in the PrepareSteams..');
-        
+
         $this->travelTo(Carbon::parse('2021-06-11 00:00'));
 
         // Arrange
@@ -75,7 +75,7 @@ class PrepareStreamsTest extends TestCase
                 ['scheduled_start_time' => Carbon::yesterday()->subDays(2)],
             ))->create();
 
-        $prepareStreamsAction = new PrepareStreams;
+        $prepareStreamsAction = new SortStreamsByDateAction;
 
         // Act
         $preparedStreams = $prepareStreamsAction
