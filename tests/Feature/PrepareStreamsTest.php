@@ -59,33 +59,4 @@ class PrepareStreamsTest extends TestCase
             'Sun 13.06.2021',
         ], $preparedStreams->keys()->toArray());
     }
-
-    /** @test */
-    public function it_orders_past_streams_from_latest_to_oldest(): void
-    {
-        $this->markTestSkipped('Sorting is not longer done in the PrepareSteams..');
-
-        $this->travelTo(Carbon::parse('2021-06-11 00:00'));
-
-        // Arrange
-        $streams = Stream::factory()->count(3)
-            ->state(new Sequence(
-                ['scheduled_start_time' => Carbon::yesterday()],
-                ['scheduled_start_time' => Carbon::yesterday()->subDay()],
-                ['scheduled_start_time' => Carbon::yesterday()->subDays(2)],
-            ))->create();
-
-        $prepareStreamsAction = new SortStreamsByDateAction;
-
-        // Act
-        $preparedStreams = $prepareStreamsAction
-            ->fromLatestToOldest()
-            ->handle($streams);
-
-        $this->assertEquals([
-            'Yesterday',
-            'Wed 09.06.2021',
-            'Tue 08.06.2021',
-        ], $preparedStreams->keys()->toArray());
-    }
 }
