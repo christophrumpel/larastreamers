@@ -1,3 +1,3 @@
 <x-main-layout>
-    <livewire:stream-list :streams-by-date="$streamsByDate"/>
+    <livewire:stream-list />
 </x-main-layout>
