@@ -9,7 +9,7 @@ class StreamResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' => $this->youtube_id,
+            'id' => $this->id,
             'type' => 'stream',
             'attributes' => [
                 'title' => $this->title,
@@ -24,6 +24,9 @@ class StreamResource extends JsonResource
                 'status' => $this->status,
                 'language_code' => $this->language_code,
                 'live' => $this->isLive(),
+                'identifiers' => [
+                    'youtube' => $this->youtube_id,
+                ],
             ],
         ];
     }
