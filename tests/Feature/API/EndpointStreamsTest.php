@@ -19,11 +19,7 @@ class EndpointStreamsTest extends TestCase
     {
         $stream = Stream::factory()->create([
             'title' => 'Stream #1',
-            'scheduled_start_time' => Carbon::now()->addDays(value: 2),
             'youtube_id' => '1234',
-            'channel_title' => 'My Channel',
-            'language_code' => 'en',
-            'approved_at' => Carbon::now()->subDay(),
         ]);
 
         $response = $this->json(
@@ -51,22 +47,12 @@ class EndpointStreamsTest extends TestCase
     /**
      * @test
      */
-    public function it_only_show_approved_streams(): void
+    public function it_only_shows_approved_streams(): void
     {
         $stream = Stream::factory()->create([
-            'title' => 'Stream #1',
-            'scheduled_start_time' => Carbon::now()->addDays(value: 2),
-            'youtube_id' => '1234',
-            'channel_title' => 'My Channel',
-            'language_code' => 'en',
             'approved_at' => Carbon::now()->subDay(),
         ]);
         $stream2 = Stream::factory()->create([
-            'title' => 'Stream #2',
-            'scheduled_start_time' => Carbon::now()->addDays(value: 3),
-            'youtube_id' => '4321',
-            'channel_title' => 'My Channel',
-            'language_code' => 'en',
             'approved_at' => null,
         ]);
 
