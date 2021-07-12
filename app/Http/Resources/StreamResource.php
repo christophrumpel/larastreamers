@@ -22,7 +22,7 @@ class StreamResource extends JsonResource
                     'formatted' => $this->scheduled_start_time->format('D d.m.Y')
                 ],
                 'status' => $this->status,
-                'language' => $this->language_code,
+                'language_code' => $this->language_code,
                 'live' => $this->isLive(),
             ]
         ];
