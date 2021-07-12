@@ -52,7 +52,7 @@ class EndpointStreamsTest extends TestCase
     public function it_only_shows_approved_streams(): void
     {
         $stream = Stream::factory()->approved()->create();
-        $stream2 = Stream::factory()->create();
+        $stream2 = Stream::factory()->notApproved()->create();
 
         $response = $this->json(
             method: 'GET',
