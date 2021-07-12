@@ -51,12 +51,8 @@ class EndpointStreamsTest extends TestCase
      */
     public function it_only_shows_approved_streams(): void
     {
-        $stream = Stream::factory()->create([
-            'approved_at' => Carbon::now()->subDay(),
-        ]);
-        $stream2 = Stream::factory()->create([
-            'approved_at' => null,
-        ]);
+        $stream = Stream::factory()->approved()->create();
+        $stream2 = Stream::factory()->create();
 
         $response = $this->json(
             method: 'GET',
