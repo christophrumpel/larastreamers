@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
+use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Artisan;
@@ -42,6 +43,42 @@ class TweetTest extends TestCase
         // Assert
         $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
     }
+
+    /** @test */
+    public function it_adds_twitter_handle_to_streams_connected_to_a_channel(): void
+    {
+        // Arrange
+        $stream = Stream::factory()
+            ->for(Channel::factory()->create(['twitter_handle' => '@twitterUser']))
+            ->create(['status' => StreamData::STATUS_LIVE]);
+
+        $expectedStatus = "🔴 A new stream by @twitterUser just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+
+        // Act
+        Artisan::call(TweetAboutLiveStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    }
+
+    /** @test */
+    public function it_works_without_missing_twitter_handle_on_connected_channel(): void
+    {
+        // Arrange
+        $stream = Stream::factory()
+            ->for(Channel::factory())
+            ->create(['status' => StreamData::STATUS_LIVE]);
+
+        $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+
+        // Act
+        Artisan::call(TweetAboutLiveStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    }
+
+
 
 
     /** @test */
