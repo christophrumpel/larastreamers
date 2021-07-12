@@ -30,6 +30,21 @@ class TweetTest extends TestCase
     }
 
     /** @test */
+    public function it_checks_the_message_of_the_tweet(): void
+    {
+        // Arrange
+        $stream = Stream::factory()->create(['status' => StreamData::STATUS_LIVE]);
+        $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+
+        // Act
+        Artisan::call(TweetAboutLiveStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    }
+
+
+    /** @test */
     public function it_correctly_sets_tweeted_at_timestamp(): void
     {
         // Arrange
