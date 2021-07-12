@@ -4,7 +4,6 @@ namespace Tests\Feature\API;
 
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class EndpointStreamsTest extends TestCase

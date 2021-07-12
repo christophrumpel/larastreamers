@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api\V1\Streams;
 
-use App\Actions\PrepareStreams;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StreamResource;
 use App\Models\Stream;

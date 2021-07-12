@@ -48,5 +48,4 @@ class StreamFactory extends Factory
     {
         return $this->state(fn() => ['approved_at' => null]);
     }
-
 }
