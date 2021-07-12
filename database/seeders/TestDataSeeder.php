@@ -26,12 +26,12 @@ class TestDataSeeder extends Seeder
         Stream::truncate();
 
         Stream::factory()
-            ->count(10)
+            ->count(100)
             ->create();
 
         Stream::factory()
             ->finished()
-            ->count(10)
+            ->count(100)
             ->create();
     }
 }
