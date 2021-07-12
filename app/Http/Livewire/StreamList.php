@@ -13,24 +13,6 @@ class StreamList extends Component
 
     public bool $isArchive = false;
 
-    public function previousPage()
-    {
-        $this->setPage(max($this->page - 1, 1));
-        $this->emit('scrollToTop');
-    }
-
-    public function nextPage()
-    {
-        $this->setPage($this->page + 1);
-        $this->emit('scrollToTop');
-    }
-
-    public function gotoPage($page)
-    {
-        $this->setPage($page);
-        $this->emit('scrollToTop');
-    }
-
     public function render(): View
     {
         $streams = Stream::approved()

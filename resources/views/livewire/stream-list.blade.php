@@ -28,7 +28,7 @@
 @push('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            Livewire.on('scrollToTop', (fromEl, toEl, component) => {
+            Livewire.hook('message.processed', (message, component) => {
                 let scrollTop = document.getElementById("scrollTop")
                 window.scrollTo({ top: scrollTop.offsetTop, left: 0, behaviour: 'smooth' })
             })
