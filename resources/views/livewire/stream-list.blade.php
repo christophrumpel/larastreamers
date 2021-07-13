@@ -1,5 +1,5 @@
 <div class="py-16 space-y-16" id="scrollTop">
-    @foreach ((new \App\Actions\SortStreamsByDateAction())->handle($streamsByDate->getCollection()) as $date => $streams)
+    @foreach ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header
                 class="sticky top-0 z-20 py-4 bg-gray-700 bg-opacity-90 backdrop-filter backdrop-blur-lg backdrop-saturate-150">
