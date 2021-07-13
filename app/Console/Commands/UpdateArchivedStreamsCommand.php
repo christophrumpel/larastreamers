@@ -12,7 +12,7 @@ class UpdateArchivedStreamsCommand extends Command
 {
     protected $signature = 'larastreamers:update-archived-streams';
 
-    protected $description = 'Update all archived (& live) streams';
+    protected $description = 'Update latest 50 archived (& live) streams';
 
     public function handle()
     {
@@ -23,7 +23,7 @@ class UpdateArchivedStreamsCommand extends Command
                 StreamData::STATUS_FINISHED,
             ])
             ->fromLatestToOldest()
-            ->limit(100)
+            ->limit(50)
             ->get()
             ->keyBy('youtube_id');
 
