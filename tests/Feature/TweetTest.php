@@ -78,9 +78,6 @@ class TweetTest extends TestCase
         $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
     }
 
-
-
-
     /** @test */
     public function it_correctly_sets_tweeted_at_timestamp(): void
     {
