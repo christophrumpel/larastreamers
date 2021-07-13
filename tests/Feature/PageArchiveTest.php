@@ -48,13 +48,13 @@ class PageArchiveTest extends TestCase
     public function we_can_search_for_streams_on_title(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Finished one day ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()]);
-        Stream::factory()->create(['title' => 'Finished two days ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
-        Stream::factory()->create(['title' => 'Finished three days ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDays(2)]);
+        Stream::factory()->finished()->create(['title' => 'Finished one day ago']);
+        Stream::factory()->finished()->create(['title' => 'Finished two days ago']);
+        Stream::factory()->finished()->create(['title' => 'Finished three days ago']);
 
         // Act & Assert
         $this->get(route('archive', ['search' => 'three']))
-            ->assertSeeInOrder([
+            ->assertSee([
                 'Finished three days ago',
             ])->assertDontSee([
                 'Finished one day ago',
@@ -66,17 +66,17 @@ class PageArchiveTest extends TestCase
     public function we_can_search_for_streams_on_channel_title(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Finished one day ago', 'channel_title' => 'Laravel', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()]);
-        Stream::factory()->create(['title' => 'Finished two days ago', 'channel_title' => 'Laravel', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
-        Stream::factory()->create(['title' => 'Finished three days ago', 'channel_title' => 'The Streamers', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDays(2)]);
+        Stream::factory()->finished()->create(['title' => 'Finished one day ago', 'channel_title' => 'Laravel']);
+        Stream::factory()->finished()->create(['title' => 'Finished two days ago', 'channel_title' => 'Laravel']);
+        Stream::factory()->finished()->create(['title' => 'Finished three days ago', 'channel_title' => 'The Streamers']);
 
         // Act & Assert
         $this->get(route('archive', ['search' => 'Laravel']))
-            ->assertSeeInOrder([
+            ->assertSee([
                 'Finished one day ago',
                 'Finished two days ago',
+                'Laravel',
             ])
-            ->assertSee('Laravel')
             ->assertDontSee([
                 'Finished three days ago',
                 'The Streamers',
