@@ -10,6 +10,7 @@ class StreamData extends DataTransferObject
     public const STATUS_UPCOMING = 'upcoming';
     public const STATUS_LIVE = 'live';
     public const STATUS_FINISHED = 'none';
+    public const STATUS_DELETED = 'deleted';
 
     public string $videoId;
     public string $title;
@@ -18,6 +19,8 @@ class StreamData extends DataTransferObject
     public string $thumbnailUrl;
     public Carbon $publishedAt;
     public Carbon $plannedStart;
+    public ?Carbon $actualStartTime;
+    public ?Carbon $actualEndTime;
     public string $status;
 
     public function isLive(): bool
@@ -39,6 +42,8 @@ class StreamData extends DataTransferObject
                 'thumbnailUrl' => 'my-new-thumbnail-url',
                 'publishedAt' => Carbon::tomorrow(),
                 'plannedStart' => Carbon::tomorrow(),
+                'actualStartTime' => Carbon::tomorrow(),
+                'actualEndTime' => Carbon::tomorrow()->addHour(),
                 'status' => static::STATUS_UPCOMING,
             ], $args)
         );

@@ -43,4 +43,18 @@ class PageArchiveTest extends TestCase
                 'Finished three days ago',
             ]);
     }
+
+    /** @test */
+    public function it_does_not_show_deleted_streams(): void
+    {
+        // Arrange
+        Stream::factory()->deleted()->create(['title' => 'Stream deleted']);
+        Stream::factory()->finished()->create(['title' => 'Stream finished']);
+
+        // Act & Assert
+        $this
+            ->get(route('archive'))
+            ->assertSee('Stream finished')
+            ->assertDontSee('Stream deleted');
+    }
 }

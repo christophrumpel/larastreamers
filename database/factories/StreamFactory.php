@@ -39,6 +39,16 @@ class StreamFactory extends Factory
         });
     }
 
+    public function deleted(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'status' => StreamData::STATUS_DELETED,
+                'hidden_at' => Carbon::now(),
+            ];
+        });
+    }
+
     public function approved(): StreamFactory
     {
         return $this->state(fn() => ['approved_at' => Carbon::now()->subDay()]);

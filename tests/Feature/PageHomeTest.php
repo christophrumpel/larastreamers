@@ -79,6 +79,20 @@ class PageHomeTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_show_deleted_streams(): void
+    {
+        // Arrange
+        Stream::factory()->deleted()->create(['title' => 'Stream deleted']);
+        Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+
+        // Act & Assert
+        $this
+            ->get('/')
+            ->assertSee('Stream upcoming')
+            ->assertDontSee('Stream deleted');
+    }
+
+    /** @test */
     public function it_marks_live_streams(): void
     {
         // Arrange

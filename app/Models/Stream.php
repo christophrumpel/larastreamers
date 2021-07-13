@@ -27,6 +27,9 @@ class Stream extends Model implements Feedable
         'description',
         'thumbnail_url',
         'scheduled_start_time',
+        'actual_start_time',
+        'actual_end_time',
+        'hidden_at',
         'status',
         'tweeted_at',
         'language_code',
@@ -37,6 +40,9 @@ class Stream extends Model implements Feedable
     protected $casts = [
         'approved_at' => 'datetime',
         'scheduled_start_time' => 'datetime',
+        'actual_start_time' => 'datetime',
+        'actual_end_time' => 'datetime',
+        'hidden_at' => 'datetime',
         'tweeted_at' => 'datetime',
     ];
 
