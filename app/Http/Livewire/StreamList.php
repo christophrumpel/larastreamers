@@ -34,12 +34,7 @@ class StreamList extends Component
             }, function(Builder $builder) {
                 $builder->upcoming()->fromOldestToLatest();
             })
-            ->when($this->search, function(Builder $builder, $search) {
-                $builder->where(function(Builder $builder) use ($search) {
-                    $builder->where('title', 'like', "%{$search}%")
-                        ->orWhere('channel_title', 'like', "%{$search}%");
-                });
-            })
+            ->search($this->search)
             ->paginate(10);
 
         return view('livewire.stream-list', [

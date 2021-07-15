@@ -104,6 +104,16 @@ class Stream extends Model implements Feedable
         );
     }
 
+    public function scopeSearch(Builder $query, ?string $search): Builder
+    {
+        return $query->when($search, function(Builder $builder, ?string $search) {
+            $builder->where(function(Builder $query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                ->orWhere('channel_title', 'like', "%{$search}%");
+            });
+        });
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
