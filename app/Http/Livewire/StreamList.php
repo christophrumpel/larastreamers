@@ -21,7 +21,7 @@ class StreamList extends Component
 
     public ?string $search = null;
 
-    public function updatedSearch($value): void
+    public function updatedSearch(): void
     {
         $this->resetPage();
     }
