@@ -6,6 +6,7 @@ use App\Services\Youtube\StreamData;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\URL;
@@ -38,6 +39,11 @@ class Stream extends Model implements Feedable
         'scheduled_start_time' => 'datetime',
         'tweeted_at' => 'datetime',
     ];
+
+    public function channel(): BelongsTo
+    {
+        return $this->belongsTo(Channel::class);
+    }
 
     public function scopeApproved(Builder $query): void
     {
