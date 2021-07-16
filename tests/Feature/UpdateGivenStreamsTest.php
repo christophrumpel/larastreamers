@@ -70,24 +70,37 @@ class UpdateGivenStreamsTest extends TestCase
     }
 
     /** @test */
-    public function it_only_updates_specific_streams_when_frequent_option_is_given(): void
+    public function it_updates_streams_that_are_live_when_soon_live_option_given(): void
     {
         // Arrange
         Http::fake();
 
         // Arrange
-        Stream::factory()->create(['youtube_id' => 'ended', 'status' => StreamData::STATUS_FINISHED]);
-        Stream::factory()->create(['youtube_id' => 'live', 'status' => StreamData::STATUS_LIVE]);
-        Stream::factory()->create(['youtube_id' => 'soon', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addMinutes(9)]);
-        Stream::factory()->create(['youtube_id' => 'tomorrow', 'status' => StreamData::STATUS_UPCOMING, 'scheduled_start_time' => now()->addDay()]);
+        Stream::factory()->create(['status' => StreamData::STATUS_UPCOMING]);
+        Stream::factory()->create(['status' => StreamData::STATUS_LIVE]);
+        Stream::factory()->create(['status' => StreamData::STATUS_FINISHED]);
 
         // Act & Expect
         $this->artisan('larastreamers:update-streams --soon-live-only')
-             ->expectsOutput('Fetching 2 stream(s) from API.')
-             ->assertExitCode(0);
-
-        $this->artisan(UpdateGivenStreams::class)
-            ->expectsOutput('Fetching 3 stream(s) from API.')
+             ->expectsOutput('Fetching 1 stream(s) from API.')
              ->assertExitCode(0);
     }
+
+    /** @test */
+    public function it_updates_streams_that_are_live_soon_when_soon_live_option_given(): void
+    {
+        // Arrange
+        Http::fake();
+
+        // Arrange
+        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(15)]);
+        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(20)]);
+        Stream::factory()->finished()->create();
+
+        // Act & Expect
+        $this->artisan('larastreamers:update-streams --soon-live-only')
+            ->expectsOutput('Fetching 1 stream(s) from API.')
+            ->assertExitCode(0);
+    }
+
 }
