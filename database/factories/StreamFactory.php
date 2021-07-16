@@ -39,6 +39,26 @@ class StreamFactory extends Factory
         });
     }
 
+    public function upcoming(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => Carbon::tomorrow(),
+                'status' => StreamData::STATUS_UPCOMING,
+            ];
+        });
+    }
+
+    public function live(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => Carbon::now(),
+                'status' => StreamData::STATUS_LIVE,
+            ];
+        });
+    }
+
     public function approved(): StreamFactory
     {
         return $this->state(fn() => ['approved_at' => Carbon::now()->subDay()]);
