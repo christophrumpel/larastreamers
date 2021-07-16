@@ -6,9 +6,9 @@ use Exception;
 
 class YoutubeException extends Exception
 {
-    public static function general(int $status): self
+    public static function general(int $status, string $message = ''): self
     {
-        return new static("YouTube API error: {$status}");
+        return new static("YouTube API error: $status - $message");
     }
 
     public static function unknownChannel(string $id): self

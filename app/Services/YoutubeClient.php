@@ -86,7 +86,7 @@ class YoutubeClient
             ->get($url, array_merge($params, [
                 'key' => config('services.youtube.key'),
             ]))
-            ->onError(fn(Response $response) => throw YoutubeException::general($response->status()))
+            ->onError(fn(Response $response) => throw YoutubeException::general($response->status(), $response->body()))
             ->json($key, []);
     }
 
