@@ -177,4 +177,15 @@ class Stream extends Model implements Feedable
     {
         return ! is_null($this->approved_at);
     }
+
+    public function getDurationAttribute(): ?string
+    {
+        if (is_null($this->actual_end_time)) {
+            return null;
+        }
+
+        $start_time = $this->actual_start_time ?? $this->scheduled_start_time;
+
+        return $start_time->longAbsoluteDiffForHumans($this->actual_end_time, 2);
+    }
 }
