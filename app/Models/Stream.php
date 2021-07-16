@@ -91,6 +91,11 @@ class Stream extends Model implements Feedable
         return $query->orderByDesc('scheduled_start_time');
     }
 
+    public function scopeFromOldestToLatest(Builder $query): Builder
+    {
+        return $query->orderBy('scheduled_start_time');
+    }
+
     public function scopeFinished(Builder $query): Builder
     {
         return $query->where('status', StreamData::STATUS_FINISHED);

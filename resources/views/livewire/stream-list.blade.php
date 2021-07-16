@@ -1,4 +1,4 @@
-<div class="py-16 space-y-16">
+<div class="py-16 space-y-16" id="scrollTop">
     @foreach ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header
@@ -24,3 +24,14 @@
         {{ $streamsByDate->links() }}
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            Livewire.hook('message.processed', (message, component) => {
+                let scrollTop = document.getElementById("scrollTop")
+                window.scrollTo({ top: scrollTop.offsetTop, left: 0, behaviour: 'smooth' })
+            })
+        })
+    </script>
+@endpush

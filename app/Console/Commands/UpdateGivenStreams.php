@@ -21,7 +21,11 @@ class UpdateGivenStreams extends Command
                 $this->option('soon-live-only'),
                 fn(Builder $query) => $query
                     ->where('status', StreamData::STATUS_LIVE)
-                    ->orWhere('scheduled_start_time', '<=', now()->addMinutes(10)),
+                    ->orWhere(function(Builder $query) {
+                        return $query
+                            ->where('status', StreamData::STATUS_UPCOMING)
+                            ->where('scheduled_start_time', '<=', now()->addMinutes(15));
+                    }),
                 fn(Builder $query) => $query->upcoming()
             )
             ->get()
