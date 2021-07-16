@@ -102,5 +102,4 @@ class UpdateGivenStreamsTest extends TestCase
             ->expectsOutput('Fetching 1 stream(s) from API.')
             ->assertExitCode(0);
     }
-
 }
