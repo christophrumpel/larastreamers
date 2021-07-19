@@ -6,28 +6,17 @@ use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Builder;
 
-class UpdateGivenStreams extends Command
+class UpdateUpcomingStreamsCommand extends Command
 {
-    protected $signature = 'larastreamers:update-streams {--soon-live-only}';
+    protected $signature = 'larastreamers:update-upcoming-streams';
 
-    protected $description = 'Update all today/upcoming streams';
+    protected $description = 'Update all upcoming streams.';
 
     public function handle(): int
     {
         $streams = Stream::query()
-            ->when(
-                $this->option('soon-live-only'),
-                fn(Builder $query) => $query
-                    ->where('status', StreamData::STATUS_LIVE)
-                    ->orWhere(function(Builder $query) {
-                        return $query
-                            ->where('status', StreamData::STATUS_UPCOMING)
-                            ->where('scheduled_start_time', '<=', now()->addMinutes(15));
-                    }),
-                fn(Builder $query) => $query->upcoming()
-            )
+            ->upcoming()
             ->get()
             ->keyBy('youtube_id');
 
@@ -37,7 +26,7 @@ class UpdateGivenStreams extends Command
             return self::SUCCESS;
         }
 
-        $this->info("Fetching {$streams->count()} stream(s) from API.");
+        $this->info("Fetching {$streams->count()} stream(s) from API to update.");
 
         $updatesCount = Youtube::videos($streams->keys())
             ->map(fn(StreamData $streamData) => optional($streams

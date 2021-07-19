@@ -78,7 +78,17 @@ class Stream extends Model implements Feedable
         return $this->status === StreamData::STATUS_LIVE;
     }
 
+    public function scopeLive(Builder $query): Builder
+    {
+        return $query->where('status', StreamData::STATUS_LIVE);
+    }
+
     public function scopeUpcoming(Builder $query): Builder
+    {
+        return $query->where('status', StreamData::STATUS_UPCOMING);
+    }
+
+    public function scopeUpcomingOrLive(Builder $query): Builder
     {
         return $query->whereIn('status', [
             StreamData::STATUS_LIVE,

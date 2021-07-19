@@ -2,9 +2,11 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
+use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
 use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
-use App\Console\Commands\UpdateGivenStreams;
+use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\UpdateArchivedStreamsCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -20,7 +22,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         TweetAboutLiveStreamsCommand::class,
-        UpdateGivenStreams::class,
+        UpdateUpcomingStreamsCommand::class,
         ImportChannelStreamsCommand::class,
     ];
 
@@ -31,8 +33,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(CleanupCommand::class)->daily()->at('01:00');
         $schedule->command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');
-        $schedule->command(UpdateGivenStreams::class)->hourly();
-        $schedule->command(UpdateGivenStreams::class, ['--soon-live-only'])->everyFiveMinutes();
+        $schedule->command(UpdateUpcomingStreamsCommand::class)->hourly();
+        $schedule->command(CheckIfUpcomingStreamsAreLiveCommand::class)->everyFiveMinutes();
+        $schedule->command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
         $schedule->command(UpdateArchivedStreamsCommand::class)->daily();
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
         $schedule->command(ImportChannelStreamsCommand::class)->hourly();

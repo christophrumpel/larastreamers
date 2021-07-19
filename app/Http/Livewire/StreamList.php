@@ -21,7 +21,7 @@ class StreamList extends Component
             ->when($this->isArchive, function(Builder $builder) {
                 $builder->finished()->fromLatestToOldest();
             }, function(Builder $builder) {
-                $builder->upcoming()->fromOldestToLatest();
+                $builder->upcomingOrLive()->fromOldestToLatest();
             })
             ->paginate(10);
 

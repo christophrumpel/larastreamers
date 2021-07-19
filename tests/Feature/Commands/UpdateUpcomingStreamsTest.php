@@ -1,22 +1,21 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Commands;
 
-use App\Console\Commands\UpdateGivenStreams;
+use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class UpdateGivenStreamsTest extends TestCase
+class UpdateUpcomingStreamsTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function it_updates_given_stream_with_new_details(): void
+    public function it_updates_upcoming_streams(): void
     {
         // Arrange
         Youtube::partialMock()
@@ -25,10 +24,10 @@ class UpdateGivenStreamsTest extends TestCase
                 StreamData::fake(videoId: '1234', title: 'My New Test Stream', description: 'My New Description', channelTitle: 'My New Channel Name', plannedStart: Carbon::tomorrow()),
             ]));
 
-        Stream::factory()->create(['youtube_id' => '1234']);
+        Stream::factory()->upcoming()->create(['youtube_id' => '1234']);
 
         // Act
-        $this->artisan(UpdateGivenStreams::class);
+        $this->artisan(UpdateUpcomingStreamsCommand::class);
 
         // Assert
         $this->assertDatabaseCount(Stream::class, 1);
@@ -42,10 +41,24 @@ class UpdateGivenStreamsTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_update_finished_or_live_streams(): void
+    {
+        // Arrange
+        Stream::factory()->finished()->create();
+        Stream::factory()->live()->create();
+
+        // Act & Expect
+        $this->artisan(UpdateUpcomingStreamsCommand::class)
+            ->expectsOutput('There are no streams to update.')
+            ->assertExitCode(0);
+    }
+
+
+    /** @test */
     public function it_tells_if_there_are_no_streams_to_update(): void
     {
         // Act & Expect
-        $this->artisan(UpdateGivenStreams::class)
+        $this->artisan(UpdateUpcomingStreamsCommand::class)
             ->expectsOutput('There are no streams to update.')
             ->assertExitCode(0);
     }
@@ -64,42 +77,9 @@ class UpdateGivenStreamsTest extends TestCase
         Stream::factory()->create(['youtube_id' => '1']);
         Stream::factory()->create(['youtube_id' => '2']);
 
-        $this->artisan(UpdateGivenStreams::class)
+        $this->artisan(UpdateUpcomingStreamsCommand::class)
             ->expectsOutput('2 stream(s) were updated.')
             ->assertExitCode(0);
     }
 
-    /** @test */
-    public function it_updates_streams_that_are_live_when_soon_live_option_given(): void
-    {
-        // Arrange
-        Http::fake();
-
-        // Arrange
-        Stream::factory()->create(['status' => StreamData::STATUS_UPCOMING]);
-        Stream::factory()->create(['status' => StreamData::STATUS_LIVE]);
-        Stream::factory()->create(['status' => StreamData::STATUS_FINISHED]);
-
-        // Act & Expect
-        $this->artisan('larastreamers:update-streams --soon-live-only')
-             ->expectsOutput('Fetching 1 stream(s) from API.')
-             ->assertExitCode(0);
-    }
-
-    /** @test */
-    public function it_updates_streams_that_are_live_soon_when_soon_live_option_given(): void
-    {
-        // Arrange
-        Http::fake();
-
-        // Arrange
-        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(15)]);
-        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(20)]);
-        Stream::factory()->finished()->create();
-
-        // Act & Expect
-        $this->artisan('larastreamers:update-streams --soon-live-only')
-            ->expectsOutput('Fetching 1 stream(s) from API.')
-            ->assertExitCode(0);
-    }
 }
