@@ -12,16 +12,13 @@ class UpdateArchivedStreamsCommand extends Command
 {
     protected $signature = 'larastreamers:update-archived-streams';
 
-    protected $description = 'Update latest 50 archived (& live) streams';
+    protected $description = 'Update latest 50 archived (& live) streams.';
 
-    public function handle()
+    public function handle(): int
     {
         $streams = Stream::query()
             ->approved()
-            ->whereIn('status', [
-                StreamData::STATUS_LIVE,
-                StreamData::STATUS_FINISHED,
-            ])
+            ->liveOrFinished()
             ->fromLatestToOldest()
             ->limit(50)
             ->get()
@@ -33,7 +30,7 @@ class UpdateArchivedStreamsCommand extends Command
             return self::SUCCESS;
         }
 
-        $this->info("Fetching {$streams->count()} stream(s) from API.");
+        $this->info("Fetching {$streams->count()} stream(s) from API to update.");
 
         $youtubeResponse = Youtube::videos($streams->keys());
 
