@@ -8,11 +8,11 @@ use App\Services\Youtube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class UpdateArchivedStreamsCommand extends Command
+class UpdateLiveAndFinishedStreamsCommand extends Command
 {
-    protected $signature = 'larastreamers:update-archived-streams';
+    protected $signature = 'larastreamers:update-live-and-finished-streams';
 
-    protected $description = 'Update latest 50 archived (& live) streams.';
+    protected $description = 'Update latest 50 live & finished streams.';
 
     public function handle(): int
     {

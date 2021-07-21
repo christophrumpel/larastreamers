@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Commands;
 
-use App\Console\Commands\UpdateArchivedStreamsCommand;
+use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class UpdateArchivedStreamsCommandTest extends TestCase
+class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -39,7 +39,7 @@ class UpdateArchivedStreamsCommandTest extends TestCase
         $existingStream = Stream::factory()->finished()->create(['youtube_id' => 'existing']);
 
         // Act
-        $this->artisan(UpdateArchivedStreamsCommand::class)
+        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
             ->expectsOutput("Updating {$existingStream->youtube_id} ...")
             ->assertExitCode(0);
 
@@ -65,7 +65,7 @@ class UpdateArchivedStreamsCommandTest extends TestCase
         $deletedStream = Stream::factory()->finished()->create(['youtube_id' => 'deleted']);
 
         // Act
-        $this->artisan(UpdateArchivedStreamsCommand::class)
+        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
             ->expectsOutput("Updating {$deletedStream->youtube_id} ...")
             ->assertExitCode(0);
 
@@ -102,7 +102,7 @@ class UpdateArchivedStreamsCommandTest extends TestCase
         $wasLiveStream = Stream::factory()->live()->create(['youtube_id' => 'live']);
 
         // Act
-        $this->artisan(UpdateArchivedStreamsCommand::class)
+        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
             ->expectsOutput("Updating {$wasLiveStream->youtube_id} ...")
             ->assertExitCode(0);
 
@@ -140,7 +140,7 @@ class UpdateArchivedStreamsCommandTest extends TestCase
         $stream51 = Stream::factory()->finished()->create(['youtube_id' => 'stream-50', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
 
         // Act
-        $this->artisan(UpdateArchivedStreamsCommand::class)
+        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
             ->doesntExpectOutput("Updating {$stream51->youtube_id} ...")
             ->assertExitCode(0);
 

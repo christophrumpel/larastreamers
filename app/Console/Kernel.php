@@ -8,7 +8,7 @@ use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\Commands\UpdateArchivedStreamsCommand;
+use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Spatie\Backup\Commands\BackupCommand;
 use Spatie\Backup\Commands\CleanupCommand;
@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(UpdateUpcomingStreamsCommand::class)->hourly();
         $schedule->command(CheckIfUpcomingStreamsAreLiveCommand::class)->everyFiveMinutes();
         $schedule->command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
-        $schedule->command(UpdateArchivedStreamsCommand::class)->daily();
+        $schedule->command(UpdateLiveAndFinishedStreamsCommand::class)->daily();
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
         $schedule->command(ImportChannelStreamsCommand::class)->hourly();
     }
