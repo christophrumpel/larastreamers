@@ -70,7 +70,7 @@ class YoutubeClient
                 publishedAt: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
                 plannedStart: $this->getPlannedStart($item),
                 actualStartTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
-                actualEndTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
+                actualEndTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualEndTime')),
                 status: data_get($item, 'snippet.liveBroadcastContent'),
             ));
     }
