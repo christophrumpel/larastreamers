@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class UpdateUpcomingStreamsTest extends TestCase
+class UpdateUpcomingStreamsCommandTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -46,6 +46,18 @@ class UpdateUpcomingStreamsTest extends TestCase
         // Arrange
         Stream::factory()->finished()->create();
         Stream::factory()->live()->create();
+
+        // Act & Expect
+        $this->artisan(UpdateUpcomingStreamsCommand::class)
+            ->expectsOutput('There are no streams to update.')
+            ->assertExitCode(0);
+    }
+
+    /** @test */
+    public function it_does_not_update_unapproved_streams(): void
+    {
+        // Arrange
+        Stream::factory()->notApproved()->create();
 
         // Act & Expect
         $this->artisan(UpdateUpcomingStreamsCommand::class)
