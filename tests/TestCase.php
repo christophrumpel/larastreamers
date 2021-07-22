@@ -176,7 +176,7 @@ abstract class TestCase extends BaseTestCase
                     ],
                     'liveStreamingDetails' => [
                         'actualStartTime' => '2031-05-15T11:00:29Z',
-                        'actualEndTime' => '2031-05-15T12:40:27Z',
+                        'actualEndTime' => '2031-05-15T11:30:29Z',
                         'scheduledStartTime' => '2031-05-15T11:00:00Z',
                     ],
                 ],

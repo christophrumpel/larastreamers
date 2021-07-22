@@ -25,12 +25,19 @@
 
     <article class="flex flex-col items-start p-6 space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
         <div class="flex items-center">
-            <x-local-time class="font-bold tracking-tight text-red-400" :date="$stream->scheduled_start_time"/>
+            <x-local-time class="font-bold tracking-tight text-red-400" :date="$stream->actual_start_time ?? $stream->scheduled_start_time"/>
             @if ($stream->language->shouldRender())
                 <span class="block mx-2 text-gray-500">&bull;</span>
                 <span class="font-semibold tracking-wider uppercase text-white">{{ $stream->language->name }}</span>
             @endif
         </div>
+
+        @if($stream->duration)
+            <div class="flex items-center space-x-2">
+                <span class="block text-gray-400 text-sm">Duration:</span>
+                <span class="font-semibold tracking-wider uppercase text-sm text-white">{{ $stream->duration }}</span>
+            </div>
+        @endif
 
         <header class="flex-1">
             <h3 class="text-2xl font-bold tracking-tight">

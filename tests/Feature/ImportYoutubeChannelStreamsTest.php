@@ -39,6 +39,31 @@ class ImportYoutubeChannelStreamsTest extends TestCase
     }
 
     /** @test */
+    public function it_sets_channel_id_to_new_streams(): void
+    {
+        // Arrange
+        Http::fake([
+            '*search*' => Http::response($this->upcomingStreamsResponse()),
+            '*video*' => Http::response($this->videoResponse()),
+        ]);
+
+        // Assert
+        $this->assertDatabaseCount(Stream::class, 0);
+
+        // Act
+        (new ImportYoutubeChannelStreamsJob('UCNlUCA4VORBx8X-h-rXvXEg', 'en'))->handle();
+
+        // Assert
+        $this->assertDatabaseCount(Stream::class, 3);
+        $this->assertDatabaseHas(Stream::class, [
+            'channel_id' => 'UCNlUCA4VORBx8X-h-rXvXEg',
+        ]);
+
+        $stream = Stream::first();
+        $this->assertNotNull($stream->approved_at);
+    }
+
+    /** @test */
     public function it_updates_already_given_streams(): void
     {
         // Arrange
