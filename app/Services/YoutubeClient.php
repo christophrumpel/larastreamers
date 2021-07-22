@@ -64,6 +64,7 @@ class YoutubeClient
             ->map(fn(array $item) => new StreamData(
                 videoId: data_get($item, 'id'),
                 title: data_get($item, 'snippet.title'),
+                channelId: data_get($item, 'snippet.channelId'),
                 channelTitle: data_get($item, 'snippet.channelTitle'),
                 description: data_get($item, 'snippet.description'),
                 thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,

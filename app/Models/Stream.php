@@ -21,6 +21,7 @@ class Stream extends Model implements Feedable
     use HasFactory;
 
     protected $fillable = [
+        'channel_id',
         'channel_title',
         'youtube_id',
         'title',

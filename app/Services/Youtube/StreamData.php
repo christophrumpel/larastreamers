@@ -14,6 +14,7 @@ class StreamData extends DataTransferObject
 
     public string $videoId;
     public string $title;
+    public string $channelId;
     public string $channelTitle;
     public string $description;
     public string $thumbnailUrl;
@@ -37,6 +38,7 @@ class StreamData extends DataTransferObject
         return new static(
             array_merge([
                 'title' => 'My Test Stream',
+                'channelId' => '1234',
                 'channelTitle' => 'My Channel Name',
                 'description' => 'Some description',
                 'thumbnailUrl' => 'my-new-thumbnail-url',
