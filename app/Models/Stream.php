@@ -33,6 +33,7 @@ class Stream extends Model implements Feedable
         'hidden_at',
         'status',
         'tweeted_at',
+        'announcement_tweeted_at',
         'language_code',
         'submitted_by_email',
         'approved_at',
