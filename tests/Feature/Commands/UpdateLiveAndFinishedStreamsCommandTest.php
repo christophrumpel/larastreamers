@@ -15,7 +15,7 @@ class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_updates_all_archived_streams(): void
+    public function it_updates_archived_streams(): void
     {
         Carbon::setTestNow(now());
 

@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 
 class CheckIfLiveStreamsHaveEndedCommand extends Command
 {
-    protected $signature = 'larastreamers:update-streams-not-live-anymore';
+    protected $signature = 'larastreamers:check-if-livestreams-ended';
 
     protected $description = 'Check if current live streams have already ended and set them to finished.';
 
@@ -26,7 +26,7 @@ class CheckIfLiveStreamsHaveEndedCommand extends Command
             return self::SUCCESS;
         }
 
-        $this->info("Fetching {$streams->count()} stream(s) from API to update.");
+        $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
         $updatesCount = Youtube::videos($streams->keys())
             ->map(fn(StreamData $streamData) => optional($streams

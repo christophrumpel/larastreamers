@@ -24,7 +24,7 @@ class CheckIfUpcomingStreamsAreLiveCommandTest extends TestCase
 
         // Act & Expect
         $this->artisan(CheckIfUpcomingStreamsAreLiveCommand::class)
-            ->expectsOutput('Fetching 1 stream(s) from API to update.')
+            ->expectsOutput('Fetching 1 stream(s) from API to update their status.')
             ->assertExitCode(0);
     }
 

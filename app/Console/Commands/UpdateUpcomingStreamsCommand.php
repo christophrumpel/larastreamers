@@ -16,6 +16,7 @@ class UpdateUpcomingStreamsCommand extends Command
     public function handle(): int
     {
         $streams = Stream::query()
+            ->approved()
             ->upcoming()
             ->get()
             ->keyBy('youtube_id');

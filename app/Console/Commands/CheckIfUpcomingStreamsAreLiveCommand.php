@@ -9,9 +9,9 @@ use Illuminate\Console\Command;
 
 class CheckIfUpcomingStreamsAreLiveCommand extends Command
 {
-    protected $signature = 'larastreamers:update-live-streams';
+    protected $signature = 'larastreamers:check-if-upcoming-streams-are-live';
 
-    protected $description = 'Check if upcoming streams are already live and set them live.';
+    protected $description = 'Check if upcoming streams (next 15min) are already live and set them live.';
 
     public function handle(): int
     {
@@ -27,7 +27,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
             return self::SUCCESS;
         }
 
-        $this->info("Fetching {$streams->count()} stream(s) from API to update.");
+        $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
         $updatesCount = Youtube::videos($streams->keys())
             ->map(fn(StreamData $streamData) => optional($streams
