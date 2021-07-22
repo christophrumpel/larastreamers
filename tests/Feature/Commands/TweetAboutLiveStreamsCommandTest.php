@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Commands;
 
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Models\Channel;
@@ -10,7 +10,7 @@ use Artisan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TweetTest extends TestCase
+class TweetAboutLiveStreamsCommandTest extends TestCase
 {
     use RefreshDatabase;
 
