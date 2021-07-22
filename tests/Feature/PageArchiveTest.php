@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -16,9 +15,9 @@ class PageArchiveTest extends TestCase
     public function it_shows_only_finished_streams(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Finished stream', 'status' => StreamData::STATUS_FINISHED]);
-        Stream::factory()->create(['title' => 'Live stream', 'status' => StreamData::STATUS_LIVE]);
-        Stream::factory()->create(['title' => 'Upcoming stream', 'status' => StreamData::STATUS_UPCOMING]);
+        Stream::factory()->finished()->create(['title' => 'Finished stream']);
+        Stream::factory()->live()->create(['title' => 'Live stream']);
+        Stream::factory()->upcoming()->create(['title' => 'Upcoming stream']);
 
         // Act & Assert
         $this->get(route('archive'))
@@ -31,9 +30,9 @@ class PageArchiveTest extends TestCase
     public function it_orders_streams_from_latest_to_oldest(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Finished one day ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()]);
-        Stream::factory()->create(['title' => 'Finished two days ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
-        Stream::factory()->create(['title' => 'Finished three days ago', 'status' => StreamData::STATUS_FINISHED, 'scheduled_start_time' => Carbon::yesterday()->subDays(2)]);
+        Stream::factory()->finished()->create(['title' => 'Finished one day ago', 'scheduled_start_time' => Carbon::yesterday()]);
+        Stream::factory()->finished()->create(['title' => 'Finished two days ago', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
+        Stream::factory()->finished()->create(['title' => 'Finished three days ago', 'scheduled_start_time' => Carbon::yesterday()->subDays(2)]);
 
         // Act & Assert
         $this->get(route('archive'))
