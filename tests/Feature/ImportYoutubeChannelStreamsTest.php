@@ -63,7 +63,6 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         $this->assertNotNull($stream->approved_at);
     }
 
-
     /** @test */
     public function it_updates_already_given_streams(): void
     {
