@@ -66,16 +66,30 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream none', 'scheduled_start_time' => Carbon::yesterday()->hour(8), 'status' => StreamData::STATUS_FINISHED]);
-        Stream::factory()->create(['title' => 'Stream live', 'scheduled_start_time' => Carbon::now()->subMinutes(10), 'status' => StreamData::STATUS_LIVE]);
-        Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+        Stream::factory()->finished()->create(['title' => 'Stream finished', 'scheduled_start_time' => Carbon::yesterday()->hour(8)]);
+        Stream::factory()->live()->create(['title' => 'Stream live', 'scheduled_start_time' => Carbon::now()->subMinutes(10)]);
+        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays()]);
 
         // Act & Assert
         $this
             ->get('/')
             ->assertSee('Stream live')
             ->assertSee('Stream upcoming')
-                ->assertDontSee('Stream none');
+                ->assertDontSee('Stream finished');
+    }
+
+    /** @test */
+    public function it_does_not_show_deleted_streams(): void
+    {
+        // Arrange
+        Stream::factory()->deleted()->create(['title' => 'Stream deleted']);
+        Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+
+        // Act & Assert
+        $this
+            ->get('/')
+            ->assertSee('Stream upcoming')
+            ->assertDontSee('Stream deleted');
     }
 
     /** @test */

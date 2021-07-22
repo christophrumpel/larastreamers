@@ -27,6 +27,9 @@ class Stream extends Model implements Feedable
         'description',
         'thumbnail_url',
         'scheduled_start_time',
+        'actual_start_time',
+        'actual_end_time',
+        'hidden_at',
         'status',
         'tweeted_at',
         'language_code',
@@ -37,6 +40,9 @@ class Stream extends Model implements Feedable
     protected $casts = [
         'approved_at' => 'datetime',
         'scheduled_start_time' => 'datetime',
+        'actual_start_time' => 'datetime',
+        'actual_end_time' => 'datetime',
+        'hidden_at' => 'datetime',
         'tweeted_at' => 'datetime',
     ];
 
@@ -72,11 +78,29 @@ class Stream extends Model implements Feedable
         return $this->status === StreamData::STATUS_LIVE;
     }
 
+    public function scopeLive(Builder $query): Builder
+    {
+        return $query->where('status', StreamData::STATUS_LIVE);
+    }
+
     public function scopeUpcoming(Builder $query): Builder
+    {
+        return $query->where('status', StreamData::STATUS_UPCOMING);
+    }
+
+    public function scopeUpcomingOrLive(Builder $query): Builder
     {
         return $query->whereIn('status', [
             StreamData::STATUS_LIVE,
             StreamData::STATUS_UPCOMING,
+        ]);
+    }
+
+    public function scopeLiveOrFinished(Builder $query): Builder
+    {
+        return $query->whereIn('status', [
+            StreamData::STATUS_LIVE,
+            StreamData::STATUS_FINISHED,
         ]);
     }
 
@@ -170,5 +194,16 @@ class Stream extends Model implements Feedable
     public function isApproved(): bool
     {
         return ! is_null($this->approved_at);
+    }
+
+    public function getDurationAttribute(): ?string
+    {
+        if (is_null($this->actual_end_time)) {
+            return null;
+        }
+
+        $start_time = $this->actual_start_time ?? $this->scheduled_start_time;
+
+        return $start_time->longAbsoluteDiffForHumans($this->actual_end_time, 2);
     }
 }

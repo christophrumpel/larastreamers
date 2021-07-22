@@ -51,6 +51,8 @@ class YoutubeTest extends TestCase
         $this->assertEquals('https://i.ytimg.com/vi/gzqJZQyfkaI/maxresdefault.jpg', $finishedStream->thumbnailUrl);
         $this->assertEquals('2021-05-15T12:51:18+00:00', $finishedStream->publishedAt->toIso8601String());
         $this->assertEquals('2031-05-15T11:00:00+00:00', $finishedStream->plannedStart->toIso8601String());
+        $this->assertEquals('2031-05-15T11:00:29+00:00', $finishedStream->actualStartTime->toIso8601String());
+        $this->assertEquals('2031-05-15T11:00:29+00:00', $finishedStream->actualEndTime->toIso8601String());
         $this->assertEquals(StreamData::STATUS_FINISHED, $finishedStream->status);
 
         /** @var \App\Services\Youtube\StreamData $upcomingStream */
@@ -61,6 +63,8 @@ class YoutubeTest extends TestCase
         $this->assertEquals('https://i.ytimg.com/vi/L3O1BbybSgw/maxresdefault_live.jpg', $upcomingStream->thumbnailUrl);
         $this->assertEquals('2021-05-14T17:00:28+00:00', $upcomingStream->publishedAt->toIso8601String());
         $this->assertEquals('2021-05-21T09:00:00+00:00', $upcomingStream->plannedStart->toIso8601String());
+        $this->assertNull($upcomingStream->actualStartTime);
+        $this->assertNull($upcomingStream->actualEndTime);
         $this->assertEquals(StreamData::STATUS_UPCOMING, $upcomingStream->status);
     }
 

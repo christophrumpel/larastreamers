@@ -69,6 +69,8 @@ class YoutubeClient
                 thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
                 publishedAt: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
                 plannedStart: $this->getPlannedStart($item),
+                actualStartTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
+                actualEndTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
                 status: data_get($item, 'snippet.liveBroadcastContent'),
             ));
     }
