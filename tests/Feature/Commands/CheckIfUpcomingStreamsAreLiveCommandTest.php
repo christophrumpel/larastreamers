@@ -43,4 +43,19 @@ class CheckIfUpcomingStreamsAreLiveCommandTest extends TestCase
             ->expectsOutput('There are no streams to update.')
             ->assertExitCode(0);
     }
+
+    /** @test */
+    public function it_does_not_update_unapproved_streams(): void
+    {
+        // Arrange
+        Http::fake();
+
+        // Arrange
+        Stream::factory()->notApproved()->create(['scheduled_start_time' => now()->addMinutes(15)]);
+
+        // Act & Expect
+        $this->artisan(CheckIfUpcomingStreamsAreLiveCommand::class)
+            ->expectsOutput('There are no streams to update.')
+            ->assertExitCode(0);
+    }
 }

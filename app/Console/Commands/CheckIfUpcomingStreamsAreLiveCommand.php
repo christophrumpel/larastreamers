@@ -16,6 +16,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
     public function handle(): int
     {
         $streams = Stream::query()
+            ->approved()
             ->upcoming()
             ->where('scheduled_start_time', '<=', now()->addMinutes(15))
             ->get()
