@@ -52,7 +52,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals('2021-05-15T12:51:18+00:00', $finishedStream->publishedAt->toIso8601String());
         $this->assertEquals('2031-05-15T11:00:00+00:00', $finishedStream->plannedStart->toIso8601String());
         $this->assertEquals('2031-05-15T11:00:29+00:00', $finishedStream->actualStartTime->toIso8601String());
-        $this->assertEquals('2031-05-15T11:00:29+00:00', $finishedStream->actualEndTime->toIso8601String());
+        $this->assertEquals('2031-05-15T11:30:29+00:00', $finishedStream->actualEndTime->toIso8601String());
         $this->assertEquals(StreamData::STATUS_FINISHED, $finishedStream->status);
 
         /** @var \App\Services\Youtube\StreamData $upcomingStream */
