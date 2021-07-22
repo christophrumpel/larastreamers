@@ -53,7 +53,6 @@ class UpdateUpcomingStreamsTest extends TestCase
             ->assertExitCode(0);
     }
 
-
     /** @test */
     public function it_tells_if_there_are_no_streams_to_update(): void
     {
@@ -81,5 +80,4 @@ class UpdateUpcomingStreamsTest extends TestCase
             ->expectsOutput('2 stream(s) were updated.')
             ->assertExitCode(0);
     }
-
 }

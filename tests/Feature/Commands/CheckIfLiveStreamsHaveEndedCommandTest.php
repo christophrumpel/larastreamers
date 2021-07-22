@@ -4,9 +4,9 @@ namespace Tests\Feature\Commands;
 
 use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
 use App\Models\Stream;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CheckIfLiveStreamsHaveEndedCommandTest extends TestCase
 {
@@ -42,6 +42,4 @@ class CheckIfLiveStreamsHaveEndedCommandTest extends TestCase
             ->expectsOutput('There are no streams to update.')
             ->assertExitCode(0);
     }
-
-
 }
