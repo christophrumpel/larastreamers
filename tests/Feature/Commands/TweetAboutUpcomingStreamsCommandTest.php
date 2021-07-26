@@ -128,14 +128,17 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
     {
         // Arrange
         Carbon::setTestNow(now());
-        $stream = Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5), 'tweeted_at' => now()]);
+
+        $stream = Stream::factory()
+            ->upcoming()
+            ->liveTweetWasSend()
+            ->create(['scheduled_start_time' => now()->addMinutes(5)]);
 
         // Assert
         $this->assertNull($stream->upcoming_tweeted_at);
 
         // Act
         $this->artisan(TweetAboutUpcomingStreamsCommand::class)
-            ->expectsOutput('1 tweets sent')
             ->assertExitCode(0);
 
         // Assert

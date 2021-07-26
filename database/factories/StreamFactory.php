@@ -79,6 +79,15 @@ class StreamFactory extends Factory
         return $this->state(fn() => ['approved_at' => null]);
     }
 
+    public function liveTweetWasSend(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'tweeted_at' => now(),
+            ];
+        });
+    }
+
     public function upcomingTweetWasSend(): StreamFactory
     {
         return $this->state(function() {

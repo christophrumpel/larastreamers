@@ -3,7 +3,6 @@
 namespace Tests\Feature\Commands;
 
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
-use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
@@ -116,7 +115,10 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
     public function it_only_tweets_streams_that_are_going_live_once(): void
     {
         // Arrange
-        Stream::factory()->live()->create(['tweeted_at' => now()]);
+        Stream::factory()
+            ->live()
+            ->liveTweetWasSend()
+            ->create();
 
         // Act
         $this->artisan(TweetAboutLiveStreamsCommand::class);
