@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Submission;
+namespace Tests\Feature\Http\Controllers\Submission;
 
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;

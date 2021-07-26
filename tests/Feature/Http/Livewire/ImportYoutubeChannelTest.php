@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Http\Livewire;
 
 use App\Http\Livewire\ImportYoutubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;

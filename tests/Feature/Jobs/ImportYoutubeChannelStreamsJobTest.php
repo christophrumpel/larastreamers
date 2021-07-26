@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Jobs;
 
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class ImportYoutubeChannelStreamsTest extends TestCase
+class ImportYoutubeChannelStreamsJobTest extends TestCase
 {
     use RefreshDatabase;
 

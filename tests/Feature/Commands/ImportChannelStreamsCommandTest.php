@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Commands;
 
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;

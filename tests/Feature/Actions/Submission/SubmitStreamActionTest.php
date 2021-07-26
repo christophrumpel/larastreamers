@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Submission;
+namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\SubmitStreamAction;
 use App\Facades\Youtube;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class SubmitActionTest extends TestCase
+class SubmitStreamActionTest extends TestCase
 {
     use RefreshDatabase;
 

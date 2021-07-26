@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers\Submission;
 
 use App\Http\Livewire\SubmitYouTubeLiveStream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class PageSubmissionTest extends TestCase
+class SubmissionControllerTest extends TestCase
 {
     use RefreshDatabase;
 

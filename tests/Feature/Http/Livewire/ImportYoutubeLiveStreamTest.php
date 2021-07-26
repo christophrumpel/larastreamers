@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Http\Livewire;
 
 use App\Facades\Youtube;
 use App\Http\Livewire\ImportYoutubeLiveStream;

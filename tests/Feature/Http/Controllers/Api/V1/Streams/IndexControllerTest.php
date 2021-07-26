@@ -1,18 +1,16 @@
 <?php
 
-namespace Tests\Feature\API;
+namespace Tests\Feature\Http\Controllers\Api\V1\Streams;
 
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class EndpointStreamsTest extends TestCase
+class IndexControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_shows_all_streams(): void
     {
         $stream = Stream::factory()->create([
@@ -45,9 +43,7 @@ class EndpointStreamsTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_only_shows_approved_streams(): void
     {
         $stream = Stream::factory()->approved()->create();
