@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\TweetUpcomingStreamJob;
+use App\Jobs\TweetStreamIsUpcomingJob;
 use App\Models\Stream;
 use Illuminate\Console\Command;
 
@@ -21,7 +21,7 @@ class TweetAboutUpcomingStreamsCommand extends Command
             ->whereNull('announcement_tweeted_at')
             ->get()
             ->each(function(Stream $stream) {
-                dispatch(new TweetUpcomingStreamJob($stream));
+                dispatch(new TweetStreamIsUpcomingJob($stream));
             });
 
         if ($streams->isEmpty()) {

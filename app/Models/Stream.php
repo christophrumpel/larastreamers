@@ -46,6 +46,7 @@ class Stream extends Model implements Feedable
         'actual_end_time' => 'datetime',
         'hidden_at' => 'datetime',
         'tweeted_at' => 'datetime',
+        'announcement_tweeted_at' => 'datetime',
     ];
 
     public function channel(): BelongsTo
