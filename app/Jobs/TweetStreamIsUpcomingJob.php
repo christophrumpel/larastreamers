@@ -11,7 +11,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class TweetStreamIsLiveJob implements ShouldQueue
+class TweetStreamIsUpcomingJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -22,6 +22,10 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
     public function handle(): void
     {
+        if ($this->stream->tweetStreamIsUpcomingWasSend()) {
+            return;
+        }
+
         if ($this->stream->tweetStreamIsLiveWasSend()) {
             return;
         }
@@ -30,8 +34,10 @@ class TweetStreamIsLiveJob implements ShouldQueue
             ->when($twitterHandle = $this->stream->channel?->twitter_handle, fn() => " by $twitterHandle ");
 
         app(Twitter::class)
-            ->tweet("🔴 A new stream{$twitterHandleIfGiven}just started: {$this->stream->title}".PHP_EOL.$this->stream->url());
+            ->tweet("🔴 A new stream{$twitterHandleIfGiven}is about to start: {$this->stream->title}. Join now!".PHP_EOL.$this->stream->url());
 
-        $this->stream->markAsTweeted();
+        $this->stream->update([
+            'upcoming_tweeted_at' => now(),
+        ]);
     }
 }

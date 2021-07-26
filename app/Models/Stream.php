@@ -33,6 +33,7 @@ class Stream extends Model implements Feedable
         'hidden_at',
         'status',
         'tweeted_at',
+        'upcoming_tweeted_at',
         'language_code',
         'submitted_by_email',
         'approved_at',
@@ -45,6 +46,7 @@ class Stream extends Model implements Feedable
         'actual_end_time' => 'datetime',
         'hidden_at' => 'datetime',
         'tweeted_at' => 'datetime',
+        'upcoming_tweeted_at' => 'datetime',
     ];
 
     public function channel(): BelongsTo
@@ -62,9 +64,14 @@ class Stream extends Model implements Feedable
         return static::query()->upcoming()->get();
     }
 
-    public function hasBeenTweeted(): bool
+    public function tweetStreamIsLiveWasSend(): bool
     {
         return ! is_null($this->tweeted_at);
+    }
+
+    public function tweetStreamIsUpcomingWasSend(): bool
+    {
+        return ! is_null($this->upcoming_tweeted_at);
     }
 
     public function markAsTweeted(): self
@@ -127,6 +134,11 @@ class Stream extends Model implements Feedable
             '>=',
             now()->subYear()->startOfYear()
         );
+    }
+
+    public function scopeWithinUpcomingTweetRange(Builder $query): Builder
+    {
+        return $query->where('scheduled_start_time', '<=', now()->addMinutes(5));
     }
 
     public function toFeedItem(): FeedItem

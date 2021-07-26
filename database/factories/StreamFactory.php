@@ -78,4 +78,41 @@ class StreamFactory extends Factory
     {
         return $this->state(fn() => ['approved_at' => null]);
     }
+
+    public function liveTweetWasSend(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'tweeted_at' => now(),
+            ];
+        });
+    }
+
+    public function upcomingTweetWasSend(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => now()->addMinutes(5),
+                'upcoming_tweeted_at' => now(),
+            ];
+        });
+    }
+
+    public function startsWithinUpcomingTweetRange(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => now()->addMinutes(5),
+            ];
+        });
+    }
+
+    public function startsOutsideUpcomingTweetRange(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => now()->addMinutes(6),
+            ];
+        });
+    }
 }

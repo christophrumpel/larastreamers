@@ -14,7 +14,7 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_only_tweets_streams_that_are_live(): void
+    public function it_tweets_streams_that_are_live(): void
     {
         // Arrange
         Stream::factory()->live()->create();
@@ -27,6 +27,20 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
 
         // Assert
         $this->twitterFake->assertTweetWasSent();
+    }
+
+    /** @test */
+    public function it_does_not_tweet_streams_that_are_upcoming_or_finished(): void
+    {
+        // Arrange
+        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+        Stream::factory()->finished()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+
+        // Act
+        $this->artisan(TweetAboutLiveStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertNoTweetsWereSent();
     }
 
     /** @test */
@@ -86,22 +100,25 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
         $streamDontTweet = Stream::factory()->upcoming()->create();
 
         // Assert
-        $this->assertFalse($streamToTweet->hasBeenTweeted());
-        $this->assertFalse($streamDontTweet->hasBeenTweeted());
+        $this->assertFalse($streamToTweet->tweetStreamIsLiveWasSend());
+        $this->assertFalse($streamDontTweet->tweetStreamIsLiveWasSend());
 
         // Act
         $this->artisan(TweetAboutLiveStreamsCommand::class);
 
         // Assert
-        $this->assertTrue($streamToTweet->refresh()->hasBeenTweeted());
-        $this->assertFalse($streamDontTweet->refresh()->hasBeenTweeted());
+        $this->assertTrue($streamToTweet->refresh()->tweetStreamIsLiveWasSend());
+        $this->assertFalse($streamDontTweet->refresh()->tweetStreamIsLiveWasSend());
     }
 
     /** @test */
     public function it_only_tweets_streams_that_are_going_live_once(): void
     {
         // Arrange
-        Stream::factory()->live()->create(['tweeted_at' => now()]);
+        Stream::factory()
+            ->live()
+            ->liveTweetWasSend()
+            ->create();
 
         // Act
         $this->artisan(TweetAboutLiveStreamsCommand::class);
