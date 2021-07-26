@@ -79,7 +79,7 @@ class StreamFactory extends Factory
         return $this->state(fn() => ['approved_at' => null]);
     }
 
-    public function announcementTweetSend(): StreamFactory
+    public function announcementTweetSent(): StreamFactory
     {
         return $this->state(function() {
             return [
