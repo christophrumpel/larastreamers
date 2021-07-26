@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Jobs\ImportYoutubeChannelStreamsJob;
+use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
@@ -47,6 +48,8 @@ class ImportYoutubeChannelStreamsTest extends TestCase
             '*video*' => Http::response($this->videoResponse()),
         ]);
 
+        $channel = Channel::factory()->create(['platform_id' => 'UCNlUCA4VORBx8X-h-rXvXEg']);
+
         // Assert
         $this->assertDatabaseCount(Stream::class, 0);
 
@@ -56,13 +59,12 @@ class ImportYoutubeChannelStreamsTest extends TestCase
         // Assert
         $this->assertDatabaseCount(Stream::class, 3);
         $this->assertDatabaseHas(Stream::class, [
-            'channel_id' => 'UCNlUCA4VORBx8X-h-rXvXEg',
+            'channel_id' => $channel->id,
         ]);
 
         $stream = Stream::first();
         $this->assertNotNull($stream->approved_at);
     }
-
 
     /** @test */
     public function it_updates_already_given_streams(): void
