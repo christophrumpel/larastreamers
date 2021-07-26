@@ -64,9 +64,14 @@ class Stream extends Model implements Feedable
         return static::query()->upcoming()->get();
     }
 
-    public function hasBeenTweeted(): bool
+    public function tweetStreamIsLiveWasSend(): bool
     {
         return ! is_null($this->tweeted_at);
+    }
+
+    public function tweetStreamIsUpcomingWasSend(): bool
+    {
+        return ! is_null($this->announcement_tweeted_at);
     }
 
     public function markAsTweeted(): self

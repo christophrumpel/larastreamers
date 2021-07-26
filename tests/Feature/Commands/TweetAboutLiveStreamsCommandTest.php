@@ -101,15 +101,15 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
         $streamDontTweet = Stream::factory()->upcoming()->create();
 
         // Assert
-        $this->assertFalse($streamToTweet->hasBeenTweeted());
-        $this->assertFalse($streamDontTweet->hasBeenTweeted());
+        $this->assertFalse($streamToTweet->tweetStreamIsLiveWasSend());
+        $this->assertFalse($streamDontTweet->tweetStreamIsLiveWasSend());
 
         // Act
         $this->artisan(TweetAboutLiveStreamsCommand::class);
 
         // Assert
-        $this->assertTrue($streamToTweet->refresh()->hasBeenTweeted());
-        $this->assertFalse($streamDontTweet->refresh()->hasBeenTweeted());
+        $this->assertTrue($streamToTweet->refresh()->tweetStreamIsLiveWasSend());
+        $this->assertFalse($streamDontTweet->refresh()->tweetStreamIsLiveWasSend());
     }
 
     /** @test */

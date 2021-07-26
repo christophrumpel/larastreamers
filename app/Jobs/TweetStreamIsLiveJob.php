@@ -22,7 +22,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
     public function handle(): void
     {
-        if ($this->stream->hasBeenTweeted()) {
+        if ($this->stream->tweetStreamIsLiveWasSend()) {
             return;
         }
 

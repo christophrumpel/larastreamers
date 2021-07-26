@@ -22,11 +22,11 @@ class TweetStreamIsUpcomingJob implements ShouldQueue
 
     public function handle(): void
     {
-        if (! is_null($this->stream->announcement_tweeted_at)) {
+        if ($this->stream->tweetStreamIsUpcomingWasSend()) {
             return;
         }
 
-        if ($this->stream->hasBeenTweeted()) {
+        if ($this->stream->tweetStreamIsLiveWasSend()) {
             return;
         }
 
