@@ -30,6 +30,20 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_tweet_streams_that_are_live_or_finished(): void
+    {
+        // Arrange
+        Stream::factory()->live()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+        Stream::factory()->finished()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+
+        // Act
+        $this->artisan(TweetAboutUpcomingStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertNoTweetsWereSent();
+    }
+
+    /** @test */
     public function it_checks_the_message_of_the_tweet(): void
     {
         // Arrange

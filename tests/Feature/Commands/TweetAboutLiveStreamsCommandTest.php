@@ -3,6 +3,7 @@
 namespace Tests\Feature\Commands;
 
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
+use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
@@ -14,7 +15,7 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function it_only_tweets_streams_that_are_live(): void
+    public function it_tweets_streams_that_are_live(): void
     {
         // Arrange
         Stream::factory()->live()->create();
@@ -27,6 +28,20 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
 
         // Assert
         $this->twitterFake->assertTweetWasSent();
+    }
+
+    /** @test */
+    public function it_does_not_tweet_streams_that_are_live_or_finished(): void
+    {
+        // Arrange
+        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+        Stream::factory()->finished()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+
+        // Act
+        $this->artisan(TweetAboutLiveStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertNoTweetsWereSent();
     }
 
     /** @test */
