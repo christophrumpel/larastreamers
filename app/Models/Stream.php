@@ -136,6 +136,11 @@ class Stream extends Model implements Feedable
         );
     }
 
+    public function scopeWithinUpcomingTweetRange(Builder $query): Builder
+    {
+        return $query->where('scheduled_start_time', '<=', now()->addMinutes(5));
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()

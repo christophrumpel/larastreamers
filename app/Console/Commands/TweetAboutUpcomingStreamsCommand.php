@@ -17,7 +17,7 @@ class TweetAboutUpcomingStreamsCommand extends Command
         $streams = Stream::query()
             ->approved()
             ->upcoming()
-            ->where('scheduled_start_time', '<=', now()->addMinutes(5))
+            ->withinUpcomingTweetRange()
             ->whereNull('upcoming_tweeted_at')
             ->get()
             ->each(function(Stream $stream) {

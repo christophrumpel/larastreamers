@@ -97,4 +97,22 @@ class StreamFactory extends Factory
             ];
         });
     }
+
+    public function startsWithinUpcomingTweetRange(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => now()->addMinutes(5),
+            ];
+        });
+    }
+
+    public function startsOutsideUpcomingTweetRange(): StreamFactory
+    {
+        return $this->state(function() {
+            return [
+                'scheduled_start_time' => now()->addMinutes(6),
+            ];
+        });
+    }
 }
