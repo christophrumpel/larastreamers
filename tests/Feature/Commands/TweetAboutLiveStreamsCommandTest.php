@@ -31,7 +31,7 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_tweet_streams_that_are_live_or_finished(): void
+    public function it_does_not_tweet_streams_that_are_upcoming_or_finished(): void
     {
         // Arrange
         Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5)]);
