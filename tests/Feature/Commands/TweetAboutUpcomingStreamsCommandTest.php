@@ -146,7 +146,7 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
     public function it_only_tweets_streams_that_are_going_live_once(): void
     {
         // Arrange
-        Stream::factory()->upcoming()->announcementTweetSent()->create();
+        Stream::factory()->upcoming()->upcomingTweetWasSend()->create();
 
         // Act
         $this->artisan(TweetAboutUpcomingStreamsCommand::class);
