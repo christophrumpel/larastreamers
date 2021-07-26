@@ -37,7 +37,7 @@ class TweetStreamIsUpcomingJob implements ShouldQueue
             ->tweet("🔴 A new stream{$twitterHandleIfGiven}is about to start: {$this->stream->title}. Join now!".PHP_EOL.$this->stream->url());
 
         $this->stream->update([
-            'announcement_tweeted_at' => now(),
+            'upcoming_tweeted_at' => now(),
         ]);
     }
 }

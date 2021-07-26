@@ -18,7 +18,7 @@ class TweetAboutUpcomingStreamsCommand extends Command
             ->approved()
             ->upcoming()
             ->where('scheduled_start_time', '<=', now()->addMinutes(5))
-            ->whereNull('announcement_tweeted_at')
+            ->whereNull('upcoming_tweeted_at')
             ->get()
             ->each(function(Stream $stream) {
                 dispatch(new TweetStreamIsUpcomingJob($stream));

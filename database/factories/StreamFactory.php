@@ -84,7 +84,7 @@ class StreamFactory extends Factory
         return $this->state(function() {
             return [
                 'scheduled_start_time' => now()->addMinutes(5),
-                'announcement_tweeted_at' => now(),
+                'upcoming_tweeted_at' => now(),
             ];
         });
     }

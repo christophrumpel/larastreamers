@@ -94,7 +94,7 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
     }
 
     /** @test */
-    public function it_correctly_sets_announcement_tweeted_at_timestamp(): void
+    public function it_correctly_sets_upcoming_tweeted_at_timestamp(): void
     {
         // Arrange
         Carbon::setTestNow(now());
@@ -103,9 +103,9 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
         $liveStreamNotToTweet = Stream::factory()->live()->create();
 
         // Assert
-        $this->assertNull($upcomingStreamToTweet->announcement_tweeted_at);
-        $this->assertNull($upcomingStreamNotToTweet->announcement_tweeted_at);
-        $this->assertNull($liveStreamNotToTweet->announcement_tweeted_at);
+        $this->assertNull($upcomingStreamToTweet->upcoming_tweeted_at);
+        $this->assertNull($upcomingStreamNotToTweet->upcoming_tweeted_at);
+        $this->assertNull($liveStreamNotToTweet->upcoming_tweeted_at);
 
         // Act
         $this->artisan(TweetAboutUpcomingStreamsCommand::class)
@@ -114,13 +114,13 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
 
         // Assert
         tap($upcomingStreamToTweet->fresh(), function($upcomingStreamToTweet) {
-            $this->assertNotNull($upcomingStreamToTweet->announcement_tweeted_at);
-            $this->assertInstanceOf(Carbon::class, $upcomingStreamToTweet->announcement_tweeted_at);
-            $this->assertSame((string) now(), (string) $upcomingStreamToTweet->announcement_tweeted_at);
+            $this->assertNotNull($upcomingStreamToTweet->upcoming_tweeted_at);
+            $this->assertInstanceOf(Carbon::class, $upcomingStreamToTweet->upcoming_tweeted_at);
+            $this->assertSame((string) now(), (string) $upcomingStreamToTweet->upcoming_tweeted_at);
         });
 
-        $this->assertNull($upcomingStreamNotToTweet->refresh()->announcement_tweeted_at);
-        $this->assertNull($liveStreamNotToTweet->refresh()->announcement_tweeted_at);
+        $this->assertNull($upcomingStreamNotToTweet->refresh()->upcoming_tweeted_at);
+        $this->assertNull($liveStreamNotToTweet->refresh()->upcoming_tweeted_at);
     }
 
     /** @test */
@@ -131,7 +131,7 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
         $stream = Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5), 'tweeted_at' => now()]);
 
         // Assert
-        $this->assertNull($stream->announcement_tweeted_at);
+        $this->assertNull($stream->upcoming_tweeted_at);
 
         // Act
         $this->artisan(TweetAboutUpcomingStreamsCommand::class)

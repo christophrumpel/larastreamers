@@ -14,7 +14,7 @@ class AddAnnouncementTweetedAtToStreamsTable extends Migration
     public function up()
     {
         Schema::table('streams', function (Blueprint $table) {
-            $table->timestamp('announcement_tweeted_at')->nullable()->after('tweeted_at');
+            $table->timestamp('upcoming_tweeted_at')->nullable()->after('tweeted_at');
         });
     }
 }

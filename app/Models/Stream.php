@@ -33,7 +33,7 @@ class Stream extends Model implements Feedable
         'hidden_at',
         'status',
         'tweeted_at',
-        'announcement_tweeted_at',
+        'upcoming_tweeted_at',
         'language_code',
         'submitted_by_email',
         'approved_at',
@@ -46,7 +46,7 @@ class Stream extends Model implements Feedable
         'actual_end_time' => 'datetime',
         'hidden_at' => 'datetime',
         'tweeted_at' => 'datetime',
-        'announcement_tweeted_at' => 'datetime',
+        'upcoming_tweeted_at' => 'datetime',
     ];
 
     public function channel(): BelongsTo
@@ -71,7 +71,7 @@ class Stream extends Model implements Feedable
 
     public function tweetStreamIsUpcomingWasSend(): bool
     {
-        return ! is_null($this->announcement_tweeted_at);
+        return ! is_null($this->upcoming_tweeted_at);
     }
 
     public function markAsTweeted(): self
