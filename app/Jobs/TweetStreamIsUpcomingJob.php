@@ -26,6 +26,10 @@ class TweetStreamIsUpcomingJob implements ShouldQueue
             return;
         }
 
+        if ($this->stream->hasBeenTweeted()) {
+            return;
+        }
+
         $twitterHandleIfGiven = Str::of(' ')
             ->when($twitterHandle = $this->stream->channel?->twitter_handle, fn() => " by $twitterHandle ");
 

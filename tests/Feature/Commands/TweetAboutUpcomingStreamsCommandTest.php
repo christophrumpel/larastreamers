@@ -110,6 +110,25 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
     }
 
     /** @test */
+    public function it_does_not_send_a_tweet_if_the_live_tweet_is_sent(): void
+    {
+        // Arrange
+        Carbon::setTestNow(now());
+        $stream = Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5), 'tweeted_at' => now()]);
+
+        // Assert
+        $this->assertNull($stream->announcement_tweeted_at);
+
+        // Act
+        $this->artisan(TweetAboutUpcomingStreamsCommand::class)
+            ->expectsOutput('1 tweets sent')
+            ->assertExitCode(0);
+
+        // Assert
+        $this->twitterFake->assertNoTweetsWereSent();
+    }
+
+    /** @test */
     public function it_only_tweets_streams_that_are_going_live_once(): void
     {
         // Arrange
