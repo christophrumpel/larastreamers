@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Commands;
 
+use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +21,7 @@ class ImportChannelStreamsCommandTest extends TestCase
         Channel::factory()->count(2)->create();
 
         // Act
-        $this->artisan('larastreamers:import-channel-streams');
+        $this->artisan(ImportChannelStreamsCommand::class);
 
         // Assert
         Queue::assertPushed(ImportYoutubeChannelStreamsJob::class, 2);

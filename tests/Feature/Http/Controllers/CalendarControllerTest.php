@@ -25,7 +25,7 @@ class CalendarControllerTest extends TestCase
         Stream::factory()->create(['title' => 'Stream next year', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1y']);
 
         // Act & Assert
-        $this->get('/calendar.ics')
+        $this->get(route('calendar.ics'))
             ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
             ->assertDontSee([
                 'SUMMARY:Stream two years old',

@@ -23,15 +23,17 @@ class ImportYoutubeLiveStreamTest extends TestCase
         $scheduledStartTime = Carbon::tomorrow();
 
         Youtube::partialMock()
-               ->shouldReceive('videos')
-               ->andReturn(collect([StreamData::fake(
-                   videoId: 'bcnR4NYOw2o',
-                   title: 'My Test Stream',
-                   description: 'Test Description',
-                   channelTitle: 'My Test Channel',
-                   thumbnailUrl: 'my-test-thumbnail-url',
-                   plannedStart: $scheduledStartTime,
-               )]));
+            ->shouldReceive('videos')
+            ->andReturn(collect([
+                StreamData::fake(
+                    videoId: 'bcnR4NYOw2o',
+                    title: 'My Test Stream',
+                    description: 'Test Description',
+                    channelTitle: 'My Test Channel',
+                    thumbnailUrl: 'my-test-thumbnail-url',
+                    plannedStart: $scheduledStartTime,
+                ),
+            ]));
 
         $this->assertDatabaseCount(Stream::class, 0);
 
@@ -56,6 +58,7 @@ class ImportYoutubeLiveStreamTest extends TestCase
     {
         // Arrange
         Http::fake();
+
         // it passes because the video was not found because
         $this->assertDatabaseCount(Stream::class, 0);
 
@@ -74,11 +77,16 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // Arrange
         Youtube::partialMock()
             ->shouldReceive('videos')
-            ->andReturn(collect([StreamData::fake(
-                videoId: '1234',
-                title: 'My New Test Stream',
-            )]));
+            ->andReturn(collect([
+                StreamData::fake(
+                    videoId: '1234',
+                    title: 'My New Test Stream',
+                ),
+            ]));
+
         Stream::factory()->create(['youtube_id' => '1234', 'title' => 'Old title']);
+
+        // Assert
         $this->assertDatabaseCount(Stream::class, 1);
 
         // Arrange & Act & Assert
@@ -99,9 +107,11 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // Arrange
         Youtube::partialMock()
             ->shouldReceive('videos')
-            ->andReturn(collect([StreamData::fake(
-                videoId: '1234',
-            )]));
+            ->andReturn(collect([
+                StreamData::fake(
+                    videoId: '1234',
+                ),
+            ]));
 
         // Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
@@ -116,9 +126,11 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // Arrange
         Youtube::partialMock()
             ->shouldReceive('videos')
-            ->andReturn(collect([StreamData::fake(
-                videoId: '1234',
-            )]));
+            ->andReturn(collect([
+                StreamData::fake(
+                    videoId: '1234',
+                ),
+            ]));
 
         // Act & Assert
         Livewire::test(ImportYoutubeLiveStream::class)
