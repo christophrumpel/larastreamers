@@ -53,29 +53,30 @@
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
 
-@include('pages.partials.nav')
+<header class="bg-gray-lightest">
 
-<section class="py-12 md:py-16">
-    <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
-            <aside class="max-w-xl space-y-4">
-                <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-                    📺 Larastreamers
-                </h1>
+    @include('pages.partials.nav')
 
-                <p class="text-gray-500 md:text-xl">
-                    There is no better way to learn than by watching other developers
-                    code live. Find out who is streaming next in the Laravel world.
-                </p>
-            </aside>
+    <section class="py-12 md:py-16">
+        <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+            <div class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
+                <aside class="max-w-xl space-y-4">
+
+                    <p class="text-gray-500 md:text-xl">
+                        There is no better way to learn than by watching other developers
+                        code live. Find out who is streaming next in the Laravel world.
+                    </p>
+                </aside>
 
 
-            @if($showCalendarDownloads)
-                <x-add-streams-to-calendar />
-            @endif
-        </header>
-    </div>
-</section>
+                @if($showCalendarDownloads)
+                    <x-add-streams-to-calendar/>
+                @endif
+            </div>
+        </div>
+    </section>
+
+</header>
 
 <main class="flex-1 text-white bg-gray-700">
     {{ $slot ?? '' }}
