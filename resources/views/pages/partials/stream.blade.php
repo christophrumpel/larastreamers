@@ -3,6 +3,7 @@
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">
+
         @if (!$isArchive && $stream->isLive())
             <div class="absolute top-2.5 right-2.5 z-10">
                 <div

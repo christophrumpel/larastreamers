@@ -27,15 +27,17 @@
         <!-- Stream Preview -->
         <div class="w-1/2">
 
-            <div class="bg-white flex flex-col">
-                <figure class="overflow-auto rounded-t-xl lg:rounded-xl aspect-w-16 aspect-h-9">
-                    <img class="object-cover w-full h-full"
-                         src="{{ $upcomingStream->thumbnail_url }}"
-                         alt="Video thumbnail"/>
-                </figure>
+            @if($upcomingStream)
+                <div class="bg-white flex flex-col">
+                    <figure class="overflow-auto rounded-t-xl lg:rounded-xl aspect-w-16 aspect-h-9">
+                        <img class="object-cover w-full h-full"
+                             src="{{ $upcomingStream->thumbnail_url }}"
+                             alt="Video thumbnail"/>
+                    </figure>
 
 
-            </div>
+                </div>
+            @endif
 
         </div>
         <!-- Stream Preview -->

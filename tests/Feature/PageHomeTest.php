@@ -101,13 +101,13 @@ class PageHomeTest extends TestCase
         // Act & Assert
         $this->get(route('home'))
             ->assertSee('Stream #1')
-            ->assertDontSee('live</span>', false);
+            ->assertDontSee('>live</span>', false);
 
         $stream->update(['status' => StreamData::STATUS_LIVE]);
 
         $this->get(route('home'))
              ->assertSee('Stream #1')
-             ->assertSee('live</span>', false);
+             ->assertSee('>live</span>', false);
     }
 
     /** @test */
