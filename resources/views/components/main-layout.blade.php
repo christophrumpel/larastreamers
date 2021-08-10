@@ -53,36 +53,53 @@
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
 
-@if(request()->routeIs('home'))
-    @include('pages.partials.header-home')
-@elseif(request()->routeIs('archive'))
-    @include('pages.partials.header-archive')
-@endif
+<header class="bg-gray-lightest">
+
+    @include('pages.partials.nav')
+
+    <section class="py-12 md:py-16">
+        <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+            <div class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
+                <aside class="max-w-xl space-y-4">
+
+                    <p class="text-gray-500 md:text-xl">
+                        There is no better way to learn than by watching other developers
+                        code live. Find out who is streaming next in the Laravel world.
+                    </p>
+                </aside>
 
 
-<main class="{{ request()->routeIs('home') ? 'md:-mt-16' : '' }} flex-1 text-white bg-gray-darkest">
+                @if($showCalendarDownloads)
+                    <x-add-streams-to-calendar/>
+                @endif
+            </div>
+        </div>
+    </section>
+
+</header>
+
+<main class="flex-1 text-white bg-gray-700">
     {{ $slot ?? '' }}
 </main>
 
-<footer class="text-white bg-black">
+<footer class="text-white bg-gray-700">
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        <nav class="flex flex-col justify-between gap-4 py-10 md:items-center md:flex-row">
+        <nav class="flex flex-col justify-between gap-4 py-8 border-t border-gray-600 md:items-center md:flex-row">
             <p class="text-sm text-gray-300">
-                <b class="text-white">&copy; Larastreamers</b> - <span class="text-gray-light under">A project by <a
-                        target="_blank" class="underline hover:text-gray-lighter"
-                        href="https://christoph-rumpel.com">Christoph
-                        Rumpel</a></span>
+                <b class="text-white">Larastreamers</b> - A project by <a target="_blank"
+                                                                          href="https://christoph-rumpel.com">Christoph
+                    Rumpel</a>
             </p>
 
-            <ul class="flex items-center space-x-6 text-sm text-gray-light underline">
+            <ul class="flex items-center space-x-6 text-sm">
                 <li>
-                    <a class="hover:text-gray-lighter"
+                    <a class="hover:underline"
                        target="_blank"
                        href="https://twitter.com/larastreamers">Twitter</a>
                 </li>
 
                 <li>
-                    <a class="hover:text-gray-lighter"
+                    <a class="hover:underline"
                        target="_blank"
                        href="https://github.com/christophrumpel/larastreamers">GitHub</a>
                 </li>
