@@ -6,6 +6,7 @@ use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
 use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
 use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
+use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -38,6 +39,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
         $schedule->command(UpdateLiveAndFinishedStreamsCommand::class)->daily();
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
+        $schedule->command(TweetAboutUpcomingStreamsCommand::class)->everyMinute();
         $schedule->command(ImportChannelStreamsCommand::class)->hourly();
     }
 
