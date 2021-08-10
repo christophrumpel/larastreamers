@@ -14,9 +14,8 @@ class ImportChannelStreamsCommand extends Command
 
     public function handle(): int
     {
-        Channel::all()->each(function(Channel $channel) {
-            dispatch(new ImportYoutubeChannelStreamsJob($channel->platform_id, $channel->language_code));
-        });
+        Channel::all()
+            ->each(fn(Channel $channel) => dispatch(new ImportYoutubeChannelStreamsJob($channel->platform_id, $channel->language_code)));
 
         return self::SUCCESS;
     }

@@ -21,7 +21,7 @@ class PageHomeTest extends TestCase
         Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456', 'language_code' => 'es']);
 
         // Act & Assert
-        $this->get('/')
+        $this->get(route('home'))
             ->assertSee('Stream #1')
             ->assertSee('https://www.youtube.com/watch?v=1234')
             ->assertSee('My Channel')
@@ -42,7 +42,7 @@ class PageHomeTest extends TestCase
         Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::tomorrow()->addDays(2)]);
 
         // Act & Assert
-        $this->get('/')
+        $this->get(route('home'))
             ->assertSeeInOrder(['Stream #1', 'Stream #2', 'Stream #3']);
     }
 
@@ -55,7 +55,7 @@ class PageHomeTest extends TestCase
         Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
 
         // Act & Assert
-        $this->get('/')
+        $this->get(route('home'))
             ->assertDontSee(today()->format('D d.m.Y'))
             ->assertSee('Today')
             ->assertDontSee(Carbon::tomorrow()->format('D d.m.Y'))
@@ -66,13 +66,13 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->finished()->create(['title' => 'Stream finished', 'scheduled_start_time' => Carbon::yesterday()->hour(8)]);
-        Stream::factory()->live()->create(['title' => 'Stream live', 'scheduled_start_time' => Carbon::now()->subMinutes(10)]);
-        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays()]);
+        Stream::factory()->finished()->create(['title' => 'Stream finished']);
+        Stream::factory()->live()->create(['title' => 'Stream live']);
+        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming']);
 
         // Act & Assert
         $this
-            ->get('/')
+            ->get(route('home'))
             ->assertSee('Stream live')
             ->assertSee('Stream upcoming')
                 ->assertDontSee('Stream finished');
@@ -83,11 +83,11 @@ class PageHomeTest extends TestCase
     {
         // Arrange
         Stream::factory()->deleted()->create(['title' => 'Stream deleted']);
-        Stream::factory()->create(['title' => 'Stream upcoming', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming']);
 
         // Act & Assert
         $this
-            ->get('/')
+            ->get(route('home'))
             ->assertSee('Stream upcoming')
             ->assertDontSee('Stream deleted');
     }
@@ -96,16 +96,16 @@ class PageHomeTest extends TestCase
     public function it_marks_live_streams(): void
     {
         // Arrange
-        $stream = Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'status' => StreamData::STATUS_UPCOMING]);
+        $stream = Stream::factory()->upcoming()->create(['title' => 'Stream #1']);
 
         // Act & Assert
-        $this->get('/')
+        $this->get(route('home'))
             ->assertSee('Stream #1')
             ->assertDontSee('live</span>', false);
 
         $stream->update(['status' => StreamData::STATUS_LIVE]);
 
-        $this->get('/')
+        $this->get(route('home'))
              ->assertSee('Stream #1')
              ->assertSee('live</span>', false);
     }
@@ -118,7 +118,7 @@ class PageHomeTest extends TestCase
         $githubLink = 'https://github.com/christophrumpel/larastreamers';
 
         // Act & Assert
-        $this->get('/')
+        $this->get(route('home'))
             ->assertSee($twitterLink)
             ->assertSee($githubLink);
     }

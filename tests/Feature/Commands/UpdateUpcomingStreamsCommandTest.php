@@ -21,7 +21,13 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
         Youtube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
-                StreamData::fake(videoId: '1234', title: 'My New Test Stream', description: 'My New Description', channelTitle: 'My New Channel Name', plannedStart: Carbon::tomorrow()),
+                StreamData::fake(
+                    videoId: '1234',
+                    title: 'My New Test Stream',
+                    description: 'My New Description',
+                    channelTitle: 'My New Channel Name',
+                    plannedStart: Carbon::tomorrow()
+                ),
             ]));
 
         Stream::factory()->upcoming()->create(['youtube_id' => '1234']);

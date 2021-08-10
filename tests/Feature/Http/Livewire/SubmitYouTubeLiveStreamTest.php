@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Http\Livewire;
 
 use App\Actions\Submission\SubmitStreamAction;
 use App\Facades\Youtube;
@@ -107,7 +107,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->set('submittedByEmail', 'test@test.at')
-            ->set('youTubeId', 'not-valid-video-id')
+            ->set('youTubeId', 'bcnR4NYOw2o')
             ->call('submit')
             ->assertSee('We only accept streams that have not started yet.');
     }

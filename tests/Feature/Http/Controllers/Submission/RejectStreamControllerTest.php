@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Feature\Submission;
+namespace Tests\Feature\Http\Controllers\Submission;
 
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class RejectStreamControllerTest extends TestCase
@@ -15,17 +14,23 @@ class RejectStreamControllerTest extends TestCase
     /** @test */
     public function it_can_reject_a_stream_using_a_signed_url()
     {
+        // Arrange
         Mail::fake();
 
-        $stream = Stream::factory()->create([
-            'submitted_by_email' => 'john@example.com',
-            'approved_at' => null,
-        ]);
+        $stream = Stream::factory()
+            ->notApproved()
+            ->create([
+                'submitted_by_email' => 'john@example.com',
+            ]);
 
+        // Assert
         $this->assertFalse($stream->isApproved());
 
-        $this->get($stream->rejectUrl())->assertStatus(Response::HTTP_OK);
+        // Act
+        $this->get($stream->rejectUrl())
+            ->assertOk();
 
+        // Assert
         $this->assertFalse($stream->refresh()->isApproved());
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Submission;
+namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\RejectStreamAction;
 use App\Mail\StreamRejectedMail;
@@ -18,10 +18,11 @@ class RejectStreamActionTest extends TestCase
     {
         // Arrange
         Mail::fake();
-        $stream = Stream::factory()->create([
-            'approved_at' => null,
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        $stream = Stream::factory()
+            ->notApproved()
+            ->create([
+                'submitted_by_email' => 'john@example.com',
+            ]);
 
         // Act
         $action = app(RejectStreamAction::class);
@@ -29,5 +30,6 @@ class RejectStreamActionTest extends TestCase
 
         // Assert
         Mail::assertQueued(fn(StreamRejectedMail $mail) => $mail->hasTo($stream->submitted_by_email));
+        $this->assertFalse($stream->refresh()->isApproved());
     }
 }

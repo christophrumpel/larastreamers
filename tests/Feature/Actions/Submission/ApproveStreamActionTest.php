@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Submission;
+namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\ApproveStreamAction;
 use App\Mail\StreamApprovedMail;
@@ -27,10 +27,11 @@ class ApproveStreamActionTest extends TestCase
     /** @test */
     public function the_action_can_approve_a_stream(): void
     {
-        $stream = Stream::factory()->create([
-            'approved_at' => null,
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        $stream = Stream::factory()
+            ->notApproved()
+            ->create([
+                'submitted_by_email' => 'john@example.com',
+            ]);
 
         $this->approveStream->handle($stream);
 
@@ -44,10 +45,11 @@ class ApproveStreamActionTest extends TestCase
     /** @test */
     public function it_will_not_send_a_mail_for_a_link_that_was_already_approved(): void
     {
-        $stream = Stream::factory()->create([
-            'approved_at' => now(),
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        $stream = Stream::factory()
+            ->approved()
+            ->create([
+                'submitted_by_email' => 'john@example.com',
+            ]);
 
         $this->approveStream->handle($stream);
 

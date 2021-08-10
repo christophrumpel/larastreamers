@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Http\Livewire;
 
+use Tests\Fakes\YoutubeReponses;
 use App\Http\Livewire\ImportYoutubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
@@ -14,6 +15,7 @@ use Tests\TestCase;
 class ImportYoutubeChannelTest extends TestCase
 {
     use RefreshDatabase;
+    use YoutubeReponses;
 
     /** @test */
     public function it_adds_channel_to_database(): void

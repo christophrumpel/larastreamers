@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Jobs;
 
+use Tests\Fakes\YoutubeReponses;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use App\Models\Stream;
@@ -9,9 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-class ImportYoutubeChannelStreamsTest extends TestCase
+class ImportYoutubeChannelStreamsJobTest extends TestCase
 {
     use RefreshDatabase;
+    use YoutubeReponses;
 
     /** @test */
     public function it_imports_youtube_channel_streams(): void
