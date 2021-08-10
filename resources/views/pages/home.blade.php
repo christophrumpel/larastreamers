@@ -1,3 +1,3 @@
-<x-main-layout>
+<x-main-layout :upcomingStream="$upcomingStream">
     <livewire:stream-list />
 </x-main-layout>

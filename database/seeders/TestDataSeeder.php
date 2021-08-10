@@ -26,6 +26,8 @@ class TestDataSeeder extends Seeder
         Stream::truncate();
 
         Stream::factory()
+            ->approved()
+            ->upcoming()
             ->count(100)
             ->create();
 
