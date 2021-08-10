@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Stream;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class TestDataSeeder extends Seeder
@@ -29,18 +28,7 @@ class TestDataSeeder extends Seeder
         Stream::factory()
             ->approved()
             ->upcoming()
-            ->create(['scheduled_start_time' => Carbon::now()]);
-
-        Stream::factory()
-            ->approved()
-            ->upcoming()
-            ->count(2)
-            ->create(['scheduled_start_time' => Carbon::tomorrow()]);
-
-        Stream::factory()
-            ->approved()
-            ->upcoming()
-            ->count(10)
+            ->count(100)
             ->create();
 
         Stream::factory()
