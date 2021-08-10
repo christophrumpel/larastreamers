@@ -3,9 +3,9 @@
 namespace Tests\Unit;
 
 use App\Facades\Youtube;
-use Tests\Fakes\YoutubeReponses;
 use App\Services\Youtube\StreamData;
 use Illuminate\Support\Facades\Http;
+use Tests\Fakes\YoutubeReponses;
 use Tests\TestCase;
 
 class YoutubeTest extends TestCase

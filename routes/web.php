@@ -35,7 +35,7 @@ Route::get('/calendar.ics', CalendarController::class)
 Route::get('/stream-{stream}.ics', AddSingleStreamToCalendarController::class)
     ->name('calendar.ics.stream');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
 });
 

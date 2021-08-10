@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Jobs;
 
-use Tests\Fakes\YoutubeReponses;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Tests\Fakes\YoutubeReponses;
 use Tests\TestCase;
 
 class ImportYoutubeChannelStreamsJobTest extends TestCase
