@@ -117,7 +117,6 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
             ->assertExitCode(0);
     }
 
-
     /** @test */
     public function it_marks_streams_as_deleted_if_not_given_on_streaming_platform_anymore(): void
     {
