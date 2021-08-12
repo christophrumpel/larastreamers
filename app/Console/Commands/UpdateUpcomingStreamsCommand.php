@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Facades\Youtube;
 use App\Models\Stream;
 use App\Services\Youtube\StreamData;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class UpdateUpcomingStreamsCommand extends Command
@@ -29,21 +30,33 @@ class UpdateUpcomingStreamsCommand extends Command
 
         $this->info("Fetching {$streams->count()} stream(s) from API to update.");
 
-        $updatesCount = Youtube::videos($streams->keys())
-            ->map(fn(StreamData $streamData) => optional($streams
-                ->get($streamData->videoId))
-                ->update([
-                    'title' => $streamData->title,
-                    'description' => $streamData->description,
-                    'channel_title' => $streamData->channelTitle,
-                    'thumbnail_url' => $streamData->thumbnailUrl,
-                    'scheduled_start_time' => $streamData->plannedStart,
-                    'status' => $streamData->status,
-                ]))
-            ->filter()
-            ->count();
+        $youtubeResponse = Youtube::videos($streams->keys());
 
-        $this->info($updatesCount.' stream(s) were updated.');
+        $streams->each(function (Stream $stream) use ($youtubeResponse) {
+
+            /** @var StreamData|null $streamData */
+            $streamData = $youtubeResponse->where('videoId', $stream->youtube_id)->first();
+
+            if (is_null($streamData)) {
+                $stream->update([
+                    'status' => StreamData::STATUS_DELETED,
+                    'hidden_at' => Carbon::now(),
+                ]);
+
+                return;
+            }
+
+            $stream->update([
+                'title' => $streamData->title,
+                'description' => $streamData->description,
+                'channel_title' => $streamData->channelTitle,
+                'thumbnail_url' => $streamData->thumbnailUrl,
+                'scheduled_start_time' => $streamData->plannedStart,
+                'status' => $streamData->status,
+            ]);
+        });
+
+        $this->info($streams->count() . ' stream(s) were updated.');
 
         return self::SUCCESS;
     }
