@@ -98,4 +98,44 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
             ->expectsOutput('2 stream(s) were updated.')
             ->assertExitCode(0);
     }
+
+    /** @test */
+    public function it_tells_how_many_streams_were_updated_including_deletes(): void
+    {
+        // Arrange
+        Youtube::partialMock()
+            ->shouldReceive('videos')
+            ->andReturn(collect([
+                StreamData::fake(videoId: '1'),
+            ]));
+
+        Stream::factory()->create(['youtube_id' => '1']);
+        Stream::factory()->create(['youtube_id' => '2']);
+
+        $this->artisan(UpdateUpcomingStreamsCommand::class)
+            ->expectsOutput('2 stream(s) were updated.')
+            ->assertExitCode(0);
+    }
+
+
+    /** @test */
+    public function it_marks_streams_as_deleted_if_not_given_on_streaming_platform_anymore(): void
+    {
+        // Arrange
+        Youtube::partialMock()
+            ->shouldReceive('videos')
+            ->andReturn(collect([]));
+
+        $stream = Stream::factory()->create(['youtube_id' => '1']);
+
+        // Act
+        $this->artisan(UpdateUpcomingStreamsCommand::class);
+
+        // Assert
+        $this->assertDatabaseCount(Stream::class, 1);
+        $this->assertDatabaseHas(Stream::class, [
+            'title' => $stream->title,
+            'status' => StreamData::STATUS_DELETED,
+        ]);
+    }
 }
