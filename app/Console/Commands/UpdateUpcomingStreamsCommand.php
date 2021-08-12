@@ -32,7 +32,7 @@ class UpdateUpcomingStreamsCommand extends Command
 
         $youtubeResponse = Youtube::videos($streams->keys());
 
-        $streams->map(function (Stream $stream) use ($youtubeResponse) {
+        $streams->each(function (Stream $stream) use ($youtubeResponse) {
 
             /** @var StreamData|null $streamData */
             $streamData = $youtubeResponse->where('videoId', $stream->youtube_id)->first();
