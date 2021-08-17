@@ -1,4 +1,5 @@
 <x-main-layout :upcomingStream="null" :show-calendar-downloads="false" title="Larastreamers Archive" description="Did you miss a stream? Don't worry. Just scroll through the archive and watch it now.">
-    <livewire:stream-list-archive />
+    <h2 class="mt-12 text-4xl text-center">Archive</h2>
+    <livewire:stream-list :is-archive="true" />
 </x-main-layout>
 
