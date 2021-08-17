@@ -1,4 +1,4 @@
-<x-main-layout :show-calendar-downloads="false" title="Larastreamers Submission" description="Submit an upcoming live stream to Larastreamers">
+<x-main-layout :upcomingStream="null" :show-calendar-downloads="false" title="Larastreamers Submission" description="Submit an upcoming live stream to Larastreamers">
     <div class="px-4 sm:px-0 py-12">
         <div class="max-w-6xl sm:px-6 lg:px-8 mx-auto">
             <h2 class="mt-12 text-4xl">Submit A Stream</h2>

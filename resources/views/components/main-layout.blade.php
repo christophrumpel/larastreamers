@@ -52,10 +52,9 @@
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
-
 @include('pages.partials.header')
 
-<main class="flex-1 text-white bg-gray-700">
+<main class="-mt-16 flex-1 text-white bg-gray-darkest">
     {{ $slot ?? '' }}
 </main>
 
