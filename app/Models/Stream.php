@@ -162,6 +162,7 @@ class Stream extends Model implements Feedable
         return Event::create()
             ->uniqueIdentifier($this->youtube_id)
             ->name($this->title)
+            ->url($this->url())
             ->description(implode(PHP_EOL, [
                 $this->title,
                 $this->channel_title,
