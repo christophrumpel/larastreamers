@@ -24,11 +24,11 @@
 
                             <!-- YouTube ID field -->
                             <div class="col-span-6 sm:col-span-2">
-                                <label for="youTubeId" class="block text-sm font-medium text-gray-700">YouTube
+                                <label for="youTubeIdOrUrl" class="block text-sm font-medium text-gray-700">YouTube
                                     stream ID or full URL</label>
-                                <input id="youTubeId" type="text" wire:model="youTubeId" placeholder="https://www.youtube.com/watch?v=1234"
+                                <input id="youTubeIdOrUrl" type="text" wire:model="youTubeIdOrUrl" placeholder="https://www.youtube.com/watch?v=1234"
                                        class="mt-1 focus:ring-red-400 focus:border-red-400 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-gray-600"/>
-                                @error('youTubeId')
+                                @error('youTubeIdOrUrl')
                                 <x-input-error :message="$message"/>
                                 @enderror
                             </div>

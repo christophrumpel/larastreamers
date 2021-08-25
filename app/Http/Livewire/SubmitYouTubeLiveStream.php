@@ -10,22 +10,23 @@ use Livewire\Component;
 
 class SubmitYouTubeLiveStream extends Component
 {
-    public $youTubeId;
+
+    public $youTubeIdOrUrl;
 
     public $submittedByEmail;
 
     public string $languageCode = 'en';
 
     protected $messages = [
-        'youTubeId.required' => 'The YouTube ID field cannot be empty.',
-        'youTubeId.unique' => 'This stream was already submitted.',
+        'youTubeIdOrUrl.required' => 'The YouTube ID field cannot be empty.',
+        'youTubeIdOrUrl.unique' => 'This stream was already submitted.',
         'submittedByEmail.required' => 'The Email field cannot be empty.',
     ];
 
     public function rules(): array
     {
         return [
-            'youTubeId' => ['required', Rule::unique('streams', 'youtube_id'), new YouTubeRule()],
+            'youTubeIdOrUrl' => ['required', Rule::unique('streams', 'youtube_id'), new YouTubeRule()],
             'submittedByEmail' => 'required',
         ];
     }
@@ -37,18 +38,20 @@ class SubmitYouTubeLiveStream extends Component
 
     public function submit(): void
     {
-        if(filter_var($this->youTubeId, FILTER_VALIDATE_URL)){
-            $query = parse_url($this->youTubeId, PHP_URL_QUERY);
+        if(filter_var($this->youTubeIdOrUrl, FILTER_VALIDATE_URL)){
+            $query = parse_url($this->youTubeIdOrUrl, PHP_URL_QUERY);
             parse_str($query, $result);
-            $this->youTubeId = $result['v'];
+            $youTubeId = $result['v'];
+        } else {
+            $youTubeId = $this->youTubeIdOrUrl;
         }
 
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
-        $action->handle($this->youTubeId, $this->languageCode, $this->submittedByEmail);
+        $action->handle($youTubeId, $this->languageCode, $this->submittedByEmail);
 
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
-        $this->reset(['youTubeId', 'languageCode', 'submittedByEmail']);
+        $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);
     }
 }
