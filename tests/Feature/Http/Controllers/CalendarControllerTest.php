@@ -76,6 +76,30 @@ class CalendarControllerTest extends TestCase
     }
 
     /** @test */
+    public function it_can_filter_streams_by_single_language_code()
+    {
+        Stream::factory()->create(['title' => 'English Test Stream', 'language_code' => 'en']);
+        Stream::factory()->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
+
+        $this->get(route('calendar.ics', ['languages' => 'en']))
+            ->assertSee('English Test Stream')
+            ->assertDontSee('Spanish Test Stream');
+    }
+
+    /** @test */
+    public function it_can_filter_streams_by_multiple_language_codes()
+    {
+        Stream::factory()->create(['title' => 'English Test Stream', 'language_code' => 'en']);
+        Stream::factory()->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
+        Stream::factory()->create(['title' => 'French Test Stream', 'language_code' => 'fr']);
+
+        $this->get(route('calendar.ics', ['languages' => 'en,es']))
+            ->assertSee('English Test Stream')
+            ->assertSee('Spanish Test Stream')
+            ->assertDontSee('French Test Stream');
+    }
+
+    /** @test */
     public function it_can_download_one_calendar_item(): void
     {
         $stream = Stream::factory()->create([

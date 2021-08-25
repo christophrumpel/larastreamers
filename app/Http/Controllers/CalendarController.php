@@ -19,6 +19,10 @@ class CalendarController extends Controller
             ->productIdentifier('larastreamers.com');
 
         Stream::query()
+            ->when(
+                $request->get('languages'),
+                fn($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
+            )
             ->notOlderThanAYear()
             ->each(fn(Stream $stream) => $calendar->event(
                 $stream->toCalendarItem()
