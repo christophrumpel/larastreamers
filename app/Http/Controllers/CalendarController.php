@@ -6,7 +6,6 @@ use App\Models\Stream;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Arr;
 use Spatie\IcalendarGenerator\Components\Calendar;
 
 class CalendarController extends Controller
@@ -22,7 +21,7 @@ class CalendarController extends Controller
         Stream::query()
             ->when(
                 $request->get('languages'),
-                fn($query, $languages) => $query->whereIn('language_code', Arr::wrap(explode(',', $languages)))
+                fn($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
             )
             ->notOlderThanAYear()
             ->each(fn(Stream $stream) => $calendar->event(
