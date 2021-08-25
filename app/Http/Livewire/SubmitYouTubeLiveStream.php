@@ -38,13 +38,7 @@ class SubmitYouTubeLiveStream extends Component
 
     public function submit(): void
     {
-        if(filter_var($this->youTubeIdOrUrl, FILTER_VALIDATE_URL)){
-            $query = parse_url($this->youTubeIdOrUrl, PHP_URL_QUERY);
-            parse_str($query, $result);
-            $youTubeId = $result['v'];
-        } else {
-            $youTubeId = $this->youTubeIdOrUrl;
-        }
+        $youTubeId = $this->determineYoutubeId();
 
         $this->validate();
 
@@ -53,5 +47,17 @@ class SubmitYouTubeLiveStream extends Component
 
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
         $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);
+    }
+
+    private function determineYoutubeId(): ?string
+    {
+        if (filter_var($this->youTubeIdOrUrl, FILTER_VALIDATE_URL)) {
+            $query = parse_url($this->youTubeIdOrUrl, PHP_URL_QUERY);
+            parse_str($query, $result);
+
+            return $result['v'];
+        }
+
+        return $this->youTubeIdOrUrl;
     }
 }
