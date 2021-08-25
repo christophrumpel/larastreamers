@@ -21,14 +21,34 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange
         $this->mock(SubmitStreamAction::class)
             ->shouldReceive('handle')
-            ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
+            ->withArgs(['1234', 'de', 'test@test.at'])
             ->once();
 
         $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeIdOrUrl', '1234')
+            ->set('submittedByEmail', 'test@test.at')
+            ->set('languageCode', 'de')
+            ->call('submit');
+    }
+
+    /** @test */
+    public function it_calls_the_submit_action_with_full_youtube_url(): void
+    {
+        // Arrange
+        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=1234';
+        $this->mock(SubmitStreamAction::class)
+            ->shouldReceive('handle')
+            ->withArgs(['1234', 'de', 'test@test.at'])
+            ->once();
+
+        $this->mockYouTubVideoCall();
+
+        // Arrange & Act & Assert
+        Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeIdOrUrl', $fullYoutubeUrl)
             ->set('submittedByEmail', 'test@test.at')
             ->set('languageCode', 'de')
             ->call('submit');
@@ -42,14 +62,14 @@ class SubmitYouTubeLiveStreamTest extends TestCase
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
             ->set('submittedByEmail', 'test@test.at')
             ->call('submit')
             ->assertSee('You successfully submitted your stream. You will receive an email, if it gets approved.');
     }
 
     /** @test */
-    public function it_shows_errors_for_missing_youTubeId_or_email_fields(): void
+    public function it_shows_errors_for_missing_youTubeIdOrUrl_or_email_fields(): void
     {
         // Arrange
         $this->mockYouTubVideoCall();
@@ -70,7 +90,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
             ->call('submit')
             ->assertSee('This stream was already submitted.');
     }
@@ -86,7 +106,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->set('submittedByEmail', 'test@test.at')
-            ->set('youTubeId', 'not-valid-video-id')
+            ->set('youTubeIdOrUrl', 'not-valid-video-id')
             ->call('submit')
             ->assertSee('This is not a valid YouTube video id.');
     }
@@ -107,7 +127,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
             ->set('submittedByEmail', 'test@test.at')
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
             ->call('submit')
             ->assertSee('We only accept streams that have not started yet.');
     }
@@ -120,11 +140,11 @@ class SubmitYouTubeLiveStreamTest extends TestCase
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
             ->set('submittedByEmail', 'test@test.at')
             ->set('languageCode', 'de')
             ->call('submit')
-            ->assertSet('youTubeId', '')
+            ->assertSet('youTubeIdOrUrl', '')
             ->assertSet('languageCode', 'en')
             ->assertSet('submittedByEmail', '');
     }
@@ -134,7 +154,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     {
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->assertPropertyWired('youTubeId')
+            ->assertPropertyWired('youTubeIdOrUrl')
             ->assertPropertyWired('submittedByEmail')
             ->assertPropertyWired('languageCode')
             ->assertMethodWiredToForm('submit');
