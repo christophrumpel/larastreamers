@@ -10,7 +10,6 @@ use Livewire\Component;
 
 class SubmitYouTubeLiveStream extends Component
 {
-
     public $youTubeIdOrUrl;
 
     public $submittedByEmail;
