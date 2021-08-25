@@ -21,14 +21,34 @@ class SubmitYouTubeLiveStreamTest extends TestCase
         // Arrange
         $this->mock(SubmitStreamAction::class)
             ->shouldReceive('handle')
-            ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
+            ->withArgs(['1234', 'de', 'test@test.at'])
             ->once();
 
         $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
+            ->set('youTubeId', '1234')
+            ->set('submittedByEmail', 'test@test.at')
+            ->set('languageCode', 'de')
+            ->call('submit');
+    }
+
+    /** @test */
+    public function it_calls_the_submit_action_with_full_youtube_url(): void
+    {
+        // Arrange
+        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=1234';
+        $this->mock(SubmitStreamAction::class)
+            ->shouldReceive('handle')
+            ->withArgs(['1234', 'de', 'test@test.at'])
+            ->once();
+
+        $this->mockYouTubVideoCall();
+
+        // Arrange & Act & Assert
+        Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeId', $fullYoutubeUrl)
             ->set('submittedByEmail', 'test@test.at')
             ->set('languageCode', 'de')
             ->call('submit');

@@ -37,6 +37,12 @@ class SubmitYouTubeLiveStream extends Component
 
     public function submit(): void
     {
+        if(filter_var($this->youTubeId, FILTER_VALIDATE_URL)){
+            $query = parse_url($this->youTubeId, PHP_URL_QUERY);
+            parse_str($query, $result);
+            $this->youTubeId = $result['v'];
+        }
+
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
