@@ -35,14 +35,17 @@ class SubmitYouTubeLiveStream extends Component
         return view('livewire.submit-you-tube-live-stream');
     }
 
+    public function updatedYouTubeIdOrUrl(string $youTubeIdOrUrl): void
+    {
+        $this->youTubeIdOrUrl = $this->determineYoutubeId();
+    }
+
     public function submit(): void
     {
-        $youTubeId = $this->determineYoutubeId();
-
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
-        $action->handle($youTubeId, $this->languageCode, $this->submittedByEmail);
+        $action->handle($this->youTubeIdOrUrl, $this->languageCode, $this->submittedByEmail);
 
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
         $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);

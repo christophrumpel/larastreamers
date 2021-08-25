@@ -69,6 +69,21 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     }
 
     /** @test */
+    public function it_shows_a_success_message_with_full_youtube_url_too(): void
+    {
+        // Arrange
+        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=1234';
+        $this->mockYouTubVideoCall();
+
+        // Arrange & Act & Assert
+        Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeIdOrUrl', $fullYoutubeUrl)
+            ->set('submittedByEmail', 'test@test.at')
+            ->call('submit')
+            ->assertSee('You successfully submitted your stream. You will receive an email, if it gets approved.');
+    }
+
+    /** @test */
     public function it_shows_errors_for_missing_youTubeIdOrUrl_or_email_fields(): void
     {
         // Arrange
