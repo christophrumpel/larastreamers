@@ -1,4 +1,4 @@
-<div class="py-16 space-y-16" id="scrollTop">
+<div class="w-full max-w-6xl mx-auto py-16 space-y-16" id="scrollTop">
     @foreach ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header
@@ -11,7 +11,7 @@
             </header>
 
             <div class="flex w-full max-w-6xl max-auto">
-                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl ml-8">
+                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl ml-32 py-8 space-y-12">
                     @foreach ($streams as $stream)
                         @include('pages.partials.stream')
                     @endforeach
