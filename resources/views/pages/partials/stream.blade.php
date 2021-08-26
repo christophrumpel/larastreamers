@@ -1,5 +1,5 @@
-<li class="grid lg:grid-cols-[1fr,2fr] lg:gap-4">
-    <a class="relative transition focus:ring-4 focus:ring-red-400 focus:outline-none rounded-t-xl lg:rounded-xl"
+<li class="flex items-center relative space-y-8">
+    <a class="w-1/3 flex-none overflow-hidden rounded -mr-12 z-0"
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">
@@ -17,16 +17,16 @@
             </div>
         @endif
 
-        <figure class="overflow-auto rounded-t-xl lg:rounded-xl aspect-w-16 aspect-h-9">
-            <img class="object-cover w-full h-full"
+        <figure class="flex items-center overflow-auto rounded-t-xl lg:rounded-xl aspect-w-16 aspect-h-9">
+            <img class="flex-none overflow-hidden rounded -mr-12 z-0"
                  src="{{ $stream->thumbnail_url }}"
                  alt="Video thumbnail"/>
         </figure>
     </a>
-
-    <article class="flex flex-col items-start p-6 space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
+    <article class="pl-24 p-10 flex flex-col items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
         <div class="flex items-center">
-            <x-local-time class="font-bold tracking-tight text-red-400" :date="$stream->actual_start_time ?? $stream->scheduled_start_time"/>
+            <x-local-time class="font-bold tracking-tight text-red-400"
+                          :date="$stream->actual_start_time ?? $stream->scheduled_start_time"/>
             @if ($stream->language->shouldRender())
                 <span class="block mx-2 text-gray-500">&bull;</span>
                 <span class="font-semibold tracking-wider uppercase text-white">{{ $stream->language->name }}</span>

@@ -10,7 +10,7 @@ module.exports = {
         },
         colors: {
             white: {
-                DEFAULT: '#fff',
+                DEFAULT: '#F8F8F8',
             },
             red: {
                 DEFAULT: '#ff3e5e',
