@@ -1,4 +1,4 @@
-<li class="flex items-center relative space-y-8">
+<li class="relative flex items-center relative -ml-24">
     <a class="w-1/3 flex-none overflow-hidden rounded -mr-12 z-0"
        title="Open on YouTube"
        target="_blank"
@@ -23,13 +23,14 @@
                  alt="Video thumbnail"/>
         </figure>
     </a>
-    <article class="pl-24 p-10 flex flex-col items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
+    <article class="pl-24 p-6 flex flex-col items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
         <div class="flex items-center">
-            <x-local-time class="font-bold tracking-tight text-red-400"
-                          :date="$stream->actual_start_time ?? $stream->scheduled_start_time"/>
+            <x-local-time class="font-bold tracking-tight text-gray"
+                          :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
+            :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
             @if ($stream->language->shouldRender())
-                <span class="block mx-2 text-gray-500">&bull;</span>
-                <span class="font-semibold tracking-wider uppercase text-white">{{ $stream->language->name }}</span>
+                <span class="block mx-2 text-gray">&bull;</span>
+                <span class="font-semibold tracking-wider uppercase text-gray">{{ $stream->language->name }}</span>
             @endif
         </div>
 
@@ -49,7 +50,7 @@
                 </a>
             </h3>
 
-            <p class="text-lg font-medium text-gray-300">
+            <p class="text-lg font-medium text-gray">
                 {{ $stream->channel_title }}
             </p>
         </header>
