@@ -3,15 +3,15 @@
         <section class="space-y-2">
             <header
                 class="sticky top-0 z-20 py-4 bg-gray-700 bg-opacity-90">
-                <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-                    <h2 class="text-3xl font-bold tracking-tight text-red-400 md:text-4xl">
+                <div class="w-full max-w-6xl px-4  sm:px-6 md:px-8">
+                    <h2 class="text-3xl font-bold tracking-tight text-red-400 md:text-4xl text-white">
                         {{ $date }}
                     </h2>
                 </div>
             </header>
 
-            <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-                <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
+            <div class="flex w-full max-w-6xl max-auto">
+                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl ml-8">
                     @foreach ($streams as $stream)
                         @include('pages.partials.stream')
                     @endforeach
@@ -30,7 +30,7 @@
         document.addEventListener("DOMContentLoaded", () => {
             Livewire.hook('message.processed', (message, component) => {
                 let scrollTop = document.getElementById("scrollTop")
-                window.scrollTo({ top: scrollTop.offsetTop, left: 0, behaviour: 'smooth' })
+                window.scrollTo({top: scrollTop.offsetTop, left: 0, behaviour: 'smooth'})
             })
         })
     </script>
