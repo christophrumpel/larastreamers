@@ -1,4 +1,4 @@
-<div class="w-full max-w-6xl mx-auto py-16 space-y-16" id="scrollTop">
+<div class="w-full max-w-6xl mx-auto py-24 space-y-16" id="scrollTop">
     @foreach ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header

@@ -1,5 +1,5 @@
-<li class="relative flex items-center relative -ml-24">
-    <a class="w-1/3 flex-none overflow-hidden rounded -mr-12 z-0"
+<li class="relative flex relative -ml-24">
+    <a class="w-1/2 flex-none overflow-hidden rounded -mr-12 z-0"
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">
@@ -23,16 +23,7 @@
                  alt="Video thumbnail"/>
         </figure>
     </a>
-    <article class="pl-24 p-6 flex flex-col items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
-        <div class="flex items-center">
-            <x-local-time class="font-bold tracking-tight text-gray"
-                          :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
-            :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
-            @if ($stream->language->shouldRender())
-                <span class="block mx-2 text-gray">&bull;</span>
-                <span class="font-semibold tracking-wider uppercase text-gray">{{ $stream->language->name }}</span>
-            @endif
-        </div>
+    <article class="pl-24 px-6 flex flex-col justify-between items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
 
         @if($stream->duration)
             <div class="flex items-center space-x-2">
@@ -50,28 +41,33 @@
                 </a>
             </h3>
 
-            <p class="text-lg font-medium text-gray">
+            <p class="text-base text-gray">
                 {{ $stream->channel_title }}
             </p>
+            <p class="text-base text-gray">
+                <x-local-time class=""
+                              :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
+                              :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
+            </p>
+            @if ($stream->language->shouldRender())
+                <p class="text-base text-gray">
+                    <span class="">{{ $stream->language->name }}</span>
+                </p>
+            @endif
         </header>
 
         @if (!$isArchive)
             <ul class="flex flex-wrap gap-6">
                 <li>
-                    <a href="{{ $stream->toWebcalLink() }}"
-                       class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                    <x-stream-button link="{{ $stream->toWebcalLink() }}" name="Add to calendar">
                         <x-icons.calendar/>
-                        <span class="text-sm font-medium">Add to calendar</span>
-                    </a>
+                    </x-stream-button>
                 </li>
 
                 <li>
-                    <a href="{{ route('calendar.ics.stream', $stream) }}"
-                       class="inline-flex items-center space-x-2 transition hover:text-gray-300">
+                    <x-stream-button link="{{ route('calendar.ics.stream', $stream) }}" name="Download .ics file">
                         <x-icons.download/>
-
-                        <span class="text-sm font-medium">Download .ics file</span>
-                    </a>
+                    </x-stream-button>
                 </li>
             </ul>
         @endif
