@@ -17,7 +17,7 @@ class TwitterFake
 
     public function assertTweetWasSent(): void
     {
-        PHPUnit::assertGreaterThan(0, $this->tweetsSent);
+        PHPUnit::assertTrue($this->tweetsSent > 0, 'Error checking if a tweet was sent.');
     }
 
     public function assertNoTweetsWereSent(): void
