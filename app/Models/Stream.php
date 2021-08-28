@@ -59,31 +59,9 @@ class Stream extends Model implements Feedable
         $query->whereNotNull('approved_at');
     }
 
-    public static function getFeedItems(): Collection
+    public function scopeFinished(Builder $query): Builder
     {
-        return static::query()->upcoming()->get();
-    }
-
-    public function tweetStreamIsLiveWasSend(): bool
-    {
-        return ! is_null($this->tweeted_at);
-    }
-
-    public function tweetStreamIsUpcomingWasSend(): bool
-    {
-        return ! is_null($this->upcoming_tweeted_at);
-    }
-
-    public function markAsTweeted(): self
-    {
-        $this->update(['tweeted_at' => now()]);
-
-        return $this;
-    }
-
-    public function isLive(): bool
-    {
-        return $this->status === StreamData::STATUS_LIVE;
+        return $query->where('status', StreamData::STATUS_FINISHED);
     }
 
     public function scopeLive(Builder $query): Builder
@@ -122,11 +100,6 @@ class Stream extends Model implements Feedable
         return $query->orderBy('scheduled_start_time');
     }
 
-    public function scopeFinished(Builder $query): Builder
-    {
-        return $query->where('status', StreamData::STATUS_FINISHED);
-    }
-
     public function scopeNotOlderThanAYear(Builder $query): Builder
     {
         return $query->where(
@@ -141,6 +114,49 @@ class Stream extends Model implements Feedable
         return $query->where('scheduled_start_time', '<=', now()->addMinutes(5));
     }
 
+    public static function getFeedItems(): Collection
+    {
+        return static::query()->upcoming()->get();
+    }
+
+    public function getDurationAttribute(): ?string
+    {
+        if (is_null($this->actual_end_time)) {
+            return null;
+        }
+
+        $start_time = $this->actual_start_time ?? $this->scheduled_start_time;
+
+        return $start_time->longAbsoluteDiffForHumans($this->actual_end_time, 2);
+    }
+
+    public function tweetStreamIsLiveWasSend(): bool
+    {
+        return ! is_null($this->tweeted_at);
+    }
+
+    public function tweetStreamIsUpcomingWasSend(): bool
+    {
+        return ! is_null($this->upcoming_tweeted_at);
+    }
+
+    public function markAsTweeted(): self
+    {
+        $this->update(['tweeted_at' => now()]);
+
+        return $this;
+    }
+
+    public function isLive(): bool
+    {
+        return $this->status === StreamData::STATUS_LIVE;
+    }
+
+    public function isApproved(): bool
+    {
+        return ! is_null($this->approved_at);
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
@@ -150,11 +166,6 @@ class Stream extends Model implements Feedable
             ->updated($this->updated_at)
             ->link($this->url())
             ->author($this->channel_title); //TODO: implement
-    }
-
-    public function url(): string
-    {
-        return "https://www.youtube.com/watch?v={$this->youtube_id}";
     }
 
     public function toCalendarItem(): Event
@@ -175,16 +186,21 @@ class Stream extends Model implements Feedable
             ->createdAt($this->created_at);
     }
 
-    public function language(): HasOne
-    {
-        return $this->hasOne(Language::class, 'code', 'language_code');
-    }
-
     public function toWebcalLink(): string
     {
         $url = parse_url(route('calendar.ics.stream', $this));
 
         return "webcal://{$url['host']}{$url['path']}";
+    }
+
+    public function url(): string
+    {
+        return "https://www.youtube.com/watch?v={$this->youtube_id}";
+    }
+
+    public function language(): HasOne
+    {
+        return $this->hasOne(Language::class, 'code', 'language_code');
     }
 
     public function approveUrl(): string
@@ -205,19 +221,4 @@ class Stream extends Model implements Feedable
         );
     }
 
-    public function isApproved(): bool
-    {
-        return ! is_null($this->approved_at);
-    }
-
-    public function getDurationAttribute(): ?string
-    {
-        if (is_null($this->actual_end_time)) {
-            return null;
-        }
-
-        $start_time = $this->actual_start_time ?? $this->scheduled_start_time;
-
-        return $start_time->longAbsoluteDiffForHumans($this->actual_end_time, 2);
-    }
 }
