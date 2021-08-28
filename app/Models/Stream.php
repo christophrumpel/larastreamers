@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
@@ -54,9 +55,17 @@ class Stream extends Model implements Feedable
         return $this->belongsTo(Channel::class);
     }
 
-    public function scopeApproved(Builder $query): void
+    public function scopeApproved(Builder $query): Builder
     {
-        $query->whereNotNull('approved_at');
+        return $query->whereNotNull('approved_at');
+    }
+
+    public function scopeFromLastWeek(Builder $query): Builder
+    {
+        return $query->whereBetween('scheduled_start_time', [
+            Carbon::now()->startOfWeek()->subDays(7),
+            Carbon::now()->startOfWeek()->subDay()->endOfDay()
+        ]);
     }
 
     public static function getFeedItems(): Collection
@@ -66,12 +75,12 @@ class Stream extends Model implements Feedable
 
     public function tweetStreamIsLiveWasSend(): bool
     {
-        return ! is_null($this->tweeted_at);
+        return !is_null($this->tweeted_at);
     }
 
     public function tweetStreamIsUpcomingWasSend(): bool
     {
-        return ! is_null($this->upcoming_tweeted_at);
+        return !is_null($this->upcoming_tweeted_at);
     }
 
     public function markAsTweeted(): self
@@ -168,7 +177,7 @@ class Stream extends Model implements Feedable
                 $this->channel_title,
                 $this->url(),
                 Str::of($this->description)
-                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),
+                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15) . PHP_EOL)),
             ]))
             ->startsAt($this->scheduled_start_time)
             ->endsAt($this->scheduled_start_time->clone()->addHour())
@@ -207,7 +216,7 @@ class Stream extends Model implements Feedable
 
     public function isApproved(): bool
     {
-        return ! is_null($this->approved_at);
+        return !is_null($this->approved_at);
     }
 
     public function getDurationAttribute(): ?string
