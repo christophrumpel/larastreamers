@@ -54,9 +54,9 @@ class Stream extends Model implements Feedable
         return $this->belongsTo(Channel::class);
     }
 
-    public function scopeApproved(Builder $query): void
+    public function scopeApproved(Builder $query): Builder
     {
-        $query->whereNotNull('approved_at');
+        return $query->whereNotNull('approved_at');
     }
 
     public static function getFeedItems(): Collection
