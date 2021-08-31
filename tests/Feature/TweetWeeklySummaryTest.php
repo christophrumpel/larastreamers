@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Commands;
+namespace Tests\Feature;
 
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TweetAboutWeeklySummaryCommandTest extends TestCase
+class TweetWeeklySummaryTest extends TestCase
 {
     use RefreshDatabase;
 
