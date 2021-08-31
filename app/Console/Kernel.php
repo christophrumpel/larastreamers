@@ -7,6 +7,7 @@ use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
 use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
+use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         TweetAboutLiveStreamsCommand::class,
         UpdateUpcomingStreamsCommand::class,
         ImportChannelStreamsCommand::class,
+        TweetAboutWeeklySummaryCommand::class,
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Services\Youtube\StreamData;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,14 @@ class Stream extends Model implements Feedable
     public function scopeApproved(Builder $query): Builder
     {
         return $query->whereNotNull('approved_at');
+    }
+
+    public function scopeFromLastWeek(Builder $query): Builder
+    {
+        return $query->whereBetween('actual_start_time', [
+            Carbon::today()->subWeek()->startOfWeek(),
+            Carbon::today()->subWeek()->endOfWeek()->endOfDay(),
+        ]);
     }
 
     public static function getFeedItems(): Collection
