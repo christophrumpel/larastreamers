@@ -28,7 +28,7 @@ class TweetAboutWeeklySummaryCommand extends Command
         }
 
         app(Twitter::class)
-            ->tweet("There were $streamsCount streams last week. Thanks to all the viewers 🙏🏻.");
+            ->tweet("There were $streamsCount streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻");
 
         return self::SUCCESS;
     }

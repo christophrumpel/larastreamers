@@ -43,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
         $schedule->command(TweetAboutUpcomingStreamsCommand::class)->everyMinute();
         $schedule->command(ImportChannelStreamsCommand::class)->hourly();
+        $schedule->command(TweetAboutWeeklySummaryCommand::class)->weeklyOn(1, '8:00');
     }
 
     /**
