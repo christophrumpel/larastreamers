@@ -4,9 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Stream;
 use App\Services\Twitter;
-use App\Services\Youtube\StreamData;
 use Illuminate\Console\Command;
-use Illuminate\Support\Carbon;
 
 class TweetAboutWeeklySummaryCommand extends Command
 {
@@ -21,7 +19,7 @@ class TweetAboutWeeklySummaryCommand extends Command
             ->fromLastWeek()
             ->count();
 
-        if(!$streamsCount) {
+        if (! $streamsCount) {
             $this->info('There were no streams last week.');
 
             return self::SUCCESS;

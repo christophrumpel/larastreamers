@@ -4,9 +4,9 @@ namespace Tests\Feature\Commands;
 
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Models\Stream;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TweetAboutWeeklySummaryCommandTest extends TestCase
 {
@@ -15,7 +15,7 @@ class TweetAboutWeeklySummaryCommandTest extends TestCase
     /** @test */
     public function it_tweets_weekly_summary(): void
     {
-    	// Arrange
+        // Arrange
         $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();
         $endOfLastWeek = Carbon::today()->subWeek()->endOfWeek()->endOfDay();
 
@@ -32,9 +32,9 @@ class TweetAboutWeeklySummaryCommandTest extends TestCase
         // Act
         $this->artisan(TweetAboutWeeklySummaryCommand::class);
 
-    	// Assert
+        // Assert
         $this->twitterFake->assertTweetWasSent();
-        $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻");
+        $this->twitterFake->assertLastTweetMessageWas('There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻');
     }
 
     /** @test */
@@ -58,7 +58,7 @@ class TweetAboutWeeklySummaryCommandTest extends TestCase
         $this->artisan(TweetAboutWeeklySummaryCommand::class)
             ->expectsOutput('There were no streams last week.');
 
-    	// Assert
+        // Assert
         $this->twitterFake->assertNoTweetsWereSent();
     }
 }
