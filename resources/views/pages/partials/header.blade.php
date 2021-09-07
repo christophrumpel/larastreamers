@@ -46,7 +46,9 @@
 
                         <div class="p-8">
                             <h3 class="mb-4 font-bold text-xl">{{ $upcomingStream->title }}</h3>
-                            <p class="mb-2 text-base text-gray-dark">{{ $upcomingStream->channel_title }}  @if ($upcomingStream->language?->shouldRender())
+                            <p class="mb-2 text-base text-gray-dark">
+                                <x-icon-user class="w-4 h-4 inline text-gray-dark fill-current stroke-current"/>
+                                {{ $upcomingStream->channel_title }}  @if ($upcomingStream->language?->shouldRender())
                                     ({{ $upcomingStream->language->name }}) @endif
                             <p class="text-base text-gray-dark">
                                 <x-local-time class="text-base"
