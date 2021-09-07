@@ -3,8 +3,8 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Stream;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class StreamTest extends TestCase
 {
@@ -13,14 +13,14 @@ class StreamTest extends TestCase
     /** @test */
     public function it_only_gives_approved_streams(): void
     {
-    	// Arrange
-    	Stream::factory()->notApproved()->create();
-    	Stream::factory()->approved()->create();
+        // Arrange
+        Stream::factory()->notApproved()->create();
+        Stream::factory()->approved()->create();
 
-    	// Act
+        // Act
         $streams = Stream::approved()->get();
 
-    	// Assert
+        // Assert
         $this->assertCount(1, $streams);
     }
 }
