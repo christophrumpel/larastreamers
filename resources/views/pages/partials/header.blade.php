@@ -46,11 +46,12 @@
 
                         <div class="p-8">
                             <h3 class="mb-4 font-bold text-xl">{{ $upcomingStream->title }}</h3>
-                            <p class="mb-2 text-base text-gray-dark">
-                                <x-icon-user class="w-4 h-4 inline text-gray-dark fill-current stroke-current"/>
+                            <p class="mb-2 text-base text-gray-dark flex items-center">
+                                <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray-dark fill-current stroke-current"/>
                                 {{ $upcomingStream->channel_title }}  @if ($upcomingStream->language?->shouldRender())
                                     ({{ $upcomingStream->language->name }}) @endif
-                            <p class="text-base text-gray-dark">
+                            <p class="text-base text-gray-dark flex items-center">
+                                <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray-dark fill-current stroke-current"/>
                                 <x-local-time class="text-base"
                                               :date="$upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time"/>
                             </p>
