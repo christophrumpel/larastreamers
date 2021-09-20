@@ -55,6 +55,26 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     }
 
     /** @test */
+    public function it_calls_the_submit_action_with_short_youtube_url(): void
+    {
+        // Arrange
+        $shortYoutubeUrl = 'https://youtu.be/1234';
+        $this->mock(SubmitStreamAction::class)
+            ->shouldReceive('handle')
+            ->withArgs(['1234', 'de', 'test@test.at'])
+            ->once();
+
+        $this->mockYouTubVideoCall();
+
+        // Arrange & Act & Assert
+        Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeIdOrUrl', $shortYoutubeUrl)
+            ->set('submittedByEmail', 'test@test.at')
+            ->set('languageCode', 'de')
+            ->call('submit');
+    }
+
+    /** @test */
     public function it_shows_a_success_message(): void
     {
         // Arrange
