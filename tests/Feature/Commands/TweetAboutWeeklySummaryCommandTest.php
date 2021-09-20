@@ -34,7 +34,7 @@ class TweetAboutWeeklySummaryCommandTest extends TestCase
 
         // Assert
         $this->twitterFake->assertTweetWasSent();
-        $this->twitterFake->assertLastTweetMessageWas('There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻');
+        $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
     }
 
     /** @test */
