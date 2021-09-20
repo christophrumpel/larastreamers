@@ -11,7 +11,7 @@
             </header>
 
             <div class="flex w-full max-w-6xl max-auto">
-                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl ml-32 py-8 space-y-12">
+                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl md:ml-32 py-8 space-y-12">
                     @foreach ($streams as $stream)
                         @include('pages.partials.stream')
                     @endforeach

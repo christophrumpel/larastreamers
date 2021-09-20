@@ -1,5 +1,5 @@
-<li class="relative flex relative -ml-24">
-    <a class="w-1/2 flex-none overflow-hidden rounded -mr-12 z-0"
+<li class="relative flex flex-col md:flex-row relative md:-ml-24">
+    <a class="w-1/2 flex-none overflow-hidden rounded md:-mr-12 z-0 px-6 md:px-0 mb-2 md:mb-0"
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">
@@ -18,12 +18,12 @@
         @endif
 
         <figure class="flex items-center overflow-auto rounded-t-xl lg:rounded-xl aspect-w-16 aspect-h-9">
-            <img class="flex-none overflow-hidden rounded -mr-12 z-0"
+            <img class="flex-none overflow-hidden rounded md:-mr-12 z-0"
                  src="{{ $stream->thumbnail_url }}"
                  alt="Video thumbnail"/>
         </figure>
     </a>
-    <article class="pl-24 px-6 flex flex-col justify-between items-start space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
+    <article class="md:pl-24 px-6 flex flex-col justify-between items-start space-y-4 md:space-y-2 bg-gray-600 rounded-b-xl lg:rounded-xl">
 
         @if($stream->duration)
             <div class="flex items-center space-x-2">
@@ -60,7 +60,7 @@
         </header>
 
         @if (!$isArchive)
-            <ul class="flex flex-wrap gap-6">
+            <ul class="flex flex-wrap gap-3 md:gap-6">
                 <li>
                     <x-stream-button link="{{ $stream->toWebcalLink() }}" name="Add to calendar">
                         <x-icons.calendar/>

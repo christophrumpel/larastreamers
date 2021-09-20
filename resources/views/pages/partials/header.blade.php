@@ -2,10 +2,10 @@
 
     @include('pages.partials.nav')
 
-    <section class="max-w-6xl mx-auto flex pt-12">
+    <section class="max-w-6xl mx-auto flex py-12 md:pb-0 md:pt-12">
 
         <!-- Headline Preview -->
-        <div class="w-3/5">
+        <div class=" w-fill md:w-3/5">
             <div class="w-full px-4 mx-auto sm:px-6 md:px-8">
                 <div class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
                     <div class="max-w-xl pt-6 space-y-8">
@@ -29,7 +29,7 @@
 
         <!-- Stream Preview -->
         @if($upcomingStream)
-            <div class="relative w-2/5">
+            <div class="hidden md:block relative w-2/5">
                 <div
                     class="z-10 absolute -top-4 left-8 bg-red rounded-xl font-bold text-xs text-white uppercase tracking-widest p-2">
                     @if($upcomingStream->isLive())  Live @else Upcoming @endif
