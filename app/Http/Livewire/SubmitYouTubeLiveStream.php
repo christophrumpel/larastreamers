@@ -54,10 +54,12 @@ class SubmitYouTubeLiveStream extends Component
     private function determineYoutubeId(): ?string
     {
         if (filter_var($this->youTubeIdOrUrl, FILTER_VALIDATE_URL)) {
-            if($query = parse_url($this->youTubeIdOrUrl, PHP_URL_QUERY)) {
+            if ($query = parse_url($this->youTubeIdOrUrl, PHP_URL_QUERY)) {
                 parse_str($query, $result);
+
                 return $result['v'];
             }
+
             return substr($this->youTubeIdOrUrl, strrpos($this->youTubeIdOrUrl, '/') + 1);
         }
 
