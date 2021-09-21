@@ -52,9 +52,15 @@
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
-@include('pages.partials.header')
 
-<main class="md:-mt-16 flex-1 text-white bg-gray-darkest">
+@if(request()->routeIs('home'))
+    @include('pages.partials.header-home')
+@elseif(request()->routeIs('archive'))
+    @include('pages.partials.header-archive')
+@endif
+
+
+<main class="{{ request()->routeIs('home') ? 'md:-mt-16' : '' }} flex-1 text-white bg-gray-darkest">
     {{ $slot ?? '' }}
 </main>
 
@@ -62,8 +68,9 @@
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
         <nav class="flex flex-col justify-between gap-4 py-10 md:items-center md:flex-row">
             <p class="text-sm text-gray-300">
-                <b class="text-white">&copy; Larastreamers</b> - <span class="text-gray-light under">A project by <a target="_blank" class="underline hover:text-gray-lighter"
-                                                                          href="https://christoph-rumpel.com">Christoph
+                <b class="text-white">&copy; Larastreamers</b> - <span class="text-gray-light under">A project by <a
+                        target="_blank" class="underline hover:text-gray-lighter"
+                        href="https://christoph-rumpel.com">Christoph
                         Rumpel</a></span>
             </p>
 
