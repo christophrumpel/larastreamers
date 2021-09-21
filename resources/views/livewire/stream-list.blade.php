@@ -1,7 +1,5 @@
 <div class="w-full max-w-6xl mx-auto py-24 space-y-16" id="scrollTop">
 
-    @include('pages.partials.search')
-
     @foreach ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header

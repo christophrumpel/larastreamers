@@ -13,16 +13,10 @@ class StreamList extends Component
 {
     use WithPagination;
 
-    public bool $isArchive = false;
-
     public function render(): View
     {
         $streams = Stream::approved()
-            ->when($this->isArchive, function(Builder $builder) {
-                $builder->finished()->fromLatestToOldest();
-            }, function(Builder $builder) {
-                $builder->upcomingOrLive()->fromOldestToLatest();
-            })
+            ->upcomingOrLive()->fromOldestToLatest()
             ->paginate(10);
 
         return view('livewire.stream-list', [
