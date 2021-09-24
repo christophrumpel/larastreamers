@@ -45,10 +45,10 @@
 @livewireStyles
 
 <!-- Fathom - beautiful, simple website analytics -->
-    <script src="https://cdn.usefathom.com/script.js"
-            data-site="POMKLANK"
-            defer></script>
-    <!-- / Fathom -->
+@production
+    <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
+@endproduction
+<!-- / Fathom -->
 </head>
 
 <body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
