@@ -2,7 +2,7 @@
     @if ($paginator->hasPages())
         <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
             <!-- Mobile pagination -->
-            <div class="flex justify-between flex-1 hidden">
+            <div class="flex justify-betwleen flex-1 hidden">
                 <span>
                     @if ($paginator->onFirstPage())
                         <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-600 cursor-default leading-5 rounded-md">
