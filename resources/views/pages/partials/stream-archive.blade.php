@@ -1,5 +1,5 @@
 <li class="relative flex flex-col relative bg-gray-darker rounded-xl overflow-hidden">
-    <a class="w-full flex-none overflow-hidden rounded z-0 px-6 md:px-0 mb-2 md:mb-0"
+    <a class="w-full flex-none overflow-hidden rounded z-0 md:px-0 mb-2 md:mb-0"
        title="Open on YouTube"
        target="_blank"
        href="{{ $stream->url() }}">

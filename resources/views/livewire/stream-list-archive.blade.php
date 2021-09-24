@@ -2,7 +2,7 @@
 
     <section class="space-y-2 -mt-48">
         <div class="flex w-full max-w-6xl max-auto">
-            <ul class="w-full rounded-2xl grid grid-cols-3 gap-8">
+            <ul class="w-full rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($streams as $stream)
                     @include('pages.partials.stream-archive')
                 @endforeach
