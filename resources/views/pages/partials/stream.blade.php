@@ -34,13 +34,6 @@
             @endif
         </div>
 
-        @if($stream->duration)
-            <div class="flex items-center space-x-2">
-                <span class="block text-gray-400 text-sm">Duration:</span>
-                <span class="font-semibold tracking-wider uppercase text-sm text-white">{{ $stream->duration }}</span>
-            </div>
-        @endif
-
         <header class="flex-1">
             <h3 class="text-2xl font-bold tracking-tight">
                 <a title="Open on YouTube"

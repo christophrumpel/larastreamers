@@ -56,4 +56,21 @@ class PageArchiveTest extends TestCase
             ->assertSee('Stream finished')
             ->assertDontSee('Stream deleted');
     }
+
+    /** @test */
+    public function it_shows_duration_of_stream_if_given(): void
+    {
+        // Arrange
+        Stream::factory()
+            ->finished()
+            ->create([
+                'actual_start_time' => Carbon::yesterday(),
+                'actual_end_time' => Carbon::yesterday()->addHour()->addMinutes(12),
+            ]);
+
+        // Act & Assert
+        $this
+            ->get(route('archive'))
+            ->assertSee('1h 12m');
+    }
 }

@@ -226,8 +226,10 @@ class Stream extends Model implements Feedable
             return null;
         }
 
-        $start_time = $this->actual_start_time ?? $this->scheduled_start_time;
+        $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-        return $start_time->longAbsoluteDiffForHumans($this->actual_end_time, 2);
+//        $duration = $start_time->diff($this->actual_end_time);
+
+        return $startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
     }
 }
