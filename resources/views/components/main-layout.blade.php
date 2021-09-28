@@ -93,7 +93,7 @@
     </div>
 </footer>
 
-@include('pages.partials.submit')
+@include('pages.partials.submit-modal')
 
 @livewireScripts
 <!-- @TODO: not working together -->
