@@ -40,18 +40,20 @@
     <link href="{{ mix('css/app.css') }}"
           rel="stylesheet"/>
 
-@include('feed::links')
+    @include('feed::links')
 
-@livewireStyles
+    @livewireStyles
 
-<!-- Fathom - beautiful, simple website analytics -->
-@production
-    <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
-@endproduction
-<!-- / Fathom -->
+    <!-- Fathom - beautiful, simple website analytics -->
+    @production
+        <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
+    @endproduction
+    <!-- / Fathom -->
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
 
-<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100" x-data="{ showSubmissionModal: false }">
+<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100" x-data="{ showSubmissionModal: false, showMobileNav: false }">
 
 @if(request()->routeIs('home'))
     @include('pages.partials.header-home')
@@ -95,7 +97,6 @@
 
 @livewireScripts
 <!-- @TODO: not working together -->
-<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 @stack('scripts')
 
