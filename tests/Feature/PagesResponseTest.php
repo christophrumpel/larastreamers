@@ -31,13 +31,6 @@ class PagesResponseTest extends TestCase
     }
 
     /** @test */
-    public function it_can_show_the_submission_page(): void
-    {
-        $this->get(route('submission'))
-            ->assertOk();
-    }
-
-    /** @test */
     public function it_can_show_the_calendar_page(): void
     {
         $this->get(route('calendar.ics'))

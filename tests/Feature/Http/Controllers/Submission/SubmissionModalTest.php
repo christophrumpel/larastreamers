@@ -6,14 +6,17 @@ use App\Http\Livewire\SubmitYouTubeLiveStream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class SubmissionControllerTest extends TestCase
+class SubmissionModalTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function it_includes_the_submission_livewire_component(): void
+    public function it_includes_the_submission_livewire_component_on_all_pages(): void
     {
-        $this->get(route('submission'))
+        $this->get(route('home'))
+            ->assertSeeLivewire(SubmitYouTubeLiveStream::class);
+
+        $this->get(route('archive'))
             ->assertSeeLivewire(SubmitYouTubeLiveStream::class);
     }
 }

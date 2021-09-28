@@ -40,7 +40,6 @@
             <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="hidden sm:ml-6 sm:flex space-x-6 sm:space-x-10">
                     <x-nav-link :link="route('home')" name="Home" route-name="home"/>
-{{--                    <x-nav-link :link="route('submission')" name="Submit" route-name="submission"/>--}}
                     <button @click="showSubmissionModal =! showSubmissionModal">Submit</button>
                     <x-nav-link :link="route('archive')" name="Archive" route-name="archive"/>
                 </div>
@@ -61,7 +60,11 @@
         class="sm:hidden" id="mobile-menu">
         <div class="pt-2 pb-4 space-y-1">
             <x-nav-mobile-link :link="route('home')" name="Home" route-name="home"/>
-            <x-nav-mobile-link :link="route('submission')" name="Submit" route-name="submission"/>
+            <button
+                @click="showSubmissionModal =! showSubmissionModal"
+                class="border-transparent text-gray-dark hover:text-gray-darkest block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                Submit
+            </button>
             <x-nav-mobile-link :link="route('archive')" name="Archive" route-name="archive"/>
         </div>
     </div>
