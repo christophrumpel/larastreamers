@@ -40,7 +40,8 @@
             <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="hidden sm:ml-6 sm:flex space-x-6 sm:space-x-10">
                     <x-nav-link :link="route('home')" name="Home" route-name="home"/>
-                    <x-nav-link :link="route('submission')" name="Submit" route-name="submission"/>
+{{--                    <x-nav-link :link="route('submission')" name="Submit" route-name="submission"/>--}}
+                    <button @click="showSubmissionModal =! showSubmissionModal">Submit</button>
                     <x-nav-link :link="route('archive')" name="Archive" route-name="archive"/>
                 </div>
             </div>

@@ -51,7 +51,7 @@
 <!-- / Fathom -->
 </head>
 
-<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
+<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100" x-data="{ showSubmissionModal: false }">
 
 @if(request()->routeIs('home'))
     @include('pages.partials.header-home')
@@ -91,7 +91,11 @@
     </div>
 </footer>
 
+@include('pages.partials.submit')
+
 @livewireScripts
+<!-- @TODO: not working together -->
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 @stack('scripts')
 
