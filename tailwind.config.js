@@ -35,6 +35,7 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            animation: ['hover', 'group-hover'],
         },
     },
 

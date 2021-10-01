@@ -1,8 +1,9 @@
-<div class="w-full max-w-6xl mx-auto py-16 space-y-16" id="scrollTop">
-    @foreach ($streamsByDate as $date => $streams)
+<div class="w-full max-w-6xl mx-auto py-24 space-y-16" id="scrollTop">
+
+    @forelse ($streamsByDate as $date => $streams)
         <section class="space-y-2">
             <header
-                class="sticky top-0 z-20 py-4 bg-gray-700 bg-opacity-90">
+                class="sticky top-0 z-20 py-4 bg-gray-darkest bg-opacity-90">
                 <div class="w-full max-w-6xl px-4  sm:px-6 md:px-8">
                     <h2 class="text-3xl font-bold tracking-tight text-red-400 md:text-4xl text-white">
                         {{ $date }}
@@ -10,15 +11,17 @@
                 </div>
             </header>
 
-            <div class="flex w-full max-w-6xl max-auto">
-                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl ml-32 py-8 space-y-12">
+            <div class="flex w-full max-w-6xl max-auto px-6 md:px-0">
+                <ul class="bg-gray-darker w-full max-w-4xl rounded-2xl md:ml-32 md:py-8 space-y-12">
                     @foreach ($streams as $stream)
                         @include('pages.partials.stream')
                     @endforeach
                 </ul>
             </div>
         </section>
-    @endforeach
+    @empty
+        @include('pages.partials.empty-stream-list')
+    @endforelse
 
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
         {{ $streamsByDate->links() }}

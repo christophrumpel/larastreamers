@@ -1,10 +1,10 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <nav>
-    <div class="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto px-6 xl:px-0">
         <div class="relative flex justify-between h-20 border-b border-gray-lighter">
-            <div class="ml-12 sm:ml-0 flex items-center text-gray-darkest text-base font-bold">
+            <a href="{{ route('home') }}" class="ml-12 sm:ml-0 flex items-center text-gray-darkest text-base font-bold">
                 📺 Larastreamers
-            </div>
+            </a>
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button -->
                 <button type="button" @click="showMobileNav = !showMobileNav"
@@ -40,7 +40,7 @@
             <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="hidden sm:ml-6 sm:flex space-x-6 sm:space-x-10">
                     <x-nav-link :link="route('home')" name="Home" route-name="home"/>
-                    <button @click="showSubmissionModal =! showSubmissionModal">Submit</button>
+                    <button class="text-gray-dark hover:text-gray-darkest" @click="showSubmissionModal =! showSubmissionModal">Submit</button>
                     <x-nav-link :link="route('archive')" name="Archive" route-name="archive"/>
                 </div>
             </div>

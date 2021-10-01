@@ -124,8 +124,19 @@ class PageHomeTest extends TestCase
     }
 
     /** @test */
-    public function it_adds_button_webcal_link(): void
+    public function it_adds_not_button_webcal_link_if_no_streams(): void
     {
+        $this->get(route('home'))
+            ->assertDontSee('webcal://');
+    }
+
+    /** @test */
+    public function it_adds_button_webcal_link_if_no_streams(): void
+    {
+        Stream::factory()
+            ->upcoming()
+            ->create();
+
         $this->get(route('home'))
             ->assertSee('webcal://');
     }

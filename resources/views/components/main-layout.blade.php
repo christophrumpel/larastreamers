@@ -62,7 +62,7 @@
 @endif
 
 
-<main class="{{ request()->routeIs('home') ? 'md:-mt-16' : '' }} flex-1 text-white bg-gray-darkest px-6">
+<main class="{{ request()->routeIs('home') && $upcomingStream ? 'md:-mt-16' : '' }} flex-1 text-white bg-gray-darkest">
     {{ $slot ?? '' }}
 </main>
 
