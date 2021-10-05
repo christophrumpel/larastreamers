@@ -101,13 +101,13 @@ class PageHomeTest extends TestCase
         // Act & Assert
         $this->get(route('home'))
             ->assertSee('Stream #1')
-            ->assertDontSee('live</span>', false);
+            ->assertDontSee('>live</span>', false);
 
         $stream->update(['status' => StreamData::STATUS_LIVE]);
 
         $this->get(route('home'))
              ->assertSee('Stream #1')
-             ->assertSee('live</span>', false);
+             ->assertSee('>live</span>', false);
     }
 
     /** @test */
@@ -124,8 +124,19 @@ class PageHomeTest extends TestCase
     }
 
     /** @test */
-    public function it_adds_button_webcal_link(): void
+    public function it_adds_not_button_webcal_link_if_no_streams(): void
     {
+        $this->get(route('home'))
+            ->assertDontSee('webcal://');
+    }
+
+    /** @test */
+    public function it_adds_button_webcal_link_if_no_streams(): void
+    {
+        Stream::factory()
+            ->upcoming()
+            ->create();
+
         $this->get(route('home'))
             ->assertSee('webcal://');
     }

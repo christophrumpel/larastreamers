@@ -7,20 +7,43 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
-    mode: "jit",
-
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
+        colors: {
+            white: {
+                DEFAULT: '#F8F8F8',
+            },
+            red: {
+                dark: '#c42e47',
+                DEFAULT: '#ff3e5e',
+            },
+            green: {
+                DEFAULT: '#69db9e',
+            },
+            gray: {
+                darkest: '#2d303e',
+                darker: '#3f4457',
+                dark: '#696e80',
+                DEFAULT: '#979caf',
+                light: '#b5b8c7',
+                lighter: '#dee0ea',
+                lightest: '#f7f8fc',
+            },
+            black: {
+                DEFAULT: '#212430'
+            }
+        }
+
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
+            animation: ['hover', 'group-hover'],
         },
     },
 

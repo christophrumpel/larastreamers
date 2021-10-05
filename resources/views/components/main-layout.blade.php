@@ -40,65 +40,51 @@
     <link href="{{ mix('css/app.css') }}"
           rel="stylesheet"/>
 
-@include('feed::links')
+    @include('feed::links')
 
-@livewireStyles
+    @livewireStyles
 
-<!-- Fathom - beautiful, simple website analytics -->
-    <script src="https://cdn.usefathom.com/script.js"
-            data-site="POMKLANK"
-            defer></script>
+    <!-- Fathom - beautiful, simple website analytics -->
+    @production
+        <script src="https://cdn.usefathom.com/script.js" data-site="POMKLANK" defer></script>
+    @endproduction
     <!-- / Fathom -->
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
 
-<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100">
+<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100" x-data="{ showSubmissionModal: false, showMobileNav: false }">
 
-@include('pages.partials.nav')
-
-<section class="py-12 md:py-16">
-    <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        <header class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
-            <aside class="max-w-xl space-y-4">
-                <h1 class="text-4xl font-bold tracking-tight md:text-5xl">
-                    📺 Larastreamers
-                </h1>
-
-                <p class="text-gray-500 md:text-xl">
-                    There is no better way to learn than by watching other developers
-                    code live. Find out who is streaming next in the Laravel world.
-                </p>
-            </aside>
+@if(request()->routeIs('home'))
+    @include('pages.partials.header-home')
+@elseif(request()->routeIs('archive'))
+    @include('pages.partials.header-archive')
+@endif
 
 
-            @if($showCalendarDownloads)
-                <x-add-streams-to-calendar />
-            @endif
-        </header>
-    </div>
-</section>
-
-<main class="flex-1 text-white bg-gray-700">
+<main class="{{ request()->routeIs('home') && $upcomingStream ? 'md:-mt-16' : '' }} flex-1 text-white bg-gray-darkest">
     {{ $slot ?? '' }}
 </main>
 
-<footer class="text-white bg-gray-700">
+<footer class="text-white bg-black">
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        <nav class="flex flex-col justify-between gap-4 py-8 border-t border-gray-600 md:items-center md:flex-row">
+        <nav class="flex flex-col justify-between gap-4 py-10 md:items-center md:flex-row">
             <p class="text-sm text-gray-300">
-                <b class="text-white">Larastreamers</b> - A project by <a target="_blank"
-                                                                          href="https://christoph-rumpel.com">Christoph
-                    Rumpel</a>
+                <b class="text-white">&copy; Larastreamers</b> - <span class="text-gray-light under">A project by <a
+                        target="_blank" class="underline hover:text-gray-lighter"
+                        href="https://christoph-rumpel.com">Christoph
+                        Rumpel</a></span>
             </p>
 
-            <ul class="flex items-center space-x-6 text-sm">
+            <ul class="flex items-center space-x-6 text-sm text-gray-light underline">
                 <li>
-                    <a class="hover:underline"
+                    <a class="hover:text-gray-lighter"
                        target="_blank"
                        href="https://twitter.com/larastreamers">Twitter</a>
                 </li>
 
                 <li>
-                    <a class="hover:underline"
+                    <a class="hover:text-gray-lighter"
                        target="_blank"
                        href="https://github.com/christophrumpel/larastreamers">GitHub</a>
                 </li>
@@ -107,7 +93,10 @@
     </div>
 </footer>
 
+@include('pages.partials.submit-modal')
+
 @livewireScripts
+<!-- @TODO: not working together -->
 <script src="{{ mix('js/app.js') }}"></script>
 @stack('scripts')
 

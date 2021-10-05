@@ -1,4 +1,4 @@
 <div
-    class="my-2 px-4 py-2 text-sm text-red-800 bg-red-200">
+    class="my-2 px-4 py-2 text-sm text-white bg-red-dark">
     {{ $message }}
 </div>

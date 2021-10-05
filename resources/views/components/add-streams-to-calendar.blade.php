@@ -1,14 +1,14 @@
 <div class="relative z-0 inline-flex shadow-sm rounded-md" x-data="{ show: false }">
     <a
             href="{{ $webcalLink }}"
-            class="relative flex items-center px-3 py-2 text-sm font-medium text-white transition bg-red-600 rounded-md rounded-r-none shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none focus:ring focus:ring-red-400"
+            class="relative flex items-center px-5 py-4 text-sm font-medium text-white transition bg-red rounded-md rounded-r-none shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none focus:ring focus:ring-red-400"
     >
         Add streams to calendar
     </a>
 
     <div class="-ml-px relative block">
         <button type="button"
-                class="relative inline-flex items-center px-2 py-2 rounded-r-md bg-red-600 hover:bg-red-500 text-sm font-medium focus:z-10 focus:outline-none focus:ring focus:ring-red-400"
+                class="relative inline-flex items-center px-2 py-4 rounded-r-md bg-red hover:bg-red-500 text-sm font-medium focus:z-10 focus:outline-none focus:ring focus:ring-red-400"
                 @click="show = !show"
         >
             <span class="sr-only">Open dropdown</span>
@@ -28,9 +28,9 @@
                 x-transition:leave-start="transform opacity-100 scale-100"
                 x-transition:leave-end="transform opacity-0 scale-95"
         >
-            <div class="py-1">
+            <div class="py-1 bg-gray-lighter">
                 <a href="{{ route('calendar.ics') }}"
-                   class="text-gray-700 block px-4 py-2 text-sm"
+                   class="text-gray-dark block px-4 py-2 text-sm"
                 >
                     Download .ics file
                 </a>

@@ -17,12 +17,18 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_title' => $this->faker->title,
+            'channel_title' => $this->faker->title . ' Channel',
             'title' => $this->faker->sentence,
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
-            'thumbnail_url' => 'https://i.ytimg.com/vi/s9s7O7_jQh8/maxresdefault_live.jpg',
-            'scheduled_start_time' => Carbon::tomorrow()->addDays(random_int(0, 10))->toIso8601String(),
+            'thumbnail_url' => collect([
+                'https://i.ytimg.com/vi/s9s7O7_jQh8/maxresdefault_live.jpg',
+                'https://i.ytimg.com/vi/kZ93WrObSQc/maxresdefault_live.jpg',
+                'https://i.ytimg.com/vi/yctFdkrTLqo/maxresdefault_live.jpg',
+                'https://i.ytimg.com/vi/BSbPsCRBpRU/maxresdefault_live.jpg',
+                'https://i.ytimg.com/vi/zlllPenYN60/maxresdefault_live.jpg'
+            ])->random(),
+            'scheduled_start_time' => Carbon::now()->addDays(random_int(2, 10)),
             'status' => StreamData::STATUS_UPCOMING,
             'language_code' => Arr::shuffle(Language::all()->map->code->toArray())[0],
             'approved_at' => now(),
@@ -43,7 +49,7 @@ class StreamFactory extends Factory
     {
         return $this->state(function() {
             return [
-                'scheduled_start_time' => Carbon::tomorrow(),
+                'scheduled_start_time' => Carbon::today()->addDays(random_int(1, 10)),
                 'status' => StreamData::STATUS_UPCOMING,
             ];
         });
