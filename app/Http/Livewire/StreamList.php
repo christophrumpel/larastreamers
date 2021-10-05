@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Actions\SortStreamsByDateAction;
 use App\Models\Stream;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;
 

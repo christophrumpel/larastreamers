@@ -93,6 +93,7 @@ class Stream extends Model implements Feedable
     public function isLive(): bool
     {
         ray($this->status);
+
         return $this->status === StreamData::STATUS_LIVE;
     }
 
@@ -230,6 +231,6 @@ class Stream extends Model implements Feedable
 
 //        $duration = $start_time->diff($this->actual_end_time);
 
-        return $startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
+        return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
     }
 }

@@ -17,7 +17,7 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_title' => $this->faker->title . ' Channel',
+            'channel_title' => $this->faker->title.' Channel',
             'title' => $this->faker->sentence,
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
@@ -26,7 +26,7 @@ class StreamFactory extends Factory
                 'https://i.ytimg.com/vi/kZ93WrObSQc/maxresdefault_live.jpg',
                 'https://i.ytimg.com/vi/yctFdkrTLqo/maxresdefault_live.jpg',
                 'https://i.ytimg.com/vi/BSbPsCRBpRU/maxresdefault_live.jpg',
-                'https://i.ytimg.com/vi/zlllPenYN60/maxresdefault_live.jpg'
+                'https://i.ytimg.com/vi/zlllPenYN60/maxresdefault_live.jpg',
             ])->random(),
             'scheduled_start_time' => Carbon::now()->addDays(random_int(2, 10)),
             'status' => StreamData::STATUS_UPCOMING,

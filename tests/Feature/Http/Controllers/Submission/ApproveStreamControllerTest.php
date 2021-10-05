@@ -24,7 +24,6 @@ class ApproveStreamControllerTest extends TestCase
                 'submitted_by_email' => 'john@example.com',
             ]);
 
-
         // Assert
         $this->assertFalse($stream->isApproved());
 

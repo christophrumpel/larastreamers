@@ -8,7 +8,6 @@ use Livewire\WithPagination;
 
 class StreamListArchive extends Component
 {
-
     use WithPagination;
 
     public function render()

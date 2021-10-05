@@ -10,11 +10,10 @@ class MainLayout extends Component
 {
     public function __construct(
         public ?Stream $upcomingStream,
-        public bool   $showCalendarDownloads = true,
+        public bool $showCalendarDownloads = true,
         public string $title = 'Larastreamers',
         public string $description = 'Larastreamers shows you who is live-coding next in the Laravel world. Never miss a live stream again!',
-    )
-    {
+    ) {
     }
 
     public function render(): View
