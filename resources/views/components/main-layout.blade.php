@@ -37,6 +37,9 @@
     <meta property="og:image"
           content="{{ asset('images/larastreamers_social.png') }}"/>
 
+    <meta name="twitter:card" content="summary_large_image" />
+
+
     <link href="{{ mix('css/app.css') }}"
           rel="stylesheet"/>
 
