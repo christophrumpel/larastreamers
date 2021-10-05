@@ -1,6 +1,6 @@
 <div class="w-full max-w-6xl mx-auto px-6 xl:px-0 py-24 space-y-16" id="scrollTop">
 
-    <section class="space-y-2 -mt-48">
+    <section class="space-y-2 -mt-40">
         <div class="flex w-full max-w-6xl max-auto">
             <ul class="w-full rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($streams as $stream)

@@ -15,7 +15,7 @@ class SortStreamsByDateAction
             ->mapWithKeys(static function(Collection $item, string $date): array {
                 $dateObject = Carbon::createFromFormat('D d.m.Y', $date);
 
-                $date = $dateObject->format('D jS M Y');
+                $date = $dateObject->format('D, M jS Y');
 
                 if ($dateObject->isYesterday()) {
                     $date = 'Yesterday';

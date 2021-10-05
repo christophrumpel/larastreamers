@@ -32,7 +32,7 @@ class SortStreamsByDateActionTest extends TestCase
         // Assert
         $this->assertEquals('Today', $preparedStreams->keys()[0]);
         $this->assertEquals('Tomorrow', $preparedStreams->keys()[1]);
-        $this->assertEquals(Carbon::tomorrow()->addDay()->format('D jS M Y'), $preparedStreams->keys()[2]);
+        $this->assertEquals(Carbon::tomorrow()->addDay()->format('D, M jS Y'), $preparedStreams->keys()[2]);
     }
 
     /** @test */
@@ -56,7 +56,7 @@ class SortStreamsByDateActionTest extends TestCase
         $this->assertEquals([
             'Today',
             'Tomorrow',
-            'Sun 13th Jun 2021',
+            'Sun, Jun 13th 2021',
         ], $preparedStreams->keys()->toArray());
     }
 }
