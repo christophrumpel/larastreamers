@@ -44,6 +44,7 @@ module.exports = {
         extend: {
             opacity: ['disabled'],
             animation: ['hover', 'group-hover'],
+            translate: ['group-hover']
         },
     },
 
