@@ -18,7 +18,7 @@
         @endif
 
         <figure class="flex items-center  aspect-w-16 aspect-h-9 mb-4 md:mb-0 transition ease-in-out transform hover:-translate-x-10 filter drop-shadow-lg">
-            <img class="flex-none overflow-hidden md:-mr-12 z-0 rounded-t-xl md:rounded-xl"
+            <img class="flex-none overflow-hidden md:-mr-12 z-0 rounded-t-xl md:rounded-xl object-cover"
                  src="{{ $stream->thumbnail_url }}"
                  alt="Video thumbnail"/>
         </figure>
