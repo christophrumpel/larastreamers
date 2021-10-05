@@ -6,7 +6,7 @@
 
         <div class="relative">
             <figure class="overflow-auto aspect-w-16 aspect-h-9">
-                <img class="overflow-hidden md:-mr-12 z-0"
+                <img class="overflow-hidden md:-mr-12 z-0 object-cover"
                      src="{{ $stream->thumbnail_url }}"
                      alt="Video thumbnail"/>
             </figure>
