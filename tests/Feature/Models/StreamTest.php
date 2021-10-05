@@ -4,6 +4,7 @@ namespace Tests\Feature\Models;
 
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class StreamTest extends TestCase
@@ -22,5 +23,43 @@ class StreamTest extends TestCase
 
         // Assert
         $this->assertCount(1, $streams);
+    }
+
+    /** @test */
+    public function it_gets_next_upcoming_stream(): void
+    {
+        // Arrange
+        Stream::factory()
+            ->upcoming()
+            ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+
+        $expectedStream = Stream::factory()
+            ->upcoming()
+            ->create(['scheduled_start_time' => Carbon::tomorrow()]);
+
+        // Act
+        $actualStream = Stream::getNextUpcomingOrLive();
+
+        // Assert
+        $this->assertEquals($expectedStream->id, $actualStream->id);
+    }
+
+    /** @test */
+    public function it_gets_next_live_stream_before_upcoming(): void
+    {
+        // Arrange
+        Stream::factory()
+            ->upcoming()
+            ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+
+        $expectedStream = Stream::factory()
+            ->live()
+            ->create(['scheduled_start_time' => Carbon::tomorrow()]);
+
+        // Act
+        $actualStream = Stream::getNextUpcomingOrLive();
+
+        // Assert
+        $this->assertEquals($expectedStream->id, $actualStream->id);
     }
 }

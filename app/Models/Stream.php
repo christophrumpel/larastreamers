@@ -115,6 +115,13 @@ class Stream extends Model implements Feedable
         ]);
     }
 
+    public static function getNextUpcomingOrLive(): ?Stream
+    {
+        return (new self)->query()->upcomingOrLive()
+            ->fromOldestToLatest()
+            ->first();
+    }
+
     public function scopeLiveOrFinished(Builder $query): Builder
     {
         return $query->whereIn('status', [
