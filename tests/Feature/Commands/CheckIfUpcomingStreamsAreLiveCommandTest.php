@@ -33,8 +33,6 @@ class CheckIfUpcomingStreamsAreLiveCommandTest extends TestCase
     {
         // Arrange
         Http::fake();
-
-        // Arrange
         Stream::factory()->live()->create();
         Stream::factory()->finished()->create();
 
