@@ -14,7 +14,7 @@ class FeedTest extends TestCase
     /** @test */
     public function it_provides_streams_in_rss_feed(): void
     {
-        // Arrangeta
+        // Arrange
         Stream::factory()->create([
             'title' => 'Stream tomorrow',
             'channel_title' => 'Channel one',
