@@ -34,7 +34,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
 
-<body class="flex flex-col min-h-screen font-sans antialiased text-gray-800 bg-gray-100" x-data="{ showSubmissionModal: false, showMobileNav: false }">
+<body class="flex flex-col min-h-screen font-sans antialiased" x-data="{ showSubmissionModal: false, showMobileNav: false }">
 
 @if(request()->routeIs('home'))
     @include('pages.partials.header-home')

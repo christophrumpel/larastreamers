@@ -27,6 +27,12 @@ class TestDataSeeder extends Seeder
 
         Stream::factory()
             ->approved()
+            ->live()
+            ->count(3)
+            ->create();
+
+        Stream::factory()
+            ->approved()
             ->upcoming()
             ->count(100)
             ->create();
