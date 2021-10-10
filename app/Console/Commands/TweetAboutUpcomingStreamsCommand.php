@@ -18,6 +18,7 @@ class TweetAboutUpcomingStreamsCommand extends Command
             ->approved()
             ->upcoming()
             ->withinUpcomingTweetRange()
+            ->scheduledTimeNotPassed()
             ->whereNull('upcoming_tweeted_at')
             ->get()
             ->each(function(Stream $stream) {

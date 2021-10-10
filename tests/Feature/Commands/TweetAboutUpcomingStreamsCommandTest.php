@@ -166,4 +166,19 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
         // Assert
         $this->twitterFake->assertNoTweetsWereSent();
     }
+
+    /** @test */
+    public function it_does_not_tweet_streams_that_are_upcoming_but_already_started(): void
+    {
+        // Arrange
+        Stream::factory()->upcoming()->create([
+            'scheduled_start_time' => now()->subSecond(),
+        ]);
+
+        // Act
+        $this->artisan(TweetAboutUpcomingStreamsCommand::class);
+
+        // Assert
+        $this->twitterFake->assertNoTweetsWereSent();
+    }
 }
