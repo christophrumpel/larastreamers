@@ -39,8 +39,8 @@ In order to import videos from  YouTube you need:
 * [x] Archive with old streams
 * [x] Streams of stored channels will be imported automaticall (every hour) 
 * [x] Pagination for archive page
-* [ ] Approval flow (planned by Freek)
-* [ ] Add Twitter tag to Twitter posts about streams that go live (only for stored channels)
+* [x] Approval flow (planned by Freek)
+* [x] Add Twitter tag to Twitter posts about streams that go live (only for stored channels)
 * [x] Add search to archive (when archive ready)
 
 ## Contribute
