@@ -29,7 +29,7 @@ class StreamListArchive extends Component
                 ->finished()
                 ->search($this->search)
                 ->fromLatestToOldest()
-                ->paginate(24)
+                ->paginate(24),
         ]);
     }
 }

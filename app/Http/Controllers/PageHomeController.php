@@ -10,7 +10,7 @@ class PageHomeController extends Controller
     public function __invoke(): View
     {
         return view('pages.home', [
-            'upcomingStream' => Stream::getNextUpcomingOrLive()
+            'upcomingStream' => Stream::getNextUpcomingOrLive(),
         ]);
     }
 }
