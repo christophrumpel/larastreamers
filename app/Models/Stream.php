@@ -117,7 +117,9 @@ class Stream extends Model implements Feedable
 
     public static function getNextUpcomingOrLive(): ?Stream
     {
-        return (new self)->query()->upcomingOrLive()
+        return (new self)->query()
+            ->approved()
+            ->upcomingOrLive()
             ->fromOldestToLatest()
             ->first();
     }
