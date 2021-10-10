@@ -13,7 +13,7 @@ class StreamListArchive extends Component
     public function render()
     {
         return view('livewire.stream-list-archive', [
-            'streams' => Stream::approved()->finished()->fromLatestToOldest()->paginate(24)
+            'streams' => Stream::approved()->finished()->fromLatestToOldest()->paginate(24),
         ]);
     }
 }
