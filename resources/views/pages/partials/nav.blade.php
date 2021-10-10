@@ -26,7 +26,7 @@
             <div class="flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div class="hidden sm:ml-6 sm:flex space-x-6 sm:space-x-10">
                     <x-nav-link :link="route('home')" name="Home" route-name="home"/>
-                    <button class="border-transparent hover:border-gray-300 text-gray-dark inline-flex items-center px-1 pt-1 hover:text-gray-darkest text-base font-medium" @click="showSubmissionModal =! showSubmissionModal">Submit</button>
+                    <button class="text-gray-dark inline-flex items-center px-1 pt-1 hover:text-gray-darkest text-base font-medium" @click="showSubmissionModal =! showSubmissionModal">Submit</button>
                     <x-nav-link :link="route('archive')" name="Archive" route-name="archive"/>
                 </div>
             </div>
