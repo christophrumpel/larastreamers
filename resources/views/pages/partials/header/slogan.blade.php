@@ -9,7 +9,7 @@
                     There is no better way to learn than by watching other developers
                     code live. Find out who is streaming next in the Laravel world.
                 </p>
-                @if($showCalendarDownloads && $upcomingStream)
+                @if($upcomingStream)
                     <x-add-streams-to-calendar/>
                 @endif
             </div>

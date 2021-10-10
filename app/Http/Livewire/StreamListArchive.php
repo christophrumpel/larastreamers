@@ -10,8 +10,26 @@ class StreamListArchive extends Component
 {
     use WithPagination;
 
+    protected $queryString = [
+        'search' => ['except' => ''],
+    ];
+
+    public ?string $search = null;
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
-        return view('livewire.stream-list-archive', ['streams' => Stream::approved()->finished()->fromLatestToOldest()->paginate(24)]);
+        return view('livewire.stream-list-archive', [
+            'streams' => Stream::query()
+                ->approved()
+                ->finished()
+                ->search($this->search)
+                ->fromLatestToOldest()
+                ->paginate(24),
+        ]);
     }
 }
