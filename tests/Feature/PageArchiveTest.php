@@ -73,4 +73,43 @@ class PageArchiveTest extends TestCase
             ->get(route('archive'))
             ->assertSee('1h 12m');
     }
+
+    /** @test */
+    public function it_searches_for_streams_on_title(): void
+    {
+        // Arrange
+        Stream::factory()->finished()->create(['title' => 'Stream One']);
+        Stream::factory()->finished()->create(['title' => 'Stream Two']);
+        Stream::factory()->finished()->create(['title' => 'Stream Three']);
+
+        // Act & Assert
+        $this->get(route('archive', ['search' => 'three']))
+            ->assertSee([
+                'Stream Three',
+            ])->assertDontSee([
+                'Stream One',
+                'Stream Two',
+            ]);
+    }
+
+    /** @test */
+    public function it_searches_for_streams_on_channel_title(): void
+    {
+        // Arrange
+        Stream::factory()->finished()->create(['title' => 'Stream #1', 'channel_title' => 'Laravel']);
+        Stream::factory()->finished()->create(['title' => 'Stream #2', 'channel_title' => 'Laravel']);
+        Stream::factory()->finished()->create(['title' => 'Stream #3', 'channel_title' => 'The Streamers']);
+
+        // Act & Assert
+        $this->get(route('archive', ['search' => 'Laravel']))
+            ->assertSee([
+                'Stream #1',
+                'Stream #2',
+                'Laravel',
+            ])
+            ->assertDontSee([
+                'Stream #3',
+                'The Streamers',
+            ]);
+    }
 }

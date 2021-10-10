@@ -38,10 +38,10 @@ In order to import videos from  YouTube you need:
 * [x] Mocking Twitter so we can get off the production check
 * [x] Archive with old streams
 * [x] Streams of stored channels will be imported automaticall (every hour) 
-* [ ] Pagination for archive page
+* [x] Pagination for archive page
 * [ ] Approval flow (planned by Freek)
 * [ ] Add Twitter tag to Twitter posts about streams that go live (only for stored channels)
-* [ ] Add search to archive (when archive ready)
+* [x] Add search to archive (when archive ready)
 
 ## Contribute
 
