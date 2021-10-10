@@ -1,14 +1,13 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div
     x-show="showSubmissionModal"
-     class="fixed z-30 inset-0 overflow-y-auto"
-     aria-labelledby="modal-title"
-     role="dialog"
-     aria-modal="true"
+    class="fixed z-30 inset-0 overflow-y-auto"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
     x-cloak
 >
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-         x-show="showSubmissionModal"
          x-transition:enter="ease-out duration-300"
          x-transition:enter-start="opacity-0"
          x-transition:enter-end="opacity-100"

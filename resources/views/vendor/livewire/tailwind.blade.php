@@ -1,15 +1,15 @@
-<div>
+<div class="w-full">
     @if ($paginator->hasPages())
-        <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">
+        <nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between flex-wrap">
             <!-- Mobile pagination -->
-            <div class="flex justify-betwleen flex-1 hidden">
+            <div class="flex justify-between flex-1 sm:hidden">
                 <span>
                     @if ($paginator->onFirstPage())
-                        <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-600 cursor-default leading-5 rounded-md">
+                        {{--<span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400 bg-gray-600 cursor-default leading-5 rounded-md">
                             {!! __('pagination.previous') !!}
-                        </span>
+                        </span>--}}
                     @else
-                        <button wire:click="previousPage" wire:loading.attr="disabled" dusk="previousPage.before" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 leading-5 rounded-md hover:text-red-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-white transition ease-in-out duration-150">
+                        <button wire:click="previousPage" wire:loading.attr="disabled" dusk="previousPage.before" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray hover:text-white bg-gray-600 leading-5 rounded-md hover:text-red-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-400 transition ease-in-out duration-150">
                             {!! __('pagination.previous') !!}
                         </button>
                     @endif
@@ -17,20 +17,20 @@
 
                 <span>
                     @if ($paginator->hasMorePages())
-                        <button wire:click="nextPage" wire:loading.attr="disabled" dusk="nextPage.before" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-white bg-gray-600 leading-5 rounded-md hover:text-red-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-white transition ease-in-out duration-150">
+                        <button wire:click="nextPage" wire:loading.attr="disabled" dusk="nextPage.before" class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray hover:text-white bg-gray-600 leading-5 rounded-md hover:text-red-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-400 transition ease-in-out duration-150">
                             {!! __('pagination.next') !!}
                         </button>
                     @else
-                        <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-400 bg-gray-600 cursor-default leading-5 rounded-md">
+                       {{-- <span class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-400 bg-gray-600 cursor-default leading-5 rounded-md">
                             {!! __('pagination.next') !!}
-                        </span>
+                        </span>--}}
                     @endif
                 </span>
             </div>
             <!-- Mobile pagination -->
 
             <!-- Desktop pagination -->
-            <div class="w-full flex items-center justify-center">
+            <div class="w-full hidden sm:flex sm:items-center sm:justify-center">
                 <div>
                     <span class="relative z-0 inline-flex rounded-md shadow-sm">
                         <span>

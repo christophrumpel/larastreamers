@@ -5,7 +5,7 @@
       content="Christoph Rumpel">
 
 <meta property="og:url"
-      content="{{ url('') }}"/>
+      content="{{ request()->fullUrl() }}"/>
 
 <meta property="og:type"
       content="website"/>

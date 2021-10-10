@@ -1,19 +1,26 @@
-<div class="w-full max-w-6xl mx-auto px-6 xl:px-0 py-24 space-y-16" id="scrollTop">
+<div>
+    @include('pages.partials.header-archive')
 
-    <section class="space-y-2 -mt-40">
-        <div class="flex w-full max-w-6xl max-auto">
-            <ul class="w-full rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach ($streams as $stream)
-                    @include('pages.partials.stream-archive')
-                @endforeach
-            </ul>
+    <main class="flex-1 text-white bg-gray-darkest">
+        <div class="w-full max-w-6xl mx-auto px-6 xl:px-0 py-24 space-y-16" id="scrollTop">
+
+            <section class="space-y-2 -mt-40">
+                <div class="flex w-full max-w-6xl max-auto">
+                    <ul class="w-full rounded-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        @foreach ($streams as $stream)
+                            @include('pages.partials.stream-archive')
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
+
+            <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
+                {{ $streams->links() }}
+            </div>
         </div>
-    </section>
-
-    <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        {{ $streams->links() }}
-    </div>
+    </main>
 </div>
+
 
 @push('scripts')
     <script>
