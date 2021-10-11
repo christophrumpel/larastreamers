@@ -2,20 +2,20 @@
 
 namespace Tests\Feature\Http\Livewire;
 
-use App\Http\Livewire\ImportYoutubeChannel;
+use App\Http\Livewire\ImportYouTubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
-use Tests\Fakes\YoutubeReponses;
+use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
 class ImportYoutubeChannelTest extends TestCase
 {
     use RefreshDatabase;
-    use YoutubeReponses;
+    use YouTubeResponses;
 
     /** @test */
     public function it_adds_channel_to_database(): void
@@ -29,8 +29,8 @@ class ImportYoutubeChannelTest extends TestCase
         // Arrange & Act
         Http::fake(fn() => Http::response($this->channelResponse()));
 
-        Livewire::test(ImportYoutubeChannel::class)
-            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+        Livewire::test(ImportYouTubeChannel::class)
+            ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel');
 
         // Assert
@@ -49,8 +49,8 @@ class ImportYoutubeChannelTest extends TestCase
         Http::fake(fn() => Http::response($this->channelResponse()));
 
         // Act
-        Livewire::test(ImportYoutubeChannel::class)
-            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+        Livewire::test(ImportYouTubeChannel::class)
+            ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel');
 
         // Assert
@@ -65,8 +65,8 @@ class ImportYoutubeChannelTest extends TestCase
         Http::fake(fn() => Http::response($this->channelResponse()));
 
         // Act & Assert
-        Livewire::test(ImportYoutubeChannel::class)
-            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+        Livewire::test(ImportYouTubeChannel::class)
+            ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel')
             ->assertSee('Channel "UCdtd5QYBx9MUVXHm7qgEpxA" was added successfully.');
     }
@@ -78,8 +78,8 @@ class ImportYoutubeChannelTest extends TestCase
         Http::fake(fn() => Http::response([], 500));
 
         // Arrange & Act & Assert
-        Livewire::test(ImportYoutubeChannel::class)
-            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+        Livewire::test(ImportYouTubeChannel::class)
+            ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel')
             ->assertSee('YouTube API error: 500');
     }
@@ -92,17 +92,17 @@ class ImportYoutubeChannelTest extends TestCase
         Http::fake(fn() => Http::response($this->channelResponse()));
 
         // Act & Assert
-        Livewire::test(ImportYoutubeChannel::class)
-            ->set('youtubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
+        Livewire::test(ImportYouTubeChannel::class)
+            ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
             ->call('importChannel')
-            ->assertSet('youtubeChannelId', '');
+            ->assertSet('youTubeChannelId', '');
     }
 
     /** @test */
     public function it_wires_properties_and_methods(): void
     {
         // Arrange & Act & Assert
-        Livewire::test(ImportYoutubeChannel::class)
+        Livewire::test(ImportYouTubeChannel::class)
             ->assertPropertyWired('youtubeChannelId')
             ->assertMethodWiredToForm('importChannel');
     }

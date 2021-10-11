@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use App\Facades\Youtube;
-use App\Services\Youtube\YoutubeException;
+use App\Facades\YouTube;
+use App\Services\YouTube\YouTubeException;
 use Illuminate\Contracts\Validation\Rule;
 
 class YouTubeRule implements Rule
@@ -13,8 +13,8 @@ class YouTubeRule implements Rule
     public function passes($attribute, $value): bool
     {
         try {
-            $video = Youtube::video($value);
-        } catch (YoutubeException) {
+            $video = YouTube::video($value);
+        } catch (YouTubeException) {
             $this->message = 'This is not a valid YouTube video id.';
 
             return false;

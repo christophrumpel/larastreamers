@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Youtube;
+namespace App\Services\YouTube;
 
 use Exception;
 
-class YoutubeException extends Exception
+class YouTubeException extends Exception
 {
     public static function general(int $status, string $message = ''): self
     {

@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Stream;
 
 class ImportVideoAction
@@ -13,7 +13,7 @@ class ImportVideoAction
         $approved = false,
         ?string $submittedByEmail = null,
     ): Stream {
-        $video = Youtube::video($youTubeId);
+        $video = YouTube::video($youTubeId);
 
         return Stream::updateOrCreate(['youtube_id' => $video->videoId], [
             'channel_title' => $video->channelTitle,

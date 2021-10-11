@@ -3,9 +3,9 @@
 namespace Tests\Feature\Commands;
 
 use App\Console\Commands\UpdateUpcomingStreamsCommand;
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -18,7 +18,7 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
     public function it_updates_upcoming_streams(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(
@@ -84,7 +84,7 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
     public function it_tells_how_many_streams_were_updated(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(videoId: '1'),
@@ -103,7 +103,7 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
     public function it_tells_how_many_streams_were_updated_including_deletes(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(videoId: '1'),
@@ -121,7 +121,7 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
     public function it_marks_streams_as_deleted_if_not_given_on_streaming_platform_anymore(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([]));
 

@@ -2,10 +2,10 @@
 
 namespace App\Jobs;
 
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Channel;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,13 +16,13 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(public string $youtubeChannelId, public string $languageCode = 'en')
+    public function __construct(public string $youTubeChannelId, public string $languageCode = 'en')
     {
     }
 
     public function handle(): void
     {
-        $streams = Youtube::upcomingStreams($this->youtubeChannelId);
+        $streams = YouTube::upcomingStreams($this->youTubeChannelId);
 
         $streams->map(function(StreamData $streamData) {
             Stream::updateOrCreate(['youtube_id' => $streamData->videoId], [

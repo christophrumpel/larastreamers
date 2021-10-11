@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -32,13 +32,13 @@ class UpdateLiveAndFinishedStreamsCommand extends Command
 
         $this->info("Fetching {$streams->count()} stream(s) from API to update.");
 
-        $youtubeResponse = Youtube::videos($streams->keys());
+        $youTubeResponse = YouTube::videos($streams->keys());
 
-        $streams->each(function(Stream $stream) use ($youtubeResponse) {
+        $streams->each(function(Stream $stream) use ($youTubeResponse) {
             $this->info("Updating {$stream->youtube_id} ...");
 
             /** @var StreamData|null $streamData */
-            $streamData = $youtubeResponse->where('videoId', $stream->youtube_id)->first();
+            $streamData = $youTubeResponse->where('videoId', $stream->youtube_id)->first();
 
             if (is_null($streamData)) {
                 $stream->update([

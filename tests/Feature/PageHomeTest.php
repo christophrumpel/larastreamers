@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;

@@ -2,7 +2,7 @@
 
 namespace Tests\Fakes;
 
-trait YoutubeReponses
+trait YouTubeResponses
 {
     protected function videoResponse(): array
     {

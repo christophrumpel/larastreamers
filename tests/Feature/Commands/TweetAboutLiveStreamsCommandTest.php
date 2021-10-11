@@ -5,7 +5,7 @@ namespace Tests\Feature\Commands;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

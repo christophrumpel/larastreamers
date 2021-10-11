@@ -3,10 +3,10 @@
 namespace Tests\Feature\Http\Livewire;
 
 use App\Actions\Submission\SubmitStreamAction;
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Http\Livewire\SubmitYouTubeLiveStream;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -134,7 +134,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     public function the_youtubeId_must_be_valid(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect());
 
@@ -150,7 +150,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     public function the_planned_stream_start_must_be_in_the_future(): void
     {
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(
@@ -197,7 +197,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
 
     private function mockYouTubVideoCall(string $videoId = 'bcnR4NYOw2o'): void
     {
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(

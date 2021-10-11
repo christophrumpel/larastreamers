@@ -2,16 +2,16 @@
 
 namespace App\Facades;
 
-use App\Services\YoutubeClient;
+use App\Services\YouTubeClient;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \App\Services\YoutubeClient
+ * @see \App\Services\YouTubeClient
  */
-class Youtube extends Facade
+class YouTube extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return YoutubeClient::class;
+        return YouTubeClient::class;
     }
 }

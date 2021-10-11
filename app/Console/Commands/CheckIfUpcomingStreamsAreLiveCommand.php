@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Console\Command;
 
 class CheckIfUpcomingStreamsAreLiveCommand extends Command
@@ -30,7 +30,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
 
         $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
-        $updatesCount = Youtube::videos($streams->keys())
+        $updatesCount = YouTube::videos($streams->keys())
             ->map(fn(StreamData $streamData) => optional($streams
                 ->get($streamData->videoId))
                 ->update([

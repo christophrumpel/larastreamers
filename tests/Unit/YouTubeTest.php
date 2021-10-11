@@ -2,15 +2,15 @@
 
 namespace Tests\Unit;
 
-use App\Facades\Youtube;
-use App\Services\Youtube\StreamData;
+use App\Facades\YouTube;
+use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Http;
-use Tests\Fakes\YoutubeReponses;
+use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-class YoutubeTest extends TestCase
+class YouTubeTest extends TestCase
 {
-    use YoutubeReponses;
+    use YouTubeResponses;
 
     /** @test */
     public function it_can_fetch_channel_details_from_youtube(): void
@@ -19,7 +19,7 @@ class YoutubeTest extends TestCase
         Http::fake(fn() => Http::response($this->channelResponse()));
 
         // Act
-        $channel = Youtube::channel('UCdtd5QYBx9MUVXHm7qgEpxA');
+        $channel = YouTube::channel('UCdtd5QYBx9MUVXHm7qgEpxA');
 
         // Assert
         $this->assertEquals('christophrumpel', $channel->slug);
@@ -40,12 +40,12 @@ class YoutubeTest extends TestCase
         ]);
 
         // Act
-        $streams = Youtube::upcomingStreams('UCNlUCA4VORBx8X-h-rXvXEg');
+        $streams = YouTube::upcomingStreams('UCNlUCA4VORBx8X-h-rXvXEg');
 
         // Assert
         $this->assertCount(3, $streams);
 
-        /** @var \App\Services\Youtube\StreamData $finishedStream */
+        /** @var \App\Services\YouTube\StreamData $finishedStream */
         $finishedStream = $streams->first();
 
         $this->assertEquals('gzqJZQyfkaI', $finishedStream->videoId);
@@ -58,7 +58,7 @@ class YoutubeTest extends TestCase
         $this->assertEquals('2031-05-15T11:30:29+00:00', $finishedStream->actualEndTime->toIso8601String());
         $this->assertEquals(StreamData::STATUS_FINISHED, $finishedStream->status);
 
-        /** @var \App\Services\Youtube\StreamData $upcomingStream */
+        /** @var \App\Services\YouTube\StreamData $upcomingStream */
         $upcomingStream = $streams->last();
 
         $this->assertEquals('L3O1BbybSgw', $upcomingStream->videoId);

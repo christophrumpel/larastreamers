@@ -3,10 +3,10 @@
 namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\SubmitStreamAction;
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Mail\StreamSubmittedMail;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -22,7 +22,7 @@ class SubmitStreamActionTest extends TestCase
     {
         // Arrange
         Mail::fake();
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->andReturn(collect([
                 StreamData::fake(

@@ -2,22 +2,22 @@
 
 namespace App\Services;
 
-use App\Services\Youtube\ChannelData;
-use App\Services\Youtube\StreamData;
-use App\Services\Youtube\YoutubeException;
+use App\Services\YouTube\ChannelData;
+use App\Services\YouTube\StreamData;
+use App\Services\YouTube\YouTubeException;
 use Carbon\Carbon;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
-class YoutubeClient
+class YouTubeClient
 {
     public function channel(string $id): ChannelData
     {
         $result = $this->fetch('channels', ['id' => $id, 'part' => 'snippet'], 'items.0');
 
         if (empty($result)) {
-            throw YoutubeException::unknownChannel($id);
+            throw YouTubeException::unknownChannel($id);
         }
 
         return new ChannelData(
@@ -51,7 +51,7 @@ class YoutubeClient
     public function video(string $id): StreamData
     {
         return $this->videos($id)
-            ->whenEmpty(fn() => throw YoutubeException::unknownVideo($id))
+            ->whenEmpty(fn() => throw YouTubeException::unknownVideo($id))
             ->first();
     }
 
@@ -89,7 +89,7 @@ class YoutubeClient
             ->get($url, array_merge($params, [
                 'key' => config('services.youtube.key'),
             ]))
-            ->onError(fn(Response $response) => throw YoutubeException::general($response->status(), $response->body()))
+            ->onError(fn(Response $response) => throw YouTubeException::general($response->status(), $response->body()))
             ->json($key, []);
     }
 

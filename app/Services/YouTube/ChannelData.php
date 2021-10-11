@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Youtube;
+namespace App\Services\YouTube;
 
 use Carbon\Carbon;
 use Spatie\DataTransferObject\DataTransferObject;

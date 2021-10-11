@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -7,13 +7,13 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
-use Tests\Fakes\YoutubeReponses;
+use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
 class ImportYoutubeChannelStreamsJobTest extends TestCase
 {
     use RefreshDatabase;
-    use YoutubeReponses;
+    use YouTubeResponses;
 
     /** @test */
     public function it_imports_youtube_channel_streams(): void

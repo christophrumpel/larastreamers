@@ -3,9 +3,9 @@
 namespace Tests\Feature\Commands;
 
 use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
-use App\Facades\Youtube;
+use App\Facades\YouTube;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -20,7 +20,7 @@ class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
         Carbon::setTestNow(now());
 
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->once()
             ->andReturn(collect([
@@ -57,7 +57,7 @@ class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
         Carbon::setTestNow(now());
 
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->once()
             ->andReturn(collect());
@@ -83,7 +83,7 @@ class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
         Carbon::setTestNow(now());
 
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->once()
             ->andReturn(collect([
@@ -120,7 +120,7 @@ class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
         Carbon::setTestNow(now());
 
         // Arrange
-        Youtube::partialMock()
+        YouTube::partialMock()
             ->shouldReceive('videos')
             ->once()
             ->andReturn(collect([

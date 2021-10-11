@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\ImportYoutubeChannel;
-use App\Http\Livewire\ImportYoutubeLiveStream;
+use App\Http\Livewire\ImportYouTubeChannel;
+use App\Http\Livewire\ImportYouTubeLiveStream;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -17,7 +17,7 @@ class PageDashboardTest extends TestCase
     {
         $this->actingAs(User::factory()->create())
             ->get(route('dashboard'))
-            ->assertSeeLivewire(ImportYoutubeLiveStream::class);
+            ->assertSeeLivewire(ImportYouTubeLiveStream::class);
     }
 
     /** @test */
@@ -25,6 +25,6 @@ class PageDashboardTest extends TestCase
     {
         $this->actingAs(User::factory()->create())
             ->get(route('dashboard'))
-            ->assertSeeLivewire(ImportYoutubeChannel::class);
+            ->assertSeeLivewire(ImportYouTubeChannel::class);
     }
 }

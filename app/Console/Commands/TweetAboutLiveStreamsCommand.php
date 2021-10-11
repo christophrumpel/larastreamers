@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\TweetStreamIsLiveJob;
 use App\Models\Stream;
-use App\Services\Youtube\StreamData;
+use App\Services\YouTube\StreamData;
 use Illuminate\Console\Command;
 
 class TweetAboutLiveStreamsCommand extends Command
