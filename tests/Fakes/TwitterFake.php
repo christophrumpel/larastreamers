@@ -22,7 +22,7 @@ class TwitterFake
 
     public function assertNoTweetsWereSent(): void
     {
-        PHPUnit::assertEquals(0, $this->tweetsSent);
+        PHPUnit::assertEquals(0, $this->tweetsSent, "There should not be any tweets sent but there are {$this->tweetsSent} tweets send.");
     }
 
     public function assertLastTweetMessageWas(string $expectedStatus): void

@@ -161,6 +161,11 @@ class Stream extends Model implements Feedable
         return $query->where('scheduled_start_time', '<=', now()->addMinutes(5));
     }
 
+    public function scopeScheduledTimeNotPassed(Builder $query): Builder
+    {
+        return $query->where('scheduled_start_time', '>=', now());
+    }
+
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->when($search, function(Builder $builder, ?string $search) {
