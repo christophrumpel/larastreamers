@@ -38,7 +38,7 @@
                 <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
                 <x-local-time class=""
                               :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
-                              :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
+                              :format="'YYYY-MM-DD'"/>
             </p>
             @if ($stream->language->shouldRender())
                 <p class="text-base text-gray flex items-center">
