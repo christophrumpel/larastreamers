@@ -6,7 +6,6 @@ use App\Facades\YouTube;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use App\Services\YouTube\YouTubeException;
 use Illuminate\Console\Command;
 
 class ImportChannelsForStreamsCommand extends Command
@@ -29,7 +28,7 @@ class ImportChannelsForStreamsCommand extends Command
 
         $youTubeResponse = YouTube::videos($streamsWithoutChannel->pluck('youtube_id'));
 
-        $youTubeResponse->each(function (StreamData $streamData) {
+        $youTubeResponse->each(function(StreamData $streamData) {
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
             $channel = Channel::create($channelData->prepareForModel());
@@ -38,7 +37,7 @@ class ImportChannelsForStreamsCommand extends Command
             $stream->update(['channel_id' => $channel->id]);
         });
 
-        $this->info($streamsWithoutChannel->count() . ' stream channels were imported.');
+        $this->info($streamsWithoutChannel->count().' stream channels were imported.');
 
         return self::SUCCESS;
     }

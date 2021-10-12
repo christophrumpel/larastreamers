@@ -27,7 +27,7 @@ class ChannelFactory extends Factory
 
     public function autoImportEnabled(): self
     {
-        return $this->state(function () {
+        return $this->state(function() {
             return ['auto_import' => true];
         });
     }

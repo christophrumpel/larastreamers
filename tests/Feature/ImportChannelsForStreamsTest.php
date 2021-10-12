@@ -3,15 +3,12 @@
 namespace Tests\Feature;
 
 use App\Console\Commands\ImportChannelsForStreamsCommand;
-use App\Facades\YouTube;
 use App\Models\Channel;
 use App\Models\Stream;
-use App\Services\YouTube\StreamData;
-use Illuminate\Support\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ImportChannelsForStreamsTest extends TestCase
 {
@@ -23,7 +20,7 @@ class ImportChannelsForStreamsTest extends TestCase
     {
         Http::fake([
             '*videos*' => Http::response($this->videoResponse()),
-            '*channels*' => Http::response($this->channelResponse())
+            '*channels*' => Http::response($this->channelResponse()),
         ]);
 
         // Arrange
@@ -49,18 +46,18 @@ class ImportChannelsForStreamsTest extends TestCase
     /** @test */
     public function it_does_not_call_youtube_if_all_channels_given(): void
     {
-    	// Arrange
-    	Http::fake();
+        // Arrange
+        Http::fake();
         Stream::factory()
             ->for(Channel::factory())
             ->create();
 
-    	// Act
+        // Act
         $this->artisan(ImportChannelsForStreamsCommand::class)
             ->expectsOutput('There are no streams without a channel.')
             ->assertExitCode(0);
 
-    	// Assert
+        // Assert
         Http::assertNothingSent();
     }
 }
