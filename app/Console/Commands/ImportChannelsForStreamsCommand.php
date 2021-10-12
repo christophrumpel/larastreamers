@@ -18,6 +18,7 @@ class ImportChannelsForStreamsCommand extends Command
     {
         $streamsWithoutChannel = Stream::whereNull('channel_id')
             ->approved()
+            ->limit(50)
             ->get();
 
         if ($streamsWithoutChannel->isEmpty()) {
