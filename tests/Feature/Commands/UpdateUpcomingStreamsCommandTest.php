@@ -6,14 +6,11 @@ use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class UpdateUpcomingStreamsCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_updates_upcoming_streams(): void
     {
@@ -74,6 +71,8 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
     /** @test */
     public function it_tells_if_there_are_no_streams_to_update(): void
     {
+        $this->assertDatabaseCount(Stream::class, 0);
+
         // Act & Expect
         $this->artisan(UpdateUpcomingStreamsCommand::class)
             ->expectsOutput('There are no streams to update.')
