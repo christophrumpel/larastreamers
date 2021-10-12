@@ -17,7 +17,7 @@ class ChannelFactory extends Factory
             'platform_id' => $this->faker->word,
             'language_code' => 'en',
             'slug' => $this->faker->slug,
-            'name' => $this->faker->name,
+            'name' => collect(['Dr Disrespect', 'Lulu', 'Harris Heller', 'itzTimmy'])->random(),
             'description' => $this->faker->text,
             'thumbnail_url' => $this->faker->url,
             'country' => $this->faker->countryCode,

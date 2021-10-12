@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddSingleStreamToCalendarController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
+use App\Http\Controllers\PageStreamersController;
 use App\Http\Controllers\Submission\ApproveStreamController;
 use App\Http\Controllers\Submission\RejectStreamController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,9 @@ Route::get('/', PageHomeController::class)
 
 Route::view('/archive', 'pages.archive')
     ->name('archive');
+
+Route::get('/streamers', PageStreamersController::class)
+    ->name('streamers');
 
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');

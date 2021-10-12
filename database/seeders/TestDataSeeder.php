@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Channel;
 use App\Models\Stream;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -23,22 +24,28 @@ class TestDataSeeder extends Seeder
             ]);
         }
 
+        Channel::truncate();
         Stream::truncate();
+
+        $channels = Channel::factory()->count(4)->create();
 
         Stream::factory()
             ->approved()
             ->live()
+            ->for($channels->random())
             ->count(3)
             ->create();
 
         Stream::factory()
             ->approved()
             ->upcoming()
+            ->for($channels->random())
             ->count(100)
             ->create();
 
         Stream::factory()
             ->finished()
+            ->for($channels->random())
             ->count(100)
             ->create();
     }
