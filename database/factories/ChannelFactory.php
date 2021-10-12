@@ -17,10 +17,14 @@ class ChannelFactory extends Factory
             'platform_id' => $this->faker->word,
             'language_code' => 'en',
             'slug' => $this->faker->slug,
-            'name' => $this->faker->name,
+            'name' => collect(['Dr Disrespect', 'Lulu', 'Harris Heller', 'itzTimmy'])->random(),
             'description' => $this->faker->text,
-            'thumbnail_url' => $this->faker->url,
+            'thumbnail_url' => collect([
+                'https://yt3.ggpht.com/JWtY_fLVUhRudr1y1TqOH60PGjmUjAjW3vKHIBrvge4j_Czh1XEkLekqEACaJEJdWkG00HeOsg=s176-c-k-c0x00ffffff-no-rj',
+                'https://yt3.ggpht.com/ytc/AKedOLRLFKZcTc_hXy75Y829rvkXzIAGxKftFRqt222Z7i4=s176-c-k-c0x00ffffff-no-rj',
+            ])->random(),
             'country' => $this->faker->countryCode,
+            'twitter_handle' => $this->faker->word,
             'on_platform_since' => Carbon::now(),
         ];
     }

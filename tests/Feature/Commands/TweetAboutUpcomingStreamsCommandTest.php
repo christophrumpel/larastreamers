@@ -84,7 +84,7 @@ class TweetAboutUpcomingStreamsCommandTest extends TestCase
         // Arrange
         $stream = Stream::factory()
             ->upcoming()
-            ->for(Channel::factory())
+            ->for(Channel::factory()->create(['twitter_handle' => null]))
             ->startsWithinUpcomingTweetRange()
             ->create();
 

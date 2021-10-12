@@ -77,7 +77,7 @@ class TweetAboutLiveStreamsCommandTest extends TestCase
         // Arrange
         $stream = Stream::factory()
             ->live()
-            ->for(Channel::factory())
+            ->for(Channel::factory()->create(['twitter_handle' => null]))
             ->create();
 
         $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
