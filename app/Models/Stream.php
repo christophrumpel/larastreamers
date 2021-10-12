@@ -92,8 +92,6 @@ class Stream extends Model implements Feedable
 
     public function isLive(): bool
     {
-        ray($this->status);
-
         return $this->status === StreamData::STATUS_LIVE;
     }
 

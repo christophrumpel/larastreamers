@@ -23,8 +23,6 @@ abstract class TestCase extends BaseTestCase
         config()->set('services.youtube.key', 'FAKE-YOUTUBE-KEY');
         $this->twitterFake = new TwitterFake();
         $this->app->instance(Twitter::class, $this->twitterFake);
-
-        ray()->newScreen($this->getName());
     }
 
     protected function useRealYoutubeApi(): void
