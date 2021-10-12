@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-class ImportChannelsForStreamsTest extends TestCase
+class ImportChannelsForStreamsCommandTest extends TestCase
 {
     use YouTubeResponses;
 
@@ -40,6 +40,26 @@ class ImportChannelsForStreamsTest extends TestCase
         $stream1->refresh();
         $this->assertEquals(1, $stream1->channel_id);
     }
+
+    /** @test */
+    public function it_does_not_import_channel_for_pending_stream(): void
+    {
+        $this->withoutExceptionHandling();
+        Http::fake();
+
+        // Arrange
+        Stream::factory()
+            ->notApproved()
+            ->create(['youtube_id' => 'gzqJZQyfkaI']);
+
+        // Act & Assert
+        $this->artisan(ImportChannelsForStreamsCommand::class)
+            ->expectsOutput('There are no streams without a channel.')
+            ->assertExitCode(0);
+
+        Http::assertNothingSent();
+    }
+
 
     /** @test */
     public function it_does_not_call_youtube_if_all_channels_given(): void

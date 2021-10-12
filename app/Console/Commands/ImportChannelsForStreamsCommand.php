@@ -16,7 +16,9 @@ class ImportChannelsForStreamsCommand extends Command
 
     public function handle(): int
     {
-        $streamsWithoutChannel = Stream::whereNull('channel_id')->get();
+        $streamsWithoutChannel = Stream::whereNull('channel_id')
+            ->approved()
+            ->get();
 
         if ($streamsWithoutChannel->isEmpty()) {
             $this->info('There are no streams without a channel.');
