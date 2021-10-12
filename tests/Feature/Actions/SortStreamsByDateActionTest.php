@@ -5,14 +5,11 @@ namespace Tests\Feature\Actions;
 use App\Actions\SortStreamsByDateAction;
 use App\Models\Stream;
 use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class SortStreamsByDateActionTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_groups_streams_by_date(): void
     {

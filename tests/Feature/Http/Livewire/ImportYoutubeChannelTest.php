@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Livewire;
 use App\Http\Livewire\ImportYouTubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
@@ -14,7 +13,6 @@ use Tests\TestCase;
 
 class ImportYoutubeChannelTest extends TestCase
 {
-    use RefreshDatabase;
     use YouTubeResponses;
 
     /** @test */

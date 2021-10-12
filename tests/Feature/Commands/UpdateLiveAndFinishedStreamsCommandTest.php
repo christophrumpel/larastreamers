@@ -6,14 +6,11 @@ use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_updates_archived_streams(): void
     {

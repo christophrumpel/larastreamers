@@ -5,14 +5,12 @@ namespace Tests\Feature;
 use App\Console\Commands\ImportChannelsForStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
 class ImportChannelsForStreamsTest extends TestCase
 {
-    use RefreshDatabase;
     use YouTubeResponses;
 
     /** @test */

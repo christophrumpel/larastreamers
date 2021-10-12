@@ -7,14 +7,11 @@ use App\Facades\YouTube;
 use App\Http\Livewire\SubmitYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class SubmitYouTubeLiveStreamTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_calls_the_submit_action(): void
     {

@@ -6,7 +6,6 @@ use App\Facades\YouTube;
 use App\Http\Livewire\ImportYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
@@ -14,8 +13,6 @@ use Tests\TestCase;
 
 class ImportYoutubeLiveStreamTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_imports_upcoming_stream_from_youTube_url(): void
     {

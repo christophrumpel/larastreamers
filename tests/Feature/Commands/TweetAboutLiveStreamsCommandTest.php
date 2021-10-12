@@ -6,13 +6,10 @@ use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TweetAboutLiveStreamsCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_tweets_streams_that_are_live(): void
     {

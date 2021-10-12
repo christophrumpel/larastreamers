@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Stream;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class FeedTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_provides_streams_in_rss_feed(): void
     {
