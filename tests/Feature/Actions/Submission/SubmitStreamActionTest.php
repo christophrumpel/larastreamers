@@ -7,14 +7,11 @@ use App\Facades\YouTube;
 use App\Mail\StreamSubmittedMail;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class SubmitStreamActionTest extends TestCase
 {
-    use RefreshDatabase;
-
     private string $youTubeId = '1234';
 
     /** @test */

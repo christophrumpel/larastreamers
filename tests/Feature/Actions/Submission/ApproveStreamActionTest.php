@@ -5,14 +5,11 @@ namespace Tests\Feature\Actions\Submission;
 use App\Actions\Submission\ApproveStreamAction;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ApproveStreamActionTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected ApproveStreamAction $approveStream;
 
     public function setUp(): void

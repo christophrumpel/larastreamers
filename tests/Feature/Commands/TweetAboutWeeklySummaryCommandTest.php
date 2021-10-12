@@ -4,14 +4,11 @@ namespace Tests\Feature\Commands;
 
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Models\Stream;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class TweetAboutWeeklySummaryCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_tweets_weekly_summary(): void
     {

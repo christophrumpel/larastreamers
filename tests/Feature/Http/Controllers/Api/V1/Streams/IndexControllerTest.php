@@ -3,13 +3,10 @@
 namespace Tests\Feature\Http\Controllers\Api\V1\Streams;
 
 use App\Models\Stream;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class IndexControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_shows_all_streams(): void
     {

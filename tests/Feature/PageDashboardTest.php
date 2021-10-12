@@ -5,13 +5,10 @@ namespace Tests\Feature;
 use App\Http\Livewire\ImportYouTubeChannel;
 use App\Http\Livewire\ImportYouTubeLiveStream;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PageDashboardTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_includes_livewire_youtube_import_stream_component(): void
     {

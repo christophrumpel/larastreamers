@@ -4,13 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\Stream;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PageArchiveTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_shows_only_finished_streams(): void
     {

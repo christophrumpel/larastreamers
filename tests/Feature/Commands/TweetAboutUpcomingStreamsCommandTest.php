@@ -5,14 +5,11 @@ namespace Tests\Feature\Commands;
 use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class TweetAboutUpcomingStreamsCommandTest extends TestCase
 {
-    use RefreshDatabase;
-
     /** @test */
     public function it_tweets_streams_that_are_upcoming(): void
     {
