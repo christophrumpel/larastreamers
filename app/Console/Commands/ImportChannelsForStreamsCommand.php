@@ -34,7 +34,7 @@ class ImportChannelsForStreamsCommand extends Command
         $youTubeResponse->each(function(StreamData $streamData) {
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
-            $channel = Channel::create($channelData->prepareForModel());
+            $channel = Channel::create(array_merge($channelData->prepareForModel(), ['language_code' => 'en']));
             $stream = Stream::where('youtube_id', $streamData->videoId)->first();
 
             $stream->update(['channel_id' => $channel->id]);
