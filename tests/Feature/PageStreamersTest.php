@@ -4,9 +4,9 @@ namespace Tests\Feature;
 
 use App\Models\Channel;
 use App\Models\Stream;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PageStreamersTest extends TestCase
 {
@@ -15,28 +15,28 @@ class PageStreamersTest extends TestCase
     /** @test */
     public function it_shows_channel_data(): void
     {
-    	// Arrange
+        // Arrange
         $channel = Channel::factory()
             ->create(['name' => 'Channel Dries']);
 
         // Act
         $response = $this->get(route('streamers'));
 
-    	// Assert
+        // Assert
         $response->assertSee([
             $channel->name,
             $channel->country,
             Str::of($channel->description)->limit(100),
             $channel->thumbnail_url,
             "https://twitter.com/$channel->twitter_handle",
-            route('archive', ['search' => $channel->name])
+            route('archive', ['search' => $channel->name]),
         ]);
     }
 
     /** @test */
     public function it_shows_all_streamers_alphabetically(): void
     {
-    	// Arrange
+        // Arrange
         Channel::factory()
             ->create(['name' => 'C Channel Dries']);
         Channel::factory()
@@ -44,14 +44,14 @@ class PageStreamersTest extends TestCase
         Channel::factory()
             ->create(['name' => 'B Channel Steve']);
 
-    	// Act
+        // Act
         $response = $this->get(route('streamers'));
 
-    	// Assert
+        // Assert
         $response->assertSeeInOrder([
             'A Channel Mohamed',
             'B Channel Steve',
-            'C Channel Dries'
+            'C Channel Dries',
         ]);
     }
 
