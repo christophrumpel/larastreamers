@@ -24,4 +24,11 @@ class ChannelFactory extends Factory
             'on_platform_since' => Carbon::now(),
         ];
     }
+
+    public function autoImportEnabled(): self
+    {
+        return $this->state(function () {
+            return ['auto_import' => true];
+        });
+    }
 }

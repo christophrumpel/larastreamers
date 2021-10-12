@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
 use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
+use App\Console\Commands\ImportChannelsForStreamsCommand;
 use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
         UpdateUpcomingStreamsCommand::class,
         ImportChannelStreamsCommand::class,
         TweetAboutWeeklySummaryCommand::class,
+        ImportChannelsForStreamsCommand::class,
     ];
 
     /**

@@ -18,7 +18,10 @@ class ImportChannelStreamsCommandTest extends TestCase
     {
         // Arrange
         Queue::fake();
-        Channel::factory()->count(2)->create();
+        Channel::factory()
+            ->autoImportEnabled()
+            ->count(2)
+            ->create();
 
         // Act
         $this->artisan(ImportChannelStreamsCommand::class);
