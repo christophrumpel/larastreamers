@@ -16,6 +16,4 @@ class Channel extends Model
     {
         return $query->where('auto_import', true);
     }
-
-
 }
