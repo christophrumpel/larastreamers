@@ -60,7 +60,6 @@ class ImportChannelsForStreamsCommandTest extends TestCase
         Http::assertNothingSent();
     }
 
-
     /** @test */
     public function it_does_not_call_youtube_if_all_channels_given(): void
     {
