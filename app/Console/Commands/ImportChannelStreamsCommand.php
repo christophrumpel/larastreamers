@@ -10,7 +10,7 @@ class ImportChannelStreamsCommand extends Command
 {
     protected $signature = 'larastreamers:import-channel-streams';
 
-    protected $description = 'Command description';
+    protected $description = 'Import all streams of auto-import channels.';
 
     public function handle(): int
     {

@@ -6,7 +6,6 @@ use App\Facades\YouTube;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
-use App\Services\YouTube\YouTubeException;
 use Illuminate\Console\Command;
 
 class ImportChannelsForStreamsCommand extends Command
