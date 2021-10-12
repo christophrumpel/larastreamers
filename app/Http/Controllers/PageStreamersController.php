@@ -9,7 +9,8 @@ class PageStreamersController extends Controller
 {
     public function __invoke(): View
     {
-        $channels = Channel::orderBy('name')->get();
+        $channels = Channel::withCount('streams')
+            ->orderBy('name')->get();
 
         return view('pages.streamers', ['channels' => $channels]);
     }

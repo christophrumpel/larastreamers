@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Channel;
+use App\Models\Stream;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -27,6 +28,7 @@ class PageStreamersTest extends TestCase
             $channel->country,
             Str::of($channel->description)->limit(100),
             $channel->thumbnail_url,
+            "https://twitter.com/$channel->twitter_handle",
             route('archive', ['search' => $channel->name])
         ]);
     }
@@ -50,6 +52,34 @@ class PageStreamersTest extends TestCase
             'A Channel Mohamed',
             'B Channel Steve',
             'C Channel Dries'
+        ]);
+    }
+
+    /** @test */
+    public function it_shows_count_of_channel_streams(): void
+    {
+        // Arrange
+        Stream::factory()
+            ->for(Channel::factory())
+            ->count(10)
+            ->create();
+        Stream::factory()
+            ->for(Channel::factory())
+            ->count(20)
+            ->create();
+        Stream::factory()
+            ->for(Channel::factory())
+            ->count(30)
+            ->create();
+
+        // Act
+        $response = $this->get(route('streamers'));
+
+        // Assert
+        $response->assertSee([
+            'Show 10 streams',
+            'Show 20 streams',
+            'Show 30 streams',
         ]);
     }
 }

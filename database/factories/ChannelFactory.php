@@ -24,6 +24,7 @@ class ChannelFactory extends Factory
                 'https://yt3.ggpht.com/ytc/AKedOLRLFKZcTc_hXy75Y829rvkXzIAGxKftFRqt222Z7i4=s176-c-k-c0x00ffffff-no-rj',
             ])->random(),
             'country' => $this->faker->countryCode,
+            'twitter_handle' => $this->faker->word,
             'on_platform_since' => Carbon::now(),
         ];
     }
