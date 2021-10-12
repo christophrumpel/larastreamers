@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Channel;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -23,7 +24,8 @@ class PageStreamersTest extends TestCase
     	// Assert
         $response->assertSee([
             $channel->name,
-            $channel->description,
+            $channel->country,
+            Str::of($channel->description)->limit(100),
             $channel->thumbnail_url,
             route('archive', ['search' => $channel->name])
         ]);

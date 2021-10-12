@@ -1,5 +1,7 @@
 <div>
-    @include('pages.partials.header-archive')
+    <x-page-header title="Archive">
+        <x-search wire:model.debounce.300ms="search" />
+    </x-page-header>
 
     <main class="flex-1 text-white bg-gray-darkest">
         <div class="w-full max-w-6xl mx-auto px-6 xl:px-0 py-24 space-y-16" >
