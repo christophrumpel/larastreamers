@@ -48,7 +48,6 @@ class PageStreamersTest extends TestCase
         ]);
     }
 
-
     /** @test */
     public function it_shows_all_streamers(): void
     {
