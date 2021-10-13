@@ -113,7 +113,6 @@ class PageStreamersTest extends TestCase
             ->count(10)
             ->create();
 
-
         // Act
         $response = $this->get(route('streamers'));
 
@@ -122,5 +121,4 @@ class PageStreamersTest extends TestCase
             'Show 10',
         ]);
     }
-
 }
