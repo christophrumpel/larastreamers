@@ -20,19 +20,14 @@ class YouTubeClient
             throw YouTubeException::unknownChannel($id);
         }
 
-        if(is_null(data_get($result, 'snippet.customUrl'))) {
-            dd($result);
-           }
-
-
         return new ChannelData(
             platformId: data_get($result, 'id'),
-            slug: data_get($result, 'snippet.customUrl'),
+            slug: data_get($result, 'snippet.customUrl', ''),
             name: data_get($result, 'snippet.title'),
-            description: data_get($result, 'snippet.description'),
+            description: data_get($result, 'snippet.description', ''),
             onPlatformSince: $this->toCarbon(data_get($result, 'snippet.publishedAt')),
             thumbnailUrl: last(data_get($result, 'snippet.thumbnails'))['url'] ?? null,
-            country: data_get($result, 'snippet.country'),
+            country: data_get($result, 'snippet.country', ''),
         );
     }
 
