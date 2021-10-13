@@ -31,16 +31,15 @@ class ImportChannelsForStreamsCommand extends Command
 
         $youTubeResponse = YouTube::videos($streamsWithoutChannel->pluck('youtube_id'));
 
-        $youTubeResponse->each(function(StreamData $streamData) {
+        $youTubeResponse->each(function (StreamData $streamData) {
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
-            $channel = Channel::create(array_merge($channelData->prepareForModel(), ['language_code' => 'en']));
+            $channel = Channel::updateOrCreate(['platform_id' => $channelData->platformId], array_merge($channelData->prepareForModel(), ['language_code' => 'en']));
             $stream = Stream::where('youtube_id', $streamData->videoId)->first();
-            // TODO, slug is null??
             $stream->update(['channel_id' => $channel->id]);
         });
 
-        $this->info($streamsWithoutChannel->count().' stream channels were imported.');
+        $this->info($streamsWithoutChannel->count() . ' stream channels were imported.');
 
         return self::SUCCESS;
     }

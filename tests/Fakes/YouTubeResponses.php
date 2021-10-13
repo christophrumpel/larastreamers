@@ -4,6 +4,14 @@ namespace Tests\Fakes;
 
 trait YouTubeResponses
 {
+    protected function singleVideoResponse(): array
+    {
+        $response = $this->videoResponse();
+        unset($response['items'][1], $response['items'][2]);
+
+        return $response;
+    }
+
     protected function videoResponse(): array
     {
         return [

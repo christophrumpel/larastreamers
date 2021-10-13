@@ -20,6 +20,11 @@ class YouTubeClient
             throw YouTubeException::unknownChannel($id);
         }
 
+        if(is_null(data_get($result, 'snippet.customUrl'))) {
+            dd($result);
+           }
+
+
         return new ChannelData(
             platformId: data_get($result, 'id'),
             slug: data_get($result, 'snippet.customUrl'),

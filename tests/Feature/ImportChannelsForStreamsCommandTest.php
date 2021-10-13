@@ -44,7 +44,6 @@ class ImportChannelsForStreamsCommandTest extends TestCase
     /** @test */
     public function it_does_not_import_channel_for_pending_stream(): void
     {
-        $this->withoutExceptionHandling();
         Http::fake();
 
         // Arrange
@@ -58,6 +57,27 @@ class ImportChannelsForStreamsCommandTest extends TestCase
             ->assertExitCode(0);
 
         Http::assertNothingSent();
+    }
+
+    /** @test */
+    public function it_updates_channel_if_already_given(): void
+    {
+        Http::fake([
+            '*videos*' => Http::response($this->singleVideoResponse()),
+            '*channels*' => Http::response($this->channelResponse()),
+        ]);
+
+        // Arrange
+        Channel::factory()
+            ->create(['platform_id' => 'UCdtd5QYBx9MUVXHm7qgEpxA']);
+        Stream::factory()
+            ->approved()
+            ->create(['channel_id' => null, 'youtube_id' => 'gzqJZQyfkaI']);
+
+        // Act & Assert
+        $this->artisan(ImportChannelsForStreamsCommand::class);
+
+        $this->assertDatabaseCount(Channel::class, 1);
     }
 
     /** @test */
