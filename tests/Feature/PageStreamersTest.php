@@ -61,14 +61,20 @@ class PageStreamersTest extends TestCase
         // Arrange
         Stream::factory()
             ->for(Channel::factory())
+            ->approved()
+            ->finished()
             ->count(10)
             ->create();
         Stream::factory()
             ->for(Channel::factory())
+            ->approved()
+            ->finished()
             ->count(20)
             ->create();
         Stream::factory()
             ->for(Channel::factory())
+            ->approved()
+            ->finished()
             ->count(30)
             ->create();
 
@@ -82,4 +88,39 @@ class PageStreamersTest extends TestCase
             'Show 10',
         ]);
     }
+
+    /** @test */
+    public function it_only_counts_approved_and_finished_streams(): void
+    {
+        // Arrange
+        $channel = Channel::factory()->create();
+        Stream::factory()
+            ->approved()
+            ->finished()
+            ->for($channel)
+            ->count(10)
+            ->create();
+
+        Stream::factory()
+            ->notApproved()
+            ->for($channel)
+            ->count(10)
+            ->create();
+
+        Stream::factory()
+            ->upcoming()
+            ->for($channel)
+            ->count(10)
+            ->create();
+
+
+        // Act
+        $response = $this->get(route('streamers'));
+
+        // Assert
+        $response->assertSeeInOrder([
+            'Show 10',
+        ]);
+    }
+
 }

@@ -18,6 +18,13 @@ class Channel extends Model
         return $this->hasMany(Stream::class);
     }
 
+    public function approvedFinishedStreams(): HasMany
+    {
+        return $this->hasMany(Stream::class)
+            ->approved()
+            ->finished();
+    }
+
     public function scopeAutoImportEnabled(Builder $query): Builder
     {
         return $query->where('auto_import', true);
