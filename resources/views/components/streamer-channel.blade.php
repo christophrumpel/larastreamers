@@ -14,7 +14,7 @@
         </div>
         <div class="flex justify-between">
             <a class="px-3 py-2 text-sm font-medium text-white transition bg-red rounded-md shadow hover:bg-red-dark focus:bg-red focus:outline-none"
-               href="{{ route('archive', ['search' => $channel->slug ?? $channel->name]) }}">Show {{ $channel->streams_count }}
+               href="{{ route('archive', ['search' => $channel->name]) }}">Show {{ $channel->streams_count }}
                 streams</a>
             <div>
                 <a href="{{ $channel->url() }}">

@@ -29,25 +29,9 @@ class PageStreamersTest extends TestCase
             Str::of($channel->description)->limit(100),
             $channel->thumbnail_url,
             "https://twitter.com/$channel->twitter_handle",
-            route('archive', ['search' => $channel->slug]),
-        ]);
-    }
-
-    public function it_adds_search_link_with_channel_name_if_slug_not_given(): void
-    {
-        // Arrange
-        $channel = Channel::factory()
-            ->create(['name' => 'Channel Dries']);
-
-        // Act
-        $response = $this->get(route('streamers'));
-
-        // Assert
-        $response->assertSee([
             route('archive', ['search' => $channel->name]),
         ]);
     }
-
 
     /** @test */
     public function it_shows_all_streamers(): void
