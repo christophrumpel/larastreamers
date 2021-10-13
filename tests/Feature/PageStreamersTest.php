@@ -34,7 +34,7 @@ class PageStreamersTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_all_streamers_alphabetically(): void
+    public function it_shows_all_streamers(): void
     {
         // Arrange
         Channel::factory()
@@ -48,7 +48,7 @@ class PageStreamersTest extends TestCase
         $response = $this->get(route('streamers'));
 
         // Assert
-        $response->assertSeeInOrder([
+        $response->assertSee([
             'A Channel Mohamed',
             'B Channel Steve',
             'C Channel Dries',
@@ -56,7 +56,7 @@ class PageStreamersTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_count_of_channel_streams(): void
+    public function it_shows_streamers_ordered_by_stream_count(): void
     {
         // Arrange
         Stream::factory()
@@ -76,10 +76,10 @@ class PageStreamersTest extends TestCase
         $response = $this->get(route('streamers'));
 
         // Assert
-        $response->assertSee([
-            'Show 10 streams',
-            'Show 20 streams',
+        $response->assertSeeInOrder([
             'Show 30 streams',
+            'Show 20 streams',
+            'Show 10 streams',
         ]);
     }
 }

@@ -33,6 +33,12 @@ class ImportChannelsForStreamsCommand extends Command
 
         $this->info("Found {$youTubeResponse->count()} stream(s) from API.");
 
+        if ($youTubeResponse->isEmpty()) {
+            $this->info('No channels were imported or updated.');
+
+            return self::SUCCESS;
+        }
+
         $youTubeResponse->each(function(StreamData $streamData) {
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
@@ -41,7 +47,7 @@ class ImportChannelsForStreamsCommand extends Command
             $stream->update(['channel_id' => $channel->id]);
         });
 
-        $this->info($streamsWithoutChannel->count().' stream channels were imported.');
+        $this->info($streamsWithoutChannel->count().' stream channels were updated or imported.');
 
         return self::SUCCESS;
     }
