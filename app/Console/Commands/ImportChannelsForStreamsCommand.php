@@ -31,6 +31,8 @@ class ImportChannelsForStreamsCommand extends Command
 
         $youTubeResponse = YouTube::videos($streamsWithoutChannel->pluck('youtube_id'));
 
+        $this->info("Found {$youTubeResponse->count()} stream(s) from API.");
+
         $youTubeResponse->each(function(StreamData $streamData) {
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
