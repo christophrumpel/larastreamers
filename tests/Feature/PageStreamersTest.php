@@ -77,9 +77,9 @@ class PageStreamersTest extends TestCase
 
         // Assert
         $response->assertSeeInOrder([
-            'Show 30 streams',
-            'Show 20 streams',
-            'Show 10 streams',
+            'Show 30',
+            'Show 20',
+            'Show 10',
         ]);
     }
 }

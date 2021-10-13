@@ -14,14 +14,19 @@
         </div>
         <div class="flex justify-between">
             <a class="px-3 py-2 text-sm font-medium text-white transition bg-red rounded-md shadow hover:bg-red-dark focus:bg-red focus:outline-none"
-               href="{{ route('archive', ['search' => $channel->name]) }}">Show {{ $channel->streams_count }} streams</a>
+               href="{{ route('archive', ['search' => $channel->name]) }}">Show {{ $channel->streams_count }}
+                streams</a>
             <div>
                 <a href="{{ $channel->url() }}">
-                    <x-icons.youtube class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white" />
+                    <x-icons.youtube
+                        class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white"/>
                 </a>
-            <a href="https://twitter.com/{{ $channel->twitter_handle }}">
-                <x-icons.twitter class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white"/>
-            </a>
+                @if($channel->twitter_handle)
+                    <a href="https://twitter.com/{{ $channel->twitter_handle }}">
+                        <x-icons.twitter
+                            class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white"/>
+                    </a>
+                @endif
             </div>
         </div>
     </div>
