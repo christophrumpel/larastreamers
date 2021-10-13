@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <livewire:import-youtube-live-stream/>
+            <livewire:import-you-tube-live-stream/>
 
             <livewire:import-youtube-channel/>
         </div>

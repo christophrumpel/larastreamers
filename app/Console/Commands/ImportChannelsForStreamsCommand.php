@@ -36,7 +36,7 @@ class ImportChannelsForStreamsCommand extends Command
             $channelData = YouTube::channel($streamData->channelId);
             $channel = Channel::create(array_merge($channelData->prepareForModel(), ['language_code' => 'en']));
             $stream = Stream::where('youtube_id', $streamData->videoId)->first();
-
+            // TODO, slug is null??
             $stream->update(['channel_id' => $channel->id]);
         });
 

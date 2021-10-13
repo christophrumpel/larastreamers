@@ -12,14 +12,9 @@ class ImportYouTubeLiveStream extends Component
     public $youTubeId;
     public $language = 'en';
 
-    public static function getName(): string
-    {
-        return 'import-youtube-live-stream';
-    }
-
     public function render(): View
     {
-        return view('livewire.import-youtube-live-stream');
+        return view('livewire.import-you-tube-live-stream');
     }
 
     public function importStream()
