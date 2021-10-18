@@ -114,7 +114,7 @@ class PageArchiveTest extends TestCase
     /** @test */
     public function it_searches_for_streams_by_specific_streamer(): void
     {
-    	// Arrange
+        // Arrange
         Stream::factory()->finished()->create(['channel_id' => 1, 'channel_title' => 'Laravel Stream']);
         Stream::factory()->finished()->create(['channel_id' => 2, 'channel_title' => 'Tailwind Stream']);
 
@@ -136,5 +136,4 @@ class PageArchiveTest extends TestCase
             ->assertSee('Laravel Stream')
             ->assertDontSee('Tailwind Stream');
     }
-
 }

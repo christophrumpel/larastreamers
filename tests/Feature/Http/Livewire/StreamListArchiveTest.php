@@ -11,11 +11,10 @@ use Vinkla\Hashids\Facades\Hashids;
 
 class StreamListArchiveTest extends TestCase
 {
-
     /** @test */
     public function it_only_shows_streams_by_selected_streamer(): void
     {
-    	// Arrange
+        // Arrange
         Stream::factory()
             ->finished()
             ->create(['title' => 'Stream Seen', 'channel_id' => 1]);
@@ -23,7 +22,7 @@ class StreamListArchiveTest extends TestCase
             ->finished()
             ->create(['title' => 'Stream Not Seen', 'channel_id' => 2]);
 
-    	// Act & Assert
+        // Act & Assert
         Livewire::test(StreamListArchive::class)
             ->set('streamer', Hashids::encode(1))
             ->assertSee('Stream Seen')
@@ -33,7 +32,7 @@ class StreamListArchiveTest extends TestCase
     /** @test */
     public function it_shows_streamers_as_dropdown_options(): void
     {
-    	// Arrange
+        // Arrange
         Channel::factory()
             ->create(['name' => 'Channel A']);
         Channel::factory()
@@ -42,8 +41,8 @@ class StreamListArchiveTest extends TestCase
         // Arrange & Act & Assert
         Livewire::test(StreamListArchive::class)
             ->assertSee([
-               'Channel A',
-               'Channel B'
+                'Channel A',
+                'Channel B',
             ]);
     }
 

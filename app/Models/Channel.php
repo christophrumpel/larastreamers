@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Channel extends Model
 {

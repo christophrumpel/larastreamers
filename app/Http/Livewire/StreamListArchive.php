@@ -28,7 +28,6 @@ class StreamListArchive extends Component
 
     public function render(): View
     {
-
         $streams = Stream::query()
             ->approved()
             ->finished()
