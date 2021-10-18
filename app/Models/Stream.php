@@ -174,6 +174,13 @@ class Stream extends Model implements Feedable
         });
     }
 
+    public function scopeByStreamer(Builder $query, ?string $streamerId): Builder
+    {
+        return $query->when($streamerId, function(Builder $builder, ?string $streamerId) {
+            $builder->where(fn(Builder $query) => $query->where('channel_id', $streamerId));
+        });
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()

@@ -13,9 +13,12 @@ class StreamListArchive extends Component
 
     protected $queryString = [
         'search' => ['except' => ''],
+        'streamer' => ['except' => ''],
     ];
 
     public ?string $search = null;
+
+    public ?string $streamer = null;
 
     public function updatedSearch(): void
     {
@@ -24,13 +27,17 @@ class StreamListArchive extends Component
 
     public function render(): View
     {
+
+        $streams = Stream::query()
+            ->approved()
+            ->finished()
+            ->search($this->search)
+            ->byStreamer($this->streamer)
+            ->fromLatestToOldest()
+            ->paginate(24);
+
         return view('livewire.stream-list-archive', [
-            'streams' => Stream::query()
-                ->approved()
-                ->finished()
-                ->search($this->search)
-                ->fromLatestToOldest()
-                ->paginate(24),
+            'streams' => $streams,
         ]);
     }
 }

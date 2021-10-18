@@ -109,4 +109,31 @@ class PageArchiveTest extends TestCase
                 'The Streamers',
             ]);
     }
+
+    /** @test */
+    public function it_searches_for_streams_by_specific_streamer(): void
+    {
+    	// Arrange
+        Stream::factory()->finished()->create(['channel_id' => 1, 'channel_title' => 'Laravel Stream']);
+        Stream::factory()->finished()->create(['channel_id' => 2, 'channel_title' => 'Tailwind Stream']);
+
+        // Act & Assert
+        $this->get(route('archive', ['streamer' => '1']))
+            ->assertSee('Laravel Stream')
+            ->assertDontSee('Tailwind Stream');
+    }
+
+    /** @test */
+    public function it_searches_for_streams_by_specific_streamer_and_search_term(): void
+    {
+        // Arrange
+        Stream::factory()->finished()->create(['channel_id' => 1, 'title' => 'Laravel Stream']);
+        Stream::factory()->finished()->create(['channel_id' => 1, 'title' => 'Tailwind Stream']);
+
+        // Act & Assert
+        $this->get(route('archive', ['streamer' => '1', 'search' => 'Laravel']))
+            ->assertSee('Laravel Stream')
+            ->assertDontSee('Tailwind Stream');
+    }
+
 }
