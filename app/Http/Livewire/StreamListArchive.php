@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
@@ -38,6 +39,7 @@ class StreamListArchive extends Component
 
         return view('livewire.stream-list-archive', [
             'streams' => $streams,
+            'channels' => Channel::select(['id', 'name'])->get(),
         ]);
     }
 }
