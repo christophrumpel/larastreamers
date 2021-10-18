@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Stream;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -21,7 +22,7 @@ class StreamListArchive extends Component
         $this->resetPage();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.stream-list-archive', [
             'streams' => Stream::query()
