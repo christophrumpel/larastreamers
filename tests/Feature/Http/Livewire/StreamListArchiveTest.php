@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Http\Livewire;
 
-use App\Http\Livewire\ImportYouTubeChannel;
-use App\Http\Livewire\StreamList;
 use App\Http\Livewire\StreamListArchive;
 use App\Models\Channel;
 use App\Models\Stream;
 use Livewire\Livewire;
 use Tests\TestCase;
+use Vinkla\Hashids\Facades\Hashids;
 
 class StreamListArchiveTest extends TestCase
 {
@@ -26,7 +25,7 @@ class StreamListArchiveTest extends TestCase
 
     	// Act & Assert
         Livewire::test(StreamListArchive::class)
-            ->set('streamer', '1')
+            ->set('streamer', Hashids::encode(1))
             ->assertSee('Stream Seen')
             ->assertDontSee('Stream Not Seen');
     }

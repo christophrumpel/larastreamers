@@ -29,7 +29,7 @@ class PageStreamersTest extends TestCase
             Str::of($channel->description)->limit(100),
             $channel->thumbnail_url,
             "https://twitter.com/$channel->twitter_handle",
-            route('archive', ['streamer' => $channel->id]),
+            route('archive', ['streamer' => $channel->hashid]),
         ]);
     }
 

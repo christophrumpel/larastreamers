@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Stream;
 use Carbon\Carbon;
 use Tests\TestCase;
+use Vinkla\Hashids\Facades\Hashids;
 
 class PageArchiveTest extends TestCase
 {
@@ -118,7 +119,7 @@ class PageArchiveTest extends TestCase
         Stream::factory()->finished()->create(['channel_id' => 2, 'channel_title' => 'Tailwind Stream']);
 
         // Act & Assert
-        $this->get(route('archive', ['streamer' => '1']))
+        $this->get(route('archive', ['streamer' => Hashids::encode(1)]))
             ->assertSee('Laravel Stream')
             ->assertDontSee('Tailwind Stream');
     }
