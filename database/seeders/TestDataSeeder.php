@@ -45,8 +45,14 @@ class TestDataSeeder extends Seeder
 
         Stream::factory()
             ->finished()
-            ->for($channels->random())
-            ->count(100)
-            ->create();
+            ->for($channels->skip(1)->first())
+            ->count(50)
+            ->create(['channel_title' => $channels->skip(1)->first()->name]);
+
+        Stream::factory()
+            ->finished()
+            ->for($channels->first())
+            ->count(50)
+            ->create(['channel_title' => $channels->first()->name]);
     }
 }

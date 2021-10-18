@@ -1,6 +1,6 @@
 <div>
     <x-page-header title="Archive">
-        <x-search wire:model.debounce.300ms="search" />
+        <x-search wire:model.debounce.300ms="search" :channels="$channels" />
     </x-page-header>
 
     <main class="flex-1 text-white bg-gray-darkest">

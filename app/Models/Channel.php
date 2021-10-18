@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,8 @@ class Channel extends Model
 
     protected $fillable = ['platform_id', 'language_code', 'slug', 'name', 'description', 'on_platform_since', 'thumbnail_url', 'country'];
 
+    protected $appends = ['hashid'];
+
     public function streams(): HasMany
     {
         return $this->hasMany(Stream::class);
@@ -23,6 +26,11 @@ class Channel extends Model
         return $this->hasMany(Stream::class)
             ->approved()
             ->finished();
+    }
+
+    public function getHashidAttribute(): string
+    {
+        return Hashids::encode((int) $this->attributes['id']);
     }
 
     public function scopeAutoImportEnabled(Builder $query): Builder

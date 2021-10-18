@@ -10,12 +10,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use Spatie\IcalendarGenerator\Components\Event;
+use Vinkla\Hashids\Facades\Hashids;
 
 class Stream extends Model implements Feedable
 {
@@ -172,6 +174,14 @@ class Stream extends Model implements Feedable
                     ->orWhere('channel_title', 'like', "%{$search}%");
             });
         });
+    }
+
+    public function scopeByStreamer(Builder $query, ?string $streamerHashid): Builder
+    {
+        $channelId = Hashids::decode($streamerHashid)[0] ?? null;
+        return $query->when($channelId, fn(Builder $builder, ?string $streamerHashid) =>
+            $builder->where(fn(Builder $query) => $query->where('channel_id', $channelId))
+        );
     }
 
     public function toFeedItem(): FeedItem
