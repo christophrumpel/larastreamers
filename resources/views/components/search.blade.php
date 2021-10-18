@@ -8,7 +8,7 @@
         >
             <option value="">All Streamers</option>
             @foreach($channels as $channel)
-                <option value="{{ $channel->hashid }}" wire:key="streamer_{{ $channel->hasid }}">{{ $channel->name }}</option>
+                <option value="{{ $channel['hashid'] }}" wire:key="streamer_{{ $channel['hashid'] }}">{{ $channel['name'] }}</option>
             @endforeach
         </select>
 
