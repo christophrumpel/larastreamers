@@ -9,10 +9,22 @@ It shows you who is live coding next in the Laravel world.
 
 ## Installation Steps
 
+> prerequisite: PHP > 8.0
+
 * clone repository
+* `composer install`
+
+### Local installation
+
 * Create DB `larastreamers`
 * `composer install`
 * `composer setup` (copies `env` file, generates key, and migrates DB)
+
+### Laravel Sail
+
+* copy `.env.example` to `.env`
+* run `./vendor/bin/sail up -d`
+* run `./vendor/bin/sail composer setup` (generates key, and migrates DB)
 
 ## Setup
 
