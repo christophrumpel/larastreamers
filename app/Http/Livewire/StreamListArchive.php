@@ -37,9 +37,7 @@ class StreamListArchive extends Component
             ->fromLatestToOldest()
             ->paginate(24);
 
-        $channels = Channel::select(['id', 'name'])->get()->map(function(Channel $channel) {
-            return $channel->only('hashid', 'name');
-        });
+        $channels = Channel::select(['id', 'name'])->get()->pluck('name', 'hashid');
 
         return view('livewire.stream-list-archive', [
             'streams' => $streams,
