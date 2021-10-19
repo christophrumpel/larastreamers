@@ -94,9 +94,9 @@ class PageArchiveTest extends TestCase
     public function it_searches_for_streams_on_channel_title(): void
     {
         // Arrange
-        Stream::factory()->finished()->create(['title' => 'Stream #1', 'channel_title' => 'Laravel']);
-        Stream::factory()->finished()->create(['title' => 'Stream #2', 'channel_title' => 'Laravel']);
-        Stream::factory()->finished()->create(['title' => 'Stream #3', 'channel_title' => 'The Streamers']);
+        Stream::factory()->finished()->create(['title' => 'Stream #1']);
+        Stream::factory()->finished()->create(['title' => 'Stream #2']);
+        Stream::factory()->finished()->create(['title' => 'Stream #3']);
 
         // Act & Assert
         $this->get(route('archive', ['search' => 'Laravel']))
@@ -115,8 +115,8 @@ class PageArchiveTest extends TestCase
     public function it_searches_for_streams_by_specific_streamer(): void
     {
         // Arrange
-        Stream::factory()->finished()->create(['channel_id' => 1, 'channel_title' => 'Laravel Stream']);
-        Stream::factory()->finished()->create(['channel_id' => 2, 'channel_title' => 'Tailwind Stream']);
+        Stream::factory()->finished()->create(['channel_id' => 1]);
+        Stream::factory()->finished()->create(['channel_id' => 2]);
 
         // Act & Assert
         $this->get(route('archive', ['streamer' => Hashids::encode(1)]))

@@ -17,7 +17,6 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_title' => collect(['Dr Disrespect', 'Lulu', 'Harris Heller', 'itzTimmy'])->random(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),

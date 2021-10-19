@@ -101,7 +101,6 @@ class CalendarControllerTest extends TestCase
     {
         $stream = Stream::factory()->create([
             'title' => 'Single Stream',
-            'channel_title' => 'My Channel',
             'scheduled_start_time' => Carbon::now(),
             'youtube_id' => '1234',
         ]);

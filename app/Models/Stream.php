@@ -24,7 +24,6 @@ class Stream extends Model implements Feedable
 
     protected $fillable = [
         'channel_id',
-        'channel_title',
         'youtube_id',
         'title',
         'description',
@@ -169,8 +168,7 @@ class Stream extends Model implements Feedable
     {
         return $query->when($search, function(Builder $builder, ?string $search) {
             $builder->where(function(Builder $query) use ($search) {
-                $query->where('title', 'like', "%{$search}%")
-                    ->orWhere('channel_title', 'like', "%{$search}%");
+                $query->where('title', 'like', "%{$search}%");
             });
         });
     }
@@ -193,7 +191,7 @@ class Stream extends Model implements Feedable
             ->summary($this->description)
             ->updated($this->updated_at)
             ->link($this->url())
-            ->author($this->channel_title); //TODO: implement
+            ->author($this->title); //TODO: implement
     }
 
     public function url(): string
@@ -209,7 +207,6 @@ class Stream extends Model implements Feedable
             ->url($this->url())
             ->description(implode(PHP_EOL, [
                 $this->title,
-                $this->channel_title,
                 $this->url(),
                 Str::of($this->description)
                     ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),

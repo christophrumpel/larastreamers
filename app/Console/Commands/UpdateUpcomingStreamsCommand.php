@@ -49,7 +49,6 @@ class UpdateUpcomingStreamsCommand extends Command
             $stream->update([
                 'title' => $streamData->title,
                 'description' => $streamData->description,
-                'channel_title' => $streamData->channelTitle,
                 'thumbnail_url' => $streamData->thumbnailUrl,
                 'scheduled_start_time' => $streamData->plannedStart,
                 'status' => $streamData->status,

@@ -14,7 +14,6 @@ class StreamResource extends JsonResource
             'attributes' => [
                 'title' => $this->title,
                 'description' => $this->description,
-                'channel' => $this->channel_title,
                 'thumbnail_url' => $this->thumbnail_url,
                 'starts' => [
                     'human' => $this->scheduled_start_time->diffForHumans(),
