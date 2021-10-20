@@ -59,6 +59,7 @@ class PageArchiveTest extends TestCase
     /** @test */
     public function it_shows_duration_of_stream_if_given(): void
     {
+        $this->withoutExceptionHandling();
         // Arrange
         Stream::factory()
             ->finished()
