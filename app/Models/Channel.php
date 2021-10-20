@@ -23,10 +23,10 @@ class Channel extends Model
 
     public function scopeWithApprovedAndFinishedStreams(Builder $query): Builder
     {
-        return $query->whereHas('streams', function(Builder $query){
-                $query->approved()
+        return $query->whereHas('streams', function(Builder $query) {
+            $query->approved()
                     ->finished();
-            });
+        });
     }
 
     public function approvedFinishedStreams(): HasMany

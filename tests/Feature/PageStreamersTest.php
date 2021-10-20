@@ -84,7 +84,6 @@ class PageStreamersTest extends TestCase
             ->assertSee('Channel Shown');
     }
 
-
     /** @test */
     public function it_shows_streamers_ordered_by_stream_count(): void
     {
