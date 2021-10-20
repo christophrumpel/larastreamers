@@ -17,6 +17,7 @@ class PageStreamersTest extends TestCase
     {
         // Arrange
         $channel = Channel::factory()
+            ->has(Stream::factory()->approved()->finished())
             ->create(['name' => 'Channel Dries']);
 
         // Act
@@ -38,10 +39,13 @@ class PageStreamersTest extends TestCase
     {
         // Arrange
         Channel::factory()
+            ->has(Stream::factory()->approved()->finished())
             ->create(['name' => 'C Channel Dries']);
         Channel::factory()
+            ->has(Stream::factory()->approved()->finished())
             ->create(['name' => 'A Channel Mohamed']);
         Channel::factory()
+            ->has(Stream::factory()->approved()->finished())
             ->create(['name' => 'B Channel Steve']);
 
         // Act
@@ -54,6 +58,32 @@ class PageStreamersTest extends TestCase
             'C Channel Dries',
         ]);
     }
+
+    /** @test */
+    public function it_only_shows_streamers_with_approved_and_finished_streams(): void
+    {
+        // Arrange
+        Stream::factory()
+            ->withChannel(['name' => 'Channel Hidden'])
+            ->finished()
+            ->notApproved()
+            ->create();
+
+        Stream::factory()
+            ->withChannel(['name' => 'Channel Shown'])
+            ->finished()
+            ->approved()
+            ->create();
+
+        // Act
+        $response = $this->get(route('streamers'));
+
+        // Assert
+        $response
+            ->assertDontSee('Channel Hidden')
+            ->assertSee('Channel Shown');
+    }
+
 
     /** @test */
     public function it_shows_streamers_ordered_by_stream_count(): void
