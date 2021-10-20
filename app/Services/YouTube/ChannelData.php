@@ -8,7 +8,7 @@ use Spatie\DataTransferObject\DataTransferObject;
 class ChannelData extends DataTransferObject
 {
     public string $platformId;
-    public string $slug;
+    public string $youtubeCustomUrl;
     public string $name;
     public string $description;
     public Carbon $onPlatformSince;
@@ -19,7 +19,7 @@ class ChannelData extends DataTransferObject
     {
         return [
             'platform_id' => $this->platformId,
-            'slug' => $this->slug,
+            'youtube_custom_url' => $this->youtubeCustomUrl,
             'name' => $this->name,
             'description' => $this->description,
             'on_platform_since' => $this->onPlatformSince,
