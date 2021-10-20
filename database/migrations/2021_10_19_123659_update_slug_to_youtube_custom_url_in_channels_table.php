@@ -6,12 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class UpdateSlugToYoutubeCustomUrlInChannelsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::table('channels', function (Blueprint $table) {
             $table->renameColumn('slug', 'youtube_custom_url');

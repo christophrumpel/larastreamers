@@ -6,12 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class RemoveChannelTitleFromStreamsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::table('streams', function (Blueprint $table) {
             $table->dropColumn('channel_title');
