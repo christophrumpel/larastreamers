@@ -36,13 +36,13 @@ class PageHomeTest extends TestCase
     {
         // Arrange
         Stream::factory()
-            ->for(Channel::factory()->create())
+            ->withChannel()
             ->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::tomorrow()]);
         Stream::factory()
-            ->for(Channel::factory()->create())
+            ->withChannel()
             ->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()->addDay()]);
         Stream::factory()
-            ->for(Channel::factory()->create())
+            ->withChannel()
             ->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::tomorrow()->addDays(2)]);
 
         // Act & Assert

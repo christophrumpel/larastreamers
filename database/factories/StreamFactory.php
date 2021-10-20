@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Channel;
 use App\Models\Language;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
@@ -119,5 +120,10 @@ class StreamFactory extends Factory
                 'scheduled_start_time' => now()->addMinutes(6),
             ];
         });
+    }
+
+    public function withChannel(array $channelData = []): StreamFactory
+    {
+        return $this->for(Channel::factory()->create($channelData));
     }
 }
