@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Channel;
 use App\Models\Stream;
 use Carbon\Carbon;
-use Database\Factories\ChannelFactory;
 use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
