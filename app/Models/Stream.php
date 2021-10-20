@@ -169,6 +169,9 @@ class Stream extends Model implements Feedable
         return $query->when($search, function(Builder $builder, ?string $search) {
             $builder->where(function(Builder $query) use ($search) {
                 $query->where('title', 'like', "%{$search}%");
+                $query->orWhereHas('channel', function($query) use ($search) {
+                    $query->where('name', 'like', "%{$search}%");
+                });
             });
         });
     }
@@ -207,6 +210,7 @@ class Stream extends Model implements Feedable
             ->url($this->url())
             ->description(implode(PHP_EOL, [
                 $this->title,
+                $this->channel->name,
                 $this->url(),
                 Str::of($this->description)
                     ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RemoveChannelTitleFromStreamsTable extends Migration
+class UpdateSlugToYoutubeCustomUrlInChannelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class RemoveChannelTitleFromStreamsTable extends Migration
      */
     public function up()
     {
-        Schema::table('streams', function (Blueprint $table) {
-            $table->dropColumn('channel_title');
+        Schema::table('channels', function (Blueprint $table) {
+            $table->renameColumn('slug', 'youtube_custom_url');
         });
     }
 }

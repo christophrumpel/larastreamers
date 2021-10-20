@@ -20,8 +20,8 @@
                         <h3 class="mb-4 font-bold text-xl">{{ $upcomingStream->title }}</h3>
                         <p class="mb-2 text-base text-gray-dark flex items-center">
                             <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray-dark fill-current stroke-current"/>
-                            @if ($upcomingStream->language?->shouldRender())
-                                {{ $upcomingStream->language->name }} @endif
+                            {{ $upcomingStream->channel->name }}  @if ($upcomingStream->language?->shouldRender())
+                                ({{ $upcomingStream->language->name }}) @endif
                         <p class="text-base text-gray-dark flex items-center">
                             <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray-dark fill-current stroke-current"/>
                             <x-local-time class="text-base"

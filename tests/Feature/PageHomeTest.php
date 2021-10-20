@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
@@ -13,9 +14,9 @@ class PageHomeTest extends TestCase
     public function it_shows_given_streams_on_home_page(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'language_code' => 'en']);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345', 'language_code' => 'fr']);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456', 'language_code' => 'es']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'language_code' => 'en']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345', 'language_code' => 'fr']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->addDays(3), 'youtube_id' => '123456', 'language_code' => 'es']);
 
         // Act & Assert
         $this->get(route('home'))
@@ -48,8 +49,8 @@ class PageHomeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today()->hour(2)]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today()->hour(2)]);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
 
         // Act & Assert
         $this->get(route('home'))
@@ -63,9 +64,9 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_old_streams(): void
     {
         // Arrange
-        Stream::factory()->finished()->create(['title' => 'Stream finished']);
-        Stream::factory()->live()->create(['title' => 'Stream live']);
-        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->finished()->create(['title' => 'Stream finished']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->live()->create(['title' => 'Stream live']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->upcoming()->create(['title' => 'Stream upcoming']);
 
         // Act & Assert
         $this
@@ -79,8 +80,8 @@ class PageHomeTest extends TestCase
     public function it_does_not_show_deleted_streams(): void
     {
         // Arrange
-        Stream::factory()->deleted()->create(['title' => 'Stream deleted']);
-        Stream::factory()->upcoming()->create(['title' => 'Stream upcoming']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->deleted()->create(['title' => 'Stream deleted']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->upcoming()->create(['title' => 'Stream upcoming']);
 
         // Act & Assert
         $this
@@ -93,7 +94,7 @@ class PageHomeTest extends TestCase
     public function it_marks_live_streams(): void
     {
         // Arrange
-        $stream = Stream::factory()->upcoming()->create(['title' => 'Stream #1']);
+        $stream = Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->upcoming()->create(['title' => 'Stream #1']);
 
         // Act & Assert
         $this->get(route('home'))
@@ -131,6 +132,7 @@ class PageHomeTest extends TestCase
     public function it_adds_button_webcal_link_if_no_streams(): void
     {
         Stream::factory()
+            ->for(Channel::factory()->create(['name' => 'My Channel']))
             ->upcoming()
             ->create();
 

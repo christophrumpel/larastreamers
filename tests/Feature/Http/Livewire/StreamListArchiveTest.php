@@ -16,9 +16,11 @@ class StreamListArchiveTest extends TestCase
     {
         // Arrange
         Stream::factory()
+            ->for(Channel::factory()->create(['name' => 'My Channel']))
             ->finished()
             ->create(['title' => 'Stream Seen', 'channel_id' => 1]);
         Stream::factory()
+            ->for(Channel::factory()->create(['name' => 'My Channel']))
             ->finished()
             ->create(['title' => 'Stream Not Seen', 'channel_id' => 2]);
 

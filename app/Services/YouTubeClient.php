@@ -22,7 +22,7 @@ class YouTubeClient
 
         return new ChannelData(
             platformId: data_get($result, 'id'),
-            youtubeCustomUrl: data_get($result, 'snippet.customUrl', ''),
+            youTubeCustomUrl: data_get($result, 'snippet.customUrl', ''),
             name: data_get($result, 'snippet.title'),
             description: data_get($result, 'snippet.description', ''),
             onPlatformSince: $this->toCarbon(data_get($result, 'snippet.publishedAt')),

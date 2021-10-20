@@ -22,7 +22,7 @@ class YouTubeTest extends TestCase
         $channel = YouTube::channel('UCdtd5QYBx9MUVXHm7qgEpxA');
 
         // Assert
-        $this->assertEquals('christophrumpel', $channel->youtubeCustomUrl);
+        $this->assertEquals('christophrumpel', $channel->youTubeCustomUrl);
         $this->assertEquals('Christoph Rumpel', $channel->name);
         $this->assertStringStartsWith('Hi, I\'m Christoph Rumpel', $channel->description);
         $this->assertEquals('2010-01-12T19:15:29+00:00', $channel->onPlatformSince->toIso8601String());
