@@ -35,9 +35,15 @@ class PageHomeTest extends TestCase
     public function it_shows_from_closest_to_farthest(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::tomorrow()]);
-        Stream::factory()->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()->addDay()]);
-        Stream::factory()->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::tomorrow()->addDays(2)]);
+        Stream::factory()
+            ->for(Channel::factory()->create())
+            ->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::tomorrow()]);
+        Stream::factory()
+            ->for(Channel::factory()->create())
+            ->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+        Stream::factory()
+            ->for(Channel::factory()->create())
+            ->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::tomorrow()->addDays(2)]);
 
         // Act & Assert
         $this->get(route('home'))

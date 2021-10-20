@@ -59,9 +59,9 @@ class PageArchiveTest extends TestCase
     /** @test */
     public function it_shows_duration_of_stream_if_given(): void
     {
-        $this->withoutExceptionHandling();
         // Arrange
         Stream::factory()
+            ->for(Channel::factory()->create())
             ->finished()
             ->create([
                 'actual_start_time' => Carbon::yesterday(),
