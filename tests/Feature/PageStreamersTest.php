@@ -98,7 +98,7 @@ class PageStreamersTest extends TestCase
             ->for(Channel::factory())
             ->approved()
             ->finished()
-            ->count(20)
+            ->count(1)
             ->create();
         Stream::factory()
             ->for(Channel::factory())
@@ -111,10 +111,10 @@ class PageStreamersTest extends TestCase
         $response = $this->get(route('streamers'));
 
         // Assert
-        $response->assertSeeInOrder([
-            'Show 30',
-            'Show 20',
-            'Show 10',
+        $response->assertSeeText([
+            'Show 30 streams',
+            'Show 10 streams',
+            'Show 1 stream',
         ]);
     }
 
