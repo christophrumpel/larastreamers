@@ -32,8 +32,9 @@
 
             <p class="text-base text-gray flex items-center">
                 <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
-                {{ $stream->channel_title }}
+                {{ $stream->channel->name }}
             </p>
+
             <p class="text-base text-gray flex items-center">
                 <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
                 <x-local-time class=""

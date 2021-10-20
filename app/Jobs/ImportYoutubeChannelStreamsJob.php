@@ -30,7 +30,6 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
                 'youtube_id' => $streamData->videoId,
                 'title' => $streamData->title,
                 'description' => $streamData->description,
-                'channel_title' => $streamData->channelTitle,
                 'thumbnail_url' => $streamData->thumbnailUrl,
                 'scheduled_start_time' => $streamData->plannedStart,
                 'language_code' => $this->languageCode,

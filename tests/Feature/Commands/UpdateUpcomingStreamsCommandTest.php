@@ -37,7 +37,6 @@ class UpdateUpcomingStreamsCommandTest extends TestCase
         $this->assertDatabaseHas(Stream::class, [
             'title' => 'My New Test Stream',
             'description' => 'My New Description',
-            'channel_title' => 'My New Channel Name',
             'thumbnail_url' => 'my-new-thumbnail-url',
             'scheduled_start_time' => Carbon::tomorrow(),
         ]);

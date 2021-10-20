@@ -42,7 +42,6 @@ class ImportYoutubeLiveStreamTest extends TestCase
         // Assert
         $this->assertDatabaseHas(Stream::class, [
             'youtube_id' => 'bcnR4NYOw2o',
-            'channel_title' => 'My Test Channel',
             'title' => 'My Test Stream',
             'description' => 'Test Description',
             'thumbnail_url' => 'my-test-thumbnail-url',

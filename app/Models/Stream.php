@@ -24,7 +24,6 @@ class Stream extends Model implements Feedable
 
     protected $fillable = [
         'channel_id',
-        'channel_title',
         'youtube_id',
         'title',
         'description',
@@ -76,12 +75,12 @@ class Stream extends Model implements Feedable
 
     public function tweetStreamIsLiveWasSend(): bool
     {
-        return ! is_null($this->tweeted_at);
+        return !is_null($this->tweeted_at);
     }
 
     public function tweetStreamIsUpcomingWasSend(): bool
     {
-        return ! is_null($this->upcoming_tweeted_at);
+        return !is_null($this->upcoming_tweeted_at);
     }
 
     public function markAsTweeted(): self
@@ -117,6 +116,7 @@ class Stream extends Model implements Feedable
     public static function getNextUpcomingOrLive(): ?Stream
     {
         return (new self)->query()
+            ->with('channel:id,name')
             ->approved()
             ->upcomingOrLive()
             ->fromOldestToLatest()
@@ -167,10 +167,13 @@ class Stream extends Model implements Feedable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->when($search, function(Builder $builder, ?string $search) {
-            $builder->where(function(Builder $query) use ($search) {
-                $query->where('title', 'like', "%{$search}%")
-                    ->orWhere('channel_title', 'like', "%{$search}%");
+        return $query->when($search, function (Builder $builder, ?string $search) {
+            $builder->where(function (Builder $query) use ($search) {
+                $query
+                    ->where('title', 'like', "%$search%")
+                    ->orWhereHas('channel', function ($query) use ($search) {
+                        $query->where('name', 'like', "%$search%");
+                    });
             });
         });
     }
@@ -193,7 +196,7 @@ class Stream extends Model implements Feedable
             ->summary($this->description)
             ->updated($this->updated_at)
             ->link($this->url())
-            ->author($this->channel_title); //TODO: implement
+            ->author($this->title); //TODO: implement
     }
 
     public function url(): string
@@ -209,10 +212,10 @@ class Stream extends Model implements Feedable
             ->url($this->url())
             ->description(implode(PHP_EOL, [
                 $this->title,
-                $this->channel_title,
+                $this->channel->name,
                 $this->url(),
                 Str::of($this->description)
-                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),
+                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15) . PHP_EOL)),
             ]))
             ->startsAt($this->scheduled_start_time)
             ->endsAt($this->scheduled_start_time->clone()->addHour())
@@ -251,7 +254,7 @@ class Stream extends Model implements Feedable
 
     public function isApproved(): bool
     {
-        return ! is_null($this->approved_at);
+        return !is_null($this->approved_at);
     }
 
     public function getDurationAttribute(): ?string
@@ -264,6 +267,6 @@ class Stream extends Model implements Feedable
 
 //        $duration = $start_time->diff($this->actual_end_time);
 
-        return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
+        return $startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
     }
 }

@@ -9,6 +9,7 @@
         "php": "^8.0",
         "abraham/twitteroauth": "^2.0",
         "calebporzio/sushi": "^2.2",
+        "doctrine/dbal": "^3.1",
         "facade/ignition": "^2.15",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",

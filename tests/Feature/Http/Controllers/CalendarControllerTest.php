@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -12,14 +13,14 @@ class CalendarControllerTest extends TestCase
     public function it_shows_all_streams_in_calendar(): void
     {
         // Arrange
-        Stream::factory()->create(['title' => 'Stream two years old', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '-2y']);
-        Stream::factory()->create(['title' => 'Stream last year', 'scheduled_start_time' => Carbon::now()->subYear(), 'youtube_id' => '-1y']);
-        Stream::factory()->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '-1d']);
-        Stream::factory()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::now(), 'youtube_id' => 'now']);
-        Stream::factory()->create(['title' => 'Stream tomorrow', 'scheduled_start_time' => Carbon::tomorrow(), 'youtube_id' => '1d']);
-        Stream::factory()->create(['title' => 'Stream next week', 'scheduled_start_time' => Carbon::now()->addWeek(), 'youtube_id' => '1w']);
-        Stream::factory()->create(['title' => 'Stream next month', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1m']);
-        Stream::factory()->create(['title' => 'Stream next year', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1y']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream two years old', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '-2y']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream last year', 'scheduled_start_time' => Carbon::now()->subYear(), 'youtube_id' => '-1y']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '-1d']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::now(), 'youtube_id' => 'now']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream tomorrow', 'scheduled_start_time' => Carbon::tomorrow(), 'youtube_id' => '1d']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next week', 'scheduled_start_time' => Carbon::now()->addWeek(), 'youtube_id' => '1w']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next month', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1m']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next year', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1y']);
 
         // Act & Assert
         $this->get(route('calendar.ics'))
@@ -75,8 +76,8 @@ class CalendarControllerTest extends TestCase
     /** @test */
     public function it_can_filter_streams_by_single_language_code()
     {
-        Stream::factory()->create(['title' => 'English Test Stream', 'language_code' => 'en']);
-        Stream::factory()->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'English Test Stream', 'language_code' => 'en']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
 
         $this->get(route('calendar.ics', ['languages' => 'en']))
             ->assertSee('English Test Stream')
@@ -86,9 +87,9 @@ class CalendarControllerTest extends TestCase
     /** @test */
     public function it_can_filter_streams_by_multiple_language_codes()
     {
-        Stream::factory()->create(['title' => 'English Test Stream', 'language_code' => 'en']);
-        Stream::factory()->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
-        Stream::factory()->create(['title' => 'French Test Stream', 'language_code' => 'fr']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'English Test Stream', 'language_code' => 'en']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
+        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'French Test Stream', 'language_code' => 'fr']);
 
         $this->get(route('calendar.ics', ['languages' => 'en,es']))
             ->assertSee('English Test Stream')
@@ -99,9 +100,10 @@ class CalendarControllerTest extends TestCase
     /** @test */
     public function it_can_download_one_calendar_item(): void
     {
-        $stream = Stream::factory()->create([
+        $stream = Stream::factory()
+            ->for(Channel::factory()->create(['name' => 'My Channel']))
+            ->create([
             'title' => 'Single Stream',
-            'channel_title' => 'My Channel',
             'scheduled_start_time' => Carbon::now(),
             'youtube_id' => '1234',
         ]);

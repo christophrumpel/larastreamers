@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Channel;
 use App\Models\Language;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
@@ -17,7 +18,6 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'channel_title' => collect(['Dr Disrespect', 'Lulu', 'Harris Heller', 'itzTimmy'])->random(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->text(100),
             'youtube_id' => Str::random(10),
@@ -120,5 +120,10 @@ class StreamFactory extends Factory
                 'scheduled_start_time' => now()->addMinutes(6),
             ];
         });
+    }
+
+    public function withChannel(array $channelData = []): StreamFactory
+    {
+        return $this->for(Channel::factory()->create($channelData));
     }
 }

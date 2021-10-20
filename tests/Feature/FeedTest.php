@@ -14,7 +14,6 @@ class FeedTest extends TestCase
         // Arrange
         Stream::factory()->create([
             'title' => 'Stream tomorrow',
-            'channel_title' => 'Channel one',
             'description' => 'Stream description',
             'scheduled_start_time' => Carbon::tomorrow(),
         ]);

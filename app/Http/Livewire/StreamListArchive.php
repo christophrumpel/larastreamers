@@ -29,6 +29,7 @@ class StreamListArchive extends Component
     public function render(): View
     {
         $streams = Stream::query()
+            ->with('channel:id,name')
             ->approved()
             ->finished()
             ->search($this->search)

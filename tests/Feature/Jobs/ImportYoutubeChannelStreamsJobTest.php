@@ -31,7 +31,6 @@ class ImportYoutubeChannelStreamsJobTest extends TestCase
         $this->assertDatabaseCount(Stream::class, 3);
         $this->assertDatabaseHas(Stream::class, [
             'youtube_id' => 'gzqJZQyfkaI',
-            'channel_title' => 'Freek Van der Herten',
             'language_code' => 'en',
         ]);
 

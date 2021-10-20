@@ -12,7 +12,7 @@ class Channel extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['platform_id', 'language_code', 'slug', 'name', 'description', 'on_platform_since', 'thumbnail_url', 'country'];
+    protected $fillable = ['platform_id', 'language_code', 'youtube_custom_url', 'name', 'description', 'on_platform_since', 'thumbnail_url', 'country'];
 
     protected $appends = ['hashid'];
 
