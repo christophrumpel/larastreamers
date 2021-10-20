@@ -14,8 +14,7 @@
         </div>
         <div class="flex justify-between">
             <a class="px-3 py-2 text-sm font-medium text-white transition bg-red rounded-md shadow hover:bg-red-dark focus:bg-red focus:outline-none"
-               href="{{ route('archive', ['streamer' => $channel->hashid]) }}">Show {{ $channel->approved_finished_streams_count }}
-                streams</a>
+               href="{{ route('archive', ['streamer' => $channel->hashid]) }}">Show {{ $channel->approved_finished_streams_count }} {{ \Illuminate\Support\Str::plural('stream', $channel->approved_finished_streams_count) }}</a>
             <div>
                 <a href="{{ $channel->url() }}">
                     <x-icons.youtube
