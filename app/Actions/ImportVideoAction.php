@@ -17,7 +17,7 @@ class ImportVideoAction
         $video = YouTube::video($youTubeId);
 
         return Stream::updateOrCreate(['youtube_id' => $video->videoId], [
-            'channel_id' => Channel::where('platform_id', $video->channelId)->first()->id ?? null,
+            'channel_id' => Channel::firstWhere('platform_id', $video->channelId)->id ?? null,
             'title' => $video->title,
             'description' => $video->description,
             'thumbnail_url' => $video->thumbnailUrl,
