@@ -6,10 +6,12 @@
     <div class="flex flex-col w-4/5 pl-8">
         <div class="mb-6">
             <p class="font-bold text-white mb-2">{{ $channel->name }}</p>
-            <div class="flex items-center text-gray mb-4">
-                <x-icons.marker class="w-4 h-4 mr-2 inline fill-current stroke-current"/>
-                <p>{{ $channel->country }}</p>
-            </div>
+            @if($channel->country)
+                <div class="flex items-center text-gray mb-4">
+                    <x-icons.marker class="w-4 h-4 mr-2 inline fill-current stroke-current"/>
+                    <p>{{ $channel->country }}</p>
+                </div>
+            @endif
             <p class="text-gray">{{ \Illuminate\Support\Str::of($channel->description)->limit(100) }}</p>
         </div>
         <div class="flex justify-between">
