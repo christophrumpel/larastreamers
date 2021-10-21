@@ -91,7 +91,6 @@ class CalendarControllerTest extends TestCase
             ]);
     }
 
-
     /** @test */
     public function it_can_filter_streams_by_single_language_code()
     {
