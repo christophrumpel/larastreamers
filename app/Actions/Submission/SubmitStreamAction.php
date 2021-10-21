@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SubmitStreamAction
 {
-    public function handle(string $youTubeId, string $languageCode, string $submittedByEmail)
+    public function handle(string $youTubeId, string $languageCode, string $submittedByEmail): void
     {
         $stream = app(ImportVideoAction::class)->handle(
             $youTubeId,
