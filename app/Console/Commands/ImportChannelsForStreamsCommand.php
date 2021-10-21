@@ -10,26 +10,26 @@ use Illuminate\Console\Command;
 
 class ImportChannelsForStreamsCommand extends Command
 {
-    protected $signature = 'larastreamers:import-streams-channels';
+    protected $signature = 'larastreamers:import-streams-channels {stream?}';
 
     protected $description = 'Imports channels for given streams.';
 
     public function handle(): int
     {
-        $streamsWithoutChannel = Stream::whereNull('channel_id')
+        $streamsToImportChannels = $this->argument('stream') ? collect([$this->argument('stream')]) : Stream::whereNull('channel_id')
             ->approved()
             ->limit(50)
             ->get();
 
-        if ($streamsWithoutChannel->isEmpty()) {
+        if ($streamsToImportChannels->isEmpty()) {
             $this->info('There are no streams without a channel.');
 
             return self::SUCCESS;
         }
 
-        $this->info("Fetching {$streamsWithoutChannel->count()} stream(s) from API to check for channel.");
+        $this->info("Fetching {$streamsToImportChannels->count()} stream(s) from API to check for channel.");
 
-        $youTubeResponse = YouTube::videos($streamsWithoutChannel->pluck('youtube_id'));
+        $youTubeResponse = YouTube::videos($streamsToImportChannels->pluck('youtube_id'));
 
         $this->info("Found {$youTubeResponse->count()} stream(s) from API.");
 
@@ -47,7 +47,7 @@ class ImportChannelsForStreamsCommand extends Command
             $stream->update(['channel_id' => $channel->id]);
         });
 
-        $this->info($streamsWithoutChannel->count().' stream channels were updated or imported.');
+        $this->info($streamsToImportChannels->count().' stream channels were updated or imported.');
 
         return self::SUCCESS;
     }
