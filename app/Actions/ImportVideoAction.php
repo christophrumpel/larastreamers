@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Facades\YouTube;
+use App\Models\Channel;
 use App\Models\Stream;
 
 class ImportVideoAction
@@ -16,6 +17,7 @@ class ImportVideoAction
         $video = YouTube::video($youTubeId);
 
         return Stream::updateOrCreate(['youtube_id' => $video->videoId], [
+            'channel_id' => Channel::where('platform_id', $video->channelId)->first()->id ?? null,
             'title' => $video->title,
             'description' => $video->description,
             'thumbnail_url' => $video->thumbnailUrl,

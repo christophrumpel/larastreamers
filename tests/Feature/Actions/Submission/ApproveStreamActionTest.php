@@ -63,6 +63,24 @@ class ApproveStreamActionTest extends TestCase
     }
 
     /** @test */
+    public function the_action_calls_does_not_import_a_channel_if_channel_already_given(): void
+    {
+        // Arrange
+        $stream = Stream::factory()
+            ->withChannel()
+            ->notApproved()
+            ->create();
+
+        Artisan::spy();
+
+        // Assert
+        Artisan::shouldNotReceive('call')->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
+
+        // Act
+        $this->approveStreamAction->handle($stream);
+    }
+
+    /** @test */
     public function it_will_not_send_a_mail_for_a_link_that_was_already_approved(): void
     {
         $stream = Stream::factory()

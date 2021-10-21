@@ -12,14 +12,15 @@ class ApproveStreamAction
 {
     public function handle(Stream $stream): void
     {
-        if (! is_null($stream->approved_at)) {
+        if (!is_null($stream->approved_at)) {
             return;
         }
 
-        $stream->approved_at = now();
-        $stream->save();
+        $stream->update(['approved_at' => now()]);
 
-        Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
+        if (is_null($stream->channel_id)) {
+            Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
+        }
 
         Mail::to($stream->submitted_by_email)->queue(new StreamApprovedMail($stream));
     }
