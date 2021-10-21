@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class ImportVideoActionTest extends TestCase
 {
-
     use YouTubeResponses;
 
     /** @test */
@@ -20,15 +19,14 @@ class ImportVideoActionTest extends TestCase
             '*videos*' => Http::response($this->singleVideoResponse()),
         ]);
 
-    	// Arrange
+        // Arrange
         $youTubeId = 'gzqJZQyfkaI';
         $channel = Channel::factory()->create(['platform_id' => 'UCNlUCA4VORBx8X-h-rXvXEg']);
 
-    	// Act
+        // Act
         $importedStream = (new ImportVideoAction())->handle($youTubeId);
 
-    	// Assert
+        // Assert
         $this->assertEquals($channel->id, $importedStream->channel_id);
-
     }
 }

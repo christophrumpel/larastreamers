@@ -66,7 +66,6 @@ class ImportChannelsForStreamsCommandTest extends TestCase
         ]);
     }
 
-
     /** @test */
     public function it_does_not_import_channel_for_pending_stream(): void
     {
