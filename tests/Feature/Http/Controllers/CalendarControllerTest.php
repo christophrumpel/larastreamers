@@ -10,17 +10,17 @@ use Tests\TestCase;
 class CalendarControllerTest extends TestCase
 {
     /** @test **/
-    public function it_shows_all_streams_in_calendar(): void
+    public function it_shows_all_approved_streams_in_calendar(): void
     {
         // Arrange
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream two years old', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '-2y']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream last year', 'scheduled_start_time' => Carbon::now()->subYear(), 'youtube_id' => '-1y']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '-1d']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::now(), 'youtube_id' => 'now']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream tomorrow', 'scheduled_start_time' => Carbon::tomorrow(), 'youtube_id' => '1d']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next week', 'scheduled_start_time' => Carbon::now()->addWeek(), 'youtube_id' => '1w']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next month', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1m']);
-        Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Stream next year', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1y']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream two years old', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '-2y']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream last year', 'scheduled_start_time' => Carbon::now()->subYear(), 'youtube_id' => '-1y']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday(), 'youtube_id' => '-1d']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::now(), 'youtube_id' => 'now']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream tomorrow', 'scheduled_start_time' => Carbon::tomorrow(), 'youtube_id' => '1d']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream next week', 'scheduled_start_time' => Carbon::now()->addWeek(), 'youtube_id' => '1w']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream next month', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1m']);
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream next year', 'scheduled_start_time' => Carbon::now()->addMonth(), 'youtube_id' => '1y']);
 
         // Act & Assert
         $this->get(route('calendar.ics'))
@@ -72,6 +72,25 @@ class CalendarControllerTest extends TestCase
         // that's why the description is not in the string.
         /** @see \Spatie\IcalendarGenerator\Builders\ComponentBuilder::chipLine() */
     }
+
+    /** @test **/
+    public function it_shows_only_approved_streams_in_calendar(): void
+    {
+        // Arrange
+        Stream::factory()->approved()->withChannel()->create(['title' => 'Stream approved', 'scheduled_start_time' => Carbon::yesterday()]);
+        Stream::factory()->notApproved()->withChannel()->create(['title' => 'Stream not approved', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
+
+        // Act & Assert
+        $this->get(route('calendar.ics'))
+            ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
+            ->assertDontSee([
+                'SUMMARY:Stream not approved',
+            ])
+            ->assertSeeInOrder([
+                'SUMMARY:Stream approved',
+            ]);
+    }
+
 
     /** @test */
     public function it_can_filter_streams_by_single_language_code()

@@ -19,6 +19,7 @@ class CalendarController extends Controller
             ->productIdentifier('larastreamers.com');
 
         Stream::query()
+            ->approved()
             ->when(
                 $request->get('languages'),
                 fn($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
