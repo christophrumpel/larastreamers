@@ -30,7 +30,8 @@ class ImportChannelsForStreamsCommandTest extends TestCase
             ->create(['youtube_id' => 'L3O1BbybSgw']);
 
         // Act
-        $this->artisan(ImportChannelsForStreamsCommand::class);
+        $this->artisan(ImportChannelsForStreamsCommand::class)
+            ->expectsOutput('Fetching 3 stream(s) from API to check for channel.');
 
         // Assert
         $this->assertDatabaseHas(Channel::class, [
@@ -40,6 +41,31 @@ class ImportChannelsForStreamsCommandTest extends TestCase
         $stream1->refresh();
         $this->assertEquals(1, $stream1->channel_id);
     }
+
+    /** @test */
+    public function it_imports_channel_for_specific_stream(): void
+    {
+        Http::fake([
+            '*videos*' => Http::response($this->singleVideoResponse()),
+            '*channels*' => Http::response($this->channelResponse()),
+        ]);
+
+        // Arrange
+        $streamWithoutChannelToImport = Stream::factory()
+            ->create(['youtube_id' => 'gzqJZQyfkaI']);
+        Stream::factory()
+            ->create(['youtube_id' => 'bcnR4NYOw2o']);
+
+        // Act
+        $this->artisan(ImportChannelsForStreamsCommand::class, ['stream' => $streamWithoutChannelToImport])
+            ->expectsOutput('Fetching 1 stream(s) from API to check for channel.');
+
+        // Assert
+        $this->assertDatabaseHas(Channel::class, [
+            'platform_id' => 'UCdtd5QYBx9MUVXHm7qgEpxA',
+        ]);
+    }
+
 
     /** @test */
     public function it_does_not_import_channel_for_pending_stream(): void

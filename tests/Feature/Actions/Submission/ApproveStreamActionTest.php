@@ -3,14 +3,16 @@
 namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\ApproveStreamAction;
+use App\Console\Commands\ImportChannelsForStreamsCommand;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ApproveStreamActionTest extends TestCase
 {
-    protected ApproveStreamAction $approveStream;
+    protected ApproveStreamAction $approveStreamAction;
 
     public function setUp(): void
     {
@@ -18,25 +20,46 @@ class ApproveStreamActionTest extends TestCase
 
         Mail::fake();
 
-        $this->approveStream = app(ApproveStreamAction::class);
+        $this->approveStreamAction = app(ApproveStreamAction::class);
     }
 
     /** @test */
     public function the_action_can_approve_a_stream(): void
     {
+        // Arrange
         $stream = Stream::factory()
             ->notApproved()
             ->create([
                 'submitted_by_email' => 'john@example.com',
             ]);
 
-        $this->approveStream->handle($stream);
+        Artisan::spy();
 
+        // Act
+        $this->approveStreamAction->handle($stream);
+
+        // Assert
         $stream = $stream->fresh();
-
         $this->assertNotNull($stream->approved_at);
 
         Mail::assertQueued(fn(StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
+    }
+
+    /** @test */
+    public function the_action_calls_the_import_channel_command(): void
+    {
+        // Arrange
+        $stream = Stream::factory()
+            ->notApproved()
+            ->create();
+
+        Artisan::spy();
+
+        // Act
+        $this->approveStreamAction->handle($stream);
+
+        // Assert
+        Artisan::shouldHaveReceived('call')->once()->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
     }
 
     /** @test */
@@ -48,7 +71,7 @@ class ApproveStreamActionTest extends TestCase
                 'submitted_by_email' => 'john@example.com',
             ]);
 
-        $this->approveStream->handle($stream);
+        $this->approveStreamAction->handle($stream);
 
         Mail::assertNothingQueued();
     }
