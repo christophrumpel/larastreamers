@@ -7,6 +7,7 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Tests\Feature\Actions\UpdateStreamAction;
 
 class UpdateUpcomingStreamsCommand extends Command
 {
@@ -46,13 +47,7 @@ class UpdateUpcomingStreamsCommand extends Command
                 return;
             }
 
-            $stream->update([
-                'title' => $streamData->title,
-                'description' => $streamData->description,
-                'thumbnail_url' => $streamData->thumbnailUrl,
-                'scheduled_start_time' => $streamData->plannedStart,
-                'status' => $streamData->status,
-            ]);
+            (new UpdateStreamAction())->handle($stream, $streamData);
         });
 
         $this->info($streams->count().' stream(s) were updated.');

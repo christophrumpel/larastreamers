@@ -8,6 +8,7 @@ use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use Tests\Feature\Actions\UpdateStreamAction;
 
 class ApproveStreamAction
 {
@@ -17,22 +18,14 @@ class ApproveStreamAction
             return;
         }
 
-
-        $stream->update(['approved_at' => now()]);
+        $streamData = YouTube::video($stream->youtube_id);
+        (new UpdateStreamAction())->handle($stream, $streamData);
 
         if (is_null($stream->channel_id)) {
             Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
         }
 
-        $youTubeResponse = YouTube::video($stream->youtube_id);
-
-        $stream->update([
-            'title' => $youTubeResponse->title,
-            'description' => $youTubeResponse->description,
-            'thumbnail_url' => $youTubeResponse->thumbnailUrl,
-            'scheduled_start_time' => $youTubeResponse->plannedStart,
-            'status' => $youTubeResponse->status,
-        ]);
+        $stream->update(['approved_at' => now()]);
 
         Mail::to($stream->submitted_by_email)->queue(new StreamApprovedMail($stream));
     }
