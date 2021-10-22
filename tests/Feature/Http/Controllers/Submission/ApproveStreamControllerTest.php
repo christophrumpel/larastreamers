@@ -18,7 +18,7 @@ class ApproveStreamControllerTest extends TestCase
     public function it_can_approve_a_stream_using_a_signed_url(): void
     {
         // Arrange
-        Http::fake(fn ()=> Http::response($this->videoResponse()));
+        Http::fake(fn() => Http::response($this->videoResponse()));
         Mail::fake();
         $stream = Stream::factory()
             ->notApproved()

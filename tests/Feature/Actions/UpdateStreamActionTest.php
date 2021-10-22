@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class UpdateStreamActionTest extends TestCase
 {
-
     protected StreamData $streamData;
 
     protected Stream $stream;
@@ -28,7 +27,7 @@ class UpdateStreamActionTest extends TestCase
                 'scheduled_start_time' => Carbon::tomorrow(),
                 'actual_start_time' => null,
                 'actual_end_time' => null,
-                'language_code' => 'en'
+                'language_code' => 'en',
             ]);
 
         $this->streamData = new StreamData(
@@ -49,10 +48,10 @@ class UpdateStreamActionTest extends TestCase
     /** @test */
     public function it_updates_a_stream(): void
     {
-    	// Act
+        // Act
         $updatedStream = (new UpdateStreamAction)->handle($this->stream, $this->streamData);
 
-    	// Assert
+        // Assert
         $this->assertEquals($this->stream->id, $updatedStream->id);
         $this->assertEquals($this->streamData->title, $updatedStream->title);
         $this->assertEquals($this->streamData->description, $updatedStream->description);
@@ -62,6 +61,4 @@ class UpdateStreamActionTest extends TestCase
         $this->assertEquals($this->streamData->actualEndTime, $updatedStream->actual_end_time);
         $this->assertEquals($this->streamData->status, $updatedStream->status);
     }
-
-
 }

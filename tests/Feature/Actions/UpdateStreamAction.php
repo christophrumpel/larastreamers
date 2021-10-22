@@ -7,11 +7,9 @@ use App\Services\YouTube\StreamData;
 
 class UpdateStreamAction
 {
-
     public function handle(Stream $stream, StreamData $streamData): Stream
     {
-        return tap($stream, function () use ($stream, $streamData) {
-
+        return tap($stream, function() use ($stream, $streamData) {
             $stream->update([
                 'title' => $streamData->title,
                 'description' => $streamData->description,

@@ -4,7 +4,6 @@ namespace Tests\Feature\Actions\Submission;
 
 use App\Actions\Submission\ApproveStreamAction;
 use App\Console\Commands\ImportChannelsForStreamsCommand;
-use App\Facades\YouTube;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
@@ -25,7 +24,7 @@ class ApproveStreamActionTest extends TestCase
         parent::setUp();
 
         Mail::fake();
-        Http::fake(fn ()=> Http::response($this->videoResponse()));
+        Http::fake(fn() => Http::response($this->videoResponse()));
         $this->approveStreamAction = app(ApproveStreamAction::class);
     }
 
@@ -106,7 +105,7 @@ class ApproveStreamActionTest extends TestCase
     /** @test */
     public function it_updates_stream_before_approving_it(): void
     {
-    	// Arrange
+        // Arrange
         $stream = Stream::factory()
             ->upcoming()
             ->notApproved()
