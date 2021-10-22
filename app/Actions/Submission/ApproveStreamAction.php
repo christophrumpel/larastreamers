@@ -3,10 +3,12 @@
 namespace App\Actions\Submission;
 
 use App\Console\Commands\ImportChannelsForStreamsCommand;
+use App\Facades\YouTube;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use Tests\Feature\Actions\UpdateStreamAction;
 
 class ApproveStreamAction
 {
@@ -16,11 +18,14 @@ class ApproveStreamAction
             return;
         }
 
-        $stream->update(['approved_at' => now()]);
+        $streamData = YouTube::video($stream->youtube_id);
+        (new UpdateStreamAction())->handle($stream, $streamData);
 
         if (is_null($stream->channel_id)) {
             Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
         }
+
+        $stream->update(['approved_at' => now()]);
 
         Mail::to($stream->submitted_by_email)->queue(new StreamApprovedMail($stream));
     }

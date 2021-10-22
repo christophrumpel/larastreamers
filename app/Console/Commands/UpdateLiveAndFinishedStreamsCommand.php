@@ -7,6 +7,7 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Tests\Feature\Actions\UpdateStreamAction;
 
 class UpdateLiveAndFinishedStreamsCommand extends Command
 {
@@ -49,15 +50,7 @@ class UpdateLiveAndFinishedStreamsCommand extends Command
                 return;
             }
 
-            $stream->update([
-                'title' => $streamData->title,
-                'description' => $streamData->description,
-                'thumbnail_url' => $streamData->thumbnailUrl,
-                'scheduled_start_time' => $streamData->plannedStart,
-                'status' => $streamData->status,
-                'actual_start_time' => $streamData->actualStartTime,
-                'actual_end_time' => $streamData->actualEndTime,
-            ]);
+            (new UpdateStreamAction)->handle($stream, $streamData);
         });
 
         return self::SUCCESS;
