@@ -9,7 +9,7 @@ class StreamData extends DataTransferObject
 {
     public const STATUS_UPCOMING = 'upcoming';
     public const STATUS_LIVE = 'live';
-    public const STATUS_FINISHED = 'none';
+    public const STATUS_FINISHED = 'finished';
     public const STATUS_DELETED = 'deleted';
 
     public string $videoId;
