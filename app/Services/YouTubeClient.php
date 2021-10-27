@@ -61,18 +61,18 @@ class YouTubeClient
             'id' => is_string($videoIds) ? $videoIds : collect($videoIds)->implode(','),
             'part' => 'snippet,statistics,liveStreamingDetails',
         ], 'items'))
-            ->map(fn(array $item) => new StreamData(
-                videoId: data_get($item, 'id'),
-                title: data_get($item, 'snippet.title'),
-                channelId: data_get($item, 'snippet.channelId'),
-                channelTitle: data_get($item, 'snippet.channelTitle'),
-                description: data_get($item, 'snippet.description'),
-                thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
-                publishedAt: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
-                plannedStart: $this->getPlannedStart($item),
-                actualStartTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualStartTime')),
-                actualEndTime: $this->toCarbon(data_get($item, 'liveStreamingDetails.actualEndTime')),
-                status: data_get($item, 'snippet.liveBroadcastContent') === 'none' ? StreamData::STATUS_FINISHED : data_get($item, 'snippet.liveBroadcastContent'),
+            ->map(fn(array $youTubeVideoDetails) => new StreamData(
+                videoId: data_get($youTubeVideoDetails, 'id'),
+                title: data_get($youTubeVideoDetails, 'snippet.title'),
+                channelId: data_get($youTubeVideoDetails, 'snippet.channelId'),
+                channelTitle: data_get($youTubeVideoDetails, 'snippet.channelTitle'),
+                description: data_get($youTubeVideoDetails, 'snippet.description'),
+                thumbnailUrl: last(data_get($youTubeVideoDetails, 'snippet.thumbnails'))['url'] ?? null,
+                publishedAt: $this->toCarbon(data_get($youTubeVideoDetails, 'snippet.publishedAt')),
+                plannedStart: $this->getPlannedStart($youTubeVideoDetails),
+                actualStartTime: $this->toCarbon(data_get($youTubeVideoDetails, 'liveStreamingDetails.actualStartTime')),
+                actualEndTime: $this->toCarbon(data_get($youTubeVideoDetails, 'liveStreamingDetails.actualEndTime')),
+                status: $this->getStatusFromYouVideoDetails($youTubeVideoDetails),
             ));
     }
 
@@ -100,5 +100,15 @@ class YouTubeClient
         }
 
         return Carbon::parse($string);
+    }
+
+    protected function getStatusFromYouVideoDetails(array $youTubeVideoDetails): string
+    {
+        $youTubeStatus = data_get($youTubeVideoDetails, 'snippet.liveBroadcastContent');
+        if ($youTubeStatus === 'none') {
+            return StreamData::STATUS_FINISHED;
+        }
+
+        return $youTubeStatus;
     }
 }
