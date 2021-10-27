@@ -23,6 +23,7 @@
         <!-- Modal Content -->
         <div class="inline-block align-bottom bg-white rounded-lg p-6 sm:p-12 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
              @click.away="showSubmissionModal = false"
+             @keyup.escape.window="showSubmissionModal = false"
              x-show="showSubmissionModal"
              x-transition:enter="ease-out duration-300"
              x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
