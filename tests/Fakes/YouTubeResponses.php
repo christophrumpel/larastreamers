@@ -56,7 +56,7 @@ trait YouTubeResponses
                         ],
                         'channelTitle' => 'Freek Van der Herten',
                         'categoryId' => '24',
-                        'liveBroadcastContent' => 'finished',
+                        'liveBroadcastContent' => 'none',
                         'localized' => [
                             'title' => 'Live coding new features for larastreamers.com',
                             'description' => "Christoph Rumpel created a nice new project: https://larastreamers.com/\nIn this stream, I'm going to add some features to Christoph's app.",
