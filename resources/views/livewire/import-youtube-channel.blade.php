@@ -22,9 +22,9 @@
                             @endif
                             <div class="grid grid-cols-6 gap-6">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="youtubeStreamId" class="block text-sm font-medium text-gray-700">YouTube
+                                    <label for="youTubeChannelId" class="block text-sm font-medium text-gray-700">YouTube
                                         Channel ID</label>
-                                    <input type="text" wire:model.defer="youtubeChannelId" id="youtubeStreamId"
+                                    <input type="text" wire:model.defer="youTubeChannelId" id="youTubeChannelId"
                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
