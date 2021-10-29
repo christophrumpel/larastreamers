@@ -27,4 +27,24 @@ class ChannelData extends DataTransferObject
             'country' => $this->country,
         ];
     }
+
+    public static function fake(...$args): self
+    {
+        if (is_array($args[0] ?? null)) {
+            $args = $args[0];
+        }
+
+        return new static(
+            array_merge([
+                'title' => 'My Test Channel',
+                'platform_id' => '1234',
+                'youtube_custom_url' => 'test',
+                'name' => 'My Channel Name',
+                'description' => 'Some description',
+                'thumbnail_url' => 'my-new-thumbnail-url',
+                'on_platform_since' => Carbon::now()->subYear(2),
+                'country' => 'US',
+            ], $args)
+        );
+    }
 }

@@ -31,6 +31,24 @@ class YouTubeClient
         );
     }
 
+    public function channels(iterable|string $channelIds): Collection
+    {
+        return collect($this->fetch('channels', [
+            'id' => is_string($channelIds) ? $channelIds : collect($channelIds)->implode(','),
+            'part' => 'snippet',
+        ], 'items'))
+            ->map(fn(array $item) => new ChannelData(
+                platformId: data_get($item, 'id'),
+                youTubeCustomUrl: data_get($item, 'snippet.customUrl', ''),
+                name: data_get($item, 'snippet.title'),
+                description: data_get($item, 'snippet.description', ''),
+                onPlatformSince: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
+                thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
+                country: data_get($item, 'snippet.country', ''),
+            ));
+    }
+
+
     public function upcomingStreams(string $channelId): Collection
     {
         $videoIds = $this->fetch('search', [
