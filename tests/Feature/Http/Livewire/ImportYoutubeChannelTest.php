@@ -101,7 +101,7 @@ class ImportYoutubeChannelTest extends TestCase
     {
         // Arrange & Act & Assert
         Livewire::test(ImportYouTubeChannel::class)
-            ->assertPropertyWired('youtubeChannelId')
+            ->assertPropertyWired('youTubeChannelId')
             ->assertMethodWiredToForm('importChannel');
     }
 }

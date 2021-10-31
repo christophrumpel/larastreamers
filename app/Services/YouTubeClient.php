@@ -14,21 +14,26 @@ class YouTubeClient
 {
     public function channel(string $id): ChannelData
     {
-        $result = $this->fetch('channels', ['id' => $id, 'part' => 'snippet'], 'items.0');
+        return $this->channels($id)
+            ->whenEmpty(fn() => throw  YouTubeException::unknownChannel($id))
+            ->first();
+    }
 
-        if (empty($result)) {
-            throw YouTubeException::unknownChannel($id);
-        }
-
-        return new ChannelData(
-            platformId: data_get($result, 'id'),
-            youTubeCustomUrl: data_get($result, 'snippet.customUrl', ''),
-            name: data_get($result, 'snippet.title'),
-            description: data_get($result, 'snippet.description', ''),
-            onPlatformSince: $this->toCarbon(data_get($result, 'snippet.publishedAt')),
-            thumbnailUrl: last(data_get($result, 'snippet.thumbnails'))['url'] ?? null,
-            country: data_get($result, 'snippet.country', ''),
-        );
+    public function channels(iterable|string $channelIds): Collection
+    {
+        return collect($this->fetch('channels', [
+            'id' => is_string($channelIds) ? $channelIds : collect($channelIds)->implode(','),
+            'part' => 'snippet',
+        ], 'items'))
+            ->map(fn(array $item) => new ChannelData(
+                platformId: data_get($item, 'id'),
+                youTubeCustomUrl: data_get($item, 'snippet.customUrl', ''),
+                name: data_get($item, 'snippet.title'),
+                description: data_get($item, 'snippet.description', ''),
+                onPlatformSince: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
+                thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
+                country: data_get($item, 'snippet.country', ''),
+            ));
     }
 
     public function upcomingStreams(string $channelId): Collection
