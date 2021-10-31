@@ -9,7 +9,7 @@ use App\Console\Commands\ImportChannelStreamsCommand;
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
-use App\Console\Commands\UpdateAllChannelDetails;
+use App\Console\Commands\UpdateChannelsCommand;
 use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -47,7 +47,7 @@ class Kernel extends ConsoleKernel
         $schedule->command(TweetAboutUpcomingStreamsCommand::class)->everyMinute();
         $schedule->command(ImportChannelStreamsCommand::class)->hourly();
         $schedule->command(TweetAboutWeeklySummaryCommand::class)->weeklyOn(1, '8:00');
-        $schedule->command(UpdateAllChannelDetails::class)->weeklyOn(1, '8:00');
+        $schedule->command(UpdateChannelsCommand::class)->weeklyOn(1, '8:00');
     }
 
     /**

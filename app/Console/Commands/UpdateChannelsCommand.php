@@ -7,18 +7,18 @@ use App\Models\Channel;
 use App\Services\YouTube\ChannelData;
 use Illuminate\Console\Command;
 
-class UpdateAllChannelDetails extends Command
+class UpdateChannelsCommand extends Command
 {
-    protected $signature = 'larastreamers:update-channel-details';
+    protected $signature = 'larastreamers:update-channels';
 
-    protected $description = 'Update all channel details';
+    protected $description = 'Update all channels.';
 
     public function handle()
     {
+
         $channels = Channel::query()
             ->get()
             ->keyBy('platform_id');
-
 
         if ($channels->isEmpty()) {
             $this->info('There are no channels to update.');
