@@ -36,7 +36,6 @@ class YouTubeClient
             ));
     }
 
-
     public function upcomingStreams(string $channelId): Collection
     {
         $videoIds = $this->fetch('search', [
