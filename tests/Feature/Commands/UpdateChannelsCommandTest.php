@@ -47,7 +47,9 @@ class UpdateChannelsCommandTest extends TestCase
         Channel::factory()->create(['platform_id' => '5678']);
 
         // Act
-        $this->artisan(UpdateChannelsCommand::class);
+        $this->artisan(UpdateChannelsCommand::class)
+            ->expectsOutput('Fetching 2 channels(s) from API to update.')
+            ->assertExitCode(0);
 
         // Assert
         Http::assertNothingSent();
