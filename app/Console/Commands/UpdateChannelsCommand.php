@@ -6,6 +6,7 @@ use App\Facades\YouTube;
 use App\Models\Channel;
 use App\Services\YouTube\ChannelData;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 
 class UpdateChannelsCommand extends Command
 {
@@ -29,7 +30,7 @@ class UpdateChannelsCommand extends Command
 
         $channels
             ->chunk(50)
-            ->each(function ($channels) {
+            ->each(function (Collection $channels) {
                 $youTubeResponse = YouTube::channels($channels->keys());
                 $channels->each(function (Channel $channel) use ($youTubeResponse) {
 
