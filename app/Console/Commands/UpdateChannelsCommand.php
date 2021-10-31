@@ -13,9 +13,8 @@ class UpdateChannelsCommand extends Command
 
     protected $description = 'Update all channels.';
 
-    public function handle()
+    public function handle(): int
     {
-
         $channels = Channel::query()
             ->get()
             ->keyBy('platform_id');
@@ -28,15 +27,19 @@ class UpdateChannelsCommand extends Command
 
         $this->info("Fetching {$channels->count()} channels(s) from API to update.");
 
-        $channels->chunk(50)->each(function ($channels) {
-            $youTubeResponse = YouTube::channels($channels->keys());
-            $channels->each(function(Channel $channel) use ($youTubeResponse) {
+        $channels
+            ->chunk(50)
+            ->each(function ($channels) {
+                $youTubeResponse = YouTube::channels($channels->keys());
+                $channels->each(function (Channel $channel) use ($youTubeResponse) {
 
-                /** @var ChannelData|null $channelData */
-                $channelData = $youTubeResponse->where('platformId', $channel->platform_id)->first();
+                    /** @var ChannelData|null $channelData */
+                    $channelData = $youTubeResponse->where('platformId', $channel->platform_id)->first();
 
-                Channel::updateOrCreate(['platform_id' => $channel->platform_id], $channelData->prepareForModel());
+                    Channel::updateOrCreate(['platform_id' => $channel->platform_id], $channelData->prepareForModel());
+                });
             });
-        });
+
+        return self::SUCCESS;
     }
 }
