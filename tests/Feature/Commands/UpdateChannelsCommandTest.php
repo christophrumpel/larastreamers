@@ -32,30 +32,39 @@ class UpdateChannelsCommandTest extends TestCase
                     onPlatformSince: Carbon::now()->subYear(2),
                     country: 'US',
                 ),
+                ChannelData::fake(
+                    platformId: '5678',
+                    youTubeCustomUrl: 'test',
+                    name: 'My new test channel #2',
+                    description: 'My new Description #2',
+                    thumbnailUrl: 'my-new-thumbnail-url-2',
+                    onPlatformSince: Carbon::now()->subYear(2),
+                    country: 'DE',
+                ),
             ]));
 
-        Channel::factory()
-            ->create([
-                'platform_id' => '1234',
-                'name' => 'My old channel name',
-                'description' => 'My old description',
-                'thumbnail_url' => 'my-old-thumbnail-url',
-                'on_platform_since' => Carbon::now()->subYears(1),
-                'country' => 'AT',
-            ]);
+        Channel::factory()->create(['platform_id' => '1234']);
+        Channel::factory()->create(['platform_id' => '5678']);
 
         // Act
         $this->artisan(UpdateChannelsCommand::class);
 
         // Assert
         Http::assertNothingSent();
-        $this->assertDatabaseCount(Channel::class, 1);
+        $this->assertDatabaseCount(Channel::class, 2);
         $this->assertDatabaseHas(Channel::class, [
             'name' => 'My new test channel',
             'description' => 'My new Description',
             'thumbnail_url' => 'my-new-thumbnail-url',
-            'on_platform_since' => Carbon::now()->subYear(2),
+            'on_platform_since' => Carbon::now()->subYears(2),
             'country' => 'US',
+        ]);
+        $this->assertDatabaseHas(Channel::class, [
+            'name' => 'My new test channel #2',
+            'description' => 'My new Description #2',
+            'thumbnail_url' => 'my-new-thumbnail-url-2',
+            'on_platform_since' => Carbon::now()->subYears(2),
+            'country' => 'DE',
         ]);
     }
 
