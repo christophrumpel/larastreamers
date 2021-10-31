@@ -42,7 +42,7 @@ class ChannelData extends DataTransferObject
                 'name' => 'My Channel Name',
                 'description' => 'Some description',
                 'thumbnail_url' => 'my-new-thumbnail-url',
-                'on_platform_since' => Carbon::now()->subYear(2),
+                'on_platform_since' => Carbon::now()->subYears(2),
                 'country' => 'US',
             ], $args)
         );
