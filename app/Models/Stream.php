@@ -115,7 +115,7 @@ class Stream extends Model implements Feedable
 
     public static function getNextUpcomingOrLive(): ?Stream
     {
-        return (new self)->query()
+        return Stream::query()
             ->with('channel:id,name')
             ->approved()
             ->upcomingOrLive()
