@@ -27,6 +27,9 @@
                             <x-local-time class="text-base"
                                           :date="$upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time"/>
                         </p>
+                        <time class="text-base text-gray-dark flex ml-6" datetime="{{ $upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time  }}">
+                          @if($upcomingStream->isLive())Started @endif {{ ($upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time)->diffForHumans() }}
+                        </time>
                     </div>
                 </div>
             </div>
