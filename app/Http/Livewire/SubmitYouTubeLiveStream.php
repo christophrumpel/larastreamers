@@ -10,13 +10,13 @@ use Livewire\Component;
 
 class SubmitYouTubeLiveStream extends Component
 {
-    public $youTubeIdOrUrl;
+    public string $youTubeIdOrUrl = '';
 
-    public $submittedByEmail;
+    public string $submittedByEmail = '';
 
     public string $languageCode = 'en';
 
-    protected $messages = [
+    protected array $messages = [
         'youTubeIdOrUrl.required' => 'The YouTube ID field cannot be empty.',
         'youTubeIdOrUrl.unique' => 'This stream was already submitted.',
         'submittedByEmail.required' => 'The Email field cannot be empty.',

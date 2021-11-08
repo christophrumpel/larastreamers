@@ -16,7 +16,7 @@ class StreamApprovedMail extends Mailable
     ) {
     }
 
-    public function build()
+    public function build(): self
     {
         return $this
             ->subject("The stream you've submitted has been approved")

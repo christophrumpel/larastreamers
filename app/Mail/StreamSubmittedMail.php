@@ -16,7 +16,7 @@ class StreamSubmittedMail extends Mailable
     ) {
     }
 
-    public function build()
+    public function build(): self
     {
         return $this
             ->subject('Stream submitted on Larastreamers')

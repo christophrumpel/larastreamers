@@ -11,7 +11,7 @@ class ImportVideoAction
     public function handle(
         string $youTubeId,
         string $languageCode = 'en',
-        $approved = false,
+        bool $approved = false,
         ?string $submittedByEmail = null,
     ): Stream {
         $video = YouTube::video($youTubeId);

@@ -15,7 +15,7 @@ class CalendarController extends Controller
         $calendar = Calendar::create()
             ->name('Larastreamers')
             ->description('There is no better way to learn than by watching other developers code live. Find out who is streaming next in the Laravel world.')
-            ->refreshInterval(CarbonInterval::hour()->totalMinutes)
+            ->refreshInterval((int) CarbonInterval::hour()->totalMinutes)
             ->productIdentifier('larastreamers.com');
 
         Stream::query()
