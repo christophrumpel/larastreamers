@@ -38,7 +38,6 @@ class UpdateChannelsCommand extends Command
                     $channelData = $youTubeResponse->where('platformId', $channel->platform_id)->first();
 
                     Channel::where('platform_id', $channel->platform_id)
-                        ->first()
                         ->update($channelData->prepareForModel());
                 });
             });
