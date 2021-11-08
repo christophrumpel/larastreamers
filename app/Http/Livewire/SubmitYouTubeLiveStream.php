@@ -45,6 +45,4 @@ class SubmitYouTubeLiveStream extends Component
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
         $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);
     }
-
-
 }
