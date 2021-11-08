@@ -28,7 +28,7 @@ class ChannelData extends DataTransferObject
         ];
     }
 
-    public static function fake(...$args): self
+    public static function fake(mixed ...$args): self
     {
         if (is_array($args[0] ?? null)) {
             $args = $args[0];

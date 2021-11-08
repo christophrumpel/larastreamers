@@ -12,6 +12,7 @@ class StreamListArchive extends Component
 {
     use WithPagination;
 
+    /** @var string[][]  */
     protected $queryString = [
         'search' => ['except' => ''],
         'streamer' => ['except' => ''],

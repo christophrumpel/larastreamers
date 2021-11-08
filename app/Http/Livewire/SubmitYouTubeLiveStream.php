@@ -37,12 +37,24 @@ class SubmitYouTubeLiveStream extends Component
 
     public function submit(): void
     {
+        $this->youTubeIdOrUrl = $this->determineYoutubeId();
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
-        $action->handle((new YouTubeRule())->determineYoutubeId($this->youTubeIdOrUrl), $this->languageCode, $this->submittedByEmail);
+        $action->handle($this->youTubeIdOrUrl, $this->languageCode, $this->submittedByEmail);
 
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
         $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);
+    }
+
+    private function determineYoutubeId(): string
+    {
+        if (filter_var($this->youTubeIdOrUrl, FILTER_VALIDATE_URL)) {
+            preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $this->youTubeIdOrUrl, $matches);
+
+            return $matches[0] ?? '';
+        }
+
+        return $this->youTubeIdOrUrl;
     }
 }

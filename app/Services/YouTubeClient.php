@@ -81,10 +81,10 @@ class YouTubeClient
             ));
     }
 
-    protected function getPlannedStart(array $data): Carbon
+    protected function getPlannedStart(array $data): ?Carbon
     {
-        return $this->toCarbon(data_get($data, 'liveStreamingDetails.scheduledStartTime'))
-            ?? $this->toCarbon(data_get($data, 'snippet.publishedAt'));
+        return $this->toCarbon(data_get($data, 'liveStreamingDetails.scheduledStartTime', now()))
+            ?? $this->toCarbon(data_get($data, 'snippet.publishedAt', now()));
     }
 
     protected function fetch(string $url, array $params = [], string $key = null): array
