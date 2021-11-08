@@ -35,10 +35,10 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     public function it_calls_the_submit_action_with_full_youtube_url(): void
     {
         // Arrange
-        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=1234';
+        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=bcnR4NYOw2o';
         $this->mock(SubmitStreamAction::class)
             ->shouldReceive('handle')
-            ->withArgs(['1234', 'de', 'test@test.at'])
+            ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
             ->once();
 
         $this->mockYouTubVideoCall();
@@ -55,10 +55,10 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     public function it_calls_the_submit_action_with_short_youtube_url(): void
     {
         // Arrange
-        $shortYoutubeUrl = 'https://youtu.be/1234';
+        $shortYoutubeUrl = 'https://youtu.be/bcnR4NYOw2o';
         $this->mock(SubmitStreamAction::class)
             ->shouldReceive('handle')
-            ->withArgs(['1234', 'de', 'test@test.at'])
+            ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
             ->once();
 
         $this->mockYouTubVideoCall();
@@ -89,7 +89,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     public function it_shows_a_success_message_with_full_youtube_url_too(): void
     {
         // Arrange
-        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=1234';
+        $fullYoutubeUrl = 'https://www.youtube.com/watch?v=bcnR4NYOw2o';
         $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
@@ -101,17 +101,18 @@ class SubmitYouTubeLiveStreamTest extends TestCase
     }
 
     /** @test */
-    public function it_shows_errors_for_missing_youTubeIdOrUrl_or_email_fields(): void
+    public function it_shows_errors_for_wrong_youTube_url(): void
     {
         // Arrange
         $this->mockYouTubVideoCall();
 
         // Arrange & Act & Assert
         Livewire::test(SubmitYouTubeLiveStream::class)
+            ->set('youTubeIdOrUrl', 'https://twitch.com/video?v=1')
             ->call('submit')
-            ->assertSee('The YouTube ID field cannot be empty.')
-            ->assertSee('The Email field cannot be empty.');
+            ->assertSee('This is not a valid YouTube video ID/URL.');
     }
+
 
     /** @test */
     public function the_youtubeId_must_be_unique(): void
@@ -140,7 +141,7 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->set('submittedByEmail', 'test@test.at')
             ->set('youTubeIdOrUrl', 'not-valid-video-id')
             ->call('submit')
-            ->assertSee('This is not a valid YouTube video id.');
+            ->assertSee("We couldn't find a YouTube video for the ID: not-valid-video-id");
     }
 
     /** @test */
