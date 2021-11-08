@@ -113,7 +113,6 @@ class SubmitYouTubeLiveStreamTest extends TestCase
             ->assertSee('This is not a valid YouTube video ID/URL.');
     }
 
-
     /** @test */
     public function the_youtubeId_must_be_unique(): void
     {

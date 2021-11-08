@@ -13,7 +13,7 @@ class YouTubeRule implements Rule
     public function passes($attribute, $value): bool
     {
         $youTubeId = $this->determineYoutubeId($value);
-        if(!$youTubeId) {
+        if (! $youTubeId) {
             return false;
         }
 
@@ -48,9 +48,9 @@ class YouTubeRule implements Rule
     public function determineYoutubeId(string $youTubeIdOrUrl): ?string
     {
         if (filter_var($youTubeIdOrUrl, FILTER_VALIDATE_URL)) {
-            preg_match("#(?<=v=|v/|vi=|vi/|youtu.be/)[a-zA-Z0-9_-]{11}#", $youTubeIdOrUrl, $matches);
-            if(!$matches) {
-                $this->message = "This is not a valid YouTube video ID/URL.";
+            preg_match('#(?<=v=|v/|vi=|vi/|youtu.be/)[a-zA-Z0-9_-]{11}#', $youTubeIdOrUrl, $matches);
+            if (! $matches) {
+                $this->message = 'This is not a valid YouTube video ID/URL.';
 
                 return false;
             }
