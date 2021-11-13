@@ -37,6 +37,6 @@ class PreviewTest extends TestCase
 
         $this->view('pages.partials.header.preview', [
             'upcomingStream' => $stream,
-        ])->assertSee('Started  7 minutes ago');
+        ])->assertSee('7 minutes ago');
     }
 }
