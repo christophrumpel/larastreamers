@@ -39,8 +39,7 @@ class UpdateChannelsCommand extends Command
 
                     if ($channelData) {
                         Channel::where('platform_id', $channel->platform_id)
-                            ->first()
-                            ?->update($channelData->prepareForModel());
+                            ->update($channelData->prepareForModel());
                     }
                 });
             });

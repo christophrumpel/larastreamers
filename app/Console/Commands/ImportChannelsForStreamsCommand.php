@@ -43,8 +43,8 @@ class ImportChannelsForStreamsCommand extends Command
             // Import new channel
             $channelData = YouTube::channel($streamData->channelId);
             $channel = Channel::updateOrCreate(['platform_id' => $channelData->platformId], array_merge($channelData->prepareForModel(), ['language_code' => 'en']));
-            $stream = Stream::where('youtube_id', $streamData->videoId)->first();
-            $stream?->update(['channel_id' => $channel->id]);
+            Stream::where('youtube_id', $streamData->videoId)
+                ->update(['channel_id' => $channel->id]);
         });
 
         $this->info($streamsToImportChannels->count().' stream channels were updated or imported.');
