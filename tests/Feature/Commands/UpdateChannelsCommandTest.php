@@ -65,7 +65,6 @@ class UpdateChannelsCommandTest extends TestCase
             'name' => 'My new test channel #2',
             'description' => 'My new Description #2',
             'thumbnail_url' => 'my-new-thumbnail-url-2',
-            'on_platform_since' => Carbon::now()->subYears(2),
             'country' => 'DE',
         ]);
     }

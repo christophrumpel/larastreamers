@@ -36,6 +36,7 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^1.0.1",
         "nunomaduro/patrol": "^1.0",
         "phpunit/phpunit": "^9.3.3",
         "roave/security-advisories": "dev-latest",

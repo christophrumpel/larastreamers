@@ -115,7 +115,7 @@ class Stream extends Model implements Feedable
 
     public static function getNextUpcomingOrLive(): ?Stream
     {
-        return (new self)->query()
+        return Stream::query()
             ->with('channel:id,name')
             ->approved()
             ->upcomingOrLive()
@@ -180,6 +180,10 @@ class Stream extends Model implements Feedable
 
     public function scopeByStreamer(Builder $query, ?string $streamerHashid): Builder
     {
+        if(!$streamerHashid) {
+            return $query;
+        }
+
         $channelId = Hashids::decode($streamerHashid)[0] ?? null;
 
         return $query->when(
@@ -191,10 +195,10 @@ class Stream extends Model implements Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id($this->id)
+            ->id((string) $this->id)
             ->title($this->title)
-            ->summary($this->description)
-            ->updated($this->updated_at)
+            ->summary((string) $this->description)
+            ->updated($this->updated_at ?? now())
             ->link($this->url())
             ->author($this->title); //TODO: implement
     }
@@ -212,14 +216,14 @@ class Stream extends Model implements Feedable
             ->url($this->url())
             ->description(implode(PHP_EOL, [
                 $this->title,
-                $this->channel->name,
+                $this->channel?->name,
                 $this->url(),
-                Str::of($this->description)
+                Str::of((string) $this->description)
                     ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),
             ]))
             ->startsAt($this->scheduled_start_time)
             ->endsAt($this->scheduled_start_time->clone()->addHour())
-            ->createdAt($this->created_at);
+            ->createdAt($this->created_at ?? now());
     }
 
     public function language(): HasOne
@@ -229,6 +233,7 @@ class Stream extends Model implements Feedable
 
     public function toWebcalLink(): string
     {
+        /** @var string[] $url */
         $url = parse_url(route('calendar.ics.stream', $this));
 
         return "webcal://{$url['host']}{$url['path']}";

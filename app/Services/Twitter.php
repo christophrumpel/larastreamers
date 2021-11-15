@@ -13,10 +13,10 @@ class Twitter
         $this->twitter = $twitter;
     }
 
-    public function tweet(string $status): array
+    public function tweet(string $status): ?array
     {
         if (! app()->environment('production')) {
-            return [];
+            return null;
         }
 
         return (array) $this->twitter->post('statuses/update', compact('status'));

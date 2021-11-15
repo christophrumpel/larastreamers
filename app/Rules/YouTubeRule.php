@@ -28,12 +28,6 @@ class YouTubeRule implements Rule
             return false;
         }
 
-        if (is_null($video)) {
-            $this->message = 'This is not a valid YouTube video id.';
-
-            return false;
-        }
-
         if (! $video->plannedStart->isFuture()) {
             $this->message = 'We only accept streams that have not started yet.';
 

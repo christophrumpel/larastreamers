@@ -10,6 +10,7 @@ class AddStreamsToCalendar extends Component
 
     public function __construct()
     {
+        /** @var string[] $url */
         $url = parse_url(route('calendar.ics'));
         $webcalLink = "webcal://{$url['host']}{$url['path']}";
 

@@ -12,6 +12,7 @@ class StreamListArchive extends Component
 {
     use WithPagination;
 
+    /** @var string[][]  */
     protected $queryString = [
         'search' => ['except' => ''],
         'streamer' => ['except' => ''],
@@ -37,6 +38,7 @@ class StreamListArchive extends Component
             ->fromLatestToOldest()
             ->paginate(24);
 
+        // @phpstan-ignore-next-line
         $channels = Channel::select(['id', 'name'])->get()->pluck('name', 'hashid');
 
         return view('livewire.stream-list-archive', [
