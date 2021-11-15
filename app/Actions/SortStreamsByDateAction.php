@@ -13,7 +13,6 @@ class SortStreamsByDateAction
         return $streams
             ->groupBy(static fn(Stream $item): string => $item->scheduled_start_time->format('D d.m.Y'))
             ->mapWithKeys(static function(Collection $item, string $date): array {
-                /** @var \Carbon\Carbon $dateObject */
                 $dateObject = Carbon::createFromFormat('D d.m.Y', $date);
 
                 $date = $dateObject->format('D, M jS Y');
