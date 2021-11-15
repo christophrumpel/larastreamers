@@ -5,6 +5,7 @@ on:
     paths:
       - '**.php'
       - 'phpstan.neon'
+      - 'composer.json'
 
 jobs:
   larastan:
