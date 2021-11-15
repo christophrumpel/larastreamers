@@ -180,7 +180,7 @@ class Stream extends Model implements Feedable
 
     public function scopeByStreamer(Builder $query, ?string $streamerHashid): Builder
     {
-        if(!$streamerHashid) {
+        if (! $streamerHashid) {
             return $query;
         }
 
