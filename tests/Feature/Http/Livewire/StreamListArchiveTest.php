@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Http\Livewire;
-
 use App\Http\Livewire\StreamListArchive;
 use App\Models\Channel;
 use App\Models\Stream;
@@ -9,50 +7,43 @@ use Livewire\Livewire;
 use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
-class StreamListArchiveTest extends TestCase
-{
-    /** @test */
-    public function it_only_shows_streams_by_selected_streamer(): void
-    {
-        // Arrange
-        Stream::factory()
-            ->for(Channel::factory()->create(['name' => 'My Channel']))
-            ->finished()
-            ->create(['title' => 'Stream Seen', 'channel_id' => 1]);
-        Stream::factory()
-            ->for(Channel::factory()->create(['name' => 'My Channel']))
-            ->finished()
-            ->create(['title' => 'Stream Not Seen', 'channel_id' => 2]);
+uses(TestCase::class);
 
-        // Act & Assert
-        Livewire::test(StreamListArchive::class)
-            ->set('streamer', Hashids::encode(1))
-            ->assertSee('Stream Seen')
-            ->assertDontSee('Stream Not Seen');
-    }
+it('only shows streams by selected streamer', function () {
+    // Arrange
+    Stream::factory()
+        ->for(Channel::factory()->create(['name' => 'My Channel']))
+        ->finished()
+        ->create(['title' => 'Stream Seen', 'channel_id' => 1]);
+    Stream::factory()
+        ->for(Channel::factory()->create(['name' => 'My Channel']))
+        ->finished()
+        ->create(['title' => 'Stream Not Seen', 'channel_id' => 2]);
 
-    /** @test */
-    public function it_shows_streamers_as_dropdown_options(): void
-    {
-        // Arrange
-        Channel::factory()
-            ->create(['name' => 'Channel A']);
-        Channel::factory()
-            ->create(['name' => 'Channel B']);
+    // Act & Assert
+    Livewire::test(StreamListArchive::class)
+        ->set('streamer', Hashids::encode(1))
+        ->assertSee('Stream Seen')
+        ->assertDontSee('Stream Not Seen');
+});
 
-        // Arrange & Act & Assert
-        Livewire::test(StreamListArchive::class)
-            ->assertSee([
-                'Channel A',
-                'Channel B',
-            ]);
-    }
+it('shows streamers as dropdown options', function () {
+    // Arrange
+    Channel::factory()
+        ->create(['name' => 'Channel A']);
+    Channel::factory()
+        ->create(['name' => 'Channel B']);
 
-    /** @test */
-    public function it_wires_properties_and_methods(): void
-    {
-        // Arrange & Act & Assert
-        Livewire::test(StreamListArchive::class)
-            ->assertPropertyWired('streamer');
-    }
-}
+    // Arrange & Act & Assert
+    Livewire::test(StreamListArchive::class)
+        ->assertSee([
+            'Channel A',
+            'Channel B',
+        ]);
+});
+
+it('wires properties and methods', function () {
+    // Arrange & Act & Assert
+    Livewire::test(StreamListArchive::class)
+        ->assertPropertyWired('streamer');
+});
