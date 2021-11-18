@@ -18,7 +18,7 @@ test('two factor authentication can be enabled', function () {
     $user = $user->fresh();
 
     $this->assertNotNull($user->two_factor_secret);
-    $this->assertCount(8, $user->recoveryCodes());
+    expect($user->recoveryCodes())->toHaveCount(8);
 });
 
 test('recovery codes can be regenerated', function () {
@@ -34,8 +34,8 @@ test('recovery codes can be regenerated', function () {
 
     $component->call('regenerateRecoveryCodes');
 
-    $this->assertCount(8, $user->recoveryCodes());
-    $this->assertCount(8, array_diff($user->recoveryCodes(), $user->fresh()->recoveryCodes()));
+    expect($user->recoveryCodes())->toHaveCount(8);
+    expect(array_diff($user->recoveryCodes(), $user->fresh()->recoveryCodes()))->toHaveCount(8);
 });
 
 test('two factor authentication can be disabled', function () {
@@ -50,5 +50,5 @@ test('two factor authentication can be disabled', function () {
 
     $component->call('disableTwoFactorAuthentication');
 
-    $this->assertNull($user->fresh()->two_factor_secret);
+    expect($user->fresh()->two_factor_secret)->toBeNull();
 });

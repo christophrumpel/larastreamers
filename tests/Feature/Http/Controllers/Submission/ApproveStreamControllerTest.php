@@ -24,14 +24,14 @@ it('can approve a stream using a signed url', function () {
     Artisan::spy();
 
     // Assert
-    $this->assertFalse($stream->isApproved());
+    expect($stream->isApproved())->toBeFalse();
 
     // Act
     $this->get($stream->approveUrl())
         ->assertOk();
 
     // Assert
-    $this->assertTrue($stream->refresh()->isApproved());
+    expect($stream->refresh()->isApproved())->toBeTrue();
 
     Mail::assertQueued(StreamApprovedMail::class);
 });

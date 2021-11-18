@@ -19,7 +19,7 @@ test('user accounts can be deleted', function () {
                     ->set('password', 'password')
                     ->call('deleteUser');
 
-    $this->assertNull($user->fresh());
+    expect($user->fresh())->toBeNull();
 });
 
 test('correct password must be provided before account can be deleted', function () {

@@ -23,5 +23,5 @@ test('the action sends rejection mail', function () {
 
     // Assert
     Mail::assertQueued(fn(StreamRejectedMail $mail) => $mail->hasTo($stream->submitted_by_email));
-    $this->assertFalse($stream->refresh()->isApproved());
+    expect($stream->refresh()->isApproved())->toBeFalse();
 });

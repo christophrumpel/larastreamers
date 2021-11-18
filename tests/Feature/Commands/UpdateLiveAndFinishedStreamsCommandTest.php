@@ -39,9 +39,9 @@ it('updates archived streams', function () {
     // Assert
     $existingStream->refresh();
 
-    $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $existingStream->actual_start_time->toIso8601String());
-    $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $existingStream->actual_end_time->toIso8601String());
-    $this->assertSame(StreamData::STATUS_FINISHED, $existingStream->status);
+    expect($existingStream->actual_start_time->toIso8601String())->toBe(Carbon::yesterday()->addMinutes(3)->toIso8601String());
+    expect($existingStream->actual_end_time->toIso8601String())->toBe(Carbon::yesterday()->addMinutes(93)->toIso8601String());
+    expect($existingStream->status)->toBe(StreamData::STATUS_FINISHED);
 });
 
 it('marks missing streams as deleted', function () {
@@ -63,9 +63,9 @@ it('marks missing streams as deleted', function () {
     // Assert
     $deletedStream->refresh();
 
-    $this->assertNull($deletedStream->actual_start_time);
-    $this->assertSame(StreamData::STATUS_DELETED, $deletedStream->status);
-    $this->assertSame(Carbon::now()->toIso8601String(), $deletedStream->hidden_at->toIso8601String());
+    expect($deletedStream->actual_start_time)->toBeNull();
+    expect($deletedStream->status)->toBe(StreamData::STATUS_DELETED);
+    expect($deletedStream->hidden_at->toIso8601String())->toBe(Carbon::now()->toIso8601String());
 });
 
 it('updates live streams', function () {
@@ -98,9 +98,9 @@ it('updates live streams', function () {
     // Assert
     $wasLiveStream->refresh();
 
-    $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $wasLiveStream->actual_start_time->toIso8601String());
-    $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $wasLiveStream->actual_end_time->toIso8601String());
-    $this->assertSame(StreamData::STATUS_FINISHED, $wasLiveStream->status);
+    expect($wasLiveStream->actual_start_time->toIso8601String())->toBe(Carbon::yesterday()->addMinutes(3)->toIso8601String());
+    expect($wasLiveStream->actual_end_time->toIso8601String())->toBe(Carbon::yesterday()->addMinutes(93)->toIso8601String());
+    expect($wasLiveStream->status)->toBe(StreamData::STATUS_FINISHED);
 });
 
 it('limits the update to the latest 50 streams', function () {
@@ -134,6 +134,6 @@ it('limits the update to the latest 50 streams', function () {
     // Assert
     $stream51->refresh();
 
-    $this->assertNull($stream51->actual_start_time);
-    $this->assertSame(StreamData::STATUS_FINISHED, $stream51->status);
+    expect($stream51->actual_start_time)->toBeNull();
+    expect($stream51->status)->toBe(StreamData::STATUS_FINISHED);
 });

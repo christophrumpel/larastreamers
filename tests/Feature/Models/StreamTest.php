@@ -15,7 +15,7 @@ it('only gives approved streams', function () {
     $streams = Stream::approved()->get();
 
     // Assert
-    $this->assertCount(1, $streams);
+    expect($streams)->toHaveCount(1);
 });
 
 it('gets next upcoming stream', function () {
@@ -32,7 +32,7 @@ it('gets next upcoming stream', function () {
     $actualStream = Stream::getNextUpcomingOrLive();
 
     // Assert
-    $this->assertEquals($expectedStream->id, $actualStream->id);
+    expect($actualStream->id)->toEqual($expectedStream->id);
 });
 
 it('gets next live stream before upcoming', function () {
@@ -49,5 +49,5 @@ it('gets next live stream before upcoming', function () {
     $actualStream = Stream::getNextUpcomingOrLive();
 
     // Assert
-    $this->assertEquals($expectedStream->id, $actualStream->id);
+    expect($actualStream->id)->toEqual($expectedStream->id);
 });

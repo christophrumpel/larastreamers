@@ -34,7 +34,7 @@ it('imports channel for stream', function () {
     ]);
 
     $stream1->refresh();
-    $this->assertEquals(1, $stream1->channel_id);
+    expect($stream1->channel_id)->toEqual(1);
 });
 
 it('imports channel for specific stream', function () {

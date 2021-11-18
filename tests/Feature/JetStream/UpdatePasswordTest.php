@@ -19,7 +19,7 @@ test('password can be updated', function () {
             ])
             ->call('updatePassword');
 
-    $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
+    expect(Hash::check('new-password', $user->fresh()->password))->toBeTrue();
 });
 
 test('current password must be correct', function () {
@@ -34,7 +34,7 @@ test('current password must be correct', function () {
             ->call('updatePassword')
             ->assertHasErrors(['current_password']);
 
-    $this->assertTrue(Hash::check('password', $user->fresh()->password));
+    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
 });
 
 test('new passwords must match', function () {
@@ -49,5 +49,5 @@ test('new passwords must match', function () {
             ->call('updatePassword')
             ->assertHasErrors(['password']);
 
-    $this->assertTrue(Hash::check('password', $user->fresh()->password));
+    expect(Hash::check('password', $user->fresh()->password))->toBeTrue();
 });

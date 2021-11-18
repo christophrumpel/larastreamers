@@ -101,5 +101,5 @@ it('updates stream before approving it', function () {
 
     // Assert
     $stream->refresh();
-    $this->assertEquals(StreamData::STATUS_FINISHED, $stream->status);
+    expect($stream->status)->toEqual(StreamData::STATUS_FINISHED);
 });

@@ -17,14 +17,14 @@ it('tweets streams that are upcoming', function () {
 
     // Assert
     $this->twitterFake->assertNoTweetsWereSent();
-    $this->assertFalse($stream->tweetStreamIsUpcomingWasSend());
+    expect($stream->tweetStreamIsUpcomingWasSend())->toBeFalse();
 
     // Act
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
     $this->twitterFake->assertTweetWasSent();
-    $this->assertTrue($stream->refresh()->tweetStreamIsUpcomingWasSend());
+    expect($stream->refresh()->tweetStreamIsUpcomingWasSend())->toBeTrue();
 });
 
 it('does not tweet streams that are live or finished', function () {
@@ -93,9 +93,9 @@ it('correctly sets upcoming tweeted at timestamp', function () {
     $liveStreamNotToTweet = Stream::factory()->live()->create();
 
     // Assert
-    $this->assertNull($upcomingStreamToTweet->upcoming_tweeted_at);
-    $this->assertNull($upcomingStreamNotToTweet->upcoming_tweeted_at);
-    $this->assertNull($liveStreamNotToTweet->upcoming_tweeted_at);
+    expect($upcomingStreamToTweet->upcoming_tweeted_at)->toBeNull();
+    expect($upcomingStreamNotToTweet->upcoming_tweeted_at)->toBeNull();
+    expect($liveStreamNotToTweet->upcoming_tweeted_at)->toBeNull();
 
     // Act
     $this->artisan(TweetAboutUpcomingStreamsCommand::class)
@@ -105,13 +105,13 @@ it('correctly sets upcoming tweeted at timestamp', function () {
     // Assert
     tap($upcomingStreamToTweet->fresh(), function($upcomingStreamToTweet) {
         $this->assertNotNull($upcomingStreamToTweet->upcoming_tweeted_at);
-        $this->assertInstanceOf(Carbon::class, $upcomingStreamToTweet->upcoming_tweeted_at);
-        $this->assertSame((string) now(), (string) $upcomingStreamToTweet->upcoming_tweeted_at);
-        $this->assertTrue($upcomingStreamToTweet->tweetStreamIsUpcomingWasSend());
+        expect($upcomingStreamToTweet->upcoming_tweeted_at)->toBeInstanceOf(Carbon::class);
+        expect((string) $upcomingStreamToTweet->upcoming_tweeted_at)->toBe((string) now());
+        expect($upcomingStreamToTweet->tweetStreamIsUpcomingWasSend())->toBeTrue();
     });
 
-    $this->assertNull($upcomingStreamNotToTweet->refresh()->upcoming_tweeted_at);
-    $this->assertNull($liveStreamNotToTweet->refresh()->upcoming_tweeted_at);
+    expect($upcomingStreamNotToTweet->refresh()->upcoming_tweeted_at)->toBeNull();
+    expect($liveStreamNotToTweet->refresh()->upcoming_tweeted_at)->toBeNull();
 });
 
 it('does not send a tweet if the live tweet is sent', function () {
@@ -125,7 +125,7 @@ it('does not send a tweet if the live tweet is sent', function () {
         ->create();
 
     // Assert
-    $this->assertNull($stream->upcoming_tweeted_at);
+    expect($stream->upcoming_tweeted_at)->toBeNull();
 
     // Act
     $this->artisan(TweetAboutUpcomingStreamsCommand::class)
