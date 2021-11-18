@@ -4,7 +4,6 @@ use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('only gives approved streams', function () {
     // Arrange

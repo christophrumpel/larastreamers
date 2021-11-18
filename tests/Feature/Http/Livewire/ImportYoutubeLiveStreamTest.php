@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('imports upcoming stream from you tube url', function () {
     // Arrange

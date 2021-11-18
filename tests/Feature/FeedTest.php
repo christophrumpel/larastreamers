@@ -4,7 +4,6 @@ use App\Models\Stream;
 use Carbon\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('provides streams in rss feed', function () {
     // Arrange

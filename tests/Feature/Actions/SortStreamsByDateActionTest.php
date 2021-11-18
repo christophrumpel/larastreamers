@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('groups streams by date', function () {
     // Arrange

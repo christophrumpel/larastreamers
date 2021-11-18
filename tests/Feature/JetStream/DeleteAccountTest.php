@@ -6,7 +6,6 @@ use Laravel\Jetstream\Http\Livewire\DeleteUserForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 test('user accounts can be deleted', function () {
     if (! Features::hasAccountDeletionFeatures()) {

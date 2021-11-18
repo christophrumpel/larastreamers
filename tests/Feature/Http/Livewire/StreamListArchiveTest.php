@@ -7,7 +7,6 @@ use Livewire\Livewire;
 use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
-uses(TestCase::class);
 
 it('only shows streams by selected streamer', function () {
     // Arrange

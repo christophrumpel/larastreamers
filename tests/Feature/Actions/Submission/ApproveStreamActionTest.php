@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(YouTubeResponses::class);
 
 beforeEach(function () {

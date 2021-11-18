@@ -6,7 +6,6 @@ use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('tweets streams that are upcoming', function () {
     // Arrange

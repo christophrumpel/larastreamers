@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
-uses(TestCase::class);
 
 it('shows only finished streams', function () {
     // Arrange

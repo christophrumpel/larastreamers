@@ -8,7 +8,6 @@ use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('can store a stream', function () {
     // Arrange

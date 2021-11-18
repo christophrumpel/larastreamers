@@ -8,7 +8,6 @@ use App\Services\YouTube\StreamData;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('calls the submit action', function () {
     // Arrange

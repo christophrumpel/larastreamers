@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(YouTubeResponses::class);
 
 it('can approve a stream using a signed url', function () {

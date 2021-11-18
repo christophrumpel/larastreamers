@@ -5,7 +5,6 @@ use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 beforeEach(function () {
     $this->stream = Stream::factory()

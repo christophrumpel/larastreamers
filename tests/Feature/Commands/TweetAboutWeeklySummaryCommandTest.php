@@ -5,7 +5,6 @@ use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('tweets weekly summary', function () {
     // Arrange

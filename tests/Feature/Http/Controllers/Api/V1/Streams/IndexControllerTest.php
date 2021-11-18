@@ -3,7 +3,6 @@
 use App\Models\Stream;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('shows all streams', function () {
     $stream = Stream::factory()->create([
