@@ -38,10 +38,11 @@
         "nunomaduro/collision": "^5.0",
         "nunomaduro/larastan": "^1.0.1",
         "nunomaduro/patrol": "^1.0",
-        "phpunit/phpunit": "^9.3.3",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ray": "^1.17",
-        "spatie/test-time": "^1.2"
+        "spatie/test-time": "^1.2",
+        "pestphp/pest": "^1.20",
+        "pestphp/pest-plugin-laravel": "^1.1"
     },
     "config": {
         "optimize-autoloader": true,
