@@ -29,9 +29,9 @@ it('can store a stream', function () {
     $stream = Stream::firstWhere('youtube_id', $this->youTubeId);
     $this->assertNotNull($stream);
 
-    $this->assertFalse($stream->isApproved());
-    $this->assertEquals('john@example.com', $stream->submitted_by_email);
-    $this->assertEquals('de', $stream->language_code);
+    expect($stream->isApproved())->toBeFalse();
+    expect($stream->submitted_by_email)->toEqual('john@example.com');
+    expect($stream->language_code)->toEqual('de');
 
     Mail::assertQueued(fn(StreamSubmittedMail $mail) => $mail->hasTo('christoph@christoph-rumpel.com'));
 });

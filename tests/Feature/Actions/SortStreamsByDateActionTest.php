@@ -23,9 +23,9 @@ it('groups streams by date', function () {
     $preparedStreams = $prepareStreamsAction->handle($streams);
 
     // Assert
-    $this->assertEquals('Today', $preparedStreams->keys()[0]);
-    $this->assertEquals('Tomorrow', $preparedStreams->keys()[1]);
-    $this->assertEquals(Carbon::tomorrow()->addDay()->format('D, M jS Y'), $preparedStreams->keys()[2]);
+    expect($preparedStreams->keys()[0])->toEqual('Today');
+    expect($preparedStreams->keys()[1])->toEqual('Tomorrow');
+    expect($preparedStreams->keys()[2])->toEqual(Carbon::tomorrow()->addDay()->format('D, M jS Y'));
 });
 
 it('orders streams from current to upcoming', function () {

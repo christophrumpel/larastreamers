@@ -83,15 +83,15 @@ it('correctly sets tweeted at timestamp', function () {
     $streamDontTweet = Stream::factory()->upcoming()->create();
 
     // Assert
-    $this->assertFalse($streamToTweet->tweetStreamIsLiveWasSend());
-    $this->assertFalse($streamDontTweet->tweetStreamIsLiveWasSend());
+    expect($streamToTweet->tweetStreamIsLiveWasSend())->toBeFalse();
+    expect($streamDontTweet->tweetStreamIsLiveWasSend())->toBeFalse();
 
     // Act
     $this->artisan(TweetAboutLiveStreamsCommand::class);
 
     // Assert
-    $this->assertTrue($streamToTweet->refresh()->tweetStreamIsLiveWasSend());
-    $this->assertFalse($streamDontTweet->refresh()->tweetStreamIsLiveWasSend());
+    expect($streamToTweet->refresh()->tweetStreamIsLiveWasSend())->toBeTrue();
+    expect($streamDontTweet->refresh()->tweetStreamIsLiveWasSend())->toBeFalse();
 });
 
 it('only tweets streams that are going live once', function () {

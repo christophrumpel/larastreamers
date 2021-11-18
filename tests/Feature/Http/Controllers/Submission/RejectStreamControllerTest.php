@@ -17,12 +17,12 @@ it('can reject a stream using a signed url', function () {
         ]);
 
     // Assert
-    $this->assertFalse($stream->isApproved());
+    expect($stream->isApproved())->toBeFalse();
 
     // Act
     $this->get($stream->rejectUrl())
         ->assertOk();
 
     // Assert
-    $this->assertFalse($stream->refresh()->isApproved());
+    expect($stream->refresh()->isApproved())->toBeFalse();
 });

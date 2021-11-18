@@ -44,12 +44,12 @@ it('updates a stream', function () {
     $updatedStream = (new UpdateStreamAction)->handle($this->stream, $this->streamData);
 
     // Assert
-    $this->assertEquals($this->stream->id, $updatedStream->id);
-    $this->assertEquals($this->streamData->title, $updatedStream->title);
-    $this->assertEquals($this->streamData->description, $updatedStream->description);
-    $this->assertEquals($this->streamData->thumbnailUrl, $updatedStream->thumbnail_url);
-    $this->assertEquals($this->streamData->plannedStart, $updatedStream->scheduled_start_time);
-    $this->assertEquals($this->streamData->actualStartTime, $updatedStream->actual_start_time);
-    $this->assertEquals($this->streamData->actualEndTime, $updatedStream->actual_end_time);
-    $this->assertEquals($this->streamData->status, $updatedStream->status);
+    expect($updatedStream->id)->toEqual($this->stream->id);
+    expect($updatedStream->title)->toEqual($this->streamData->title);
+    expect($updatedStream->description)->toEqual($this->streamData->description);
+    expect($updatedStream->thumbnail_url)->toEqual($this->streamData->thumbnailUrl);
+    expect($updatedStream->scheduled_start_time)->toEqual($this->streamData->plannedStart);
+    expect($updatedStream->actual_start_time)->toEqual($this->streamData->actualStartTime);
+    expect($updatedStream->actual_end_time)->toEqual($this->streamData->actualEndTime);
+    expect($updatedStream->status)->toEqual($this->streamData->status);
 });

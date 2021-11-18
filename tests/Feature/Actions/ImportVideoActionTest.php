@@ -22,5 +22,5 @@ it('adds a channel id if channel already given', function () {
     $importedStream = (new ImportVideoAction())->handle($youTubeId);
 
     // Assert
-    $this->assertEquals($channel->id, $importedStream->channel_id);
+    expect($importedStream->channel_id)->toEqual($channel->id);
 });
