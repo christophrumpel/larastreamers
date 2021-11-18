@@ -1,126 +1,109 @@
 <?php
 
-namespace Tests\Feature\Commands;
-
 use App\Console\Commands\TweetAboutLiveStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Tests\TestCase;
 
-class TweetAboutLiveStreamsCommandTest extends TestCase
-{
-    /** @test */
-    public function it_tweets_streams_that_are_live(): void
-    {
-        // Arrange
-        Stream::factory()->live()->create();
+uses(TestCase::class);
 
-        // Assert
-        $this->twitterFake->assertNoTweetsWereSent();
+it('tweets streams that are live', function () {
+    // Arrange
+    Stream::factory()->live()->create();
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+    // Assert
+    $this->twitterFake->assertNoTweetsWereSent();
 
-        // Assert
-        $this->twitterFake->assertTweetWasSent();
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_does_not_tweet_streams_that_are_upcoming_or_finished(): void
-    {
-        // Arrange
-        Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5)]);
-        Stream::factory()->finished()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+    // Assert
+    $this->twitterFake->assertTweetWasSent();
+});
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+it('does not tweet streams that are upcoming or finished', function () {
+    // Arrange
+    Stream::factory()->upcoming()->create(['scheduled_start_time' => now()->addMinutes(5)]);
+    Stream::factory()->finished()->create(['scheduled_start_time' => now()->addMinutes(5)]);
 
-        // Assert
-        $this->twitterFake->assertNoTweetsWereSent();
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_checks_the_message_of_the_tweet(): void
-    {
-        // Arrange
-        $stream = Stream::factory()->live()->create();
-        $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+    // Assert
+    $this->twitterFake->assertNoTweetsWereSent();
+});
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+it('checks the message of the tweet', function () {
+    // Arrange
+    $stream = Stream::factory()->live()->create();
+    $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
 
-        // Assert
-        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_adds_twitter_handle_to_streams_connected_to_a_channel(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->for(Channel::factory()->create(['twitter_handle' => '@twitterUser']))
-            ->create(['status' => StreamData::STATUS_LIVE]);
+    // Assert
+    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+});
 
-        $expectedStatus = "🔴 A new stream by @twitterUser just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+it('adds twitter handle to streams connected to a channel', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->for(Channel::factory()->create(['twitter_handle' => '@twitterUser']))
+        ->create(['status' => StreamData::STATUS_LIVE]);
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+    $expectedStatus = "🔴 A new stream by @twitterUser just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
 
-        // Assert
-        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_works_without_missing_twitter_handle_on_connected_channel(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->live()
-            ->for(Channel::factory()->create(['twitter_handle' => null]))
-            ->create();
+    // Assert
+    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+});
 
-        $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
+it('works without missing twitter handle on connected channel', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->live()
+        ->for(Channel::factory()->create(['twitter_handle' => null]))
+        ->create();
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+    $expectedStatus = "🔴 A new stream just started: $stream->title\nhttps://www.youtube.com/watch?v=$stream->youtube_id";
 
-        // Assert
-        $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_correctly_sets_tweeted_at_timestamp(): void
-    {
-        // Arrange
-        $streamToTweet = Stream::factory()->live()->create();
-        $streamDontTweet = Stream::factory()->upcoming()->create();
+    // Assert
+    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+});
 
-        // Assert
-        $this->assertFalse($streamToTweet->tweetStreamIsLiveWasSend());
-        $this->assertFalse($streamDontTweet->tweetStreamIsLiveWasSend());
+it('correctly sets tweeted at timestamp', function () {
+    // Arrange
+    $streamToTweet = Stream::factory()->live()->create();
+    $streamDontTweet = Stream::factory()->upcoming()->create();
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+    // Assert
+    $this->assertFalse($streamToTweet->tweetStreamIsLiveWasSend());
+    $this->assertFalse($streamDontTweet->tweetStreamIsLiveWasSend());
 
-        // Assert
-        $this->assertTrue($streamToTweet->refresh()->tweetStreamIsLiveWasSend());
-        $this->assertFalse($streamDontTweet->refresh()->tweetStreamIsLiveWasSend());
-    }
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
 
-    /** @test */
-    public function it_only_tweets_streams_that_are_going_live_once(): void
-    {
-        // Arrange
-        Stream::factory()
-            ->live()
-            ->liveTweetWasSend()
-            ->create();
+    // Assert
+    $this->assertTrue($streamToTweet->refresh()->tweetStreamIsLiveWasSend());
+    $this->assertFalse($streamDontTweet->refresh()->tweetStreamIsLiveWasSend());
+});
 
-        // Act
-        $this->artisan(TweetAboutLiveStreamsCommand::class);
+it('only tweets streams that are going live once', function () {
+    // Arrange
+    Stream::factory()
+        ->live()
+        ->liveTweetWasSend()
+        ->create();
 
-        // Assert
-        $this->twitterFake->assertNoTweetsWereSent();
-    }
-}
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
+
+    // Assert
+    $this->twitterFake->assertNoTweetsWereSent();
+});

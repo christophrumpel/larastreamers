@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Commands;
-
 use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
 use App\Facades\YouTube;
 use App\Models\Stream;
@@ -9,142 +7,133 @@ use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class UpdateLiveAndFinishedStreamsCommandTest extends TestCase
-{
-    /** @test */
-    public function it_updates_archived_streams(): void
-    {
-        Carbon::setTestNow(now());
+uses(TestCase::class);
 
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->once()
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: 'existing',
-                    title: 'My New Test Stream',
-                    description: 'My New Description',
-                    channelTitle: 'My New Channel Name',
-                    status: StreamData::STATUS_FINISHED,
-                    plannedStart: Carbon::yesterday(),
-                    actualStartTime: Carbon::yesterday()->addMinutes(3),
-                    actualEndTime: Carbon::yesterday()->addMinutes(93)
-                ),
-            ]));
+it('updates archived streams', function () {
+    Carbon::setTestNow(now());
 
-        $existingStream = Stream::factory()->finished()->create(['youtube_id' => 'existing']);
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->once()
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: 'existing',
+                title: 'My New Test Stream',
+                description: 'My New Description',
+                channelTitle: 'My New Channel Name',
+                status: StreamData::STATUS_FINISHED,
+                plannedStart: Carbon::yesterday(),
+                actualStartTime: Carbon::yesterday()->addMinutes(3),
+                actualEndTime: Carbon::yesterday()->addMinutes(93)
+            ),
+        ]));
 
-        // Act
-        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
-            ->expectsOutput("Updating {$existingStream->youtube_id} ...")
-            ->assertExitCode(0);
+    $existingStream = Stream::factory()->finished()->create(['youtube_id' => 'existing']);
 
-        // Assert
-        $existingStream->refresh();
+    // Act
+    $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
+        ->expectsOutput("Updating {$existingStream->youtube_id} ...")
+        ->assertExitCode(0);
 
-        $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $existingStream->actual_start_time->toIso8601String());
-        $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $existingStream->actual_end_time->toIso8601String());
-        $this->assertSame(StreamData::STATUS_FINISHED, $existingStream->status);
-    }
+    // Assert
+    $existingStream->refresh();
 
-    /** @test */
-    public function it_marks_missing_streams_as_deleted(): void
-    {
-        Carbon::setTestNow(now());
+    $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $existingStream->actual_start_time->toIso8601String());
+    $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $existingStream->actual_end_time->toIso8601String());
+    $this->assertSame(StreamData::STATUS_FINISHED, $existingStream->status);
+});
 
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->once()
-            ->andReturn(collect());
+it('marks missing streams as deleted', function () {
+    Carbon::setTestNow(now());
 
-        $deletedStream = Stream::factory()->finished()->create(['youtube_id' => 'deleted']);
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->once()
+        ->andReturn(collect());
 
-        // Act
-        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
-            ->expectsOutput("Updating {$deletedStream->youtube_id} ...")
-            ->assertExitCode(0);
+    $deletedStream = Stream::factory()->finished()->create(['youtube_id' => 'deleted']);
 
-        // Assert
-        $deletedStream->refresh();
+    // Act
+    $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
+        ->expectsOutput("Updating {$deletedStream->youtube_id} ...")
+        ->assertExitCode(0);
 
-        $this->assertNull($deletedStream->actual_start_time);
-        $this->assertSame(StreamData::STATUS_DELETED, $deletedStream->status);
-        $this->assertSame(Carbon::now()->toIso8601String(), $deletedStream->hidden_at->toIso8601String());
-    }
+    // Assert
+    $deletedStream->refresh();
 
-    /** @test */
-    public function it_updates_live_streams(): void
-    {
-        Carbon::setTestNow(now());
+    $this->assertNull($deletedStream->actual_start_time);
+    $this->assertSame(StreamData::STATUS_DELETED, $deletedStream->status);
+    $this->assertSame(Carbon::now()->toIso8601String(), $deletedStream->hidden_at->toIso8601String());
+});
 
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->once()
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: 'live',
-                    title: 'My New Test Stream',
-                    description: 'My New Description',
-                    channelTitle: 'My New Channel Name',
-                    status: StreamData::STATUS_FINISHED,
-                    plannedStart: Carbon::yesterday(),
-                    actualStartTime: Carbon::yesterday()->addMinutes(3),
-                    actualEndTime: Carbon::yesterday()->addMinutes(93)
-                ),
-            ]));
+it('updates live streams', function () {
+    Carbon::setTestNow(now());
 
-        $wasLiveStream = Stream::factory()->live()->create(['youtube_id' => 'live']);
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->once()
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: 'live',
+                title: 'My New Test Stream',
+                description: 'My New Description',
+                channelTitle: 'My New Channel Name',
+                status: StreamData::STATUS_FINISHED,
+                plannedStart: Carbon::yesterday(),
+                actualStartTime: Carbon::yesterday()->addMinutes(3),
+                actualEndTime: Carbon::yesterday()->addMinutes(93)
+            ),
+        ]));
 
-        // Act
-        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
-            ->expectsOutput("Updating {$wasLiveStream->youtube_id} ...")
-            ->assertExitCode(0);
+    $wasLiveStream = Stream::factory()->live()->create(['youtube_id' => 'live']);
 
-        // Assert
-        $wasLiveStream->refresh();
+    // Act
+    $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
+        ->expectsOutput("Updating {$wasLiveStream->youtube_id} ...")
+        ->assertExitCode(0);
 
-        $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $wasLiveStream->actual_start_time->toIso8601String());
-        $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $wasLiveStream->actual_end_time->toIso8601String());
-        $this->assertSame(StreamData::STATUS_FINISHED, $wasLiveStream->status);
-    }
+    // Assert
+    $wasLiveStream->refresh();
 
-    /** @test */
-    public function it_limits_the_update_to_the_latest_50_streams(): void
-    {
-        Carbon::setTestNow(now());
+    $this->assertSame(Carbon::yesterday()->addMinutes(3)->toIso8601String(), $wasLiveStream->actual_start_time->toIso8601String());
+    $this->assertSame(Carbon::yesterday()->addMinutes(93)->toIso8601String(), $wasLiveStream->actual_end_time->toIso8601String());
+    $this->assertSame(StreamData::STATUS_FINISHED, $wasLiveStream->status);
+});
 
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->once()
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: 'stream-50',
-                    title: 'My New Test Stream',
-                    description: 'My New Description',
-                    channelTitle: 'My New Channel Name',
-                    status: StreamData::STATUS_FINISHED,
-                    plannedStart: Carbon::yesterday(),
-                    actualStartTime: Carbon::yesterday()->addMinutes(3),
-                    actualEndTime: Carbon::yesterday()->addMinutes(93)
-                ),
-            ]));
+it('limits the update to the latest 50 streams', function () {
+    Carbon::setTestNow(now());
 
-        Stream::factory(50)->finished()->create(['scheduled_start_time' => Carbon::yesterday()]);
-        $stream51 = Stream::factory()->finished()->create(['youtube_id' => 'stream-50', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->once()
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: 'stream-50',
+                title: 'My New Test Stream',
+                description: 'My New Description',
+                channelTitle: 'My New Channel Name',
+                status: StreamData::STATUS_FINISHED,
+                plannedStart: Carbon::yesterday(),
+                actualStartTime: Carbon::yesterday()->addMinutes(3),
+                actualEndTime: Carbon::yesterday()->addMinutes(93)
+            ),
+        ]));
 
-        // Act
-        $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
-            ->doesntExpectOutput("Updating {$stream51->youtube_id} ...")
-            ->assertExitCode(0);
+    Stream::factory(50)->finished()->create(['scheduled_start_time' => Carbon::yesterday()]);
+    $stream51 = Stream::factory()->finished()->create(['youtube_id' => 'stream-50', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
 
-        // Assert
-        $stream51->refresh();
+    // Act
+    $this->artisan(UpdateLiveAndFinishedStreamsCommand::class)
+        ->doesntExpectOutput("Updating {$stream51->youtube_id} ...")
+        ->assertExitCode(0);
 
-        $this->assertNull($stream51->actual_start_time);
-        $this->assertSame(StreamData::STATUS_FINISHED, $stream51->status);
-    }
-}
+    // Assert
+    $stream51->refresh();
+
+    $this->assertNull($stream51->actual_start_time);
+    $this->assertSame(StreamData::STATUS_FINISHED, $stream51->status);
+});

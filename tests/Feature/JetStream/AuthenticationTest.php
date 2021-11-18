@@ -1,42 +1,36 @@
 <?php
 
-namespace Tests\Feature\JetStream;
-
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
-{
-    public function test_login_screen_can_be_rendered()
-    {
-        $response = $this->get('/login');
+uses(TestCase::class);
 
-        $response->assertStatus(200);
-    }
+test('login screen can be rendered', function () {
+    $response = $this->get('/login');
 
-    public function test_users_can_authenticate_using_the_login_screen()
-    {
-        $user = User::factory()->create();
+    $response->assertStatus(200);
+});
 
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+test('users can authenticate using the login screen', function () {
+    $user = User::factory()->create();
 
-        $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
-    }
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
 
-    public function test_users_can_not_authenticate_with_invalid_password()
-    {
-        $user = User::factory()->create();
+    $this->assertAuthenticated();
+    $response->assertRedirect(RouteServiceProvider::HOME);
+});
 
-        $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'wrong-password',
-        ]);
+test('users can not authenticate with invalid password', function () {
+    $user = User::factory()->create();
 
-        $this->assertGuest();
-    }
-}
+    $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'wrong-password',
+    ]);
+
+    $this->assertGuest();
+});
