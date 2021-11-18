@@ -5,7 +5,6 @@ use App\Models\Stream;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('updates streams that are currently live', function () {
     // Arrange

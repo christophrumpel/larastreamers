@@ -7,7 +7,6 @@ use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 test('api tokens can be deleted', function () {
     if (! Features::hasApiFeatures()) {

@@ -4,7 +4,6 @@ use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('can reject a stream using a signed url', function () {
     // Arrange

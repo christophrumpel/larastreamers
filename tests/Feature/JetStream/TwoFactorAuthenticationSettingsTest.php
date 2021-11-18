@@ -5,7 +5,6 @@ use Laravel\Jetstream\Http\Livewire\TwoFactorAuthenticationForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 test('two factor authentication can be enabled', function () {
     $this->actingAs($user = User::factory()->create());

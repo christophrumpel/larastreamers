@@ -7,7 +7,6 @@ use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('updates archived streams', function () {
     Carbon::setTestNow(now());

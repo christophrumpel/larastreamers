@@ -6,7 +6,6 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('tweets streams that are live', function () {
     // Arrange

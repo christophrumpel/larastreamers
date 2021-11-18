@@ -2,7 +2,6 @@
 
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 it('can show the home page', function () {
     $this->get(route('home'))

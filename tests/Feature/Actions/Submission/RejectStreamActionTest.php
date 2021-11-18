@@ -6,7 +6,6 @@ use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-uses(TestCase::class);
 
 test('the action sends rejection mail', function () {
     // Arrange

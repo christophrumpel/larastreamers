@@ -9,7 +9,6 @@ use Livewire\Livewire;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(YouTubeResponses::class);
 
 it('adds channel to database', function () {

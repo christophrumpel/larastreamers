@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-uses(TestCase::class);
 uses(YouTubeResponses::class);
 
 it('adds a channel id if channel already given', function () {
