@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Actions;
 
+use App\Actions\UpdateStreamAction;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;

@@ -8,7 +8,7 @@ use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
-use Tests\Feature\Actions\UpdateStreamAction;
+use App\Actions\UpdateStreamAction;
 
 class ApproveStreamAction
 {
@@ -19,7 +19,7 @@ class ApproveStreamAction
         }
 
         $streamData = YouTube::video($stream->youtube_id);
-        (new UpdateStreamAction())->handle($stream, $streamData);
+        (new \App\Actions\UpdateStreamAction())->handle($stream, $streamData);
 
         if (is_null($stream->channel_id)) {
             Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
