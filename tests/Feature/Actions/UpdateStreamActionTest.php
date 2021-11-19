@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\UpdateStreamAction;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
@@ -37,7 +38,7 @@ beforeEach(function () {
 
 it('updates a stream', function () {
     // Act
-    $updatedStream = (new UpdateStreamAction)->handle($this->stream, $this->streamData);
+    $updatedStream = (new UpdateStreamAction())->handle($this->stream, $this->streamData);
 
     // Assert
     expect($updatedStream->id)->toEqual($this->stream->id);

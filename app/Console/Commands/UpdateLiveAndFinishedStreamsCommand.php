@@ -7,7 +7,7 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Tests\Feature\Actions\UpdateStreamAction;
+use App\Actions\UpdateStreamAction;
 
 class UpdateLiveAndFinishedStreamsCommand extends Command
 {

@@ -16,16 +16,16 @@ it('can store a stream', function () {
         ->shouldReceive('videos')
         ->andReturn(collect([
             StreamData::fake(
-                videoId: $this->youTubeId,
+                videoId: '1234',
             ),
         ]));
 
     // Act
     $action = app(SubmitStreamAction::class);
-    $action->handle($this->youTubeId, 'de', 'john@example.com');
+    $action->handle('1234', 'de', 'john@example.com');
 
     // Assert
-    $stream = Stream::firstWhere('youtube_id', $this->youTubeId);
+    $stream = Stream::firstWhere('youtube_id', '1234');
     $this->assertNotNull($stream);
 
     expect($stream->isApproved())->toBeFalse();
