@@ -8,7 +8,6 @@ use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
-use App\Actions\UpdateStreamAction;
 
 class ApproveStreamAction
 {

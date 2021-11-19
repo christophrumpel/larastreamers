@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\UpdateStreamAction;
 use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use App\Actions\UpdateStreamAction;
 
 class UpdateLiveAndFinishedStreamsCommand extends Command
 {
