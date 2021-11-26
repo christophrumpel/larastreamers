@@ -1,36 +1,24 @@
 <?php
 
-namespace Tests\Feature;
-
 use Tests\TestCase;
 
-class PagesResponseTest extends TestCase
-{
-    /** @test */
-    public function it_can_show_the_home_page(): void
-    {
-        $this->get(route('home'))
-             ->assertOk();
-    }
 
-    /** @test */
-    public function it_can_show_the_feed(): void
-    {
-        $this->get('/feed')
-            ->assertOk();
-    }
+it('can show the home page', function () {
+    $this->get(route('home'))
+         ->assertOk();
+});
 
-    /** @test */
-    public function it_can_show_the_archive(): void
-    {
-        $this->get(route('archive'))
-            ->assertOk();
-    }
+it('can show the feed', function () {
+    $this->get('/feed')
+        ->assertOk();
+});
 
-    /** @test */
-    public function it_can_show_the_calendar_page(): void
-    {
-        $this->get(route('calendar.ics'))
-            ->assertOk();
-    }
-}
+it('can show the archive', function () {
+    $this->get(route('archive'))
+        ->assertOk();
+});
+
+it('can show the calendar page', function () {
+    $this->get(route('calendar.ics'))
+        ->assertOk();
+});

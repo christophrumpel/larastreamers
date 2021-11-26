@@ -1,62 +1,52 @@
 <?php
 
-namespace Tests\Feature\Models;
-
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class StreamTest extends TestCase
-{
-    /** @test */
-    public function it_only_gives_approved_streams(): void
-    {
-        // Arrange
-        Stream::factory()->notApproved()->create();
-        Stream::factory()->approved()->create();
 
-        // Act
-        $streams = Stream::approved()->get();
+it('only gives approved streams', function () {
+    // Arrange
+    Stream::factory()->notApproved()->create();
+    Stream::factory()->approved()->create();
 
-        // Assert
-        $this->assertCount(1, $streams);
-    }
+    // Act
+    $streams = Stream::approved()->get();
 
-    /** @test */
-    public function it_gets_next_upcoming_stream(): void
-    {
-        // Arrange
-        Stream::factory()
-            ->upcoming()
-            ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+    // Assert
+    expect($streams)->toHaveCount(1);
+});
 
-        $expectedStream = Stream::factory()
-            ->upcoming()
-            ->create(['scheduled_start_time' => Carbon::tomorrow()]);
+it('gets next upcoming stream', function () {
+    // Arrange
+    Stream::factory()
+        ->upcoming()
+        ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
 
-        // Act
-        $actualStream = Stream::getNextUpcomingOrLive();
+    $expectedStream = Stream::factory()
+        ->upcoming()
+        ->create(['scheduled_start_time' => Carbon::tomorrow()]);
 
-        // Assert
-        $this->assertEquals($expectedStream->id, $actualStream->id);
-    }
+    // Act
+    $actualStream = Stream::getNextUpcomingOrLive();
 
-    /** @test */
-    public function it_gets_next_live_stream_before_upcoming(): void
-    {
-        // Arrange
-        Stream::factory()
-            ->upcoming()
-            ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
+    // Assert
+    expect($actualStream->id)->toEqual($expectedStream->id);
+});
 
-        $expectedStream = Stream::factory()
-            ->live()
-            ->create(['scheduled_start_time' => Carbon::tomorrow()]);
+it('gets next live stream before upcoming', function () {
+    // Arrange
+    Stream::factory()
+        ->upcoming()
+        ->create(['scheduled_start_time' => Carbon::tomorrow()->addDay()]);
 
-        // Act
-        $actualStream = Stream::getNextUpcomingOrLive();
+    $expectedStream = Stream::factory()
+        ->live()
+        ->create(['scheduled_start_time' => Carbon::tomorrow()]);
 
-        // Assert
-        $this->assertEquals($expectedStream->id, $actualStream->id);
-    }
-}
+    // Act
+    $actualStream = Stream::getNextUpcomingOrLive();
+
+    // Assert
+    expect($actualStream->id)->toEqual($expectedStream->id);
+});

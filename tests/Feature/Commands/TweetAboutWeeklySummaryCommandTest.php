@@ -1,61 +1,53 @@
 <?php
 
-namespace Tests\Feature\Commands;
-
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
-class TweetAboutWeeklySummaryCommandTest extends TestCase
-{
-    /** @test */
-    public function it_tweets_weekly_summary(): void
-    {
-        // Arrange
-        $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();
-        $endOfLastWeek = Carbon::today()->subWeek()->endOfWeek()->endOfDay();
 
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['actual_start_time' => $startOfLastWeek]);
+it('tweets weekly summary', function () {
+    // Arrange
+    $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();
+    $endOfLastWeek = Carbon::today()->subWeek()->endOfWeek()->endOfDay();
 
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['actual_start_time' => $endOfLastWeek]);
+    Stream::factory()
+        ->approved()
+        ->finished()
+        ->create(['actual_start_time' => $startOfLastWeek]);
 
-        // Act
-        $this->artisan(TweetAboutWeeklySummaryCommand::class);
+    Stream::factory()
+        ->approved()
+        ->finished()
+        ->create(['actual_start_time' => $endOfLastWeek]);
 
-        // Assert
-        $this->twitterFake->assertTweetWasSent();
-        $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
-    }
+    // Act
+    $this->artisan(TweetAboutWeeklySummaryCommand::class);
 
-    /** @test */
-    public function it_does_not_tweet_weekly_summary_when_no_streams_given(): void
-    {
-        // Arrange
-        $beforeLastWeek = Carbon::today()->subWeek()->startOfWeek()->subDay();
-        $afterLastWeek = Carbon::today();
+    // Assert
+    $this->twitterFake->assertTweetWasSent();
+    $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
+});
 
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['actual_start_time' => $beforeLastWeek]);
+it('does not tweet weekly summary when no streams given', function () {
+    // Arrange
+    $beforeLastWeek = Carbon::today()->subWeek()->startOfWeek()->subDay();
+    $afterLastWeek = Carbon::today();
 
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['actual_start_time' => $afterLastWeek]);
+    Stream::factory()
+        ->approved()
+        ->finished()
+        ->create(['actual_start_time' => $beforeLastWeek]);
 
-        // Act
-        $this->artisan(TweetAboutWeeklySummaryCommand::class)
-            ->expectsOutput('There were no streams last week.');
+    Stream::factory()
+        ->approved()
+        ->finished()
+        ->create(['actual_start_time' => $afterLastWeek]);
 
-        // Assert
-        $this->twitterFake->assertNoTweetsWereSent();
-    }
-}
+    // Act
+    $this->artisan(TweetAboutWeeklySummaryCommand::class)
+        ->expectsOutput('There were no streams last week.');
+
+    // Assert
+    $this->twitterFake->assertNoTweetsWereSent();
+});

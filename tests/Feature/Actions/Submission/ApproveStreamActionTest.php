@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Actions\Submission;
-
 use App\Actions\Submission\ApproveStreamAction;
 use App\Console\Commands\ImportChannelsForStreamsCommand;
 use App\Mail\StreamApprovedMail;
@@ -13,112 +11,94 @@ use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
 use Tests\TestCase;
 
-class ApproveStreamActionTest extends TestCase
-{
-    use YouTubeResponses;
+uses(YouTubeResponses::class);
 
-    protected ApproveStreamAction $approveStreamAction;
+beforeEach(function () {
+    Mail::fake();
+    Http::fake(fn() => Http::response($this->videoResponse()));
+    $this->approveStreamAction = app(ApproveStreamAction::class);
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
+test('the action can approve a stream', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->notApproved()
+        ->create([
+            'submitted_by_email' => 'john@example.com',
+        ]);
 
-        Mail::fake();
-        Http::fake(fn() => Http::response($this->videoResponse()));
-        $this->approveStreamAction = app(ApproveStreamAction::class);
-    }
+    Artisan::spy();
 
-    /** @test */
-    public function the_action_can_approve_a_stream(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->notApproved()
-            ->create([
-                'submitted_by_email' => 'john@example.com',
-            ]);
+    // Act
+    $this->approveStreamAction->handle($stream);
 
-        Artisan::spy();
+    // Assert
+    $stream = $stream->fresh();
+    $this->assertNotNull($stream->approved_at);
 
-        // Act
-        $this->approveStreamAction->handle($stream);
+    Mail::assertQueued(fn(StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
+});
 
-        // Assert
-        $stream = $stream->fresh();
-        $this->assertNotNull($stream->approved_at);
+test('the action calls the import channel command', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->notApproved()
+        ->create();
 
-        Mail::assertQueued(fn(StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
-    }
+    Artisan::spy();
 
-    /** @test */
-    public function the_action_calls_the_import_channel_command(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->notApproved()
-            ->create();
+    // Act
+    $this->approveStreamAction->handle($stream);
 
-        Artisan::spy();
+    // Assert
+    Artisan::shouldHaveReceived('call')->once()->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
+});
 
-        // Act
-        $this->approveStreamAction->handle($stream);
+test('the action calls does not import a channel if channel already given', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->withChannel()
+        ->notApproved()
+        ->create();
 
-        // Assert
-        Artisan::shouldHaveReceived('call')->once()->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
-    }
+    Artisan::spy();
 
-    /** @test */
-    public function the_action_calls_does_not_import_a_channel_if_channel_already_given(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->withChannel()
-            ->notApproved()
-            ->create();
+    // Assert
+    Artisan::shouldNotReceive('call')->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
 
-        Artisan::spy();
+    // Act
+    $this->approveStreamAction->handle($stream);
+});
 
-        // Assert
-        Artisan::shouldNotReceive('call')->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
+it('will not send a mail for a link that was already approved', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->approved()
+        ->create([
+            'submitted_by_email' => 'john@example.com',
+        ]);
 
-        // Act
-        $this->approveStreamAction->handle($stream);
-    }
+    // Act
+    $this->approveStreamAction->handle($stream);
 
-    /** @test */
-    public function it_will_not_send_a_mail_for_a_link_that_was_already_approved(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->approved()
-            ->create([
-                'submitted_by_email' => 'john@example.com',
-            ]);
+    // Assert
+    Mail::assertNothingQueued();
+});
 
-        // Act
-        $this->approveStreamAction->handle($stream);
+it('updates stream before approving it', function () {
+    // Arrange
+    $stream = Stream::factory()
+        ->upcoming()
+        ->notApproved()
+        ->create([
+            'submitted_by_email' => 'john@example.com',
+        ]);
+    Artisan::spy();
 
-        // Assert
-        Mail::assertNothingQueued();
-    }
+    // Act
+    $this->approveStreamAction->handle($stream);
 
-    /** @test */
-    public function it_updates_stream_before_approving_it(): void
-    {
-        // Arrange
-        $stream = Stream::factory()
-            ->upcoming()
-            ->notApproved()
-            ->create([
-                'submitted_by_email' => 'john@example.com',
-            ]);
-        Artisan::spy();
-
-        // Act
-        $this->approveStreamAction->handle($stream);
-
-        // Assert
-        $stream->refresh();
-        $this->assertEquals(StreamData::STATUS_FINISHED, $stream->status);
-    }
-}
+    // Assert
+    $stream->refresh();
+    expect($stream->status)->toEqual(StreamData::STATUS_FINISHED);
+});

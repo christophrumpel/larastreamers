@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature\Http\Livewire;
-
 use App\Facades\YouTube;
 use App\Http\Livewire\ImportYouTubeLiveStream;
 use App\Models\Stream;
@@ -11,149 +9,133 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class ImportYoutubeLiveStreamTest extends TestCase
-{
-    /** @test */
-    public function it_imports_upcoming_stream_from_youTube_url(): void
-    {
-        // Arrange
-        $scheduledStartTime = Carbon::tomorrow();
 
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: 'bcnR4NYOw2o',
-                    title: 'My Test Stream',
-                    description: 'Test Description',
-                    channelTitle: 'My Test Channel',
-                    thumbnailUrl: 'my-test-thumbnail-url',
-                    plannedStart: $scheduledStartTime,
-                ),
-            ]));
+it('imports upcoming stream from you tube url', function () {
+    // Arrange
+    $scheduledStartTime = Carbon::tomorrow();
 
-        $this->assertDatabaseCount(Stream::class, 0);
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: 'bcnR4NYOw2o',
+                title: 'My Test Stream',
+                description: 'Test Description',
+                channelTitle: 'My Test Channel',
+                thumbnailUrl: 'my-test-thumbnail-url',
+                plannedStart: $scheduledStartTime,
+            ),
+        ]));
 
-        // Act
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
-            ->call('importStream');
+    $this->assertDatabaseCount(Stream::class, 0);
 
-        // Assert
-        $this->assertDatabaseHas(Stream::class, [
-            'youtube_id' => 'bcnR4NYOw2o',
-            'title' => 'My Test Stream',
-            'description' => 'Test Description',
-            'thumbnail_url' => 'my-test-thumbnail-url',
-            'scheduled_start_time' => $scheduledStartTime,
-        ]);
-    }
+    // Act
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', 'bcnR4NYOw2o')
+        ->call('importStream');
 
-    /** @test */
-    public function it_does_not_import_streams_which_are_not_upcoming(): void
-    {
-        // Arrange
-        Http::fake();
+    // Assert
+    $this->assertDatabaseHas(Stream::class, [
+        'youtube_id' => 'bcnR4NYOw2o',
+        'title' => 'My Test Stream',
+        'description' => 'Test Description',
+        'thumbnail_url' => 'my-test-thumbnail-url',
+        'scheduled_start_time' => $scheduledStartTime,
+    ]);
+});
 
-        // it passes because the video was not found because
-        $this->assertDatabaseCount(Stream::class, 0);
+it('does not import streams which are not upcoming', function () {
+    // Arrange
+    Http::fake();
 
-        // Arrange & Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', 'bcnR4NYOw2o')
-            ->call('importStream')
-            ->assertHasErrors(['stream']);
+    // it passes because the video was not found because
+    $this->assertDatabaseCount(Stream::class, 0);
 
-        $this->assertDatabaseCount(Stream::class, 0);
-    }
+    // Arrange & Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', 'bcnR4NYOw2o')
+        ->call('importStream')
+        ->assertHasErrors(['stream']);
 
-    /** @test */
-    public function it_overrides_if_a_stream_is_already_given(): void
-    {
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: '1234',
-                    title: 'My New Test Stream',
-                ),
-            ]));
+    $this->assertDatabaseCount(Stream::class, 0);
+});
 
-        Stream::factory()->create(['youtube_id' => '1234', 'title' => 'Old title']);
+it('overrides if a stream is already given', function () {
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: '1234',
+                title: 'My New Test Stream',
+            ),
+        ]));
 
-        // Assert
-        $this->assertDatabaseCount(Stream::class, 1);
+    Stream::factory()->create(['youtube_id' => '1234', 'title' => 'Old title']);
 
-        // Arrange & Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', '1234')
-            ->call('importStream');
+    // Assert
+    $this->assertDatabaseCount(Stream::class, 1);
 
-        $this->assertDatabaseCount(Stream::class, 1);
-        $this->assertDatabaseHas(Stream::class, [
-            'youtube_id' => '1234',
-            'title' => 'My New Test Stream',
-        ]);
-    }
+    // Arrange & Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', '1234')
+        ->call('importStream');
 
-    /** @test */
-    public function it_shows_success_message(): void
-    {
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: '1234',
-                ),
-            ]));
+    $this->assertDatabaseCount(Stream::class, 1);
+    $this->assertDatabaseHas(Stream::class, [
+        'youtube_id' => '1234',
+        'title' => 'My New Test Stream',
+    ]);
+});
 
-        // Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', '1234')
-            ->call('importStream')
-            ->assertSee('Stream "1234" was added successfully.');
-    }
+it('shows success message', function () {
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: '1234',
+            ),
+        ]));
 
-    /** @test */
-    public function it_clears_form_after_successful_import(): void
-    {
-        // Arrange
-        YouTube::partialMock()
-            ->shouldReceive('videos')
-            ->andReturn(collect([
-                StreamData::fake(
-                    videoId: '1234',
-                ),
-            ]));
+    // Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', '1234')
+        ->call('importStream')
+        ->assertSee('Stream "1234" was added successfully.');
+});
 
-        // Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', '1234')
-            ->call('importStream')
-            ->assertSet('youTubeId', '');
-    }
+it('clears form after successful import', function () {
+    // Arrange
+    YouTube::partialMock()
+        ->shouldReceive('videos')
+        ->andReturn(collect([
+            StreamData::fake(
+                videoId: '1234',
+            ),
+        ]));
 
-    /** @test */
-    public function it_shows_youTube_client_error_message(): void
-    {
-        // Arrange
-        Http::fake(fn() => Http::response([], 500));
+    // Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', '1234')
+        ->call('importStream')
+        ->assertSet('youTubeId', '');
+});
 
-        // Arrange & Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->set('youTubeId', '1234')
-            ->call('importStream')
-            ->assertSee('YouTube API error: 500');
-    }
+it('shows you tube client error message', function () {
+    // Arrange
+    Http::fake(fn() => Http::response([], 500));
 
-    /** @test */
-    public function it_checks_properties_and_method_wired_to_the_view(): void
-    {
-        // Arrange & Act & Assert
-        Livewire::test(ImportYouTubeLiveStream::class)
-            ->assertPropertyWired('youTubeId')
-            ->assertMethodWiredToForm('importStream');
-    }
-}
+    // Arrange & Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->set('youTubeId', '1234')
+        ->call('importStream')
+        ->assertSee('YouTube API error: 500');
+});
+
+it('checks properties and method wired to the view', function () {
+    // Arrange & Act & Assert
+    Livewire::test(ImportYouTubeLiveStream::class)
+        ->assertPropertyWired('youTubeId')
+        ->assertMethodWiredToForm('importStream');
+});
