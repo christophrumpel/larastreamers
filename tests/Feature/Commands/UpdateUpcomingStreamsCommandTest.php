@@ -5,10 +5,8 @@ use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('updates upcoming streams', function () {
+it('updates upcoming streams', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -37,7 +35,7 @@ it('updates upcoming streams', function () {
     ]);
 });
 
-it('does not update finished or live streams', function () {
+it('does not update finished or live streams', function() {
     // Arrange
     Stream::factory()->finished()->create();
     Stream::factory()->live()->create();
@@ -48,7 +46,7 @@ it('does not update finished or live streams', function () {
         ->assertExitCode(0);
 });
 
-it('does not update unapproved streams', function () {
+it('does not update unapproved streams', function() {
     // Arrange
     Stream::factory()->notApproved()->create();
 
@@ -58,7 +56,7 @@ it('does not update unapproved streams', function () {
         ->assertExitCode(0);
 });
 
-it('tells if there are no streams to update', function () {
+it('tells if there are no streams to update', function() {
     $this->assertDatabaseCount(Stream::class, 0);
 
     // Act & Expect
@@ -67,7 +65,7 @@ it('tells if there are no streams to update', function () {
         ->assertExitCode(0);
 });
 
-it('tells how many streams were updated', function () {
+it('tells how many streams were updated', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -84,7 +82,7 @@ it('tells how many streams were updated', function () {
         ->assertExitCode(0);
 });
 
-it('tells how many streams were updated including deletes', function () {
+it('tells how many streams were updated including deletes', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -100,7 +98,7 @@ it('tells how many streams were updated including deletes', function () {
         ->assertExitCode(0);
 });
 
-it('marks streams as deleted if not given on streaming platform anymore', function () {
+it('marks streams as deleted if not given on streaming platform anymore', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')

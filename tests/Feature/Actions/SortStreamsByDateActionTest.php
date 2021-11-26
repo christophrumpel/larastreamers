@@ -4,10 +4,8 @@ use App\Actions\SortStreamsByDateAction;
 use App\Models\Stream;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('groups streams by date', function () {
+it('groups streams by date', function() {
     // Arrange
     $streams = Stream::factory()->count(3)
         ->state(new Sequence(
@@ -30,7 +28,7 @@ it('groups streams by date', function () {
         );
 });
 
-it('orders streams from current to upcoming', function () {
+it('orders streams from current to upcoming', function() {
     $this->travelTo(Carbon::parse('2021-06-11 00:00'));
 
     // Arrange
@@ -46,8 +44,8 @@ it('orders streams from current to upcoming', function () {
     // Act
     $preparedStreams = $prepareStreamsAction->handle($streams);
     expect($preparedStreams->keys())->sequence(
-            'Today',
-            'Tomorrow',
-            'Sun, Jun 13th 2021',
+        'Today',
+        'Tomorrow',
+        'Sun, Jun 13th 2021',
     );
 });

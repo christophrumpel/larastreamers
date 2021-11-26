@@ -2,10 +2,8 @@
 
 use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
-use Tests\TestCase;
 
-
-it('can reject a stream using a signed url', function () {
+it('can reject a stream using a signed url', function() {
     // Arrange
     Mail::fake();
 

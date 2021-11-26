@@ -7,11 +7,10 @@ use App\Services\YouTube\ChannelData;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 
-it('updates channels', function () {
+it('updates channels', function() {
     // Arrange
     Http::fake();
     YouTube::partialMock()
@@ -63,7 +62,7 @@ it('updates channels', function () {
     ]);
 });
 
-it('does not update channels if no channels given', function () {
+it('does not update channels if no channels given', function() {
     // Arrange
     Http::fake();
 

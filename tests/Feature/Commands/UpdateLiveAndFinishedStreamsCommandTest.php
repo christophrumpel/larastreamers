@@ -5,10 +5,8 @@ use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('updates archived streams', function () {
+it('updates archived streams', function() {
     Carbon::setTestNow(now());
 
     // Arrange
@@ -43,7 +41,7 @@ it('updates archived streams', function () {
     expect($existingStream->status)->toBe(StreamData::STATUS_FINISHED);
 });
 
-it('marks missing streams as deleted', function () {
+it('marks missing streams as deleted', function() {
     Carbon::setTestNow(now());
 
     // Arrange
@@ -67,7 +65,7 @@ it('marks missing streams as deleted', function () {
     expect($deletedStream->hidden_at->toIso8601String())->toBe(Carbon::now()->toIso8601String());
 });
 
-it('updates live streams', function () {
+it('updates live streams', function() {
     Carbon::setTestNow(now());
 
     // Arrange
@@ -102,7 +100,7 @@ it('updates live streams', function () {
     expect($wasLiveStream->status)->toBe(StreamData::STATUS_FINISHED);
 });
 
-it('limits the update to the latest 50 streams', function () {
+it('limits the update to the latest 50 streams', function() {
     Carbon::setTestNow(now());
 
     // Arrange

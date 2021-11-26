@@ -3,11 +3,8 @@
 use App\Facades\YouTube;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Http;
-use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
-
-it('can fetch channel details from youtube', function () {
+it('can fetch channel details from youtube', function() {
     // Arrange
     Http::fake(fn() => Http::response($this->channelResponse()));
 
@@ -24,7 +21,7 @@ it('can fetch channel details from youtube', function () {
         ->thumbnailUrl->toBe('https://yt3.ggpht.com/ytc/AAUvwniFZUkXnS4vDKY4lDohrpFsyu1V2AJwt4CFZGy25Q=s800-c-k-c0x00ffffff-no-rj');
 });
 
-it('can fetch upcoming streams from youtube', function () {
+it('can fetch upcoming streams from youtube', function() {
     // Arrange
     Http::fake([
         '*search*' => Http::response($this->upcomingStreamsResponse()),
@@ -63,7 +60,7 @@ it('can fetch upcoming streams from youtube', function () {
     expect($upcomingStream->status)->toEqual(StreamData::STATUS_UPCOMING);
 });
 
-it('uses real api key when needed', function () {
+it('uses real api key when needed', function() {
     expect(config()->get('services.youtube.key'))->toEqual('FAKE-YOUTUBE-KEY');
 
     $this->useRealYoutubeApi();

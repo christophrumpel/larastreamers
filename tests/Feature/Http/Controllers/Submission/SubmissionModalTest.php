@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Livewire\SubmitYouTubeLiveStream;
-use Tests\TestCase;
 
-
-it('includes the submission livewire component on all pages', function () {
+it('includes the submission livewire component on all pages', function() {
     $this->get(route('home'))
         ->assertSeeLivewire(SubmitYouTubeLiveStream::class);
 

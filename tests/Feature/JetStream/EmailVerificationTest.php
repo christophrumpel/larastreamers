@@ -6,10 +6,8 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
-use Tests\TestCase;
 
-
-test('email verification screen can be rendered', function () {
+test('email verification screen can be rendered', function() {
     if (! Features::enabled(Features::emailVerification())) {
         return $this->markTestSkipped('Email verification not enabled.');
     }
@@ -23,7 +21,7 @@ test('email verification screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('email can be verified', function () {
+test('email can be verified', function() {
     if (! Features::enabled(Features::emailVerification())) {
         return $this->markTestSkipped('Email verification not enabled.');
     }
@@ -48,7 +46,7 @@ test('email can be verified', function () {
     $response->assertRedirect(RouteServiceProvider::HOME.'?verified=1');
 });
 
-test('email can not verified with invalid hash', function () {
+test('email can not verified with invalid hash', function() {
     if (! Features::enabled(Features::emailVerification())) {
         return $this->markTestSkipped('Email verification not enabled.');
     }

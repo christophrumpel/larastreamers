@@ -3,10 +3,8 @@
 use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('shows all approved streams in calendar', function () {
+it('shows all approved streams in calendar', function() {
     // Arrange
     Stream::factory()->approved()->withChannel()->create(['title' => 'Stream two years old', 'scheduled_start_time' => Carbon::now()->subYears(2), 'youtube_id' => '-2y']);
     Stream::factory()->approved()->withChannel()->create(['title' => 'Stream last year', 'scheduled_start_time' => Carbon::now()->subYear(), 'youtube_id' => '-1y']);
@@ -68,7 +66,7 @@ it('shows all approved streams in calendar', function () {
     /** @see \Spatie\IcalendarGenerator\Builders\ComponentBuilder::chipLine() */
 });
 
-it('shows only approved streams in calendar', function () {
+it('shows only approved streams in calendar', function() {
     // Arrange
     Stream::factory()->approved()->withChannel()->create(['title' => 'Stream approved', 'scheduled_start_time' => Carbon::yesterday()]);
     Stream::factory()->notApproved()->withChannel()->create(['title' => 'Stream not approved', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
@@ -84,7 +82,7 @@ it('shows only approved streams in calendar', function () {
         ]);
 });
 
-it('can filter streams by single language code', function () {
+it('can filter streams by single language code', function() {
     Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'English Test Stream', 'language_code' => 'en']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
 
@@ -93,7 +91,7 @@ it('can filter streams by single language code', function () {
         ->assertDontSee('Spanish Test Stream');
 });
 
-it('can filter streams by multiple language codes', function () {
+it('can filter streams by multiple language codes', function() {
     Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'English Test Stream', 'language_code' => 'en']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'Spanish Test Stream', 'language_code' => 'es']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'Laravel']))->create(['title' => 'French Test Stream', 'language_code' => 'fr']);
@@ -104,7 +102,7 @@ it('can filter streams by multiple language codes', function () {
         ->assertDontSee('French Test Stream');
 });
 
-it('can download one calendar item', function () {
+it('can download one calendar item', function() {
     $stream = Stream::factory()
         ->for(Channel::factory()->create(['name' => 'My Channel']))
         ->create([

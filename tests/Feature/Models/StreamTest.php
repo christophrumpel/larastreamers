@@ -2,10 +2,8 @@
 
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('only gives approved streams', function () {
+it('only gives approved streams', function() {
     // Arrange
     Stream::factory()->notApproved()->create();
     Stream::factory()->approved()->create();
@@ -17,7 +15,7 @@ it('only gives approved streams', function () {
     expect($streams)->toHaveCount(1);
 });
 
-it('gets next upcoming stream', function () {
+it('gets next upcoming stream', function() {
     // Arrange
     Stream::factory()
         ->upcoming()
@@ -34,7 +32,7 @@ it('gets next upcoming stream', function () {
     expect($actualStream->id)->toEqual($expectedStream->id);
 });
 
-it('gets next live stream before upcoming', function () {
+it('gets next live stream before upcoming', function() {
     // Arrange
     Stream::factory()
         ->upcoming()

@@ -2,10 +2,8 @@
 
 use App\Models\Stream;
 use Carbon\Carbon;
-use Tests\TestCase;
 
-
-it('provides streams in rss feed', function () {
+it('provides streams in rss feed', function() {
     // Arrange
     Stream::factory()->create([
         'title' => 'Stream tomorrow',

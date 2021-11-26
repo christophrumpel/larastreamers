@@ -3,10 +3,8 @@
 use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
-
-it('updates upcoming streams that are soon live', function () {
+it('updates upcoming streams that are soon live', function() {
     // Arrange
     Http::fake();
 
@@ -20,7 +18,7 @@ it('updates upcoming streams that are soon live', function () {
         ->assertExitCode(0);
 });
 
-it('does not update finished or live streams', function () {
+it('does not update finished or live streams', function() {
     // Arrange
     Http::fake();
     Stream::factory()->live()->create();
@@ -32,7 +30,7 @@ it('does not update finished or live streams', function () {
         ->assertExitCode(0);
 });
 
-it('does not update unapproved streams', function () {
+it('does not update unapproved streams', function() {
     // Arrange
     Http::fake();
 

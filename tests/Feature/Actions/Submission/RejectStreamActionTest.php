@@ -4,10 +4,8 @@ use App\Actions\Submission\RejectStreamAction;
 use App\Mail\StreamRejectedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
-use Tests\TestCase;
 
-
-test('the action sends rejection mail', function () {
+test('the action sends rejection mail', function() {
     // Arrange
     Mail::fake();
     $stream = Stream::factory()

@@ -3,11 +3,9 @@
 use App\Models\Channel;
 use App\Models\Stream;
 use Carbon\Carbon;
-use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
-
-it('shows only finished streams', function () {
+it('shows only finished streams', function() {
     // Arrange
     Stream::factory()->withChannel()->finished()->create(['title' => 'Finished stream']);
     Stream::factory()->withChannel()->live()->create(['title' => 'Live stream']);
@@ -20,7 +18,7 @@ it('shows only finished streams', function () {
         ->assertSee('Finished stream');
 });
 
-it('orders streams from latest to oldest', function () {
+it('orders streams from latest to oldest', function() {
     // Arrange
     Stream::factory()->withChannel()->finished()->create(['title' => 'Finished one day ago', 'scheduled_start_time' => Carbon::yesterday()]);
     Stream::factory()->withChannel()->finished()->create(['title' => 'Finished two days ago', 'scheduled_start_time' => Carbon::yesterday()->subDay()]);
@@ -35,7 +33,7 @@ it('orders streams from latest to oldest', function () {
         ]);
 });
 
-it('does not show deleted streams', function () {
+it('does not show deleted streams', function() {
     // Arrange
     Stream::factory()
         ->withChannel()
@@ -54,7 +52,7 @@ it('does not show deleted streams', function () {
         ->assertDontSee('Stream deleted');
 });
 
-it('shows duration of stream if given', function () {
+it('shows duration of stream if given', function() {
     // Arrange
     Stream::factory()
         ->withChannel()
@@ -70,7 +68,7 @@ it('shows duration of stream if given', function () {
         ->assertSee('1h 12m');
 });
 
-it('searches for streams on title', function () {
+it('searches for streams on title', function() {
     // Arrange
     Stream::factory()->withChannel()->finished()->create(['title' => 'Stream One']);
     Stream::factory()->withChannel()->finished()->create(['title' => 'Stream Two']);
@@ -86,7 +84,7 @@ it('searches for streams on title', function () {
         ]);
 });
 
-it('searches for streams on channel title', function () {
+it('searches for streams on channel title', function() {
     // Arrange
     $channelShown = Channel::factory()->create(['name' => 'Channel Shown']);
     Stream::factory()
@@ -116,7 +114,7 @@ it('searches for streams on channel title', function () {
         ]);
 });
 
-it('searches for streams by specific streamer', function () {
+it('searches for streams by specific streamer', function() {
     // Arrange
     Stream::factory()->withChannel()->finished()->create(['title' => 'Stream Shown']);
     Stream::factory()->withChannel()->finished()->create(['title' => 'Stream Hidden']);
@@ -127,7 +125,7 @@ it('searches for streams by specific streamer', function () {
         ->assertDontSee('Stream Hidden');
 });
 
-it('searches for streams by specific streamer and search term', function () {
+it('searches for streams by specific streamer and search term', function() {
     // Arrange
     $channel = Channel::factory()->create();
     Stream::factory()->for($channel)->finished()->create(['title' => 'Stream Shown']);

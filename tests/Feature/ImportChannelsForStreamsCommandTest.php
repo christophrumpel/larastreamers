@@ -5,11 +5,10 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
 uses(YouTubeResponses::class);
 
-it('imports channel for stream', function () {
+it('imports channel for stream', function() {
     Http::fake([
         '*videos*' => Http::response($this->videoResponse()),
         '*channels*' => Http::response($this->channelResponse()),
@@ -36,7 +35,7 @@ it('imports channel for stream', function () {
     expect($stream1->channel_id)->toEqual(1);
 });
 
-it('imports channel for specific stream', function () {
+it('imports channel for specific stream', function() {
     Http::fake([
         '*videos*' => Http::response($this->singleVideoResponse()),
         '*channels*' => Http::response($this->channelResponse()),
@@ -58,7 +57,7 @@ it('imports channel for specific stream', function () {
     ]);
 });
 
-it('does not import channel for pending stream', function () {
+it('does not import channel for pending stream', function() {
     Http::fake();
 
     // Arrange
@@ -74,7 +73,7 @@ it('does not import channel for pending stream', function () {
     Http::assertNothingSent();
 });
 
-it('updates channel if already given', function () {
+it('updates channel if already given', function() {
     Http::fake([
         '*videos*' => Http::response($this->singleVideoResponse()),
         '*channels*' => Http::response($this->channelResponse()),
@@ -93,7 +92,7 @@ it('updates channel if already given', function () {
     $this->assertDatabaseCount(Channel::class, 1);
 });
 
-it('does not call youtube if all channels given', function () {
+it('does not call youtube if all channels given', function() {
     // Arrange
     Http::fake();
     Stream::factory()

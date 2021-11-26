@@ -4,10 +4,8 @@ use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('shows given streams on home page', function () {
+it('shows given streams on home page', function() {
     // Arrange
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'language_code' => 'en']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345', 'language_code' => 'fr']);
@@ -26,7 +24,7 @@ it('shows given streams on home page', function () {
         ->assertSee('https://www.youtube.com/watch?v=123456');
 });
 
-it('shows from closest to farthest', function () {
+it('shows from closest to farthest', function() {
     // Arrange
     Stream::factory()
         ->withChannel()
@@ -43,7 +41,7 @@ it('shows from closest to farthest', function () {
         ->assertSeeInOrder(['Stream #1', 'Stream #2', 'Stream #3']);
 });
 
-it('shows unique names for today and tomorrow instead of whole date', function () {
+it('shows unique names for today and tomorrow instead of whole date', function() {
     $this->withoutExceptionHandling();
     // Arrange
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today()->hour(2)]);
@@ -57,7 +55,7 @@ it('shows unique names for today and tomorrow instead of whole date', function (
         ->assertSee('Tomorrow');
 });
 
-it('does not show old streams', function () {
+it('does not show old streams', function() {
     // Arrange
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->finished()->create(['title' => 'Stream finished']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->live()->create(['title' => 'Stream live']);
@@ -71,7 +69,7 @@ it('does not show old streams', function () {
             ->assertDontSee('Stream finished');
 });
 
-it('does not show deleted streams', function () {
+it('does not show deleted streams', function() {
     // Arrange
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->deleted()->create(['title' => 'Stream deleted']);
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->upcoming()->create(['title' => 'Stream upcoming']);
@@ -83,7 +81,7 @@ it('does not show deleted streams', function () {
         ->assertDontSee('Stream deleted');
 });
 
-it('marks live streams', function () {
+it('marks live streams', function() {
     // Arrange
     $stream = Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->upcoming()->create(['title' => 'Stream #1']);
 
@@ -99,7 +97,7 @@ it('marks live streams', function () {
          ->assertSee('>live</span>', false);
 });
 
-it('shows footer links', function () {
+it('shows footer links', function() {
     // Arrange
     $twitterLink = 'https://twitter.com/larastreamers';
     $githubLink = 'https://github.com/christophrumpel/larastreamers';
@@ -110,12 +108,12 @@ it('shows footer links', function () {
         ->assertSee($githubLink);
 });
 
-it('adds not button webcal link if no streams', function () {
+it('adds not button webcal link if no streams', function() {
     $this->get(route('home'))
         ->assertDontSee('webcal://');
 });
 
-it('adds button webcal link if no streams', function () {
+it('adds button webcal link if no streams', function() {
     Stream::factory()
         ->for(Channel::factory()->create(['name' => 'My Channel']))
         ->upcoming()

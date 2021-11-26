@@ -5,10 +5,8 @@ use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
-use Tests\TestCase;
 
-
-test('api token permissions can be updated', function () {
+test('api token permissions can be updated', function() {
     if (! Features::hasApiFeatures()) {
         return $this->markTestSkipped('API support is not enabled.');
     }

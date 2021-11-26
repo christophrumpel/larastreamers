@@ -4,10 +4,8 @@ use App\Models\User;
 use Laravel\Jetstream\Features;
 use Laravel\Jetstream\Http\Livewire\ApiTokenManager;
 use Livewire\Livewire;
-use Tests\TestCase;
 
-
-test('api tokens can be created', function () {
+test('api tokens can be created', function() {
     if (! Features::hasApiFeatures()) {
         return $this->markTestSkipped('API support is not enabled.');
     }

@@ -3,10 +3,8 @@
 use App\Models\User;
 use Laravel\Jetstream\Http\Livewire\UpdateProfileInformationForm;
 use Livewire\Livewire;
-use Tests\TestCase;
 
-
-test('current profile information is available', function () {
+test('current profile information is available', function() {
     $this->actingAs($user = User::factory()->create());
 
     $component = Livewire::test(UpdateProfileInformationForm::class);
@@ -15,7 +13,7 @@ test('current profile information is available', function () {
     expect($component->state['email'])->toEqual($user->email);
 });
 
-test('profile information can be updated', function () {
+test('profile information can be updated', function() {
     $this->actingAs($user = User::factory()->create());
 
     Livewire::test(UpdateProfileInformationForm::class)

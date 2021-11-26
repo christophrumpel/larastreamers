@@ -1,10 +1,8 @@
 <?php
 
 use App\Models\Stream;
-use Tests\TestCase;
 
-
-it('shows all streams', function () {
+it('shows all streams', function() {
     $stream = Stream::factory()->create([
         'title' => 'Stream #1',
         'youtube_id' => '1234',
@@ -35,7 +33,7 @@ it('shows all streams', function () {
     );
 });
 
-it('only shows approved streams', function () {
+it('only shows approved streams', function() {
     $stream = Stream::factory()->approved()->create();
     $stream2 = Stream::factory()->notApproved()->create();
 

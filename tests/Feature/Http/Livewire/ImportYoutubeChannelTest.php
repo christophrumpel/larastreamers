@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Livewire\Livewire;
 use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
 uses(YouTubeResponses::class);
 
-it('adds channel to database', function () {
+it('adds channel to database', function() {
     // Arrange
     Queue::fake();
 
@@ -33,7 +32,7 @@ it('adds channel to database', function () {
     ]);
 });
 
-it('dispatches job to import upcoming streams', function () {
+it('dispatches job to import upcoming streams', function() {
     // Arrange
     Queue::fake();
     Http::fake(fn() => Http::response($this->channelResponse()));
@@ -47,7 +46,7 @@ it('dispatches job to import upcoming streams', function () {
     Queue::assertPushed(ImportYoutubeChannelStreamsJob::class);
 });
 
-it('shows success message', function () {
+it('shows success message', function() {
     // Arrange
     Queue::fake();
     Http::fake(fn() => Http::response($this->channelResponse()));
@@ -59,7 +58,7 @@ it('shows success message', function () {
         ->assertSee('Channel "UCdtd5QYBx9MUVXHm7qgEpxA" was added successfully.');
 });
 
-it('shows youtube client error message', function () {
+it('shows youtube client error message', function() {
     // Arrange
     Http::fake(fn() => Http::response([], 500));
 
@@ -70,7 +69,7 @@ it('shows youtube client error message', function () {
         ->assertSee('YouTube API error: 500');
 });
 
-it('clears form after successful import', function () {
+it('clears form after successful import', function() {
     // Arrange
     Queue::fake();
     Http::fake(fn() => Http::response($this->channelResponse()));
@@ -82,7 +81,7 @@ it('clears form after successful import', function () {
         ->assertSet('youTubeChannelId', '');
 });
 
-it('wires properties and methods', function () {
+it('wires properties and methods', function() {
     // Arrange & Act & Assert
     Livewire::test(ImportYouTubeChannel::class)
         ->assertPropertyWired('youTubeChannelId')

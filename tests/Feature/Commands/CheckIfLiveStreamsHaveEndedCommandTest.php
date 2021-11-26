@@ -3,10 +3,8 @@
 use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Http;
-use Tests\TestCase;
 
-
-it('updates streams that are currently live', function () {
+it('updates streams that are currently live', function() {
     // Arrange
     Http::fake();
 
@@ -19,7 +17,7 @@ it('updates streams that are currently live', function () {
         ->assertExitCode(0);
 });
 
-it('does not update finished or upcoming streams', function () {
+it('does not update finished or upcoming streams', function() {
     // Arrange
     Http::fake();
 

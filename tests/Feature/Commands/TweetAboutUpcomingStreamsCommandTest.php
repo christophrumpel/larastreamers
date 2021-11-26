@@ -4,10 +4,8 @@ use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
 use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('tweets streams that are upcoming', function () {
+it('tweets streams that are upcoming', function() {
     // Arrange
     $stream = Stream::factory()
         ->upcoming()
@@ -26,7 +24,7 @@ it('tweets streams that are upcoming', function () {
     expect($stream->refresh()->tweetStreamIsUpcomingWasSend())->toBeTrue();
 });
 
-it('does not tweet streams that are live or finished', function () {
+it('does not tweet streams that are live or finished', function() {
     // Arrange
     Stream::factory()->live()->startsWithinUpcomingTweetRange()->create();
     Stream::factory()->finished()->startsWithinUpcomingTweetRange()->create();
@@ -38,7 +36,7 @@ it('does not tweet streams that are live or finished', function () {
     $this->twitterFake->assertNoTweetsWereSent();
 });
 
-it('checks the message of the tweet', function () {
+it('checks the message of the tweet', function() {
     // Arrange
     $stream = Stream::factory()->upcoming()->startsWithinUpcomingTweetRange()->create();
     $expectedStatus = "🔴 A new stream is about to start: $stream->title. Join now!\n{$stream->url()}";
@@ -50,7 +48,7 @@ it('checks the message of the tweet', function () {
     $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
 });
 
-it('adds twitter handle to streams connected to a channel', function () {
+it('adds twitter handle to streams connected to a channel', function() {
     // Arrange
     $stream = Stream::factory()
         ->upcoming()
@@ -67,7 +65,7 @@ it('adds twitter handle to streams connected to a channel', function () {
     $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
 });
 
-it('works without missing twitter handle on connected channel', function () {
+it('works without missing twitter handle on connected channel', function() {
     // Arrange
     $stream = Stream::factory()
         ->upcoming()
@@ -84,7 +82,7 @@ it('works without missing twitter handle on connected channel', function () {
     $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
 });
 
-it('correctly sets upcoming tweeted at timestamp', function () {
+it('correctly sets upcoming tweeted at timestamp', function() {
     // Arrange
     Carbon::setTestNow(now());
     $upcomingStreamToTweet = Stream::factory()->upcoming()->startsWithinUpcomingTweetRange()->create();
@@ -113,7 +111,7 @@ it('correctly sets upcoming tweeted at timestamp', function () {
     expect($liveStreamNotToTweet->refresh()->upcoming_tweeted_at)->toBeNull();
 });
 
-it('does not send a tweet if the live tweet is sent', function () {
+it('does not send a tweet if the live tweet is sent', function() {
     // Arrange
     Carbon::setTestNow(now());
 
@@ -134,7 +132,7 @@ it('does not send a tweet if the live tweet is sent', function () {
     $this->twitterFake->assertNoTweetsWereSent();
 });
 
-it('only tweets streams that are going live once', function () {
+it('only tweets streams that are going live once', function() {
     // Arrange
     Stream::factory()->upcoming()->upcomingTweetWasSend()->create();
 
@@ -145,7 +143,7 @@ it('only tweets streams that are going live once', function () {
     $this->twitterFake->assertNoTweetsWereSent();
 });
 
-it('does not tweet streams that are upcoming but already started', function () {
+it('does not tweet streams that are upcoming but already started', function() {
     // Arrange
     Stream::factory()->upcoming()->create([
         'scheduled_start_time' => now()->subSecond(),

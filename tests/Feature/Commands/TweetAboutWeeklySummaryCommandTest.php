@@ -3,10 +3,8 @@
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
-use Tests\TestCase;
 
-
-it('tweets weekly summary', function () {
+it('tweets weekly summary', function() {
     // Arrange
     $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();
     $endOfLastWeek = Carbon::today()->subWeek()->endOfWeek()->endOfDay();
@@ -29,7 +27,7 @@ it('tweets weekly summary', function () {
     $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
 });
 
-it('does not tweet weekly summary when no streams given', function () {
+it('does not tweet weekly summary when no streams given', function() {
     // Arrange
     $beforeLastWeek = Carbon::today()->subWeek()->startOfWeek()->subDay();
     $afterLastWeek = Carbon::today();

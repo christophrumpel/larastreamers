@@ -4,11 +4,10 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
-use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 
-it('shows channel data', function () {
+it('shows channel data', function() {
     // Arrange
     $channel = Channel::factory()
         ->has(Stream::factory()->approved()->finished())
@@ -28,7 +27,7 @@ it('shows channel data', function () {
     ]);
 });
 
-it('shows all streamers', function () {
+it('shows all streamers', function() {
     // Arrange
     Channel::factory()
         ->has(Stream::factory()->approved()->finished())
@@ -51,7 +50,7 @@ it('shows all streamers', function () {
     ]);
 });
 
-it('only shows streamers with approved and finished streams', function () {
+it('only shows streamers with approved and finished streams', function() {
     // Arrange
     Stream::factory()
         ->withChannel(['name' => 'Channel Hidden'])
@@ -74,7 +73,7 @@ it('only shows streamers with approved and finished streams', function () {
         ->assertSee('Channel Shown');
 });
 
-it('shows streamers ordered by stream count', function () {
+it('shows streamers ordered by stream count', function() {
     // Arrange
     Stream::factory()
         ->for(Channel::factory())
@@ -106,7 +105,7 @@ it('shows streamers ordered by stream count', function () {
     ]);
 });
 
-it('only counts approved and finished streams', function () {
+it('only counts approved and finished streams', function() {
     // Arrange
     $channel = Channel::factory()->create();
     Stream::factory()

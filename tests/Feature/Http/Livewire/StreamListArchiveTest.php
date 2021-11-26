@@ -4,11 +4,9 @@ use App\Http\Livewire\StreamListArchive;
 use App\Models\Channel;
 use App\Models\Stream;
 use Livewire\Livewire;
-use Tests\TestCase;
 use Vinkla\Hashids\Facades\Hashids;
 
-
-it('only shows streams by selected streamer', function () {
+it('only shows streams by selected streamer', function() {
     // Arrange
     Stream::factory()
         ->for(Channel::factory()->create(['name' => 'My Channel']))
@@ -26,7 +24,7 @@ it('only shows streams by selected streamer', function () {
         ->assertDontSee('Stream Not Seen');
 });
 
-it('shows streamers as dropdown options', function () {
+it('shows streamers as dropdown options', function() {
     // Arrange
     Channel::factory()
         ->create(['name' => 'Channel A']);
@@ -41,7 +39,7 @@ it('shows streamers as dropdown options', function () {
         ]);
 });
 
-it('wires properties and methods', function () {
+it('wires properties and methods', function() {
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
         ->assertPropertyWired('streamer');

@@ -6,11 +6,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
 uses(YouTubeResponses::class);
 
-it('can approve a stream using a signed url', function () {
+it('can approve a stream using a signed url', function() {
     // Arrange
     Http::fake(fn() => Http::response($this->videoResponse()));
     Mail::fake();

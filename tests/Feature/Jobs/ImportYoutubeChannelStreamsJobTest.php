@@ -5,11 +5,10 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Http;
 use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
 uses(YouTubeResponses::class);
 
-it('imports youtube channel streams', function () {
+it('imports youtube channel streams', function() {
     Http::fake([
         '*search*' => Http::response($this->upcomingStreamsResponse()),
         '*video*' => Http::response($this->videoResponse()),
@@ -32,7 +31,7 @@ it('imports youtube channel streams', function () {
     $this->assertNotNull($stream->approved_at);
 });
 
-it('sets channel id to new streams', function () {
+it('sets channel id to new streams', function() {
     // Arrange
     Http::fake([
         '*search*' => Http::response($this->upcomingStreamsResponse()),
@@ -57,7 +56,7 @@ it('sets channel id to new streams', function () {
     $this->assertNotNull($stream->approved_at);
 });
 
-it('updates already given streams', function () {
+it('updates already given streams', function() {
     // Arrange
     Http::fake([
         '*search*' => Http::response($this->upcomingStreamsResponse()),

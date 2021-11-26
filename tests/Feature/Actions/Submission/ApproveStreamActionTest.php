@@ -9,17 +9,16 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
-use Tests\TestCase;
 
 uses(YouTubeResponses::class);
 
-beforeEach(function () {
+beforeEach(function() {
     Mail::fake();
     Http::fake(fn() => Http::response($this->videoResponse()));
     $this->approveStreamAction = app(ApproveStreamAction::class);
 });
 
-test('the action can approve a stream', function () {
+test('the action can approve a stream', function() {
     // Arrange
     $stream = Stream::factory()
         ->notApproved()
@@ -39,7 +38,7 @@ test('the action can approve a stream', function () {
     Mail::assertQueued(fn(StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
 });
 
-test('the action calls the import channel command', function () {
+test('the action calls the import channel command', function() {
     // Arrange
     $stream = Stream::factory()
         ->notApproved()
@@ -54,7 +53,7 @@ test('the action calls the import channel command', function () {
     Artisan::shouldHaveReceived('call')->once()->with(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);
 });
 
-test('the action calls does not import a channel if channel already given', function () {
+test('the action calls does not import a channel if channel already given', function() {
     // Arrange
     $stream = Stream::factory()
         ->withChannel()
@@ -70,7 +69,7 @@ test('the action calls does not import a channel if channel already given', func
     $this->approveStreamAction->handle($stream);
 });
 
-it('will not send a mail for a link that was already approved', function () {
+it('will not send a mail for a link that was already approved', function() {
     // Arrange
     $stream = Stream::factory()
         ->approved()
@@ -85,7 +84,7 @@ it('will not send a mail for a link that was already approved', function () {
     Mail::assertNothingQueued();
 });
 
-it('updates stream before approving it', function () {
+it('updates stream before approving it', function() {
     // Arrange
     $stream = Stream::factory()
         ->upcoming()

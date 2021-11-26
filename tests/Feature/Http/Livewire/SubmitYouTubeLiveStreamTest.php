@@ -6,10 +6,8 @@ use App\Http\Livewire\SubmitYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Livewire\Livewire;
-use Tests\TestCase;
 
-
-it('calls the submit action', function () {
+it('calls the submit action', function() {
     // Arrange
     $this->mock(SubmitStreamAction::class)
         ->shouldReceive('handle')
@@ -26,7 +24,7 @@ it('calls the submit action', function () {
         ->call('submit');
 });
 
-it('calls the submit action with full youtube url', function () {
+it('calls the submit action with full youtube url', function() {
     // Arrange
     $fullYoutubeUrl = 'https://www.youtube.com/watch?v=bcnR4NYOw2o';
     $this->mock(SubmitStreamAction::class)
@@ -44,7 +42,7 @@ it('calls the submit action with full youtube url', function () {
         ->call('submit');
 });
 
-it('calls the submit action with short youtube url', function () {
+it('calls the submit action with short youtube url', function() {
     // Arrange
     $shortYoutubeUrl = 'https://youtu.be/bcnR4NYOw2o';
     $this->mock(SubmitStreamAction::class)
@@ -62,7 +60,7 @@ it('calls the submit action with short youtube url', function () {
         ->call('submit');
 });
 
-it('shows a success message', function () {
+it('shows a success message', function() {
     // Arrange
     mockYouTubVideoCall();
 
@@ -74,7 +72,7 @@ it('shows a success message', function () {
         ->assertSee('You successfully submitted your stream. You will receive an email, if it gets approved.');
 });
 
-it('shows a success message with full youtube url too', function () {
+it('shows a success message with full youtube url too', function() {
     // Arrange
     $fullYoutubeUrl = 'https://www.youtube.com/watch?v=bcnR4NYOw2o';
     mockYouTubVideoCall();
@@ -87,7 +85,7 @@ it('shows a success message with full youtube url too', function () {
         ->assertSee('You successfully submitted your stream. You will receive an email, if it gets approved.');
 });
 
-it('shows errors for wrong you tube url', function () {
+it('shows errors for wrong you tube url', function() {
     // Arrange
     mockYouTubVideoCall();
 
@@ -98,7 +96,7 @@ it('shows errors for wrong you tube url', function () {
         ->assertSee('This is not a valid YouTube video ID/URL.');
 });
 
-test('the youtube id must be unique', function () {
+test('the youtube id must be unique', function() {
     // Arrange
     Stream::factory()->create(['youtube_id' => 'bcnR4NYOw2o']);
     mockYouTubVideoCall();
@@ -110,7 +108,7 @@ test('the youtube id must be unique', function () {
         ->assertSee('This stream was already submitted.');
 });
 
-test('the youtube id must be valid', function () {
+test('the youtube id must be valid', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -124,7 +122,7 @@ test('the youtube id must be valid', function () {
         ->assertSee("We couldn't find a YouTube video for the ID: not-valid-video-id");
 });
 
-test('the planned stream start must be in the future', function () {
+test('the planned stream start must be in the future', function() {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -143,7 +141,7 @@ test('the planned stream start must be in the future', function () {
         ->assertSee('We only accept streams that have not started yet.');
 });
 
-it('clears out the form after submission', function () {
+it('clears out the form after submission', function() {
     // Arrange
     mockYouTubVideoCall();
 
@@ -158,7 +156,7 @@ it('clears out the form after submission', function () {
         ->assertSet('submittedByEmail', '');
 });
 
-it('wires properties and methods', function () {
+it('wires properties and methods', function() {
     // Arrange & Act & Assert
     Livewire::test(SubmitYouTubeLiveStream::class)
         ->assertPropertyWired('youTubeIdOrUrl')

@@ -7,8 +7,7 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Mail;
 
-
-it('can store a stream', function () {
+it('can store a stream', function() {
     // Arrange
     Mail::fake();
     YouTube::partialMock()
