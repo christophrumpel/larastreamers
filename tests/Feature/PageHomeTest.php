@@ -4,6 +4,7 @@ use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
+use Spatie\TestTime\TestTime;
 
 it('shows given streams on home page', function() {
     // Arrange
@@ -121,4 +122,32 @@ it('adds button webcal link if no streams', function() {
 
     $this->get(route('home'))
         ->assertSee('webcal://');
+});
+
+it('will render the correct relative date for a scheduled stream', function() {
+    TestTime::freeze();
+    $stream = Stream::factory()
+        ->upcoming()
+        ->withChannel()
+        ->create([
+            'scheduled_start_time' => now()->addHours(2)->addSecond(),
+        ]);
+
+    $this->view('pages.partials.header.preview', [
+        'upcomingStream' => $stream,
+    ])->assertSee('2 hours from now');
+});
+
+it('will render the correct relative date for a running stream', function() {
+    TestTime::freeze();
+    $stream = Stream::factory()
+        ->live()
+        ->withChannel()
+        ->create([
+            'scheduled_start_time' => now()->subMinutes(7),
+        ]);
+
+    $this->view('pages.partials.header.preview', [
+        'upcomingStream' => $stream,
+    ])->assertSee('7 minutes ago');
 });
