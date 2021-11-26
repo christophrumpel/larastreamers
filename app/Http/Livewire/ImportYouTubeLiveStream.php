@@ -9,20 +9,22 @@ use Livewire\Component;
 
 class ImportYouTubeLiveStream extends Component
 {
-    public $youTubeId;
-    public $language = 'en';
+    public string $youTubeId = '';
+    public string $language = 'en';
 
     public function render(): View
     {
         return view('livewire.import-you-tube-live-stream');
     }
 
-    public function importStream()
+    public function importStream(): void
     {
         try {
             (new ImportVideoAction())->handle($this->youTubeId, $this->language, approved: true);
         } catch (YouTubeException $exception) {
-            return $this->addError('stream', $exception->getMessage());
+            $this->addError('stream', $exception->getMessage());
+
+            return;
         }
 
         session()->flash('stream-message', 'Stream "'.$this->youTubeId.'" was added successfully.');

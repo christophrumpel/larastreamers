@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stream;
+use Illuminate\Http\Response;
 use Spatie\IcalendarGenerator\Components\Calendar;
 
 class AddSingleStreamToCalendarController extends Controller
 {
-    public function __invoke(Stream $stream)
+    public function __invoke(Stream $stream): Response
     {
         $calendar = Calendar::create()
             ->name("Larastreamers: watch {$stream->title}")

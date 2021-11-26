@@ -11,8 +11,8 @@ use Livewire\Component;
 
 class ImportYouTubeChannel extends Component
 {
-    public $youTubeChannelId;
-    public $languageCode = 'en';
+    public string $youTubeChannelId = '';
+    public string $languageCode = 'en';
 
     public static function getName(): string
     {

@@ -36,8 +36,11 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^1.0.1",
         "nunomaduro/patrol": "^1.0",
-        "phpunit/phpunit": "^9.3.3",
+        "pestphp/pest": "^1.20",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "pestphp/pest-plugin-parallel": "^0.3.1",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ray": "^1.17",
         "spatie/test-time": "^1.2"

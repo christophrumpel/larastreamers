@@ -16,7 +16,9 @@ class ImportChannelStreamsCommand extends Command
     {
         Channel::autoImportEnabled()
             ->get()
-            ->each(fn(Channel $channel) => dispatch(new ImportYoutubeChannelStreamsJob($channel->platform_id, $channel->language_code)));
+            ->each(function(Channel $channel) {
+                dispatch(new ImportYoutubeChannelStreamsJob($channel->platform_id, $channel->language_code));
+            });
 
         return self::SUCCESS;
     }

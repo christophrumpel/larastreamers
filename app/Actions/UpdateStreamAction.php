@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Feature\Actions;
+namespace App\Actions;
 
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
+use function tap;
 
 class UpdateStreamAction
 {

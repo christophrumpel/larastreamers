@@ -1,33 +1,25 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers\Submission;
-
 use App\Models\Stream;
 use Illuminate\Support\Facades\Mail;
-use Tests\TestCase;
 
-class RejectStreamControllerTest extends TestCase
-{
-    /** @test */
-    public function it_can_reject_a_stream_using_a_signed_url()
-    {
-        // Arrange
-        Mail::fake();
+it('can reject a stream using a signed url', function() {
+    // Arrange
+    Mail::fake();
 
-        $stream = Stream::factory()
-            ->notApproved()
-            ->create([
-                'submitted_by_email' => 'john@example.com',
-            ]);
+    $stream = Stream::factory()
+        ->notApproved()
+        ->create([
+            'submitted_by_email' => 'john@example.com',
+        ]);
 
-        // Assert
-        $this->assertFalse($stream->isApproved());
+    // Assert
+    expect($stream->isApproved())->toBeFalse();
 
-        // Act
-        $this->get($stream->rejectUrl())
-            ->assertOk();
+    // Act
+    $this->get($stream->rejectUrl())
+        ->assertOk();
 
-        // Assert
-        $this->assertFalse($stream->refresh()->isApproved());
-    }
-}
+    // Assert
+    expect($stream->refresh()->isApproved())->toBeFalse();
+});

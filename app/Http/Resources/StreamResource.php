@@ -2,8 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Stream;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Stream
+ */
 class StreamResource extends JsonResource
 {
     public function toArray($request): array

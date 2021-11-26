@@ -2,13 +2,13 @@
 
 namespace App\Actions\Submission;
 
+use App\Actions\UpdateStreamAction;
 use App\Console\Commands\ImportChannelsForStreamsCommand;
 use App\Facades\YouTube;
 use App\Mail\StreamApprovedMail;
 use App\Models\Stream;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
-use Tests\Feature\Actions\UpdateStreamAction;
 
 class ApproveStreamAction
 {

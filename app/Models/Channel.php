@@ -24,6 +24,7 @@ class Channel extends Model
     public function scopeWithApprovedAndFinishedStreams(Builder $query): Builder
     {
         return $query->whereHas('streams', function(Builder $query) {
+            /** @var Builder<Stream> $query */
             $query->approved()
                     ->finished();
         });
