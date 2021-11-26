@@ -1,8 +1,7 @@
 <?php
 
-uses(\Tests\TestCase::class)->in('tests', 'Fakes', 'Feature', 'Unit');
+uses(\Tests\TestCase::class)->in('Feature', 'Unit');
 uses(\Tests\Fakes\YouTubeResponses::class)->in('Unit');
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class)->in('');
 
 /*
 |--------------------------------------------------------------------------
