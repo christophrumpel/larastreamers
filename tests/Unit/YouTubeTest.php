@@ -15,12 +15,13 @@ it('can fetch channel details from youtube', function () {
     $channel = YouTube::channel('UCdtd5QYBx9MUVXHm7qgEpxA');
 
     // Assert
-    expect($channel->youTubeCustomUrl)->toEqual('christophrumpel');
-    expect($channel->name)->toEqual('Christoph Rumpel');
-    expect($channel->description)->toStartWith('Hi, I\'m Christoph Rumpel');
-    expect($channel->onPlatformSince->toIso8601String())->toEqual('2010-01-12T19:15:29+00:00');
-    expect($channel->country)->toEqual('AT');
-    expect($channel->thumbnailUrl)->toEqual('https://yt3.ggpht.com/ytc/AAUvwniFZUkXnS4vDKY4lDohrpFsyu1V2AJwt4CFZGy25Q=s800-c-k-c0x00ffffff-no-rj');
+    expect($channel)
+        ->youTubeCustomUrl->toBe('christophrumpel')
+        ->name->toBe('Christoph Rumpel')
+        ->description->toStartWith('Hi, I\'m Christoph Rumpel')
+        ->onPlatformSince->toIso8601String()->toBe('2010-01-12T19:15:29+00:00')
+        ->country->toBe('AT')
+        ->thumbnailUrl->toBe('https://yt3.ggpht.com/ytc/AAUvwniFZUkXnS4vDKY4lDohrpFsyu1V2AJwt4CFZGy25Q=s800-c-k-c0x00ffffff-no-rj');
 });
 
 it('can fetch upcoming streams from youtube', function () {

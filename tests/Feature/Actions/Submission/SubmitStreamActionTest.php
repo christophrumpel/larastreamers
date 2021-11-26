@@ -6,7 +6,6 @@ use App\Mail\StreamSubmittedMail;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Mail;
-use Tests\TestCase;
 
 
 it('can store a stream', function () {
@@ -28,9 +27,10 @@ it('can store a stream', function () {
     $stream = Stream::firstWhere('youtube_id', '1234');
     $this->assertNotNull($stream);
 
-    expect($stream->isApproved())->toBeFalse();
-    expect($stream->submitted_by_email)->toEqual('john@example.com');
-    expect($stream->language_code)->toEqual('de');
+    expect($stream)
+        ->isApproved()->toBeFalse()
+        ->submitted_by_email->toBe('john@example.com')
+        ->language_code->toBe('de');
 
     Mail::assertQueued(fn(StreamSubmittedMail $mail) => $mail->hasTo('christoph@christoph-rumpel.com'));
 });

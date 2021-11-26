@@ -22,9 +22,12 @@ it('groups streams by date', function () {
     $preparedStreams = $prepareStreamsAction->handle($streams);
 
     // Assert
-    expect($preparedStreams->keys()[0])->toEqual('Today');
-    expect($preparedStreams->keys()[1])->toEqual('Tomorrow');
-    expect($preparedStreams->keys()[2])->toEqual(Carbon::tomorrow()->addDay()->format('D, M jS Y'));
+    expect($preparedStreams->keys())
+        ->sequence(
+            'Today',
+            'Tomorrow',
+            Carbon::tomorrow()->addDay()->format('D, M jS Y')
+        );
 });
 
 it('orders streams from current to upcoming', function () {
@@ -42,10 +45,9 @@ it('orders streams from current to upcoming', function () {
 
     // Act
     $preparedStreams = $prepareStreamsAction->handle($streams);
-
-    $this->assertEquals([
-        'Today',
-        'Tomorrow',
-        'Sun, Jun 13th 2021',
-    ], $preparedStreams->keys()->toArray());
+    expect($preparedStreams->keys())->sequence(
+            'Today',
+            'Tomorrow',
+            'Sun, Jun 13th 2021',
+    );
 });
