@@ -275,7 +275,7 @@ class Stream extends Model implements Feedable
 
     public function getStartForHumansAttribute(): string
     {
-        if($this->actual_start_time) {
+        if ($this->actual_start_time) {
             return "Started {$this->actual_start_time->diffForHumans()}";
         }
 
