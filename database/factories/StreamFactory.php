@@ -49,7 +49,7 @@ class StreamFactory extends Factory
     {
         return $this->state(function() {
             return [
-                'scheduled_start_time' => Carbon::today()->addDays(random_int(1, 10)),
+                'scheduled_start_time' => Carbon::today()->addDays(random_int(2, 10)),
                 'status' => StreamData::STATUS_UPCOMING,
             ];
         });

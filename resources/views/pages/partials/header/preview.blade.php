@@ -24,13 +24,10 @@
                                 ({{ $upcomingStream->language->name }}) @endif
                         <p class="text-base text-gray-dark flex items-center">
                             <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray-dark fill-current stroke-current"/>
-                            <x-local-time class="text-base"
-                                          :date="$upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time"/>
+                            <time class="text-base text-gray-dark flex">
+                               {{ $upcomingStream->startForHumans }}
+                            </time>
                         </p>
-                        <x-relative-time
-                            :datetime="($upcomingStream->actual_start_time ?? $upcomingStream->scheduled_start_time)"
-                            class="text-base text-gray-dark flex ml-6"
-                        />
                     </div>
                 </div>
             </div>
