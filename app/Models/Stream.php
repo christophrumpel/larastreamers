@@ -270,8 +270,15 @@ class Stream extends Model implements Feedable
 
         $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-//        $duration = $start_time->diff($this->actual_end_time);
-
         return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
+    }
+
+    public function getStartForHumansAttribute(): string
+    {
+        if($this->actual_start_time) {
+            return "Started {$this->actual_start_time->diffForHumans()}";
+        }
+
+        return "Starts {$this->scheduled_start_time->diffForHumans()}";
     }
 }
