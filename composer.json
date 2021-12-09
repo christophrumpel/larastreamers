@@ -33,7 +33,7 @@
         "christophrumpel/missing-livewire-assertions": "0.*",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "laravel/sail": "^1.0.1",
+        "laravel/sail": "^1.12.10",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
         "nunomaduro/larastan": "^1.0.1",
