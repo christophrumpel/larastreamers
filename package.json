@@ -15,7 +15,7 @@
         "@tailwindcss/typography": "^0.4.0",
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.39",
         "postcss": "^8.1.14",
         "postcss-import": "^14.0.1",
         "tailwindcss": "^2.2.0"
