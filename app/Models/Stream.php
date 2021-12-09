@@ -200,7 +200,7 @@ class Stream extends Model implements Feedable
             ->summary((string) $this->description)
             ->updated($this->updated_at ?? now())
             ->link($this->url())
-            ->author($this->title); //TODO: implement
+            ->authorName($this->title); //TODO: implement
     }
 
     public function url(): string
