@@ -32,7 +32,7 @@
         "brianium/paratest": "^6.4",
         "christophrumpel/missing-livewire-assertions": "^0.4.0",
         "fakerphp/faker": "^1.17",
-        "friendsofphp/php-cs-fixer": "^3.3",
+        "friendsofphp/php-cs-fixer": "^3.4",
         "laravel/sail": "^1.12",
         "mockery/mockery": "^1.4",
         "nunomaduro/collision": "^5.10",
