@@ -2435,16 +2435,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.75.0",
+            "version": "v8.76.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0bb91d3176357da232da69762a64b0e0a0988637"
+                "reference": "c67acfdc968f487b6235435080eef62a7e2ed055"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0bb91d3176357da232da69762a64b0e0a0988637",
-                "reference": "0bb91d3176357da232da69762a64b0e0a0988637",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c67acfdc968f487b6235435080eef62a7e2ed055",
+                "reference": "c67acfdc968f487b6235435080eef62a7e2ed055",
                 "shasum": ""
             },
             "require": {
@@ -2603,7 +2603,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-12-07T14:55:46+00:00"
+            "time": "2021-12-15T14:02:14+00:00"
         },
         {
             "name": "laravel/jetstream",
@@ -12991,16 +12991,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.26.3",
+            "version": "1.26.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "ec971959bc8e513cbfa1163e6af030cdaa5ce7bf"
+                "reference": "eebd571834d3940b1d8314950198b4ae71789a82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/ec971959bc8e513cbfa1163e6af030cdaa5ce7bf",
-                "reference": "ec971959bc8e513cbfa1163e6af030cdaa5ce7bf",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/eebd571834d3940b1d8314950198b4ae71789a82",
+                "reference": "eebd571834d3940b1d8314950198b4ae71789a82",
                 "shasum": ""
             },
             "require": {
@@ -13057,7 +13057,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.26.3"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.26.4"
             },
             "funding": [
                 {
@@ -13069,7 +13069,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-11-22T15:57:41+00:00"
+            "time": "2021-12-10T12:10:14+00:00"
         },
         {
             "name": "spatie/macroable",
@@ -13510,16 +13510,16 @@
         },
         {
             "name": "zbateson/mail-mime-parser",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zbateson/mail-mime-parser.git",
-                "reference": "0ef2d7de2577ea0a339d34720451c8ba8cd9dbb4"
+                "reference": "b969a8a72106dcdaa9ac4b19bb2e6b22d3fc5584"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zbateson/mail-mime-parser/zipball/0ef2d7de2577ea0a339d34720451c8ba8cd9dbb4",
-                "reference": "0ef2d7de2577ea0a339d34720451c8ba8cd9dbb4",
+                "url": "https://api.github.com/repos/zbateson/mail-mime-parser/zipball/b969a8a72106dcdaa9ac4b19bb2e6b22d3fc5584",
+                "reference": "b969a8a72106dcdaa9ac4b19bb2e6b22d3fc5584",
                 "shasum": ""
             },
             "require": {
@@ -13579,7 +13579,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-09T18:24:41+00:00"
+            "time": "2021-12-08T20:21:28+00:00"
         },
         {
             "name": "zbateson/mb-wrapper",
