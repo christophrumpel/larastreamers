@@ -15,7 +15,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^8.75",
-        "laravel/jetstream": "^2.4",
+        "laravel/jetstream": "^2.5",
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.6",
         "livewire/livewire": "^2.8",
