@@ -1,4 +1,5 @@
-<span
+<time
+    datetime="{{ $date->toIso8601String() }}"
     x-data="{
         formatLocalTimeZone: function (element, timestamp) {
             const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -12,4 +13,4 @@
     {{ $attributes }}
 >
     {{ $date->format('Y-m-d H:i') }}
-</span>
+</time>
