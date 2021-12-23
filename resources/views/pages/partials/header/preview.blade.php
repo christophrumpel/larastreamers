@@ -24,7 +24,7 @@
                                 ({{ $upcomingStream->language->name }}) @endif
                         <p class="flex items-center text-base text-gray-dark">
                             <x-icons.icon-time class="inline w-4 h-4 mr-2 fill-current stroke-current text-gray-dark"/>
-                            <time datetime="{{ $upcomingStream->actual_start_time }}" class="flex text-base text-gray-dark">
+                            <time datetime="{{ $upcomingStream->startForRobots }}" class="flex text-base text-gray-dark">
                                {{ $upcomingStream->startForHumans }}
                             </time>
                         </p>
