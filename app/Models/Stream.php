@@ -284,6 +284,6 @@ class Stream extends Model implements Feedable
 
     public function getStartForRobotsAttribute(): string
     {
-        return $this->actual_start_time->toIso8601String() ?? $this->scheduled_start_time->toIso8601String();
+        return $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time?->toIso8601String();
     }
 }
