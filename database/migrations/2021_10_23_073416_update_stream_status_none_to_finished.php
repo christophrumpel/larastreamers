@@ -1,13 +1,16 @@
 <?php
 
-use App\Models\Stream;
-use App\Services\YouTube\StreamData;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class UpdateStreamStatusNoneToFinished extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Stream::where('status', 'none')->update(['status' => StreamData::STATUS_FINISHED]);
+        DB::table('streams')
+            ->where('status', 'none')
+            ->update([
+                'status' => 'finished',
+            ]);
     }
 }
