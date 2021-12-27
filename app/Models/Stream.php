@@ -279,12 +279,11 @@ class Stream extends Model implements Feedable
             return "Started {$this->actual_start_time->diffForHumans()}";
         }
 
-        if($this->scheduled_start_time->isPast()) {
+        if ($this->scheduled_start_time->isPast()) {
             return "Started {$this->scheduled_start_time->diffForHumans()}";
         }
 
         return "Starts {$this->scheduled_start_time->diffForHumans()}";
-
     }
 
     public function getStartForRobotsAttribute(): string
