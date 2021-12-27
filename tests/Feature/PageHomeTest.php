@@ -152,3 +152,17 @@ it('will show the time passed since the stream started in preview component', fu
     $this->get(route('home'))
         ->assertSeeText('Started 7 minutes ago');
 });
+
+it('will show the time passed since the stream even if actual start missing', function() {
+    TestTime::freeze();
+    Stream::factory()
+        ->live()
+        ->withChannel()
+        ->create([
+            'scheduled_start_time' => now()->subMinutes(7),
+        ]);
+
+    // Act & Assert
+    $this->get(route('home'))
+        ->assertSeeText('Started 7 minutes ago');
+});
