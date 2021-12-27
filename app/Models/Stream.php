@@ -200,7 +200,7 @@ class Stream extends Model implements Feedable
             ->summary((string) $this->description)
             ->updated($this->updated_at ?? now())
             ->link($this->url())
-            ->authorName($this->title); //TODO: implement
+            ->authorName($this->title);
     }
 
     public function url(): string
@@ -284,6 +284,6 @@ class Stream extends Model implements Feedable
 
     public function getStartForRobotsAttribute(): string
     {
-        return $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time?->toIso8601String();
+        return $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String();
     }
 }
