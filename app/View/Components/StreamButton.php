@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 
 class StreamButton extends Component
 {
-    public function __construct(public string $link, public string $name)
+    public function __construct(public string $link, public string $name, public string $ariaLabel)
     {
     }
 

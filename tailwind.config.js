@@ -34,7 +34,7 @@ module.exports = {
                 lightest: '#f7f8fc',
             },
             black: {
-                DEFAULT: '#212430'
+                DEFAULT: '#17181e'
             }
         }
 

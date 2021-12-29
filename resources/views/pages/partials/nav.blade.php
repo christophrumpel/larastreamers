@@ -1,5 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<nav>
+<nav aria-label="Main Navigation">
     <div class="max-w-6xl mx-auto px-6 xl:px-0">
         <div class="relative flex justify-between h-20 border-b border-gray-lighter">
             <a href="{{ route('home') }}" class="ml-12 sm:ml-0 flex items-center text-gray-darkest text-base font-bold">
