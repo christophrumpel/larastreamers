@@ -1,7 +1,7 @@
 <div class="relative z-0 inline-flex shadow-sm rounded-md" x-data="{ show: false }">
     <a
             href="{{ $webcalLink }}"
-            class="relative flex items-center px-5 py-4 text-sm font-medium text-white transition bg-red rounded-md rounded-r-none shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none focus:ring focus:ring-red-400"
+            class="relative flex items-center px-5 py-4 text-sm font-medium text-black transition bg-red rounded-md rounded-r-none shadow hover:bg-red-500 focus:bg-red-700 focus:outline-none focus:ring focus:ring-red-400"
     >
         Add streams to calendar
     </a>

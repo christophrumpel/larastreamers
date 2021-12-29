@@ -3,7 +3,7 @@
         <a href="{{ $upcomingStream->url() }}">
 
             <div
-                class="absolute z-10 p-2 text-xs font-bold tracking-widest text-white uppercase -top-4 left-8 bg-red rounded-xl">
+                class="absolute z-10 p-2 text-xs font-bold tracking-widest text-black uppercase -top-4 left-8 bg-red rounded-xl">
                 @if($upcomingStream->isLive())  Live @else Upcoming @endif
             </div>
             <div class="overflow-hidden shadow-lg rounded-xl">
@@ -17,7 +17,7 @@
                     </figure>
 
                     <div class="p-8">
-                        <h3 class="mb-4 text-xl font-bold">{{ $upcomingStream->title }}</h3>
+                        <h2 class="mb-4 text-xl font-bold">{{ $upcomingStream->title }}</h2>
                         <p class="flex items-center mb-2 text-base text-gray-dark">
                             <x-icons.icon-user class="inline w-4 h-4 mr-2 fill-current stroke-current text-gray-dark"/>
                             {{ $upcomingStream->channel->name }}  @if ($upcomingStream->language?->shouldRender())

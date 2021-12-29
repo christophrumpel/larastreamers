@@ -3,8 +3,8 @@
         <div class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
             <div class="max-w-xl pt-6 space-y-8">
 
-                <h2 class="text-gray-darkest text-4xl font-bold">Watch other developers <span
-                        class="text-red">code live</span></h2>
+                <h1 class="text-gray-darkest text-4xl font-bold">Watch other developers <span
+                        class="text-red">code live</span></h1>
                 <p class="text-xl text-gray-dark leading-6">
                     There is no better way to learn than by watching other developers
                     code live. Find out who is streaming next in the Laravel world.

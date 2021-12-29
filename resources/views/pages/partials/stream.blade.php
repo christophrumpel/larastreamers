@@ -11,7 +11,7 @@
         <figure class="flex items-center aspect-w-16 aspect-h-9 mb-4 md:mb-0 filter drop-shadow-lg">
             <img class="flex-none overflow-hidden md:-mr-12 z-0 rounded-t-xl md:rounded-xl object-cover transition ease-in-out transform md:group-hover:-translate-x-10"
                  src="{{ $stream->thumbnail_url }}"
-                 alt="Video thumbnail"/>
+                 alt="Video thumbnail for {{ $stream->title }}"/>
         </figure>
         </div>
     </a>
@@ -27,19 +27,19 @@
                 </a>
             </h3>
 
-            <p class="text-base text-gray flex items-center">
+            <p class="text-base text-gray-light flex items-center">
                 <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
                 {{ $stream->channel->name }}
             </p>
 
-            <p class="text-base text-gray flex items-center">
+            <p class="text-base text-gray-light flex items-center">
                 <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
                 <x-local-time class=""
                               :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
                               :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
             </p>
             @if ($stream->language->shouldRender())
-                <p class="text-base text-gray flex items-center">
+                <p class="text-base text-gray-light flex items-center">
                     <x-icons.world class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
                     <span class="">{{ $stream->language->name }}</span>
                 </p>
@@ -48,13 +48,13 @@
 
         <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6">
             <li class="w-full sm:w-auto group">
-                <x-stream-button link="{{ $stream->toWebcalLink() }}" name="Add to calendar">
+                <x-stream-button link="{{ $stream->toWebcalLink() }}" name="Add to calendar" ariaLabel="Add stream to calendar: {{ $stream->title }}">
                     <x-icons.calendar class="text-red w-6 h-6 text-gray group-hover:text-red"/>
                 </x-stream-button>
             </li>
 
             <li class="w-full sm:w-auto group">
-                <x-stream-button link="{{ route('calendar.ics.stream', $stream) }}" name="Download .ics file">
+                <x-stream-button link="{{ route('calendar.ics.stream', $stream) }}" name="Download .ics file" aria-label="Download .ics file for {{ $stream->title }}">
                     <x-icons.download class="w-6 h-6 text-gray group-hover:text-red"/>
                 </x-stream-button>
             </li>
