@@ -1,6 +1,6 @@
 <footer class="text-white bg-black">
     <div class="w-full max-w-6xl px-4 mx-auto sm:px-6 md:px-8">
-        <nav class="flex flex-col justify-between gap-4 py-10 md:items-center md:flex-row">
+        <nav aria-label="Footer Navigation" class="flex flex-col justify-between gap-4 py-10 md:items-center md:flex-row">
             <p class="text-sm text-gray-300">
                 <b class="text-white">&copy; Larastreamers</b> - <span class="text-gray-light under">A project by <a
                         target="_blank" class="underline hover:text-gray-lighter"
