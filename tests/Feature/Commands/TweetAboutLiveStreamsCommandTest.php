@@ -6,6 +6,10 @@ use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 
+beforeEach(function() {
+    Twitter::fake();
+});
+
 it('tweets streams that are live', function() {
     // Arrange
     Stream::factory()->live()->create();

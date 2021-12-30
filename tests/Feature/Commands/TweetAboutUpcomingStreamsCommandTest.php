@@ -6,6 +6,10 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 
+beforeEach(function() {
+    Twitter::fake();
+});
+
 it('tweets streams that are upcoming', function() {
     // Arrange
     $stream = Stream::factory()

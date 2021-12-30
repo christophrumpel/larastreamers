@@ -5,6 +5,10 @@ use App\Facades\Twitter;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 
+beforeEach(function() {
+    Twitter::fake();
+});
+
 it('tweets weekly summary', function() {
     // Arrange
     $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();

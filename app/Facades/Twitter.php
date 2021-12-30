@@ -17,4 +17,9 @@ class Twitter extends Facade
     {
         return TwitterInterface::class;
     }
+
+    public static function fake(): void
+    {
+        self::swap(new TwitterFake());
+    }
 }
