@@ -1,6 +1,7 @@
 <?php
 
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
+use App\Facades\Twitter;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
 
@@ -23,8 +24,8 @@ it('tweets weekly summary', function() {
     $this->artisan(TweetAboutWeeklySummaryCommand::class);
 
     // Assert
-    $this->twitterFake->assertTweetWasSent();
-    $this->twitterFake->assertLastTweetMessageWas("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
+    Twitter::assertTweetCount(1)
+        ->assertLastTweet("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
 });
 
 it('does not tweet weekly summary when no streams given', function() {
@@ -47,5 +48,5 @@ it('does not tweet weekly summary when no streams given', function() {
         ->expectsOutput('There were no streams last week.');
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
 });

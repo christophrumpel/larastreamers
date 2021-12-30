@@ -21,6 +21,7 @@ return [
     ],
 
     'twitter' => [
+        'driver' => env('TWITTER_DRIVER'), // oauth,fake,null
         'consumer_key' => env('TWITTER_CONSUMER_KEY'),
         'consumer_secret' => env('TWITTER_CONSUMER_SECRET'),
         'access_token' => env('TWITTER_ACCESS_TOKEN'),
