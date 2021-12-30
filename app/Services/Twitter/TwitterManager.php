@@ -11,7 +11,7 @@ class TwitterManager extends Manager
         return $this->config->get('services.twitter.driver', 'oauth');
     }
 
-    public function createTwitterDriver(): OAuthTwitter
+    public function createOauthDriver(): OAuthTwitter
     {
         return $this->container->get(OAuthTwitter::class);
     }
