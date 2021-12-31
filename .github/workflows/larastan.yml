@@ -6,6 +6,8 @@ on:
       - '**.php'
       - 'phpstan.neon'
       - 'composer.json'
+  pull_request:
+    types: [ ready_for_review, synchronize, opened ]
 
 jobs:
   larastan:
