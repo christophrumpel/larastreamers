@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Facades\Twitter;
 use App\Models\Stream;
-use App\Services\Twitter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -29,8 +29,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
         $twitterHandleIfGiven = Str::of(' ')
             ->when($twitterHandle = $this->stream->channel?->twitter_handle, fn() => " by $twitterHandle ");
 
-        app(Twitter::class)
-            ->tweet("🔴 A new stream{$twitterHandleIfGiven}just started: {$this->stream->title}".PHP_EOL.$this->stream->url());
+        Twitter::tweet("🔴 A new stream{$twitterHandleIfGiven}just started: {$this->stream->title}".PHP_EOL.$this->stream->url());
 
         $this->stream->markAsTweeted();
     }

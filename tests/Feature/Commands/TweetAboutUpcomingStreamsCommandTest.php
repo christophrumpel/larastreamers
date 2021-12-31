@@ -1,9 +1,14 @@
 <?php
 
 use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
+use App\Facades\Twitter;
 use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
+
+beforeEach(function() {
+    Twitter::fake();
+});
 
 it('tweets streams that are upcoming', function() {
     // Arrange
@@ -13,14 +18,14 @@ it('tweets streams that are upcoming', function() {
         ->create();
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
     expect($stream->tweetStreamIsUpcomingWasSend())->toBeFalse();
 
     // Act
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertTweetWasSent();
+    Twitter::assertTweetCount(1);
     expect($stream->refresh()->tweetStreamIsUpcomingWasSend())->toBeTrue();
 });
 
@@ -33,7 +38,7 @@ it('does not tweet streams that are live or finished', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
 });
 
 it('checks the message of the tweet', function() {
@@ -45,7 +50,7 @@ it('checks the message of the tweet', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    Twitter::assertLastTweet($expectedStatus);
 });
 
 it('adds twitter handle to streams connected to a channel', function() {
@@ -62,7 +67,7 @@ it('adds twitter handle to streams connected to a channel', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    Twitter::assertLastTweet($expectedStatus);
 });
 
 it('works without missing twitter handle on connected channel', function() {
@@ -79,7 +84,7 @@ it('works without missing twitter handle on connected channel', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertLastTweetMessageWas($expectedStatus);
+    Twitter::assertLastTweet($expectedStatus);
 });
 
 it('correctly sets upcoming tweeted at timestamp', function() {
@@ -129,7 +134,7 @@ it('does not send a tweet if the live tweet is sent', function() {
         ->assertExitCode(0);
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
 });
 
 it('only tweets streams that are going live once', function() {
@@ -140,7 +145,7 @@ it('only tweets streams that are going live once', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
 });
 
 it('does not tweet streams that are upcoming but already started', function() {
@@ -153,5 +158,5 @@ it('does not tweet streams that are upcoming but already started', function() {
     $this->artisan(TweetAboutUpcomingStreamsCommand::class);
 
     // Assert
-    $this->twitterFake->assertNoTweetsWereSent();
+    Twitter::assertNoTweetsSent();
 });

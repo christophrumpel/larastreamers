@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Facades\Twitter;
 use App\Models\Stream;
-use App\Services\Twitter;
 use Illuminate\Console\Command;
 
 class TweetAboutWeeklySummaryCommand extends Command
@@ -25,8 +25,7 @@ class TweetAboutWeeklySummaryCommand extends Command
             return self::SUCCESS;
         }
 
-        app(Twitter::class)
-            ->tweet("There were $streamsCount streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
+        Twitter::tweet("There were $streamsCount streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
 
         return self::SUCCESS;
     }

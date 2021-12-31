@@ -2,16 +2,12 @@
 
 namespace Tests;
 
-use App\Services\Twitter;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Tests\Fakes\TwitterFake;
 
 abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication, LazilyRefreshDatabase;
-
-    protected TwitterFake $twitterFake;
 
     private string $originalYoutubeApiKey;
 
@@ -21,8 +17,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->originalYoutubeApiKey = config()->get('services.youtube.key', 'REAL-YOUTUBE-API-KEY') ?? '';
         config()->set('services.youtube.key', 'FAKE-YOUTUBE-KEY');
-        $this->twitterFake = new TwitterFake();
-        $this->app->instance(Twitter::class, $this->twitterFake);
     }
 
     protected function useRealYoutubeApi(): void
