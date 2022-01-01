@@ -35,7 +35,7 @@ jobs:
           restore-keys: composer-
 
       - name: Run composer install
-        run: composer update --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction --no-suggest
 
       - name: Run tests
         run: ./vendor/bin/pest

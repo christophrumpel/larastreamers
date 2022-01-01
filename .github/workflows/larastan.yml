@@ -34,7 +34,7 @@ jobs:
           restore-keys: composer-
 
       - name: Run composer install
-        run: composer update --prefer-dist --no-interaction --no-suggest
+        run: composer install --prefer-dist --no-interaction --no-suggest
 
       - name: Run Larastan
         run: ./vendor/bin/phpstan --error-format=github
