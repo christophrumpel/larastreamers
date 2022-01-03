@@ -42,7 +42,7 @@
         "pestphp/pest-plugin-laravel": "^1.1",
         "pestphp/pest-plugin-parallel": "^1.0",
         "roave/security-advisories": "dev-latest",
-        "spatie/laravel-ray": "^1.26",
+        "spatie/laravel-ray": "^1.27",
         "spatie/test-time": "^1.2"
     },
     "config": {
