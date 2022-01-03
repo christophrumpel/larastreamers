@@ -58,7 +58,6 @@
                 </li>
             </ul>
             @endif
-
         </header>
 
         <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6">
