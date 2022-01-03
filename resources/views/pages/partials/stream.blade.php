@@ -27,7 +27,9 @@
                 </a>
             </h3>
 
+            @if ($stream->description)
             <p class="my-2">{{ $stream->description }}</p>
+            @endif
 
             <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6 my-2">
                 <li class="w-full sm:w-auto group">
