@@ -27,23 +27,36 @@
                 </a>
             </h3>
 
-            <p class="text-base text-gray-light flex items-center">
-                <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
-                {{ $stream->channel->name }}
-            </p>
+            <p class="my-2">{{ $stream->description }}</p>
 
-            <p class="text-base text-gray-light flex items-center">
-                <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
-                <x-local-time class=""
-                              :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
-                              :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
-            </p>
+            <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6 my-2">
+                <li class="w-full sm:w-auto group">
+                    <p class="text-sm text-gray-light flex items-center">
+                        <x-icons.icon-user class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
+                        {{ $stream->channel->name }}
+                    </p>
+                </li>
+                <li class="w-full sm:w-auto group">
+                    <p class="text-sm text-gray-light flex items-center">
+                        <x-icons.icon-time class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
+                        <x-local-time class=""
+                                      :date="$date = $stream->actual_start_time ?? $stream->scheduled_start_time"
+                                      :format="$date->isToday() ? 'HH:mm (z)' : 'YYYY-MM-DD HH:mm (z)'"/>
+                    </p>
+                </li>
+            </ul>
+
             @if ($stream->language->shouldRender())
-                <p class="text-base text-gray-light flex items-center">
-                    <x-icons.world class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
-                    <span class="">{{ $stream->language->name }}</span>
-                </p>
+            <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6 my-2">
+                <li class="w-full sm:w-auto group">
+                    <p class="text-sm text-gray-light flex items-center">
+                        <x-icons.world class="w-4 h-4 mr-2 inline text-gray fill-current stroke-current"/>
+                        <span class="">{{ $stream->language->name }}</span>
+                    </p>
+                </li>
+            </ul>
             @endif
+
         </header>
 
         <ul class="w-full sm:w-auto flex flex-wrap gap-3 md:gap-6">
