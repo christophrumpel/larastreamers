@@ -5,6 +5,7 @@ use App\Models\Channel;
 use App\Models\Stream;
 use Livewire\Livewire;
 use Vinkla\Hashids\Facades\Hashids;
+use App\Services\YouTube\StreamData;
 
 it('only shows streams by selected streamer', function() {
     // Arrange
@@ -26,10 +27,15 @@ it('only shows streams by selected streamer', function() {
 
 it('shows streamers as dropdown options', function() {
     // Arrange
-    Channel::factory()
+    $channel_a = Channel::factory()
         ->create(['name' => 'Channel A']);
-    Channel::factory()
+    $channel_b = Channel::factory()
         ->create(['name' => 'Channel B']);
+
+    Stream::factory()
+        ->create(['channel_id' => $channel_a->id, 'status' => StreamData::STATUS_FINISHED]);
+    Stream::factory()
+        ->create(['channel_id' => $channel_b->id, 'status' => StreamData::STATUS_FINISHED]);
 
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
@@ -43,4 +49,14 @@ it('wires properties and methods', function() {
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
         ->assertPropertyWired('streamer');
+});
+
+it('does not show streamer as dropdown option without approved finished streams', function () {
+    // Arrange
+    Channel::factory()
+        ->create(['name' => 'Channel A']);
+
+    // Arrange & Act & Assert
+    Livewire::test(StreamListArchive::class)
+        ->assertDontSee('Channel A');
 });
