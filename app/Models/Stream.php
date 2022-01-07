@@ -194,15 +194,13 @@ class Stream extends Model implements Feedable
 
     public function toFeedItem(): FeedItem
     {
-        $channel = Channel::find($this->channel_id);
-
         return FeedItem::create()
             ->id((string) $this->id)
             ->title($this->title)
             ->summary((string) $this->description)
             ->updated($this->updated_at ?? now())
             ->link($this->url())
-            ->authorName($channel ? $channel->name : '');
+            ->authorName($this->channel()->first(['id', 'name'])?->name ?? '');
     }
 
     public function url(): string
