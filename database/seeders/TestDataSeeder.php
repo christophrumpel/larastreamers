@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class TestDataSeeder extends Seeder
@@ -27,7 +28,15 @@ class TestDataSeeder extends Seeder
         Channel::truncate();
         Stream::truncate();
 
-        $channels = Channel::factory()->count(4)->create();
+        $channels = Channel::factory()
+            ->count(4)
+            ->state(new Sequence(
+                ['name' => 'Dr. Disrecpect'],
+                ['name' => 'Lulu'],
+                ['name' => 'itzTimmy'],
+                ['name' => 'Faide'],
+            ))
+            ->create();
 
         Stream::factory()
             ->approved()

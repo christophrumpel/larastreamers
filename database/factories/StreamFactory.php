@@ -18,8 +18,20 @@ class StreamFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->text(100),
+            'title' => collect([
+                'The Beginning Of a New Laravel Era',
+                'Diving Into Code (Episode 2)',
+                'Me, Myself, And Refactoring',
+                'There Is No Easy Pull Request',
+                'Welcome To My New Laravel Package',
+            ])->random(),
+            'description' => collect([
+                'Hello and welcome to this new stream of mine. It will be quite exciting for you to watch what I have prepared for you.',
+                'This will be my last stream of this century. I have dreams, big dreams. Just wait and see.',
+                'We will continue diving into this new topic of mine. I cannot wait to tell you more about it.',
+                'Super secret project! Do not tell anyone. Please!',
+                'In this third edition of this stream, you will be the hero. You have to decide what we will do.',
+            ])->random(),
             'youtube_id' => Str::random(10),
             'thumbnail_url' => collect([
                 'https://i.ytimg.com/vi/s9s7O7_jQh8/maxresdefault_live.jpg',
