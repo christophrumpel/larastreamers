@@ -137,7 +137,7 @@ it('searches for streams by specific streamer and search term', function() {
         ->assertDontSee('Stream Hidden');
 });
 
-it('orders streamers by name', function () {
+it('orders streamers by name', function() {
     // Arrange
     Channel::factory()->create(['name' => 'Laravel']);
     Channel::factory()->create(['name' => 'Christoph Rumpel']);
