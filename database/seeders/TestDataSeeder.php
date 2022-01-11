@@ -6,7 +6,6 @@ use App\Models\Channel;
 use App\Models\Stream;
 use App\Models\User;
 use App\Services\YouTube\StreamData;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class TestDataSeeder extends Seeder
@@ -18,7 +17,7 @@ class TestDataSeeder extends Seeder
      */
     public function run()
     {
-        if (!User::count()) {
+        if (! User::count()) {
             User::create([
                 'name' => 'Christoph',
                 'email' => 'test@test.at',
@@ -37,7 +36,6 @@ class TestDataSeeder extends Seeder
         $caleb = Channel::factory()->create(['name' => 'Caleb Porzio']);
         $matt = Channel::factory()->create(['name' => 'Matt Stauffer']);
 
-
         Stream::insert([
             [
                 'title' => '📺 Larastreamers - Add Streamer Search',
@@ -52,7 +50,7 @@ class TestDataSeeder extends Seeder
             [
                 'title' => "Let's play with Laravel LiveWire",
                 'channel_id' => $steve->id,
-                'description' => "In this stream I will be inviting Tom Witkowski (@devgummibear) to join me as I build some things in LiveWire, asking some questions and seeing what we can build.",
+                'description' => 'In this stream I will be inviting Tom Witkowski (@devgummibear) to join me as I build some things in LiveWire, asking some questions and seeing what we can build.',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/cQT37gxGr6g/maxresdefault.jpg',
                 'youtube_id' => '123542',
                 'scheduled_start_time' => now()->addMinutes(10),
@@ -62,9 +60,9 @@ class TestDataSeeder extends Seeder
             [
                 'title' => 'Livewire Wire UI com Pedro Henrique - Petiscando #072',
                 'channel_id' => $beerAndCode->id,
-                'description' => "faaala galera!!
+                'description' => 'faaala galera!!
 Hoje(10/10) vamos receber o Pedro Henrique para aquele bate papo diferenciado sobre Livewire, então já sabe né??
-Prepara aquele petisco de lei e cooola no chat com a gente!!",
+Prepara aquele petisco de lei e cooola no chat com a gente!!',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/_Rg30_tQRPs/maxresdefault.jpg',
                 'youtube_id' => '123543',
                 'scheduled_start_time' => now()->addMinutes(100),
@@ -74,7 +72,7 @@ Prepara aquele petisco de lei e cooola no chat com a gente!!",
             [
                 'title' => "PEST Meetup #1: Testing Livewire with PEST & You know the REST, now it's time for Pest",
                 'channel_id' => $nuno->id,
-                'description' => "Pest is an elegant PHP Testing Framework with a focus on simplicity. It was carefully crafted to bring the joy of testing to PHP.",
+                'description' => 'Pest is an elegant PHP Testing Framework with a focus on simplicity. It was carefully crafted to bring the joy of testing to PHP.',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/q_8kRlAIyms/maxresdefault.jpg',
                 'youtube_id' => '123544',
                 'scheduled_start_time' => now()->addMinutes(456),
@@ -82,9 +80,9 @@ Prepara aquele petisco de lei e cooola no chat com a gente!!",
                 'approved_at' => now(),
             ],
             [
-                'title' => "Laravel Meetup #11: Building APIs & Spotlight and Modals With Livewire",
+                'title' => 'Laravel Meetup #11: Building APIs & Spotlight and Modals With Livewire',
                 'channel_id' => $freek->id,
-                'description' => "https://meetup.laravel.com",
+                'description' => 'https://meetup.laravel.com',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/0pylMAlfw5k/maxresdefault.jpg',
                 'youtube_id' => '123545',
                 'scheduled_start_time' => now()->addMinutes(254),
@@ -102,7 +100,7 @@ Prepara aquele petisco de lei e cooola no chat com a gente!!",
                 'approved_at' => now(),
             ],
             [
-                'title' => "Events and Nesting in Laravel Livewire, pairing with Caleb Porzio - Matt Stauffer Livestream",
+                'title' => 'Events and Nesting in Laravel Livewire, pairing with Caleb Porzio - Matt Stauffer Livestream',
                 'channel_id' => $matt->id,
                 'description' => "Apologies: The first few minutes of this stream were cut by glitches in YouTube's editor.",
                 'thumbnail_url' => 'https://i.ytimg.com/vi/y3TQq534dRM/maxresdefault.jpg',
@@ -114,8 +112,8 @@ Prepara aquele petisco de lei e cooola no chat com a gente!!",
             [
                 'title' => '📺 Larastreamers - Add A Streamers Overview',
                 'channel_id' => $christoph->id,
-                'description' => "What fits a live stream better than working on a platform that promotes live streams? 😅
-Today we implement a new streamers-overview page for https://larastreamers.com/. It will show ",
+                'description' => 'What fits a live stream better than working on a platform that promotes live streams? 😅
+Today we implement a new streamers-overview page for https://larastreamers.com/. It will show ',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/NLnf2VdBdhc/maxresdefault.jpg',
                 'youtube_id' => '123548',
                 'scheduled_start_time' => now()->subDays(2),
@@ -125,8 +123,8 @@ Today we implement a new streamers-overview page for https://larastreamers.com/.
             [
                 'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
                 'channel_id' => $beerAndCode->id,
-                'description' => "Faaala artesãos!!!
-E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ",
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
                 'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
                 'youtube_id' => '123549',
                 'scheduled_start_time' => now()->subDays(3),
