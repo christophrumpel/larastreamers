@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "084f94573ecba933e5244c621dd15c2b",
+    "content-hash": "012000b22fdaf09dbde0899d6bac7b0c",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -13000,16 +13000,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.27.0",
+            "version": "1.27.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "b0c3d13d17ea430e3cf02495192b6ed99f0f7615"
+                "reference": "63facbd443b3ba0e920054ca7f48a08e2870b740"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/b0c3d13d17ea430e3cf02495192b6ed99f0f7615",
-                "reference": "b0c3d13d17ea430e3cf02495192b6ed99f0f7615",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/63facbd443b3ba0e920054ca7f48a08e2870b740",
+                "reference": "63facbd443b3ba0e920054ca7f48a08e2870b740",
                 "shasum": ""
             },
             "require": {
@@ -13066,7 +13066,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.27.0"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.27.2"
             },
             "funding": [
                 {
@@ -13078,7 +13078,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2021-12-26T19:28:33+00:00"
+            "time": "2021-12-27T21:05:04+00:00"
         },
         {
             "name": "spatie/macroable",
