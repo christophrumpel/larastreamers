@@ -4,7 +4,7 @@
         <label for="streamer" class="sr-only">Filter by streamer</label>
         <select wire:model="streamer"
                 id="streamer"
-            class="border-white focus:border-1 focus:border-red"
+            class="border-white focus:border-1 focus:border-red rounded-l-lg"
         >
             <option value="">All Streamers</option>
             @foreach($channels as $hashId => $channel)
