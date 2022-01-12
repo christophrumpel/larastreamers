@@ -27,15 +27,13 @@ it('only shows streams by selected streamer', function() {
 
 it('shows streamers as dropdown options', function() {
     // Arrange
-    $channel_a = Channel::factory()
-        ->create(['name' => 'Channel A']);
-    $channel_b = Channel::factory()
-        ->create(['name' => 'Channel B']);
+    Stream::factory()
+        ->for(Channel::factory()->create(['name' => 'Channel A']))
+        ->create(['status' => StreamData::STATUS_FINISHED]);
 
     Stream::factory()
-        ->create(['channel_id' => $channel_a->id, 'status' => StreamData::STATUS_FINISHED]);
-    Stream::factory()
-        ->create(['channel_id' => $channel_b->id, 'status' => StreamData::STATUS_FINISHED]);
+        ->for(Channel::factory()->create(['name' => 'Channel B']))
+        ->create(['status' => StreamData::STATUS_FINISHED]);
 
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
