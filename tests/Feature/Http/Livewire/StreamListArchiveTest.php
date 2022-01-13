@@ -3,9 +3,9 @@
 use App\Http\Livewire\StreamListArchive;
 use App\Models\Channel;
 use App\Models\Stream;
+use App\Services\YouTube\StreamData;
 use Livewire\Livewire;
 use Vinkla\Hashids\Facades\Hashids;
-use App\Services\YouTube\StreamData;
 
 it('only shows streams by selected streamer', function() {
     // Arrange
@@ -49,7 +49,7 @@ it('wires properties and methods', function() {
         ->assertPropertyWired('streamer');
 });
 
-it('does not show streamer as dropdown option without approved finished streams', function () {
+it('does not show streamer as dropdown option without approved finished streams', function() {
     // Arrange
     Channel::factory()
         ->create(['name' => 'Channel A']);
