@@ -139,10 +139,18 @@ it('searches for streams by specific streamer and search term', function() {
 
 it('orders streamers by name', function() {
     // Arrange
-    Channel::factory()->create(['name' => 'Laravel']);
-    Channel::factory()->create(['name' => 'Christoph Rumpel']);
-    Channel::factory()->create(['name' => 'Adrian Nürnberger']);
-    Channel::factory()->create(['name' => 'Caleb Porzio']);
+    Channel::factory()
+        ->has(Stream::factory()->finished())
+        ->create(['name' => 'Laravel']);
+    Channel::factory()
+        ->has(Stream::factory()->finished())
+        ->create(['name' => 'Christoph Rumpel']);
+    Channel::factory()
+        ->has(Stream::factory()->finished())
+        ->create(['name' => 'Adrian Nürnberger']);
+    Channel::factory()
+        ->has(Stream::factory()->finished())
+        ->create(['name' => 'Caleb Porzio']);
 
     // Act & Assert
     $this->get(route('archive'))
