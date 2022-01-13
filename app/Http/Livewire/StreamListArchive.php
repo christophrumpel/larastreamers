@@ -39,7 +39,7 @@ class StreamListArchive extends Component
             ->paginate(24);
 
         // @phpstan-ignore-next-line
-        $channels = Channel::has('approvedFinishedStreams')->select(['id', 'name'])->get()->pluck('name', 'hashid');
+        $channels = Channel::has('approvedFinishedStreams')->select(['id', 'name'])->orderBy('name')->get()->pluck('name', 'hashid');
 
         return view('livewire.stream-list-archive', [
             'streams' => $streams,

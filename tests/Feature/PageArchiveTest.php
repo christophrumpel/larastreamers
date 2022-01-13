@@ -136,3 +136,20 @@ it('searches for streams by specific streamer and search term', function() {
         ->assertSee('Stream Shown')
         ->assertDontSee('Stream Hidden');
 });
+
+it('orders streamers by name', function() {
+    // Arrange
+    Channel::factory()->create(['name' => 'Laravel']);
+    Channel::factory()->create(['name' => 'Christoph Rumpel']);
+    Channel::factory()->create(['name' => 'Adrian Nürnberger']);
+    Channel::factory()->create(['name' => 'Caleb Porzio']);
+
+    // Act & Assert
+    $this->get(route('archive'))
+        ->assertSeeInOrder([
+            'Adrian Nürnberger',
+            'Caleb Porzio',
+            'Christoph Rumpel',
+            'Laravel',
+        ]);
+});
