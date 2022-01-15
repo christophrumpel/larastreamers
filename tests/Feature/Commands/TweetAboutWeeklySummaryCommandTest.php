@@ -29,7 +29,7 @@ it('tweets weekly summary', function() {
 
     // Assert
     Twitter::assertTweetCount(1)
-        ->assertLastTweet("There were 2 streams last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
+        ->assertLastTweet("2 streams happened last week. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find them here: ".route('archive'));
 });
 
 it('does not tweet weekly summary when no streams given', function() {
