@@ -17,7 +17,7 @@
         "laravel/framework": "^8.75",
         "laravel/jetstream": "^2.4",
         "laravel/sanctum": "^2.12",
-        "laravel/tinker": "^2.6",
+        "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.8",
         "owenvoke/blade-fontawesome": "^1.10",
         "pragmarx/countries": "^0.7.2",
