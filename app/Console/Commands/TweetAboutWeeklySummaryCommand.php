@@ -26,7 +26,8 @@ class TweetAboutWeeklySummaryCommand extends Command
             return self::SUCCESS;
         }
 
-        Twitter::tweet(sprintf("Last week, there %s %s %s. 👏 %s 🙏🏻\n Find more Streams here: ".route('archive'),
+        Twitter::tweet(sprintf(
+            "Last week, there %s %s %s. 👏 %s 🙏🏻\n Find more Streams here: ".route('archive'),
             $streamsCount == 1 ? 'was' : 'were',
             $streamsCount,
             Str::plural('stream', $streamsCount),
