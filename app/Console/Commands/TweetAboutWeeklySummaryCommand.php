@@ -30,7 +30,7 @@ class TweetAboutWeeklySummaryCommand extends Command
             $streamsCount == 1 ? 'was' : 'were',
             $streamsCount,
             Str::plural('stream', $streamsCount),
-        $streamsCount == 1 ? 'Thanks to everyone who participated.' : 'Thanks to all the streamers and viewers.'
+            $streamsCount == 1 ? 'Thanks to everyone who participated.' : 'Thanks to all the streamers and viewers.'
         ));
 
         return self::SUCCESS;
