@@ -3,8 +3,8 @@
         <img class="-mt-12 w-full rounded-md overflow-hidden shadow" src="{{ $channel->thumbnail_url }}"
              alt="YouTube channel image from {{ $channel->name }}"/>
     </div>
-    <div class="flex flex-col w-4/5 pl-8">
-        <div class="mb-6">
+    <div class="flex flex-col w-4/5 pl-8 h-full">
+        <div class="mb-6 flex-1">
             <p class="font-bold text-white mb-2">{{ $channel->name }}</p>
             @if($channel->country)
                 <div class="flex items-center text-gray mb-4">
