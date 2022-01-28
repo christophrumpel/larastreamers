@@ -27,6 +27,11 @@ class StreamListArchive extends Component
         $this->resetPage();
     }
 
+    public function updatedStreamer(): void
+    {
+        $this->resetPage();
+    }
+
     public function render(): View
     {
         $streams = Stream::query()

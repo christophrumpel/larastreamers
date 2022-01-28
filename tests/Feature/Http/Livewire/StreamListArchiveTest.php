@@ -58,3 +58,19 @@ it('does not show streamer as dropdown option without approved finished streams'
     Livewire::test(StreamListArchive::class)
         ->assertDontSee('Channel A');
 });
+
+it('resets the pagination when selecting a streamer from the dropdown', function() {
+    // Arrange
+    Stream::factory()
+        ->for($channel = Channel::factory()->create())
+        ->finished()
+        ->create(['title' => 'Stream Seen']);
+
+    // Act & Assert
+    Livewire::withQueryParams(['page' => 2])
+        ->test(StreamListArchive::class)
+        ->assertDontSee('Stream Seen')
+        ->set('streamer', $channel->hash)
+        ->assertSet('page', 1)
+        ->assertSee('Stream Seen');
+});
