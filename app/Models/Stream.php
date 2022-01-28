@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -262,32 +263,36 @@ class Stream extends Model implements Feedable
         return ! is_null($this->approved_at);
     }
 
-    public function getDurationAttribute(): ?string
+    public function duration(): Attribute
     {
-        if (is_null($this->actual_end_time)) {
-            return null;
-        }
+        return Attribute::get(function(): ?string {
+            if (is_null($this->actual_end_time)) {
+                return null;
+            }
 
-        $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
+            $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-        return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
+            return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
+        });
     }
 
-    public function getStartForHumansAttribute(): string
+    public function startForHumans(): Attribute
     {
-        if ($this->actual_start_time) {
-            return "Started {$this->actual_start_time->diffForHumans()}";
-        }
+        return Attribute::get(function(): string {
+            if ($this->actual_start_time) {
+                return "Started {$this->actual_start_time->diffForHumans()}";
+            }
 
-        if ($this->scheduled_start_time->isPast()) {
-            return "Started {$this->scheduled_start_time->diffForHumans()}";
-        }
+            if ($this->scheduled_start_time->isPast()) {
+                return "Started {$this->scheduled_start_time->diffForHumans()}";
+            }
 
-        return "Starts {$this->scheduled_start_time->diffForHumans()}";
+            return "Starts {$this->scheduled_start_time->diffForHumans()}";
+        });
     }
 
-    public function getStartForRobotsAttribute(): string
+    public function startForRobotsAttribute(): Attribute
     {
-        return $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String();
+        return Attribute::get(fn() => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
     }
 }
