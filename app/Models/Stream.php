@@ -291,7 +291,7 @@ class Stream extends Model implements Feedable
         });
     }
 
-    public function startForRobotsAttribute(): Attribute
+    public function startForRobots(): Attribute
     {
         return Attribute::get(fn() => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
     }
