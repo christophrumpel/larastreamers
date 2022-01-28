@@ -131,6 +131,182 @@ E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar mui
                 'status' => StreamData::STATUS_FINISHED,
                 'approved_at' => now(),
             ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '1235410',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354911',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354912',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354913',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354914',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354915',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354916',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354917',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354918',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354920',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354921',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354922',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354923',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354924',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354925',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
+            [
+                'title' => 'Adote um Dev - TALL Stack projeto prático do zero - #002',
+                'channel_id' => $beerAndCode->id,
+                'description' => 'Faaala artesãos!!!
+E hoje(019/06) vamos dar sequencia ao nosso projeto Web do Zero, vamos falar muito e aprender ',
+                'thumbnail_url' => 'https://i.ytimg.com/vi/F0unkkovzA8/maxresdefault.jpg',
+                'youtube_id' => '12354926',
+                'scheduled_start_time' => now()->subDays(3),
+                'status' => StreamData::STATUS_FINISHED,
+                'approved_at' => now(),
+            ],
         ]);
     }
 }
