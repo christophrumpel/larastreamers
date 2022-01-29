@@ -8,8 +8,8 @@
             @if ($stream->isLive())
                 @include('pages.partials.live-indicator')
             @endif
-        <figure class="flex items-center aspect-w-16 aspect-h-9 mb-4 md:mb-0 filter drop-shadow-lg">
-            <img class="flex-none overflow-hidden md:-mr-12 z-0 rounded-t-xl md:rounded-xl object-cover transition ease-in-out transform md:group-hover:-translate-x-10"
+        <figure class="flex items-center aspect-w-16 aspect-h-9 mb-4 md:mb-0 drop-shadow-lg">
+            <img class="flex-none overflow-hidden md:-mr-12 z-0 rounded-t-xl md:rounded-xl object-cover transition ease-in-out md:group-hover:-translate-x-10"
                  src="{{ $stream->thumbnail_url }}"
                  alt="Video thumbnail for {{ $stream->title }}"/>
         </figure>
