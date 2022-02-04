@@ -8,7 +8,7 @@
     "require": {
         "php": "^8.0",
         "abraham/twitteroauth": "^3.2",
-        "calebporzio/sushi": "^2.3",
+        "calebporzio/sushi": "^2.4",
         "doctrine/dbal": "^3.2",
         "facade/ignition": "^2.17",
         "fideloper/proxy": "^4.4",
