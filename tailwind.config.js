@@ -14,6 +14,7 @@ module.exports = {
             },
         },
         colors: {
+            current: 'currentColor',
             white: {
                 DEFAULT: '#F8F8F8',
             },
