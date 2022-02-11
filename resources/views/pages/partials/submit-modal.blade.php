@@ -21,7 +21,7 @@
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
         <!-- Modal Content -->
-        <div class="inline-block align-bottom bg-white rounded-lg p-6 sm:p-12 text-left overflow-hidden shadow-xl transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        <div class="relative inline-block align-bottom bg-white rounded-lg p-6 sm:p-12 text-left overflow-hidden shadow-xl transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
              @click.away="showSubmissionModal = false"
              @keyup.escape.window="showSubmissionModal = false"
              x-show="showSubmissionModal"
