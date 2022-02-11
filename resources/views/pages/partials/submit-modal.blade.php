@@ -15,13 +15,13 @@
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0 scale-95"
     >
-        <div class="fixed inset-0 backdrop-filter backdrop-blur-lg backdrop-brightness-75 transition" aria-hidden="true"></div>
+        <div class="fixed inset-0 backdrop-blur-lg backdrop-brightness-75 transition" aria-hidden="true"></div>
 
         <!-- This element is to trick the browser into centering the modal contents. -->
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
         <!-- Modal Content -->
-        <div class="inline-block align-bottom bg-white rounded-lg p-6 sm:p-12 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        <div class="relative inline-block align-bottom bg-white rounded-lg p-6 sm:p-12 text-left overflow-hidden shadow-xl transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
              @click.away="showSubmissionModal = false"
              @keyup.escape.window="showSubmissionModal = false"
              x-show="showSubmissionModal"
@@ -57,7 +57,6 @@
 
         </div>
         <!-- Modal Content -->
-
 
     </div>
 </div>

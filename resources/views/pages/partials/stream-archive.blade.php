@@ -1,4 +1,4 @@
-<li class="relative flex flex-col relative bg-gray-darker rounded-xl overflow-hidden transition ease-in-out transform hover:-translate-y-5">
+<li class="relative flex flex-col relative bg-gray-darker rounded-xl overflow-hidden transition ease-in-out hover:-translate-y-5">
     <a class="w-full flex-none overflow-hidden z-0 md:px-0 mb-2 md:mb-0"
        title="Open on YouTube"
        target="_blank"

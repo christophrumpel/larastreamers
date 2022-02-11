@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    purge: [
+    content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
@@ -14,6 +14,7 @@ module.exports = {
             },
         },
         colors: {
+            current: 'currentColor',
             white: {
                 DEFAULT: '#F8F8F8',
             },
@@ -38,15 +39,6 @@ module.exports = {
             }
         }
 
-    },
-
-    variants: {
-        extend: {
-            opacity: ['disabled'],
-            animation: ['hover', 'group-hover'],
-            translate: ['group-hover'],
-            responsive: ['group-hover']
-        },
     },
 
     plugins: [

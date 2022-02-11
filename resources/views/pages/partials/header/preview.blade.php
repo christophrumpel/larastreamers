@@ -1,13 +1,11 @@
 @if($upcomingStream)
     <div class="relative hidden w-2/5 md:block">
         <a href="{{ $upcomingStream->url() }}">
-
             <div
                 class="absolute z-10 p-2 text-xs font-bold tracking-widest text-black uppercase -top-4 left-8 bg-red rounded-xl">
                 @if($upcomingStream->isLive())  Live @else Upcoming @endif
             </div>
             <div class="overflow-hidden shadow-lg rounded-xl">
-
 
                 <div class="flex flex-col bg-white">
                     <figure class="overflow-auto aspect-w-16 aspect-h-9">
@@ -33,5 +31,4 @@
             </div>
         </a>
     </div>
-
 @endif

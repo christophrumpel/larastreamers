@@ -1,4 +1,4 @@
-<div class=" w-fill md:w-3/5 {{ !$upcomingStream ? 'pb-8' : '' }}">
+<div class="w-fill md:w-3/5{{ !$upcomingStream ? ' pb-8' : '' }}">
     <div class="w-full px-4 mx-auto px-6 xl:px-0">
         <div class="flex flex-col items-start justify-between gap-8 md:items-center md:flex-row">
             <div class="max-w-xl pt-6 space-y-8">
@@ -13,7 +13,6 @@
                     <x-add-streams-to-calendar/>
                 @endif
             </div>
-
         </div>
     </div>
 </div>
