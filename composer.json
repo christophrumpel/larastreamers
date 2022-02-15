@@ -35,7 +35,7 @@
         "friendsofphp/php-cs-fixer": "^3.4",
         "laravel/sail": "^1.12",
         "mockery/mockery": "^1.5",
-        "nunomaduro/collision": "^5.10",
+        "nunomaduro/collision": "^5.11",
         "nunomaduro/larastan": "^1.0",
         "nunomaduro/patrol": "^1.1",
         "pestphp/pest": "^1.21",
