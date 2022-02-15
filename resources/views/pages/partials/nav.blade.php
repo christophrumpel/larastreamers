@@ -2,8 +2,8 @@
 <nav aria-label="Main Navigation">
     <div class="max-w-6xl mx-auto px-6 xl:px-0">
         <div class="relative flex justify-between h-20 border-b border-gray-lighter">
-            <a href="{{ route('home') }}" class="ml-12 sm:ml-0 flex items-center text-gray-darkest text-base font-bold">
-                📺 Larastreamers
+            <a href="{{ route('home') }}" class="ml-12 sm:ml-0 flex space-x-2 items-center text-gray-darkest text-base font-bold">
+                <span class="w-5">📺</span> <span>Larastreamers</span>
             </a>
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button -->
