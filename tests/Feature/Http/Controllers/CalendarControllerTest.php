@@ -119,3 +119,14 @@ it('can download one calendar item', function() {
             'DESCRIPTION:Single Stream\nMy Channel\nhttps://www.youtube.com/watch?v=1234',
         ]);
 });
+
+it('removes carriage returns', function() {
+    $stream = Stream::factory()
+        ->for(Channel::factory())
+        ->create(['description' => "\rJoin me on a journ"]);
+
+    $this
+        ->get(route('calendar.ics.stream', $stream))
+        ->assertDontSee("\rJoin me on a journ")
+        ->assertSee("Join me on a journ");
+});

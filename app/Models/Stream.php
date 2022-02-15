@@ -220,7 +220,8 @@ class Stream extends Model implements Feedable
                 $this->channel?->name,
                 $this->url(),
                 Str::of((string) $this->description)
-                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL)),
+                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL))
+                    ->remove("\r"),
             ]))
             ->startsAt($this->scheduled_start_time)
             ->endsAt($this->scheduled_start_time->clone()->addHour())
