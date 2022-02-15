@@ -24,7 +24,7 @@
         "spatie/data-transfer-object": "^3.7",
         "spatie/icalendar-generator": "^2.3",
         "spatie/laravel-backup": "^7.7",
-        "spatie/laravel-feed": "^4.0",
+        "spatie/laravel-feed": "^4.1",
         "vinkla/hashids": "^9.1",
         "wildbit/swiftmailer-postmark": "^3.3"
     },
