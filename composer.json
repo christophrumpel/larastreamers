@@ -18,7 +18,6 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "owenvoke/blade-fontawesome": "^2.0",
-        "pragmarx/countries": "^0.7.2",
         "spatie/data-transfer-object": "^3.7",
         "spatie/icalendar-generator": "^2.3",
         "spatie/laravel-backup": "^8.0",
@@ -29,7 +28,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^6.4",
-        "christophrumpel/missing-livewire-assertions": "^0.4.0",
+        "christophrumpel/missing-livewire-assertions": "^0.5.0",
         "fakerphp/faker": "^1.17",
         "friendsofphp/php-cs-fixer": "^3.6",
         "laravel/sail": "^1.13",
