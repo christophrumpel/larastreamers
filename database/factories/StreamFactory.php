@@ -13,8 +13,6 @@ use Illuminate\Support\Str;
 
 class StreamFactory extends Factory
 {
-    protected $model = Stream::class;
-
     public function definition(): array
     {
         return [
