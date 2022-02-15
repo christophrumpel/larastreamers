@@ -22,7 +22,7 @@
         "tailwindcss": "^3.0.22"
     },
     "dependencies": {
-        "@alpinejs/trap": "^3.7.0",
+        "@alpinejs/trap": "^3.7.3",
         "alpinejs": "^3.7.0",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.34"
