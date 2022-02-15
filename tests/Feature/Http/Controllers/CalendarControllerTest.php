@@ -128,5 +128,5 @@ it('removes carriage returns', function() {
     $this
         ->get(route('calendar.ics.stream', $stream))
         ->assertDontSee("\rJoin me on a journ")
-        ->assertSee("Join me on a journ");
+        ->assertSee('Join me on a journ');
 });
