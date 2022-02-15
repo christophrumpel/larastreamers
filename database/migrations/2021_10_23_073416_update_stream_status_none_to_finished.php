@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class UpdateStreamStatusNoneToFinished extends Migration
+return new class extends Migration
 {
     public function up(): void
     {
@@ -13,4 +13,4 @@ class UpdateStreamStatusNoneToFinished extends Migration
                 'status' => 'finished',
             ]);
     }
-}
+};
