@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAnnouncementTweetedAtToStreamsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -17,4 +17,4 @@ class AddAnnouncementTweetedAtToStreamsTable extends Migration
             $table->timestamp('upcoming_tweeted_at')->nullable()->after('tweeted_at');
         });
     }
-}
+};
