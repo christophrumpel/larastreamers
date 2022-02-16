@@ -16,15 +16,16 @@
         "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
+        "league/flysystem-ftp": "^3.0",
         "livewire/livewire": "^2.10",
         "owenvoke/blade-fontawesome": "^2.0",
         "spatie/data-transfer-object": "^3.7",
         "spatie/icalendar-generator": "^2.3",
         "spatie/laravel-backup": "^8.0",
         "spatie/laravel-feed": "^4.1",
-        "vinkla/hashids": "^10.0",
+        "spatie/laravel-ignition": "^1.0",
         "symfony/postmark-mailer": "^6.0",
-        "spatie/laravel-ignition": "^1.0"
+        "vinkla/hashids": "^10.0"
     },
     "require-dev": {
         "brianium/paratest": "^6.4",

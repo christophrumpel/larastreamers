@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "69dad128239b5d0e8782d8d00f477db2",
+    "content-hash": "9812d6dc05a9df710d8159435cd2e655",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -2018,16 +2018,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.0.2",
+            "version": "v9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4c7cd8c4e95d161c0c6ada6efa0a5af4d0d487c9"
+                "reference": "ca7ddd4782f120ae50569d04eb9e40e52f67a9d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4c7cd8c4e95d161c0c6ada6efa0a5af4d0d487c9",
-                "reference": "4c7cd8c4e95d161c0c6ada6efa0a5af4d0d487c9",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ca7ddd4782f120ae50569d04eb9e40e52f67a9d9",
+                "reference": "ca7ddd4782f120ae50569d04eb9e40e52f67a9d9",
                 "shasum": ""
             },
             "require": {
@@ -2115,7 +2115,6 @@
                 "phpstan/phpstan": "^1.0",
                 "phpunit/phpunit": "^9.5.8",
                 "predis/predis": "^1.1.9",
-                "symfony/amazon-mailer": "^6.0",
                 "symfony/cache": "^6.0"
             },
             "suggest": {
@@ -2193,20 +2192,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-02-10T15:07:46+00:00"
+            "time": "2022-02-15T15:06:44+00:00"
         },
         {
             "name": "laravel/jetstream",
-            "version": "v2.6.5",
+            "version": "v2.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/jetstream.git",
-                "reference": "49acffbae6ddad87195dedee8868db3c04cde801"
+                "reference": "a03b8ececef21e4d2c3bfb8a7e90ec36c2dfaaf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/jetstream/zipball/49acffbae6ddad87195dedee8868db3c04cde801",
-                "reference": "49acffbae6ddad87195dedee8868db3c04cde801",
+                "url": "https://api.github.com/repos/laravel/jetstream/zipball/a03b8ececef21e4d2c3bfb8a7e90ec36c2dfaaf9",
+                "reference": "a03b8ececef21e4d2c3bfb8a7e90ec36c2dfaaf9",
                 "shasum": ""
             },
             "require": {
@@ -2259,20 +2258,20 @@
                 "issues": "https://github.com/laravel/jetstream/issues",
                 "source": "https://github.com/laravel/jetstream"
             },
-            "time": "2022-02-08T14:12:45+00:00"
+            "time": "2022-02-15T14:30:06+00:00"
         },
         {
             "name": "laravel/sanctum",
-            "version": "v2.14.0",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "0647a87140c7522e75826cffcadb3ad6e01f71e9"
+                "reference": "89937617fa144ddb759a740861a47c4f2fd2245b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/0647a87140c7522e75826cffcadb3ad6e01f71e9",
-                "reference": "0647a87140c7522e75826cffcadb3ad6e01f71e9",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/89937617fa144ddb759a740861a47c4f2fd2245b",
+                "reference": "89937617fa144ddb759a740861a47c4f2fd2245b",
                 "shasum": ""
             },
             "require": {
@@ -2323,20 +2322,20 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2022-01-12T15:07:43+00:00"
+            "time": "2022-02-15T08:08:57+00:00"
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "65c9faf50d567b65d81764a44526545689e3fe63"
+                "reference": "9e4b005daa20b0c161f3845040046dc9ddc1d74e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/65c9faf50d567b65d81764a44526545689e3fe63",
-                "reference": "65c9faf50d567b65d81764a44526545689e3fe63",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/9e4b005daa20b0c161f3845040046dc9ddc1d74e",
+                "reference": "9e4b005daa20b0c161f3845040046dc9ddc1d74e",
                 "shasum": ""
             },
             "require": {
@@ -2382,7 +2381,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2022-02-01T16:29:39+00:00"
+            "time": "2022-02-11T19:23:53+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -2726,6 +2725,70 @@
                 }
             ],
             "time": "2022-02-14T20:25:21+00:00"
+        },
+        {
+            "name": "league/flysystem-ftp",
+            "version": "3.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem-ftp.git",
+                "reference": "41e4c170348bc56cae84843d3c0176ec8af96d53"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-ftp/zipball/41e4c170348bc56cae84843d3c0176ec8af96d53",
+                "reference": "41e4c170348bc56cae84843d3c0176ec8af96d53",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ftp": "*",
+                "league/flysystem": "^2.0.0 || ^3.0.0",
+                "league/mime-type-detection": "^1.0.0",
+                "php": "^8.0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\Flysystem\\Ftp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Frank de Jonge",
+                    "email": "info@frankdejonge.nl"
+                }
+            ],
+            "description": "FTP filesystem adapter for Flysystem.",
+            "keywords": [
+                "Flysystem",
+                "file",
+                "files",
+                "filesystem",
+                "ftp",
+                "ftpd"
+            ],
+            "support": {
+                "source": "https://github.com/thephpleague/flysystem-ftp/tree/3.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://offset.earth/frankdejonge",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/frankdejonge",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/league/flysystem",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2022-02-14T18:49:21+00:00"
         },
         {
             "name": "league/mime-type-detection",
@@ -7849,12 +7912,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "ae68ada127afc705111f3269f14abe468e152e41"
+                "reference": "48758c02076c22bdbb97cf4c8974bc9539923f98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/ae68ada127afc705111f3269f14abe468e152e41",
-                "reference": "ae68ada127afc705111f3269f14abe468e152e41",
+                "url": "https://api.github.com/repos/composer/composer/zipball/48758c02076c22bdbb97cf4c8974bc9539923f98",
+                "reference": "48758c02076c22bdbb97cf4c8974bc9539923f98",
                 "shasum": ""
             },
             "require": {
@@ -7944,7 +8007,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-08T13:55:10+00:00"
+            "time": "2022-02-15T16:05:01+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -8857,16 +8920,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.2",
+            "version": "v1.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "ede5e861549be2c3a8b789cdb34203a5aef5b92a"
+                "reference": "53dd949a2134bd468f50defce85de566a7800dd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/ede5e861549be2c3a8b789cdb34203a5aef5b92a",
-                "reference": "ede5e861549be2c3a8b789cdb34203a5aef5b92a",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/53dd949a2134bd468f50defce85de566a7800dd9",
+                "reference": "53dd949a2134bd468f50defce85de566a7800dd9",
                 "shasum": ""
             },
             "require": {
@@ -8913,7 +8976,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-02-08T14:14:12+00:00"
+            "time": "2022-02-11T14:28:50+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -12194,16 +12257,16 @@
         },
         {
             "name": "spatie/laravel-ray",
-            "version": "1.29.2",
+            "version": "1.29.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ray.git",
-                "reference": "6465e1fe7faefdd66aede0952033863181548551"
+                "reference": "440cda76812a7770e6684d19683444c608e135e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/6465e1fe7faefdd66aede0952033863181548551",
-                "reference": "6465e1fe7faefdd66aede0952033863181548551",
+                "url": "https://api.github.com/repos/spatie/laravel-ray/zipball/440cda76812a7770e6684d19683444c608e135e4",
+                "reference": "440cda76812a7770e6684d19683444c608e135e4",
                 "shasum": ""
             },
             "require": {
@@ -12262,7 +12325,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-ray/issues",
-                "source": "https://github.com/spatie/laravel-ray/tree/1.29.2"
+                "source": "https://github.com/spatie/laravel-ray/tree/1.29.3"
             },
             "funding": [
                 {
@@ -12274,7 +12337,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2022-02-13T15:39:44+00:00"
+            "time": "2022-02-15T14:52:59+00:00"
         },
         {
             "name": "spatie/macroable",
