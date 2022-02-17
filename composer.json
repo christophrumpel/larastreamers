@@ -24,6 +24,7 @@
         "spatie/laravel-backup": "^8.0",
         "spatie/laravel-feed": "^4.1",
         "spatie/laravel-ignition": "^1.0",
+        "symfony/http-client": "^6.0",
         "symfony/postmark-mailer": "^6.0",
         "vinkla/hashids": "^10.0"
     },
