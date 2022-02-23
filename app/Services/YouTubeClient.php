@@ -21,6 +21,7 @@ class YouTubeClient
     public function channels(iterable|string $channelIds): Collection
     {
         return Http::youtube('channels', [
+            /** @phpstan-ignore-next-line   */
             'id' => collect($channelIds)->implode(','),
             'part' => 'snippet',
         ], 'items')->map(fn(array $item) => new ChannelData(
@@ -55,6 +56,7 @@ class YouTubeClient
     public function videos(iterable|string $videoIds): Collection
     {
         return Http::youtube('videos', [
+            /** @phpstan-ignore-next-line   */
             'id' => collect($videoIds)->implode(','),
             'part' => 'snippet,statistics,liveStreamingDetails',
         ], 'items')
