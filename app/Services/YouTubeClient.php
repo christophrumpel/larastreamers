@@ -18,10 +18,6 @@ class YouTubeClient
             ->first();
     }
 
-    /**
-     * @param iterable<int, string>|string $channelIds
-     * @return Collection
-     */
     public function channels(iterable|string $channelIds): Collection
     {
         return Http::youtube('channels', [
@@ -56,10 +52,6 @@ class YouTubeClient
             ->first();
     }
 
-    /**
-     * @param iterable<int, string>|string $videoIds
-     * @return Collection
-     */
     public function videos(iterable|string $videoIds): Collection
     {
         return Http::youtube('videos', [
