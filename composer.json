@@ -10,7 +10,7 @@
         "abraham/twitteroauth": "^3.3",
         "calebporzio/sushi": "^2.4",
         "doctrine/dbal": "^3.3",
-        "fruitcake/laravel-cors": "^2.0.5",
+        "fruitcake/laravel-cors": "^2.1.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.0",
         "laravel/jetstream": "^2.6",
