@@ -20,8 +20,6 @@ class YouTubeClient
 
     public function channels(iterable|string $channelIds): Collection
     {
-        $channelIds = is_array($channelIds) ? $channelIds : [$channelIds];
-
         return Http::youtube('channels', [
             'id' => collect($channelIds)->implode(','),
             'part' => 'snippet',
@@ -56,8 +54,6 @@ class YouTubeClient
 
     public function videos(iterable|string $videoIds): Collection
     {
-        $videoIds = is_array($videoIds) ? $videoIds : [$videoIds];
-
         return Http::youtube('videos', [
             'id' => collect($videoIds)->implode(','),
             'part' => 'snippet,statistics,liveStreamingDetails',
