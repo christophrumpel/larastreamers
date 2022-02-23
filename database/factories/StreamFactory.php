@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Channel;
 use App\Models\Language;
-use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
