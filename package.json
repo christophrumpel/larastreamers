@@ -17,13 +17,13 @@
         "browser-sync": "^2.27.7",
         "browser-sync-webpack-plugin": "^2.3.0",
         "laravel-mix": "^6.0.42",
-        "postcss": "^8.4.6",
+        "postcss": "^8.4.12",
         "postcss-import": "^14.0.2",
         "tailwindcss": "^3.0.22"
     },
     "dependencies": {
         "@alpinejs/trap": "^3.7.3",
-        "alpinejs": "^3.7.0",
+        "alpinejs": "^3.9.1",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.34"
     }
