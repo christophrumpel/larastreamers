@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@alpinejs/trap": "^3.7.3",
-        "alpinejs": "^3.7.0",
+        "alpinejs": "^3.9.1",
         "moment": "^2.29.1",
         "moment-timezone": "^0.5.34"
     }
