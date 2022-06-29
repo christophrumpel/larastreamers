@@ -8,7 +8,6 @@ class AuthServiceProvider extends ServiceProvider
 {
     /**
      * The policy mappings for the application.
-     *
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
