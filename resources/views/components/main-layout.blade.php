@@ -18,8 +18,8 @@
 
     @include('pages.partials.meta')
 
-    <link href="{{ mix('css/app.css') }}"
-          rel="stylesheet"/>
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @include('feed::links')
 
@@ -42,8 +42,6 @@
 @include('pages.partials.submit-modal')
 
 @livewireScripts
-<!-- @TODO: not working together -->
-<script src="{{ mix('js/app.js') }}"></script>
 @stack('scripts')
 
 </body>
