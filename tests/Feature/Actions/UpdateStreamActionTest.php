@@ -5,7 +5,7 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 
-beforeEach(function () {
+beforeEach(function() {
     $this->stream = Stream::factory()
         ->upcoming()
         ->create();
@@ -25,7 +25,7 @@ beforeEach(function () {
     );
 });
 
-it('updates a stream', function () {
+it('updates a stream', function() {
     // Act
     $updatedStream = (new UpdateStreamAction())->handle($this->stream, $this->streamData);
 
