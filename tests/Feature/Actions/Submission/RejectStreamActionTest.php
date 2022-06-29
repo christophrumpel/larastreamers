@@ -10,9 +10,7 @@ test('the action sends rejection mail', function() {
     Mail::fake();
     $stream = Stream::factory()
         ->notApproved()
-        ->create([
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        ->create();
 
     // Act
     $action = app(RejectStreamAction::class);

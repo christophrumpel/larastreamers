@@ -40,6 +40,7 @@ class StreamFactory extends Factory
             'scheduled_start_time' => Carbon::now()->addDays(random_int(2, 10)),
             'status' => StreamData::STATUS_UPCOMING,
             'language_code' => Arr::shuffle(Language::all()->map->code->toArray())[0],
+            'submitted_by_email' => $this->faker->email(),
             'approved_at' => now(),
         ];
     }

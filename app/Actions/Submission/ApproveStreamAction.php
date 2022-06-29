@@ -14,7 +14,7 @@ class ApproveStreamAction
 {
     public function handle(Stream $stream): void
     {
-        if (! is_null($stream->approved_at)) {
+        if ($stream->approved_at) {
             return;
         }
 

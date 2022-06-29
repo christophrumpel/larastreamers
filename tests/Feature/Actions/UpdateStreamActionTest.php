@@ -5,19 +5,10 @@ use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 
-beforeEach(function() {
+beforeEach(function () {
     $this->stream = Stream::factory()
         ->upcoming()
-        ->create([
-            'youtube_id' => '1234',
-            'title' => 'old title',
-            'description' => 'old desc',
-            'thumbnail_url' => 'old thumbnail url',
-            'scheduled_start_time' => Carbon::tomorrow(),
-            'actual_start_time' => null,
-            'actual_end_time' => null,
-            'language_code' => 'en',
-        ]);
+        ->create();
 
     $this->streamData = new StreamData(
         videoId: '1234',
@@ -34,17 +25,18 @@ beforeEach(function() {
     );
 });
 
-it('updates a stream', function() {
+it('updates a stream', function () {
     // Act
     $updatedStream = (new UpdateStreamAction())->handle($this->stream, $this->streamData);
 
     // Assert
-    expect($updatedStream->id)->toEqual($this->stream->id);
-    expect($updatedStream->title)->toEqual($this->streamData->title);
-    expect($updatedStream->description)->toEqual($this->streamData->description);
-    expect($updatedStream->thumbnail_url)->toEqual($this->streamData->thumbnailUrl);
-    expect($updatedStream->scheduled_start_time)->toEqual($this->streamData->plannedStart);
-    expect($updatedStream->actual_start_time)->toEqual($this->streamData->actualStartTime);
-    expect($updatedStream->actual_end_time)->toEqual($this->streamData->actualEndTime);
-    expect($updatedStream->status)->toEqual($this->streamData->status);
+    expect($updatedStream)
+        ->id->toBe($this->stream->id)
+        ->title->toBe($this->streamData->title)
+        ->description->toBe($this->streamData->description)
+        ->thumbnail_url->toBe($this->streamData->thumbnailUrl)
+        ->scheduled_start_time->toEqual($this->streamData->plannedStart)
+        ->actual_start_time->toEqual($this->streamData->actualStartTime)
+        ->actual_end_time->toEqual($this->streamData->actualEndTime)
+        ->status->toBe($this->streamData->status);
 });

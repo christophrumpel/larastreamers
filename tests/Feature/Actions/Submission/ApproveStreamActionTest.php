@@ -22,9 +22,7 @@ test('the action can approve a stream', function() {
     // Arrange
     $stream = Stream::factory()
         ->notApproved()
-        ->create([
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        ->create();
 
     Artisan::spy();
 
@@ -73,9 +71,7 @@ it('will not send a mail for a link that was already approved', function() {
     // Arrange
     $stream = Stream::factory()
         ->approved()
-        ->create([
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        ->create();
 
     // Act
     $this->approveStreamAction->handle($stream);
@@ -89,9 +85,7 @@ it('updates stream before approving it', function() {
     $stream = Stream::factory()
         ->upcoming()
         ->notApproved()
-        ->create([
-            'submitted_by_email' => 'john@example.com',
-        ]);
+        ->create();
     Artisan::spy();
 
     // Act
