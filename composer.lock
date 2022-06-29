@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47bcf521c69e2dfbd629de65086b9ebe",
+    "content-hash": "09b40ca850441a4989b678ac7c759adf",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -8086,16 +8086,16 @@
         },
         {
             "name": "christophrumpel/missing-livewire-assertions",
-            "version": "v0.5.0",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/christophrumpel/missing-livewire-assertions.git",
-                "reference": "60d1be264787ad15e67747d262cfd8a31b9de8b7"
+                "reference": "8b0daaa42f2e3e2930a5df21e322295559a2024b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/christophrumpel/missing-livewire-assertions/zipball/60d1be264787ad15e67747d262cfd8a31b9de8b7",
-                "reference": "60d1be264787ad15e67747d262cfd8a31b9de8b7",
+                "url": "https://api.github.com/repos/christophrumpel/missing-livewire-assertions/zipball/8b0daaa42f2e3e2930a5df21e322295559a2024b",
+                "reference": "8b0daaa42f2e3e2930a5df21e322295559a2024b",
                 "shasum": ""
             },
             "require": {
@@ -8144,9 +8144,9 @@
             ],
             "support": {
                 "issues": "https://github.com/christophrumpel/missing-livewire-assertions/issues",
-                "source": "https://github.com/christophrumpel/missing-livewire-assertions/tree/v0.5.0"
+                "source": "https://github.com/christophrumpel/missing-livewire-assertions/tree/v0.7.0"
             },
-            "time": "2022-02-15T10:48:15+00:00"
+            "time": "2022-04-04T06:55:25+00:00"
         },
         {
             "name": "composer/pcre",
