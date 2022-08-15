@@ -43,7 +43,6 @@ class StreamListArchive extends Component
             ->fromLatestToOldest()
             ->paginate(24);
 
-        // @phpstan-ignore-next-line
         $channels = Channel::has('approvedFinishedStreams')->select('id', 'name')->orderBy('name')->withCount('approvedFinishedStreams')->get()->keyBy('hashId');
 
         return view('livewire.stream-list-archive', [
