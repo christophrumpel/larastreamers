@@ -38,8 +38,8 @@ it('shows streamers as dropdown options', function() {
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
         ->assertSee([
-            'Channel A',
-            'Channel B',
+            'Channel A (1)',
+            'Channel B (1)',
         ]);
 });
 
