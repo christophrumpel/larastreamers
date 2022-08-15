@@ -1,5 +1,5 @@
 <div>
-    <x-page-header title="Archive ({{ $streams->count() }})">
+    <x-page-header title="Archive ({{ $streams->total() }})">
         <x-search wire:model.debounce.300ms="search" :channels="$channels" />
     </x-page-header>
 
