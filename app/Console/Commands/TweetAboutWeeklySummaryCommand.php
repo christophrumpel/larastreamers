@@ -14,7 +14,7 @@ class TweetAboutWeeklySummaryCommand extends Command
 
     protected $description = 'Tweet a summary about last weeks stream.';
 
-    public function handle(): int
+    public function handle()
     {
         $streams = Stream::whereNotNull('approved_at')
             ->where('status', StreamData::STATUS_FINISHED)
@@ -24,15 +24,7 @@ class TweetAboutWeeklySummaryCommand extends Command
             ])
             ->get();
 
-        if ($streams->isEmpty()) {
-            $this->info('There were no streams last week.');
-
-            return self::SUCCESS;
-        }
-
         app(Twitter::class)
             ->tweet("Last week we had {$streams->count()} streams. Thanks to all the streamers and viewers 🙏🏻");
-
-        return self::SUCCESS;
     }
 }
