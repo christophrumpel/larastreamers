@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Models\Stream;
 use App\Services\Twitter;
+use App\Services\Youtube\StreamData;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
 
 class TweetAboutWeeklySummaryCommand extends Command
 {
@@ -14,10 +16,12 @@ class TweetAboutWeeklySummaryCommand extends Command
 
     public function handle(): int
     {
-        $streams = Stream::query()
-            ->approved()
-            ->finished()
-            ->fromLastWeek()
+        $streams = Stream::whereNotNull('approved_at')
+            ->where('status', StreamData::STATUS_FINISHED)
+            ->whereBetween('scheduled_start_time', [
+                Carbon::now()->startOfWeek()->subDays(7),
+                Carbon::now()->startOfWeek()->subDay()->endOfDay()
+            ])
             ->get();
 
         if ($streams->isEmpty()) {

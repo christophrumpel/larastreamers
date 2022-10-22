@@ -60,14 +60,6 @@ class Stream extends Model implements Feedable
         return $query->whereNotNull('approved_at');
     }
 
-    public function scopeFromLastWeek(Builder $query): Builder
-    {
-        return $query->whereBetween('scheduled_start_time', [
-            Carbon::now()->startOfWeek()->subDays(7),
-            Carbon::now()->startOfWeek()->subDay()->endOfDay()
-        ]);
-    }
-
     public static function getFeedItems(): Collection
     {
         return static::query()->upcoming()->get();
