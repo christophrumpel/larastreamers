@@ -55,6 +55,8 @@
 
             <livewire:submit-you-tube-live-stream />
 
+            <livewire:submit-twitch-live-stream />
+
         </div>
         <!-- Modal Content -->
 
