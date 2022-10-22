@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Feature\Commands;
+namespace Tests\Feature;
 
 use App\Console\Commands\TweetAboutWeeklySummaryCommand;
 use App\Models\Stream;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TweetAboutWeeklySummaryCommandTest extends TestCase
+class TweetAboutWeeklySummaryTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -16,18 +16,16 @@ class TweetAboutWeeklySummaryCommandTest extends TestCase
     public function it_tweets_weekly_summary(): void
     {
         // Arrange
-        $startOfWeek = Carbon::now()->subWeek()->startOfWeek();
-        $endOfWeek = Carbon::now()->subWeek()->endOfWeek();
+        // Create streams for beginning and end of week
+        Stream::factory()
+            ->approved()
+            ->finished()
+            ->create(['scheduled_start_time' => Carbon::now()->subWeek()->startOfWeek()]);
 
         Stream::factory()
             ->approved()
             ->finished()
-            ->create(['scheduled_start_time' => $startOfWeek]);
-
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['scheduled_start_time' => $endOfWeek]);
+            ->create(['scheduled_start_time' => Carbon::now()->subWeek()->endOfWeek()]);
 
         // Act
         $this->artisan(TweetAboutWeeklySummaryCommand::class);
