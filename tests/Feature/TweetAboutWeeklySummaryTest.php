@@ -28,7 +28,7 @@ class TweetAboutWeeklySummaryTest extends TestCase
             ->create(['scheduled_start_time' => Carbon::now()->subWeek()->endOfWeek()]);
 
         // Act
-        $this->artisan(TweetAboutWeeklySummaryCommand::class);
+        $this->artisan('larastreamers:tweet-weekly-summary');
 
         // Assert
         $expectedTwitterStatus = 'Last week we had 2 streams. Thanks to all the streamers and viewers 🙏🏻';
