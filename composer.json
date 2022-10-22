@@ -25,6 +25,7 @@
         "wildbit/swiftmailer-postmark": "^3.3"
     },
     "require-dev": {
+        "brianium/paratest": "^6.6",
         "christophrumpel/missing-livewire-assertions": "0.*",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
@@ -40,7 +41,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

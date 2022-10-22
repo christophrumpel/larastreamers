@@ -36,28 +36,4 @@ class TweetAboutWeeklySummaryTest extends TestCase
         $this->twitterFake->assertLastTweetMessageWas($expectedTwitterStatus);
     }
 
-    /** @test */
-    public function it_does_not_tweet_weekly_summary_if_no_streams_given(): void
-    {
-        // Arrange
-        $beforeLastWeek = Carbon::now()->subWeek()->startOfWeek()->subDay();
-        $afterLastWeek = Carbon::today();
-
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['scheduled_start_time' => $afterLastWeek]);
-
-        Stream::factory()
-            ->approved()
-            ->finished()
-            ->create(['scheduled_start_time' => $beforeLastWeek]);
-
-        // Act & Assert
-        $this->artisan(TweetAboutWeeklySummaryCommand::class)
-            ->expectsOutput('There were no streams last week.')
-            ->assertExitCode(0);
-    }
-
-
 }
