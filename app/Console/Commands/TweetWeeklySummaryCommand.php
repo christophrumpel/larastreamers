@@ -8,7 +8,7 @@ use App\Services\Youtube\StreamData;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
 
-class TweetAboutWeeklySummaryCommand extends Command
+class TweetWeeklySummaryCommand extends Command
 {
     protected $signature = 'larastreamers:tweet-weekly-summary';
 
