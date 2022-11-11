@@ -25,7 +25,7 @@ class Stream extends Model implements Feedable
 
     protected $fillable = [
         'channel_id',
-        'youtube_id',
+        'stream_id',
         'title',
         'description',
         'thumbnail_url',
