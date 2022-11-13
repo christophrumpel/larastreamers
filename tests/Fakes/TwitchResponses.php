@@ -2,6 +2,9 @@
 
 namespace Tests\Fakes;
 
+use App\Enums\TwitchEventSubscription;
+use App\Models\Channel;
+
 trait TwitchResponses
 {
 
@@ -43,6 +46,35 @@ trait TwitchResponses
             "total" => 2,
             "max_total_cost" => 10000,
             "total_cost" => 1,
+        ];
+    }
+
+    public function eventVerificationResponse(TwitchEventSubscription $event, Channel $channel): array
+    {
+        return [
+            "subscription" => [
+                "id" => "1234",
+                "status" => "enabled",
+                "type" => $event->value,
+                "version" => "1",
+                "cost" => 1,
+                "condition" => [
+                    "broadcaster_user_id" => $channel->platform_id,
+                ],
+                "transport" => [
+                    "method" => "webhook",
+                    "callback" => route('webhooks')
+                ],
+                "created_at" => "2019-11-16T10=>11=>12.123Z"
+            ],
+            "event" => [
+                "user_id" => "9999",
+                "user_login" => "awesome_user",
+                "user_name" => "Awesome_User",
+                "broadcaster_user_id" => "12826",
+                "broadcaster_user_login" => "twitch",
+                "broadcaster_user_name" => "Twitch"
+            ]
         ];
     }
 

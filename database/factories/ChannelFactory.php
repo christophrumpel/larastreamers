@@ -13,7 +13,7 @@ class ChannelFactory extends Factory
             'platform' => 'youtube',
             'platform_id' => $this->faker->word(),
             'language_code' => 'en',
-            'youtube_custom_url' => $this->faker->slug(),
+            'url' => $this->faker->slug(),
             'name' => collect(['Dr Disrespect', 'Lulu', 'Harris Heller', 'itzTimmy'])->random(),
             'description' => $this->faker->text(),
             'thumbnail_url' => collect([
