@@ -44,3 +44,7 @@ Route::middleware('signed')->group(function() {
     Route::get('submission/{stream}/approve', ApproveStreamController::class)->name('stream.approve');
     Route::get('submission/{stream}/reject', RejectStreamController::class)->name('stream.reject');
 });
+
+Route::post('webhooks', function() {
+
+})->name('webhooks');

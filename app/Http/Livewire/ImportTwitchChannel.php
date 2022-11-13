@@ -29,25 +29,36 @@ class ImportTwitchChannel extends Component
             'platform' => 'twitch',
             'platform_id' => $channel['id'],
             'name' => $channel['display_name'],
-            'youtube_custom_url' => "https://www.twitch.tv/{$channel['login']}",
+            'url' => "https://www.twitch.tv/{$channel['login']}",
             'description' => $channel['description'],
             'thumbnail_url' => $channel['profile_image_url'],
             'on_platform_since' => now(),
+            'auto_import' => true,
         ]);
 
-        // Get stream segments
-        $response = $this->getStreamSegments($channel);
-        $streams = data_get($response, 'data.segments');
+        // Add a subscription to online offline events
+        $subscriptionForOnlineEventResponse = Http::withToken(config('services.twitch.token'))
+            ->withHeaders([
+                'Client-Id' => config('services.twitch.client_id'),
+            ])
+            ->post('https://api.twitch.tv/helix/eventsub/subscriptions', [
+                'type' => 'stream.online',
+                'version' => 1,
+                'condition' => ['broadcaster_user_id' => $channel->platform_id],
+                'transport' => ["method" => "webhook", "callback" => route('webhooks'), "secret" => "1234567890"]
+            ])->json();
 
-        // Store stream segments
-        collect($streams)->each(function(array $stream) use ($channel) {
-            Stream::create([
-                'stream_id' => $stream['id'],
-                'title' => $stream['title'],
-                'thumbnail_url' => $channel->thumbnail_url,
-                'scheduled_start_time' => $stream['start_time'],
-            ]);
-        });
+        $subscriptionForOfflineEventResponse = Http::withToken(config('services.twitch.token'))
+            ->withHeaders([
+                'Client-Id' => config('services.twitch.client_id'),
+            ])
+            ->post('https://api.twitch.tv/helix/eventsub/subscriptions', [
+                'type' => 'stream.offline',
+                'version' => 1,
+                'condition' => ['broadcaster_user_id' => $channel->platform_id],
+                'transport' => ["method" => "webhook", "callback" => route('webhooks'), "secret" => "1234567890"]
+            ])->json();
+
     }
 
     protected function getChannel(): mixed
@@ -71,5 +82,17 @@ class ImportTwitchChannel extends Component
             ->get('https://api.twitch.tv/helix/schedule', [
                 'broadcaster_id' => $channel->platform_id,
             ])->json();
+    }
+
+    protected function createStreamsFromSegments(mixed $streams, Channel $channel): void
+    {
+        collect($streams)->each(function (array $stream) use ($channel) {
+            Stream::create([
+                'stream_id' => $stream['id'],
+                'title' => $stream['title'],
+                'thumbnail_url' => $channel->thumbnail_url,
+                'scheduled_start_time' => $stream['start_time'],
+            ]);
+        });
     }
 }

@@ -20,6 +20,32 @@ trait TwitchResponses
         ];
     }
 
+    public function subscriptionOnlineResponse(): array
+    {
+        return [
+            "data" => [
+                [
+                    "id" => "bc780471-e3e4-460c-a724-df4317e6594c",
+                    "status" => "webhook_callback_verification_pending",
+                    "type" => "stream.online",
+                    "version" => "1",
+                    "condition" => [
+                        "broadcaster_user_id" => "1234",
+                    ],
+                    "created_at" => "2022-11-11T14:06:05.984219853Z",
+                    "transport" => [
+                        "method" => "webhook",
+                        "callback" => "https://webhook.call",
+                    ],
+                    "cost" => 1,
+                ]
+            ],
+            "total" => 2,
+            "max_total_cost" => 10000,
+            "total_cost" => 1,
+        ];
+    }
+
     public function scheduleResponse(): array
     {
         return [

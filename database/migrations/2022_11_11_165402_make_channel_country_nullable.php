@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('channels', function (Blueprint $table) {
-            $table->renameColumn('youtube_custom_url', 'url');
+            $table->string('country')->nullable()->change();
         });
     }
 };
