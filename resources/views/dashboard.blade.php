@@ -10,6 +10,8 @@
             <livewire:import-you-tube-live-stream/>
 
             <livewire:import-youtube-channel/>
+
+            <livewire:import-twitch-channel />
         </div>
     </div>
 </x-app-layout>

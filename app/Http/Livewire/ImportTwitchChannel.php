@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\TwitchEventType;
 use App\Models\Channel;
 use App\Models\Stream;
+use App\Models\TwitchChannelSubscription;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
@@ -21,7 +23,7 @@ class ImportTwitchChannel extends Component
     public function importChannel(): void
     {
         // Get channel
-        $response = $this->getChannel();
+        $response = $this->getTwitchUser();
         $channel = data_get($response, 'data.0');
 
         // Store the channel
@@ -45,8 +47,13 @@ class ImportTwitchChannel extends Component
                 'type' => 'stream.online',
                 'version' => 1,
                 'condition' => ['broadcaster_user_id' => $channel->platform_id],
-                'transport' => ["method" => "webhook", "callback" => route('webhooks'), "secret" => "1234567890"]
+                'transport' => ["method" => "webhook", "callback" => "https://dapxpgxslj.sharedwithexpose.com/webhooks", "secret" => "1234567890"]
             ])->json();
+
+        TwitchChannelSubscription::create([
+            'channel_id' => $channel->id,
+            'subscription_event' => TwitchEventType::STREAM_ONLINE,
+        ]);
 
         $subscriptionForOfflineEventResponse = Http::withToken(config('services.twitch.token'))
             ->withHeaders([
@@ -56,12 +63,19 @@ class ImportTwitchChannel extends Component
                 'type' => 'stream.offline',
                 'version' => 1,
                 'condition' => ['broadcaster_user_id' => $channel->platform_id],
-                'transport' => ["method" => "webhook", "callback" => route('webhooks'), "secret" => "1234567890"]
+                'transport' => ["method" => "webhook", "callback" => "https://dapxpgxslj.sharedwithexpose.com/webhooks", "secret" => "1234567890"]
             ])->json();
+
+        TwitchChannelSubscription::create([
+            'channel_id' => $channel->id,
+            'subscription_event' => TwitchEventType::STREAM_OFFLINE,
+        ]);
+
+        ray($subscriptionForOnlineEventResponse, $subscriptionForOfflineEventResponse);
 
     }
 
-    protected function getChannel(): mixed
+    protected function getTwitchUser(): mixed
     {
         // TODO: Handle exception and return type
         return Http::withToken(config('services.twitch.token'))

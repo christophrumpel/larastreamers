@@ -2,13 +2,13 @@
 
 namespace Tests\Fakes;
 
-use App\Enums\TwitchEventSubscription;
+use App\Enums\TwitchEventType;
 use App\Models\Channel;
 
 trait TwitchResponses
 {
 
-    public function channelResponse(): array
+    public function userResponse(): array
     {
         return [
             "data" => [
@@ -18,6 +18,24 @@ trait TwitchResponses
                     "display_name" => "Christoph Rumpel",
                     "description" => "my description",
                     "profile_image_url" => "https://profile.url",
+                ]
+            ]
+        ];
+    }
+
+    public function twitchChannelResponse(): array
+    {
+        return [
+            "data" => [
+                [
+                    "broadcaster_id" => "1234",
+                    "broadcaster_login" => "christophrumpel",
+                    "broadcaster_name" => "christophrumpel",
+                    "broadcaster_language" => "en",
+                    "game_id" => "509670",
+                    "game_name" => "Science & Technology",
+                    "title" => "📺 Redesigning Larastreamers ",
+                    "delay" => 0,
                 ]
             ]
         ];
@@ -49,9 +67,10 @@ trait TwitchResponses
         ];
     }
 
-    public function eventVerificationResponse(TwitchEventSubscription $event, Channel $channel): array
+    public function verifyEventSubscriptionPayload(TwitchEventType $event, Channel $channel): array
     {
         return [
+            "challenge" => "59939e90-d3bc-6662-ec66-e85ab2c013ee",
             "subscription" => [
                 "id" => "1234",
                 "status" => "enabled",
@@ -67,14 +86,6 @@ trait TwitchResponses
                 ],
                 "created_at" => "2019-11-16T10=>11=>12.123Z"
             ],
-            "event" => [
-                "user_id" => "9999",
-                "user_login" => "awesome_user",
-                "user_name" => "Awesome_User",
-                "broadcaster_user_id" => "12826",
-                "broadcaster_user_login" => "twitch",
-                "broadcaster_user_name" => "Twitch"
-            ]
         ];
     }
 
@@ -96,6 +107,35 @@ trait TwitchResponses
                         "title" => "another stream title",
                     ]
                 ]
+            ]
+        ];
+    }
+
+    public function streamOnlineEventPayload(Channel $channel): array
+    {
+        return [
+            "subscription" => [
+                "id" => "1234",
+                "status" => "enabled",
+                "type" => "stream.online",
+                "version" => "1",
+                "cost" => 1,
+                "condition" => [
+                    "broadcaster_user_id" => $channel->platform_id,
+                ],
+                "transport" => [
+                    "method" => "webhook",
+                    "callback" => route('webhooks')
+                ],
+                "created_at" => "2019-11-16T10=>11=>12.123Z"
+            ],
+            "event" => [
+                "user_id" => "9999",
+                "user_login" => "christophrumpel",
+                "user_name" => "Christoph Rumpel",
+                "broadcaster_user_id" => "1234",
+                "broadcaster_user_login" => "twitch",
+                "broadcaster_user_name" => "Twitch"
             ]
         ];
     }

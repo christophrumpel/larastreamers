@@ -13,7 +13,7 @@ it('can fetch channel details from youtube', function() {
 
     // Assert
     expect($channel)
-        ->youTubeCustomUrl->toBe('christophrumpel')
+        ->url->toBe('christophrumpel')
         ->name->toBe('Christoph Rumpel')
         ->description->toStartWith('Hi, I\'m Christoph Rumpel')
         ->onPlatformSince->toIso8601String()->toBe('2010-01-12T19:15:29+00:00')

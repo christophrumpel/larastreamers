@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Channel::class);
             $table->string('subscription_event');
+            $table->boolean('verified')->default(false);
             $table->timestamps();
         });
     }

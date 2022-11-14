@@ -1,8 +1,10 @@
 <?php
 
 
+use App\Enums\TwitchEventType;
 use App\Http\Livewire\ImportTwitchChannel;
 use App\Models\Channel;
+use App\Models\TwitchChannelSubscription;
 use Tests\Fakes\TwitchResponses;
 
 uses(TwitchResponses::class);
@@ -10,7 +12,7 @@ uses(TwitchResponses::class);
 it('adds twitch channel', function () {
     // Arrange
     Http::fake([
-        'api.twitch.tv/helix/users*' => Http::response($this->channelResponse()),
+        'api.twitch.tv/helix/users*' => Http::response($this->twitchChannelResponse()),
         'api.twitch.tv/helix/eventsub/subscriptions*' => Http::response($this->subscriptionOnlineResponse())
     ]);
 
@@ -38,7 +40,7 @@ it('adds twitch channel', function () {
 it('asks for subscription for channel', function() {
     // Arrange
     Http::fake([
-        'api.twitch.tv/helix/users*' => Http::response($this->channelResponse()),
+        'api.twitch.tv/helix/users*' => Http::response($this->twitchChannelResponse()),
         'api.twitch.tv/helix/eventsub/subscriptions*' => Http::response($this->subscriptionOnlineResponse()),
     ]);
 
@@ -62,12 +64,25 @@ it('asks for subscription for channel', function() {
             && $request['condition'] == ['broadcaster_user_id' => '1234']
             && $request['transport'] == ["method" => "webhook", "callback" => route('webhooks'), "secret" => "1234567890"];
     });
+
+    $this->assertDatabaseHas(TwitchChannelSubscription::class, [
+        'channel_id' => Channel::where('platform_id', '1234')->first()->id,
+        'subscription_event' => TwitchEventType::STREAM_ONLINE,
+        'verified' => false,
+    ]);
+
+    $this->assertDatabaseHas(TwitchChannelSubscription::class, [
+        'channel_id' => Channel::where('platform_id', '1234')->first()->id,
+        'subscription_event' => TwitchEventType::STREAM_OFFLINE,
+        'verified' => false,
+    ]);
 });
 
-it('wires channel name', function () {
+it('wires channel name and submit method', function () {
     // Act & Assert
     Livewire::test(ImportTwitchChannel::class)
-        ->assertPropertyWired('channelName');
+        ->assertPropertyWired('channelName')
+        ->assertMethodWiredToForm('importChannel');
 });
 
 //it('stores channel stream segments', function () {

@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use App\Enums\TwitchEventSubscription;
+use App\Enums\TwitchEventType;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class TwitchChannelSubscription extends Model
 {
 
-    protected $fillable = ['channel_id', 'subscription_event'];
+    use HasFactory;
+
+    protected $fillable = ['channel_id', 'subscription_event', 'verified'];
 
     protected $casts = [
-        'subscription_event' => TwitchEventSubscription::class,
+        'subscription_event' => TwitchEventType::class,
+        'verified' => 'boolean'
     ];
 }

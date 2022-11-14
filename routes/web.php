@@ -1,6 +1,7 @@
 <?php
 
-use App\Enums\TwitchEventSubscription;
+use App\Enums\TwitchEventType;
+use App\Facades\Twitch;
 use App\Http\Controllers\AddSingleStreamToCalendarController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
@@ -8,7 +9,9 @@ use App\Http\Controllers\PageStreamersController;
 use App\Http\Controllers\Submission\ApproveStreamController;
 use App\Http\Controllers\Submission\RejectStreamController;
 use App\Models\Channel;
+use App\Models\Stream;
 use App\Models\TwitchChannelSubscription;
+use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,13 +56,36 @@ Route::any('webhooks', function (\Illuminate\Http\Request $request) {
 
     if ($request->header('twitch-eventsub-message-type') === 'webhook_callback_verification') {
 
-        TwitchChannelSubscription::create([
-            'channel_id' => Channel::where('platform_id', $request->get('subscription')['condition']['broadcaster_user_id'])->first()->id,
-            'subscription_event' => TwitchEventSubscription::from($request->get('subscription')['type']),
-        ]);
+        TwitchChannelSubscription::query()
+            ->where('channel_id', Channel::where('platform_id', $request->get('subscription')['condition']['broadcaster_user_id'])->first()->id)
+            ->where('subscription_event', TwitchEventType::from($request->get('subscription')['type']))
+            ->firstOrFail()
+            ->update(['verified' => true]);
 
         return response($request->get('challenge'), 200)
             ->header('Content-Type', 'text/plain');
+    }
+
+    if ($request->header('twitch-eventsub-message-type') === 'notification') {
+
+        // check if channel given
+        if (! $channel = Channel::where('platform_id', $request->get('subscription')['condition']['broadcaster_user_id'])->first()) {
+            return response('');
+        }
+
+        if ($request->get('subscription')['type'] === 'stream.online') {
+
+            // Get channel info with title of current stream
+            $channelData = Twitch::channel($request->get('subscription')['condition']['broadcaster_user_id']);
+
+            Stream::create([
+                'channel_id' => $channel->id,
+                'title' => $channelData->title,
+                'thumbnail_url' => $channel->thumbnail_url,
+                'scheduled_start_time' => now(),
+                'status' => StreamData::STATUS_LIVE,
+            ]);
+        }
     }
 
 
