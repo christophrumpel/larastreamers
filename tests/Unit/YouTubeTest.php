@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 it('can fetch channel details from youtube', function() {
     // Arrange
-    Http::fake(fn() => Http::response($this->channelResponse()));
+    Http::fake(fn () => Http::response($this->channelResponse()));
 
     // Act
     $channel = YouTube::channel('UCdtd5QYBx9MUVXHm7qgEpxA');

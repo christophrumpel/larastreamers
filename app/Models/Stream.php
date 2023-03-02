@@ -189,7 +189,7 @@ class Stream extends Model implements Feedable
 
         return $query->when(
             $channelId,
-            fn(Builder $builder, ?string $streamerHashid) => $builder->where(fn(Builder $query) => $query->where('channel_id', $channelId))
+            fn (Builder $builder, ?string $streamerHashid) => $builder->where(fn (Builder $query) => $query->where('channel_id', $channelId))
         );
     }
 
@@ -220,7 +220,7 @@ class Stream extends Model implements Feedable
                 $this->channel?->name,
                 $this->url(),
                 Str::of((string) $this->description)
-                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL))
+                    ->whenNotEmpty(fn (Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL))
                     ->remove("\r"),
             ]))
             ->startsAt($this->scheduled_start_time)
@@ -294,6 +294,6 @@ class Stream extends Model implements Feedable
 
     public function startForRobots(): Attribute
     {
-        return Attribute::get(fn() => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
+        return Attribute::get(fn () => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
     }
 }

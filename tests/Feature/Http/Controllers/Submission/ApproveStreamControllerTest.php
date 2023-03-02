@@ -11,7 +11,7 @@ uses(YouTubeResponses::class);
 
 it('can approve a stream using a signed url', function() {
     // Arrange
-    Http::fake(fn() => Http::response($this->videoResponse()));
+    Http::fake(fn () => Http::response($this->videoResponse()));
     Mail::fake();
     $stream = Stream::factory()
         ->notApproved()

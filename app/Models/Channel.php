@@ -40,7 +40,7 @@ class Channel extends Model
 
     public function hashid(): Attribute
     {
-        return Attribute::get(fn() => Hashids::encode($this->id));
+        return Attribute::get(fn () => Hashids::encode($this->id));
     }
 
     public function scopeAutoImportEnabled(Builder $query): Builder

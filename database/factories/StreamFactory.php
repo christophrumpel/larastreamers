@@ -87,12 +87,12 @@ class StreamFactory extends Factory
 
     public function approved(): StreamFactory
     {
-        return $this->state(fn() => ['approved_at' => Carbon::now()->subDay()]);
+        return $this->state(fn () => ['approved_at' => Carbon::now()->subDay()]);
     }
 
     public function notApproved(): StreamFactory
     {
-        return $this->state(fn() => ['approved_at' => null]);
+        return $this->state(fn () => ['approved_at' => null]);
     }
 
     public function liveTweetWasSend(): StreamFactory

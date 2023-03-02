@@ -122,7 +122,7 @@ it('clears form after successful import', function() {
 
 it('shows you tube client error message', function() {
     // Arrange
-    Http::fake(fn() => Http::response([], 500));
+    Http::fake(fn () => Http::response([], 500));
 
     // Arrange & Act & Assert
     Livewire::test(ImportYouTubeLiveStream::class)

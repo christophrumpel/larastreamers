@@ -45,7 +45,6 @@ class StreamListArchive extends Component
 
         $channels = Channel::has('approvedFinishedStreams')->select('id', 'name')->orderBy('name')->withCount('approvedFinishedStreams')->get()->keyBy('hashId');
 
-
         return view('livewire.stream-list-archive', [
             'streams' => $streams,
             'channels' => $channels,

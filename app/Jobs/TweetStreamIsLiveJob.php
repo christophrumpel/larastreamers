@@ -27,7 +27,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
         }
 
         $twitterHandleIfGiven = Str::of(' ')
-            ->when((bool) $twitterHandle = $this->stream->channel?->twitter_handle, fn() => " by $twitterHandle ");
+            ->when((bool) $twitterHandle = $this->stream->channel?->twitter_handle, fn () => " by $twitterHandle ");
 
         Twitter::tweet("🔴 A new stream{$twitterHandleIfGiven}just started: {$this->stream->title}".PHP_EOL.$this->stream->url());
 

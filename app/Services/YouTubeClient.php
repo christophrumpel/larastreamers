@@ -14,7 +14,7 @@ class YouTubeClient
     public function channel(string $id): ChannelData
     {
         return $this->channels($id)
-            ->whenEmpty(fn() => throw  YouTubeException::unknownChannel($id))
+            ->whenEmpty(fn () => throw  YouTubeException::unknownChannel($id))
             ->first();
     }
 
@@ -24,7 +24,7 @@ class YouTubeClient
             /** @phpstan-ignore-next-line   */
             'id' => collect($channelIds)->implode(','),
             'part' => 'snippet',
-        ], 'items')->map(fn(array $item) => new ChannelData(
+        ], 'items')->map(fn (array $item) => new ChannelData(
             platformId: data_get($item, 'id'),
             youTubeCustomUrl: data_get($item, 'snippet.customUrl', ''),
             name: data_get($item, 'snippet.title'),
@@ -43,13 +43,13 @@ class YouTubeClient
             'type' => 'video',
             'part' => 'id',
             'maxResults' => 25,
-        ], 'items.*.id.videoId')->whenNotEmpty(fn(Collection $videoIds) => $this->videos($videoIds));
+        ], 'items.*.id.videoId')->whenNotEmpty(fn (Collection $videoIds) => $this->videos($videoIds));
     }
 
     public function video(string $id): StreamData
     {
         return $this->videos($id)
-            ->whenEmpty(fn() => throw YouTubeException::unknownVideo($id))
+            ->whenEmpty(fn () => throw YouTubeException::unknownVideo($id))
             ->first();
     }
 
@@ -60,7 +60,7 @@ class YouTubeClient
             'id' => collect($videoIds)->implode(','),
             'part' => 'snippet,statistics,liveStreamingDetails',
         ], 'items')
-            ->map(fn(array $youTubeVideoDetails) => new StreamData(
+            ->map(fn (array $youTubeVideoDetails) => new StreamData(
                 videoId: data_get($youTubeVideoDetails, 'id'),
                 title: data_get($youTubeVideoDetails, 'snippet.title'),
                 channelId: data_get($youTubeVideoDetails, 'snippet.channelId'),

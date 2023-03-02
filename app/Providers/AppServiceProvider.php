@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
                 ->get($url, array_merge($params, [
                     'key' => config('services.youtube.key'),
                 ]))
-                ->onError(fn(Response $response) => throw YouTubeException::general($response->status(), $response->body()))
+                ->onError(fn (Response $response) => throw YouTubeException::general($response->status(), $response->body()))
                 ->collect($key);
         });
     }

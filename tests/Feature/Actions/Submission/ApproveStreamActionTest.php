@@ -14,7 +14,7 @@ uses(YouTubeResponses::class);
 
 beforeEach(function() {
     Mail::fake();
-    Http::fake(fn() => Http::response($this->videoResponse()));
+    Http::fake(fn () => Http::response($this->videoResponse()));
     $this->approveStreamAction = app(ApproveStreamAction::class);
 });
 
@@ -33,7 +33,7 @@ test('the action can approve a stream', function() {
     $stream = $stream->fresh();
     $this->assertNotNull($stream->approved_at);
 
-    Mail::assertQueued(fn(StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
+    Mail::assertQueued(fn (StreamApprovedMail $mail) => $mail->hasTo($stream->submitted_by_email));
 });
 
 test('the action calls the import channel command', function() {

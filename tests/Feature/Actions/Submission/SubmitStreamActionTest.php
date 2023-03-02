@@ -31,5 +31,5 @@ it('can store a stream', function() {
         ->submitted_by_email->toBe('john@example.com')
         ->language_code->toBe('de');
 
-    Mail::assertQueued(fn(StreamSubmittedMail $mail) => $mail->hasTo('christoph@christoph-rumpel.com'));
+    Mail::assertQueued(fn (StreamSubmittedMail $mail) => $mail->hasTo('christoph@christoph-rumpel.com'));
 });

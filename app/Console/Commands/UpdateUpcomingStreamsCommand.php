@@ -34,7 +34,6 @@ class UpdateUpcomingStreamsCommand extends Command
         $youTubeResponse = YouTube::videos($streams->keys());
 
         $streams->each(function(Stream $stream) use ($youTubeResponse) {
-
             /** @var StreamData|null $streamData */
             $streamData = $youTubeResponse->where('videoId', $stream->youtube_id)->first();
 

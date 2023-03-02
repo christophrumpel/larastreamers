@@ -31,7 +31,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
         $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
         $updatesCount = YouTube::videos($streams->keys())
-            ->map(fn(StreamData $streamData) => optional($streams
+            ->map(fn (StreamData $streamData) => optional($streams
                 ->get($streamData->videoId))
                 ->update([
                     'status' => $streamData->status,

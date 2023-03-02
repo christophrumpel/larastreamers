@@ -33,7 +33,6 @@ class UpdateChannelsCommand extends Command
             ->each(function(Collection $channels) {
                 $youTubeResponse = YouTube::channels($channels->keys());
                 $channels->each(function(Channel $channel) use ($youTubeResponse) {
-
                     /** @var ChannelData|null $channelData */
                     $channelData = $youTubeResponse->where('platformId', $channel->platform_id)->first();
 

@@ -18,7 +18,7 @@ it('adds channel to database', function() {
     $this->assertDatabaseCount(Channel::class, 0);
 
     // Arrange & Act
-    Http::fake(fn() => Http::response($this->channelResponse()));
+    Http::fake(fn () => Http::response($this->channelResponse()));
 
     Livewire::test(ImportYouTubeChannel::class)
         ->set('youTubeChannelId', 'UCdtd5QYBx9MUVXHm7qgEpxA')
@@ -35,7 +35,7 @@ it('adds channel to database', function() {
 it('dispatches job to import upcoming streams', function() {
     // Arrange
     Queue::fake();
-    Http::fake(fn() => Http::response($this->channelResponse()));
+    Http::fake(fn () => Http::response($this->channelResponse()));
 
     // Act
     Livewire::test(ImportYouTubeChannel::class)
@@ -49,7 +49,7 @@ it('dispatches job to import upcoming streams', function() {
 it('shows success message', function() {
     // Arrange
     Queue::fake();
-    Http::fake(fn() => Http::response($this->channelResponse()));
+    Http::fake(fn () => Http::response($this->channelResponse()));
 
     // Act & Assert
     Livewire::test(ImportYouTubeChannel::class)
@@ -60,7 +60,7 @@ it('shows success message', function() {
 
 it('shows youtube client error message', function() {
     // Arrange
-    Http::fake(fn() => Http::response([], 500));
+    Http::fake(fn () => Http::response([], 500));
 
     // Arrange & Act & Assert
     Livewire::test(ImportYouTubeChannel::class)
@@ -72,7 +72,7 @@ it('shows youtube client error message', function() {
 it('clears form after successful import', function() {
     // Arrange
     Queue::fake();
-    Http::fake(fn() => Http::response($this->channelResponse()));
+    Http::fake(fn () => Http::response($this->channelResponse()));
 
     // Act & Assert
     Livewire::test(ImportYouTubeChannel::class)

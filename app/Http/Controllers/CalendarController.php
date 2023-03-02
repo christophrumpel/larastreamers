@@ -22,10 +22,10 @@ class CalendarController extends Controller
             ->approved()
             ->when(
                 $request->get('languages'),
-                fn($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
+                fn ($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
             )
             ->notOlderThanAYear()
-            ->each(fn(Stream $stream) => $calendar->event(
+            ->each(fn (Stream $stream) => $calendar->event(
                 $stream->toCalendarItem()
             ));
 
