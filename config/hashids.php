@@ -38,7 +38,7 @@ return [
     'connections' => [
 
         'main' => [
-            'salt' => env('HASHID_SALT'),
+            'salt' => env('HASHID_SALT', 'my-main-default-salt'),
             'length' => 8,
             'alphabet' => 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
         ],
