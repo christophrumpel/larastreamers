@@ -23,8 +23,6 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the model's email address should be unverified.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
     public function unverified(): Factory
     {
@@ -37,8 +35,6 @@ class UserFactory extends Factory
 
     /**
      * Indicate that the user should have a personal team.
-     *
-     * @return $this
      */
     public function withPersonalTeam(): static
     {
