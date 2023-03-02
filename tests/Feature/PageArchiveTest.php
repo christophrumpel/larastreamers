@@ -138,6 +138,7 @@ it('searches for streams by specific streamer and search term', function() {
 });
 
 it('orders streamers by name', function() {
+    $this->withoutExceptionHandling();
     // Arrange
     Channel::factory()
         ->has(Stream::factory()->finished())
