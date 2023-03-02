@@ -12,7 +12,7 @@ class UserTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         User::truncate();
 
