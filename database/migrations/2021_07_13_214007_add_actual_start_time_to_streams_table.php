@@ -8,10 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('streams', function(Blueprint $table) {
             $table->timestamp('actual_start_time')->nullable()->after('scheduled_start_time');
