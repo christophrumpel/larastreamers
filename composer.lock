@@ -4,32 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64bf77a8e484bc60cb0a4bca24581083",
+    "content-hash": "548626f9494c817f19025c336091a7b5",
     "packages": [
         {
             "name": "abraham/twitteroauth",
-            "version": "3.3.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abraham/twitteroauth.git",
-                "reference": "2e640c1e8bb9b5dbcb2230703f97c89a852e30b5"
+                "reference": "6a68a5e53f72fbb31d4d304dc4752d3adefe0d10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/2e640c1e8bb9b5dbcb2230703f97c89a852e30b5",
-                "reference": "2e640c1e8bb9b5dbcb2230703f97c89a852e30b5",
+                "url": "https://api.github.com/repos/abraham/twitteroauth/zipball/6a68a5e53f72fbb31d4d304dc4752d3adefe0d10",
+                "reference": "6a68a5e53f72fbb31d4d304dc4752d3adefe0d10",
                 "shasum": ""
             },
             "require": {
                 "composer/ca-bundle": "^1.2",
                 "ext-curl": "*",
-                "php": "^7.4 || ^8.0 || ^8.1"
+                "php": "^8.0 || ^8.1"
             },
             "require-dev": {
                 "php-vcr/php-vcr": "^1",
-                "php-vcr/phpunit-testlistener-vcr": "dev-php-8",
+                "php-vcr/phpunit-testlistener-vcr": "dev-php8",
                 "phpmd/phpmd": "^2",
-                "phpunit/phpunit": "^8 || ^9",
+                "phpunit/phpunit": "^9",
+                "rector/rector": "^0.14.0",
                 "squizlabs/php_codesniffer": "^3"
             },
             "type": "library",
@@ -65,7 +66,7 @@
                 "issues": "https://github.com/abraham/twitteroauth/issues",
                 "source": "https://github.com/abraham/twitteroauth"
             },
-            "time": "2022-01-19T01:10:09+00:00"
+            "time": "2023-01-17T01:10:54+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
