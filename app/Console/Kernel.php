@@ -40,14 +40,14 @@ class Kernel extends ConsoleKernel
         $schedule->command(CleanupCommand::class)->daily()->at('01:00');
         $schedule->command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');
         $schedule->command(UpdateUpcomingStreamsCommand::class)->hourly();
-        $schedule->command(CheckIfUpcomingStreamsAreLiveCommand::class)->everyFiveMinutes();
-        $schedule->command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
+//        $schedule->command(CheckIfUpcomingStreamsAreLiveCommand::class)->everyFiveMinutes();
+//        $schedule->command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
+        $schedule->command(ImportChannelStreamsCommand::class)->hourly();
         $schedule->command(UpdateLiveAndFinishedStreamsCommand::class)->daily();
+        $schedule->command(UpdateChannelsCommand::class)->weeklyOn(1, '8:00');
         $schedule->command(TweetAboutLiveStreamsCommand::class)->everyMinute();
         $schedule->command(TweetAboutUpcomingStreamsCommand::class)->everyMinute();
-        $schedule->command(ImportChannelStreamsCommand::class)->hourly();
         $schedule->command(TweetAboutWeeklySummaryCommand::class)->weeklyOn(1, '8:00');
-        $schedule->command(UpdateChannelsCommand::class)->weeklyOn(1, '8:00');
     }
 
     /**
