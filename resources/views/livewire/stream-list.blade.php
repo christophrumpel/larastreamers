@@ -5,7 +5,7 @@
             <header
                 class="sticky top-0 z-20 py-4 bg-gray-darkest bg-opacity-90">
                 <div class="w-full max-w-6xl px-4  sm:px-6 md:px-8">
-                    <h2 class="text-3xl font-bold tracking-tight text-red-400 md:text-4xl text-white">
+                    <h2 class="text-3xl font-bold tracking-tight md:text-4xl text-white">
                         {{ $date }}
                     </h2>
                 </div>

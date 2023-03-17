@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddSingleStreamToCalendarController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PageHomeController;
+use App\Http\Controllers\PagePrivacyPolicyController;
 use App\Http\Controllers\PageStreamersController;
 use App\Http\Controllers\Submission\ApproveStreamController;
 use App\Http\Controllers\Submission\RejectStreamController;
@@ -29,6 +30,9 @@ Route::view('/archive', 'pages.archive')
 
 Route::get('/streamers', PageStreamersController::class)
     ->name('streamers');
+
+Route::get('/privacy-policy', PagePrivacyPolicyController::class)
+    ->name('privacy.policy');
 
 Route::get('/calendar.ics', CalendarController::class)
     ->name('calendar.ics');

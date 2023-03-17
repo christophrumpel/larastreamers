@@ -20,6 +20,12 @@
                        target="_blank"
                        href="https://github.com/christophrumpel/larastreamers">GitHub</a>
                 </li>
+
+                <li>
+                    <a class="hover:text-gray-lighter"
+                       target="_blank"
+                       href="{{ route('privacy.policy') }}">Privacy Policy</a>
+                </li>
             </ul>
         </nav>
     </div>

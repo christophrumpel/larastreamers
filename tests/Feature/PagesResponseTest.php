@@ -19,3 +19,8 @@ it('can show the calendar page', function() {
     $this->get(route('calendar.ics'))
         ->assertOk();
 });
+
+it('can privacy policy page', function() {
+    $this->get(route('privacy.policy'))
+        ->assertOk();
+});
