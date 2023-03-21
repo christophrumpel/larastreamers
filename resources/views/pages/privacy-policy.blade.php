@@ -48,8 +48,7 @@
                     Policy, we will notify you by email or by posting a notice on our website prior to the effective
                     date of the changes.</p>
                 <h3 class="text-white">9. Contact us</h3>
-                <p>If you have any questions about this Privacy Policy, please contact us at [insert contact
-                    information].</p>
+                <p>If you have any questions about this Privacy Policy, please contact us at christoph [at] christoph-rumpel.com.</p>
             </div>
         </div>
     </main>
