@@ -32,7 +32,7 @@
                 <h3 class="text-white">4. YouTube API</h3>
                 <p>We use the YouTube API to import upcoming video streams. By using our website and services,
                     you agree to be bound by YouTube's Terms of Service, which can be found at <a class="text-gray-light underline"
-                        href="https://www.youtube.com/t/terms">https://www.youtube.com/t/terms</a>. Please also read <a class="text-gray-light underline" href="http://www.google.com/policies/privacy.">http://www.google.com/policies/privacy.</a> </p>
+                        href="https://www.youtube.com/t/terms">https://www.youtube.com/t/terms</a>. Please also read <a class="text-gray-light underline" href="http://www.google.com/policies/privacy">http://www.google.com/policies/privacy.</a> </p>
                 <h3 class="text-white">5. Data retention</h3>
                 <p>We retain your personal information for as long as necessary to provide our website and services and
                     to comply with our legal obligations.</p>
