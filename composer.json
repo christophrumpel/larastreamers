@@ -38,7 +38,7 @@
         "nunomaduro/collision": "^6.1",
         "nunomaduro/larastan": "^2.4",
         "nunomaduro/patrol": "^1.1",
-        "pestphp/pest": "^1.21",
+        "pestphp/pest": "^1.23",
         "pestphp/pest-plugin-laravel": "^1.4",
         "pestphp/pest-plugin-parallel": "^1.0",
         "roave/security-advisories": "dev-latest",
