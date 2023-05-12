@@ -4,7 +4,7 @@
 
             <!-- Global message like success -->
             @if (session()->has('message'))
-                    <div class="mb-4 px-4 py-2 text-sm text-green-800 bg-green-200 text-center">
+                    <div class="mb-4 px-4 py-2 text-sm text-white bg-green text-center">
                         {{ session('message') }}
                     </div>
             @endif

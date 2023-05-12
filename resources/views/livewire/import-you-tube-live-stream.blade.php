@@ -16,7 +16,7 @@
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             @if (session()->has('stream-message'))
-                                <div class="mb-4 px-4 py-2 text-sm text-green-800 bg-green-200">
+                                <div class="mb-4 px-4 py-2 text-sm text-white bg-green">
                                     {{ session('stream-message') }}
                                 </div>
                             @endif
