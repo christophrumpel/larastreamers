@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'mailcoach'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +34,11 @@ return [
     */
 
     'mailers' => [
+        'mailcoach' => [
+            'transport' => 'mailcoach',
+            'domain' => env('MAILCOACH_CLOUD_DOMAIN'),
+            'token' => env('MAILCOACH_CLOUD_API_KEY'),
+        ],
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
