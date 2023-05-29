@@ -29,7 +29,7 @@
         "vinkla/hashids": "^11.0"
     },
     "require-dev": {
-        "brianium/paratest": "^6.4",
+        "brianium/paratest": "^6.10",
         "christophrumpel/missing-livewire-assertions": "^1.0",
         "fakerphp/faker": "^1.17",
         "friendsofphp/php-cs-fixer": "^3.6",
