@@ -11,8 +11,8 @@ class OAuthTwitter implements TwitterInterface
     ) {
     }
 
-    public function tweet(string $status): ?array
+    public function tweet(string $text): ?array
     {
-        return (array) $this->twitter->post('statuses/update', compact('status'));
+        return (array) $this->twitter->post('tweets', compact('text'));
     }
 }
