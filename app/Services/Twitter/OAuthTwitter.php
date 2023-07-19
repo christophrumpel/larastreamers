@@ -13,6 +13,6 @@ class OAuthTwitter implements TwitterInterface
 
     public function tweet(string $text): ?array
     {
-        return (array) $this->twitter->post('tweets', compact('text'));
+        return (array) $this->twitter->post('tweets', compact('text'), true);
     }
 }
