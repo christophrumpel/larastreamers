@@ -16,7 +16,7 @@ class OAuthTwitter implements TwitterInterface
         $response = $this->twitter->post('tweets', compact('text'), true);
 
         if ($this->twitter->getLastHttpCode() !== 200) {
-            throw TwitterException::general($this->twitter->getLastHttpCode(), $response?->errors[0]?->message ?? $response->title);
+            throw TwitterException::general($this->twitter->getLastHttpCode(), json_encode($response) ?? $response->title);
         }
 
         return (array) $response;
