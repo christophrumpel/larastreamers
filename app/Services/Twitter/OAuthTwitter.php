@@ -13,6 +13,12 @@ class OAuthTwitter implements TwitterInterface
 
     public function tweet(string $text): ?array
     {
-        return (array) $this->twitter->post('tweets', compact('text'), true);
+        $response = $this->twitter->post('tweets', compact('text'), true);
+
+        if ($this->twitter->getLastHttpCode() !== 200) {
+            throw TwitterException::general($this->twitter->getLastHttpCode(), $response?->errors[0]?->message ?? $response->title);
+        }
+
+        return (array) $response;
     }
 }
