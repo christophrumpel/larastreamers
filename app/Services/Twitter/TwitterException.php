@@ -10,5 +10,4 @@ class TwitterException extends Exception
     {
         return new static("Twitter API error: $status - $message");
     }
-
 }

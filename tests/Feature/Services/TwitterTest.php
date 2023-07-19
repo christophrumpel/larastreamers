@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Services\Twitter\OAuthTwitter;
 use App\Services\Twitter\TwitterException;
 
