@@ -122,25 +122,6 @@ test('the youtube id must be valid', function() {
         ->assertSee("We couldn't find a YouTube video for the ID: not-valid-video-id");
 });
 
-test('the planned stream start must be in the future', function() {
-    // Arrange
-    YouTube::partialMock()
-        ->shouldReceive('videos')
-        ->andReturn(collect([
-            StreamData::fake(
-                videoId: 'bcnR4NYOw2o',
-                plannedStart: now()->subDay()
-            ),
-        ]));
-
-    // Arrange & Act & Assert
-    Livewire::test(SubmitYouTubeLiveStream::class)
-        ->set('submittedByEmail', 'test@test.at')
-        ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
-        ->call('submit')
-        ->assertSee('We only accept streams that have not started yet.');
-});
-
 it('clears out the form after submission', function() {
     // Arrange
     mockYouTubVideoCall();

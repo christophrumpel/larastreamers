@@ -28,12 +28,6 @@ class YouTubeRule implements Rule
             return false;
         }
 
-        if (! $video->plannedStart->isFuture()) {
-            $this->message = 'We only accept streams that have not started yet.';
-
-            return false;
-        }
-
         return true;
     }
 
