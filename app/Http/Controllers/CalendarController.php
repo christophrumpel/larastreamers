@@ -20,6 +20,7 @@ class CalendarController extends Controller
 
         Stream::query()
             ->approved()
+            ->upcoming()
             ->when(
                 $request->get('languages'),
                 fn ($query, $languages) => $query->whereIn('language_code', explode(',', $languages))
