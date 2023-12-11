@@ -134,12 +134,12 @@ class Stream extends Model implements Feedable
 
     public function scopeFromLatestToOldest(Builder $query): Builder
     {
-        return $query->orderByDesc('scheduled_start_time');
+        return $query->orderByRaw('COALESCE(actual_start_time, scheduled_start_time) DESC');
     }
 
     public function scopeFromOldestToLatest(Builder $query): Builder
     {
-        return $query->orderBy('scheduled_start_time');
+        return $query->orderByRaw('COALESCE(actual_start_time, scheduled_start_time) ASC');
     }
 
     public function scopeFinished(Builder $query): Builder
@@ -168,11 +168,11 @@ class Stream extends Model implements Feedable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->when($search, function(Builder $builder, ?string $search) {
-            $builder->where(function(Builder $query) use ($search) {
+        return $query->when($search, function (Builder $builder, ?string $search) {
+            $builder->where(function (Builder $query) use ($search) {
                 $query
                     ->where('title', 'like', "%$search%")
-                    ->orWhereHas('channel', function($query) use ($search) {
+                    ->orWhereHas('channel', function ($query) use ($search) {
                         $query->where('name', 'like', "%$search%");
                     });
             });
@@ -189,16 +189,16 @@ class Stream extends Model implements Feedable
 
         return $query->when(
             $channelId,
-            fn (Builder $builder, ?string $streamerHashid) => $builder->where(fn (Builder $query) => $query->where('channel_id', $channelId))
+            fn(Builder $builder, ?string $streamerHashid) => $builder->where(fn(Builder $query) => $query->where('channel_id', $channelId))
         );
     }
 
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id((string) $this->id)
+            ->id((string)$this->id)
             ->title($this->title)
-            ->summary((string) $this->description)
+            ->summary((string)$this->description)
             ->updated($this->updated_at ?? now())
             ->link($this->url())
             ->authorName($this->channel()->first(['id', 'name'])?->name ?? '');
@@ -219,8 +219,8 @@ class Stream extends Model implements Feedable
                 $this->title,
                 $this->channel?->name,
                 $this->url(),
-                Str::of((string) $this->description)
-                    ->whenNotEmpty(fn (Stringable $description) => $description->prepend(str_repeat('-', 15).PHP_EOL))
+                Str::of((string)$this->description)
+                    ->whenNotEmpty(fn(Stringable $description) => $description->prepend(str_repeat('-', 15) . PHP_EOL))
                     ->remove("\r"),
             ]))
             ->startsAt($this->scheduled_start_time)
@@ -266,20 +266,20 @@ class Stream extends Model implements Feedable
 
     public function duration(): Attribute
     {
-        return Attribute::get(function(): ?string {
+        return Attribute::get(function (): ?string {
             if (is_null($this->actual_end_time)) {
                 return null;
             }
 
             $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-            return $startTime->diffInHours($this->actual_end_time).'h '.$startTime->diff($this->actual_end_time)->format('%i').'m';
+            return $startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
         });
     }
 
     public function startForHumans(): Attribute
     {
-        return Attribute::get(function(): string {
+        return Attribute::get(function (): string {
             if ($this->actual_start_time) {
                 return "Started {$this->actual_start_time->diffForHumans()}";
             }
@@ -294,6 +294,6 @@ class Stream extends Model implements Feedable
 
     public function startForRobots(): Attribute
     {
-        return Attribute::get(fn () => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
+        return Attribute::get(fn() => $this->actual_start_time?->toIso8601String() ?? $this->scheduled_start_time->toIso8601String());
     }
 }

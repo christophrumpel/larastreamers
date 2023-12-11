@@ -136,4 +136,32 @@ class StreamFactory extends Factory
     {
         return $this->for(Channel::factory()->create($channelData));
     }
+
+    public function withActualStartTime(Carbon $date): StreamFactory
+    {
+        return $this->state(fn() => [
+            'actual_start_time' => $date,
+        ]);
+    }
+
+    public function withActualEndTime(Carbon $date): StreamFactory
+    {
+        return $this->state(fn() => [
+            'actual_end_time' => $date,
+        ]);
+    }
+
+    public function withScheduledStartTime(Carbon $date): StreamFactory
+    {
+        return $this->state(fn() => [
+            'scheduled_start_time' => $date,
+        ]);
+    }
+
+    public function withTitle(string $title): StreamFactory
+    {
+        return $this->state(fn() => [
+            'title' => $title,
+        ]);
+    }
 }
