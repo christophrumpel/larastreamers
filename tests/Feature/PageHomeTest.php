@@ -25,6 +25,26 @@ it('shows given streams on home page', function() {
         ->assertSee('https://www.youtube.com/watch?v=123456');
 });
 
+it('will not show past upcoming streams on home page', function() {
+    // Arrange
+    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addDays(), 'youtube_id' => '1234', 'language_code' => 'en']);
+    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::now()->addDays(2), 'youtube_id' => '12345', 'language_code' => 'fr']);
+    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #3', 'scheduled_start_time' => Carbon::now()->subHour(), 'youtube_id' => '123456', 'language_code' => 'es']);
+    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #4', 'scheduled_start_time' => Carbon::now()->subDay(), 'youtube_id' => '123457', 'language_code' => 'es']);
+
+    // Act & Assert
+    $this->get(route('home'))
+        ->assertSee('Stream #1')
+        ->assertSee('https://www.youtube.com/watch?v=1234')
+        ->assertSee('My Channel')
+        ->assertSee('Stream #2')
+        ->assertSee('https://www.youtube.com/watch?v=12345')
+        ->assertDontSee('Stream #3')
+        ->assertDontSee('https://www.youtube.com/watch?v=123456')
+        ->assertDontSee('Stream #4')
+        ->assertDontSee('https://www.youtube.com/watch?v=123457');
+});
+
 it('shows from closest to farthest', function() {
     // Arrange
     Stream::factory()
@@ -53,10 +73,9 @@ it('shows from closest to farthest', function() {
 it('shows unique names for today and tomorrow instead of whole date', function() {
     $this->withoutExceptionHandling();
     // Arrange
-    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::today()->hour(2)]);
+    Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #1', 'scheduled_start_time' => Carbon::now()->addHour(2)]);
     Stream::factory()->for(Channel::factory()->create(['name' => 'My Channel']))->create(['title' => 'Stream #2', 'scheduled_start_time' => Carbon::tomorrow()]);
 
-    // Act & Assert
     $this->get(route('home'))
         ->assertDontSee(today()->format('D d.m.Y'))
         ->assertSee('Today')

@@ -103,15 +103,16 @@ class Stream extends Model implements Feedable
 
     public function scopeUpcoming(Builder $query): Builder
     {
-        return $query->where('status', StreamData::STATUS_UPCOMING);
+        return $query->where('status', StreamData::STATUS_UPCOMING)
+            ->where('scheduled_start_time', '>', now());
     }
 
     public function scopeUpcomingOrLive(Builder $query): Builder
     {
-        return $query->whereIn('status', [
-            StreamData::STATUS_LIVE,
-            StreamData::STATUS_UPCOMING,
-        ]);
+        return $query->where('status', StreamData::STATUS_LIVE)
+            ->orWhere(function (Builder $query) {
+                return $query->upcoming();
+            });
     }
 
     public static function getNextUpcomingOrLive(): ?Stream

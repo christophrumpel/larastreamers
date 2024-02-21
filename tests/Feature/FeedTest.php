@@ -10,8 +10,7 @@ it('provides streams in rss feed', function() {
         'description' => 'Stream description',
         'scheduled_start_time' => Carbon::tomorrow(),
     ]);
-    Stream::factory()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::today()]);
-    Stream::factory()->create(['title' => 'Stream yesterday', 'scheduled_start_time' => Carbon::yesterday()]);
+    Stream::factory()->create(['title' => 'Stream today', 'scheduled_start_time' => Carbon::now()->addHour(1)]);
 
     // Act
     $response = $this->get('feed');
@@ -25,6 +24,5 @@ it('provides streams in rss feed', function() {
     $response->assertSeeInOrder([
         'Stream tomorrow',
         'Stream today',
-        'Stream yesterday',
     ]);
 });
