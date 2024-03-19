@@ -41,15 +41,18 @@ class Stream extends Model implements Feedable
         'approved_at',
     ];
 
-    protected $casts = [
-        'approved_at' => 'datetime',
-        'scheduled_start_time' => 'datetime',
-        'actual_start_time' => 'datetime',
-        'actual_end_time' => 'datetime',
-        'hidden_at' => 'datetime',
-        'tweeted_at' => 'datetime',
-        'upcoming_tweeted_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'approved_at' => 'datetime',
+            'scheduled_start_time' => 'datetime',
+            'actual_start_time' => 'datetime',
+            'actual_end_time' => 'datetime',
+            'hidden_at' => 'datetime',
+            'tweeted_at' => 'datetime',
+            'upcoming_tweeted_at' => 'datetime',
+        ];
+    }
 
     public function channel(): BelongsTo
     {
