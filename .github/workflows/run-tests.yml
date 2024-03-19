@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
   pull_request:
-    types: [ready_for_review, synchronize, opened]
+    types: [ ready_for_review, synchronize, opened ]
 
 jobs:
   run-tests:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup PHP, with composer and extensions
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: '8.2'
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           tools: composer:v2
           coverage: none
