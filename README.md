@@ -9,7 +9,7 @@ It shows you who is live coding next in the Laravel world.
 
 ## Installation Steps
 
-> prerequisite: PHP > 8.0
+> prerequisite: PHP > 8.2
 
 * clone repository
 * `composer install`
