@@ -33,15 +33,20 @@ class User extends Authenticatable
         'two_factor_recovery_codes',
         'two_factor_secret',
     ];
-
-    /**
-     * The attributes that should be cast to native types.
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
     
     protected $appends = [
         'profile_photo_url',
     ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+        ];
+    }
 }
