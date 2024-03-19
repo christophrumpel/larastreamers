@@ -47,7 +47,7 @@ class StreamFactory extends Factory
 
     public function finished(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => Carbon::yesterday()->subDays(random_int(0, 10))->toIso8601String(),
                 'status' => StreamData::STATUS_FINISHED,
@@ -57,7 +57,7 @@ class StreamFactory extends Factory
 
     public function upcoming(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => Carbon::today()->addDays(random_int(2, 10)),
                 'status' => StreamData::STATUS_UPCOMING,
@@ -67,7 +67,7 @@ class StreamFactory extends Factory
 
     public function live(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => Carbon::now(),
                 'status' => StreamData::STATUS_LIVE,
@@ -77,7 +77,7 @@ class StreamFactory extends Factory
 
     public function deleted(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'status' => StreamData::STATUS_DELETED,
                 'hidden_at' => Carbon::now(),
@@ -87,17 +87,17 @@ class StreamFactory extends Factory
 
     public function approved(): StreamFactory
     {
-        return $this->state(fn () => ['approved_at' => Carbon::now()->subDay()]);
+        return $this->state(fn() => ['approved_at' => Carbon::now()->subDay()]);
     }
 
     public function notApproved(): StreamFactory
     {
-        return $this->state(fn () => ['approved_at' => null]);
+        return $this->state(fn() => ['approved_at' => null]);
     }
 
     public function liveTweetWasSend(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'tweeted_at' => now(),
             ];
@@ -106,7 +106,7 @@ class StreamFactory extends Factory
 
     public function upcomingTweetWasSend(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => now()->addMinutes(5),
                 'upcoming_tweeted_at' => now(),
@@ -116,7 +116,7 @@ class StreamFactory extends Factory
 
     public function startsWithinUpcomingTweetRange(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => now()->addMinutes(5),
             ];
@@ -125,7 +125,7 @@ class StreamFactory extends Factory
 
     public function startsOutsideUpcomingTweetRange(): StreamFactory
     {
-        return $this->state(function() {
+        return $this->state(function () {
             return [
                 'scheduled_start_time' => now()->addMinutes(6),
             ];
@@ -139,29 +139,36 @@ class StreamFactory extends Factory
 
     public function withActualStartTime(Carbon $date): StreamFactory
     {
-        return $this->state(fn () => [
+        return $this->state(fn() => [
             'actual_start_time' => $date,
         ]);
     }
 
     public function withActualEndTime(Carbon $date): StreamFactory
     {
-        return $this->state(fn () => [
+        return $this->state(fn() => [
             'actual_end_time' => $date,
         ]);
     }
 
     public function withScheduledStartTime(Carbon $date): StreamFactory
     {
-        return $this->state(fn () => [
+        return $this->state(fn() => [
             'scheduled_start_time' => $date,
         ]);
     }
 
     public function withTitle(string $title): StreamFactory
     {
-        return $this->state(fn () => [
+        return $this->state(fn() => [
             'title' => $title,
+        ]);
+    }
+
+    public function withYoutubeId(string $youtubeId): StreamFactory
+    {
+        return $this->state(fn() => [
+            'youtube_id' => $youtubeId,
         ]);
     }
 }
