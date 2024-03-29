@@ -1,5 +1,5 @@
 <div class="mt-12">
-    <form wire:submit.prevent="importChannel">
+    <form wire:submit="importChannel">
         @error('channel') <span class="error">{{ $message }}</span> @enderror
 
         <div class="md:grid md:grid-cols-3 md:gap-6">
@@ -24,12 +24,12 @@
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="youTubeChannelId" class="block text-sm font-medium text-gray-700">YouTube
                                         Channel ID</label>
-                                    <input type="text" wire:model.defer="youTubeChannelId" id="youTubeChannelId"
+                                    <input type="text" wire:model="youTubeChannelId" id="youTubeChannelId"
                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                 </div>
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="language_code" class="block text-sm font-medium text-gray-700">Language</label>
-                                    <select wire:model.defer="languageCode" id="language_code"
+                                    <select wire:model="languageCode" id="language_code"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         @foreach(\App\Models\Language::all() as $country)
                                             <option value="{{ $country->code }}">{{ $country->name }}</option>

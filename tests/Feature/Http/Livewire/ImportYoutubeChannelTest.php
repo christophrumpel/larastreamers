@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\ImportYouTubeChannel;
+use App\Livewire\ImportYouTubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use Illuminate\Support\Facades\Http;

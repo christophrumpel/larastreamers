@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Actions\ImportVideoAction;
 use App\Services\YouTube\YouTubeException;

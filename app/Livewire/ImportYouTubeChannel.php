@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Facades\YouTube;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
@@ -14,14 +14,14 @@ class ImportYouTubeChannel extends Component
     public string $youTubeChannelId = '';
     public string $languageCode = 'en';
 
-    public static function getName(): string
+    public function getName(): string
     {
-        return 'import-youtube-channel';
+        return 'import-you-tube-channel';
     }
 
     public function render(): View
     {
-        return view('livewire.import-youtube-channel');
+        return view('livewire.import-you-tube-channel');
     }
 
     public function importChannel(): void
@@ -37,7 +37,7 @@ class ImportYouTubeChannel extends Component
 
         dispatch(new ImportYoutubeChannelStreamsJob($this->youTubeChannelId, $this->languageCode));
 
-        session()->flash('channel-message', 'Channel "'.$this->youTubeChannelId.'" was added successfully.');
+        session()->flash('channel-message', 'Channel "' . $this->youTubeChannelId . '" was added successfully.');
 
         $this->reset(['youTubeChannelId', 'languageCode']);
     }

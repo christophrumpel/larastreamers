@@ -1,7 +1,7 @@
 <div class="mt-10 w-full max-w-xs">
     <label for="timezone" class="block text-base font-medium text-gray-500">Timezone</label>
     <div class="mt-1.5 relative">
-        <select id="timezone" wire:model="currentTimezone"
+        <select id="timezone" wire:model.live="currentTimezone"
                 class="appearance-none block w-full bg-none bg-white border border-gray-300 rounded-md pl-3 pr-10 py-2 text-base text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             @foreach($timezones as $timezoneSelect)
                 <option value="{{ $timezoneSelect }}"

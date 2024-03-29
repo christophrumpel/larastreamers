@@ -1,7 +1,7 @@
 <?php
 
 use App\Facades\YouTube;
-use App\Http\Livewire\ImportYouTubeLiveStream;
+use App\Livewire\ImportYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;

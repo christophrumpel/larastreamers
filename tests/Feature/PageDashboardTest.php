@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Livewire\ImportYouTubeChannel;
-use App\Http\Livewire\ImportYouTubeLiveStream;
+use App\Livewire\ImportYouTubeChannel;
+use App\Livewire\ImportYouTubeLiveStream;
 use App\Models\User;
 
 it('includes livewire youtube import stream component', function() {

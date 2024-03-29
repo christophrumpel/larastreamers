@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Livewire\SubmitYouTubeLiveStream;
+use App\Livewire\SubmitYouTubeLiveStream;
 
 it('includes the submission livewire component on all pages', function() {
     $this->get(route('home'))
