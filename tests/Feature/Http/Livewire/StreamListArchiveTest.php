@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Livewire\StreamListArchive;
+use App\Livewire\StreamListArchive;
 use App\Models\Channel;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Livewire\Livewire;
 use Vinkla\Hashids\Facades\Hashids;
 
-it('only shows streams by selected streamer', function() {
+it('only shows streams by selected streamer', function () {
     // Arrange
     Stream::factory()
         ->for(Channel::factory()->create(['name' => 'My Channel']))
@@ -25,7 +25,7 @@ it('only shows streams by selected streamer', function() {
         ->assertDontSee('Stream Not Seen');
 });
 
-it('shows streamers as dropdown options', function() {
+it('shows streamers as dropdown options', function () {
     // Arrange
     Stream::factory()
         ->for(Channel::factory()->create(['name' => 'Channel A']))
@@ -43,13 +43,13 @@ it('shows streamers as dropdown options', function() {
         ]);
 });
 
-it('wires properties and methods', function() {
+it('wires properties and methods', function () {
     // Arrange & Act & Assert
     Livewire::test(StreamListArchive::class)
         ->assertPropertyWired('streamer');
 });
 
-it('does not show streamer as dropdown option without approved finished streams', function() {
+it('does not show streamer as dropdown option without approved finished streams', function () {
     // Arrange
     Channel::factory()
         ->create(['name' => 'Channel A']);
@@ -59,7 +59,7 @@ it('does not show streamer as dropdown option without approved finished streams'
         ->assertDontSee('Channel A');
 });
 
-it('resets the pagination when selecting a streamer from the dropdown', function() {
+it('resets the pagination when selecting a streamer from the dropdown', function () {
     // Arrange
     Stream::factory()
         ->for($channel = Channel::factory()->create())

@@ -1,4 +1,3 @@
-<div
-    class="my-2 px-4 py-2 text-sm text-white bg-red-dark">
-    {{ $message }}
-</div>
+@error($for)
+<p {{ $attributes->merge(['class' => 'text-sm text-red-600']) }}>{{ $message }}</p>
+@enderror

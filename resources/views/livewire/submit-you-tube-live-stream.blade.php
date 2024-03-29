@@ -4,11 +4,11 @@
 
             <!-- Global message like success -->
             @if (session()->has('message'))
-                    <div class="mb-4 px-4 py-2 text-sm text-white bg-green text-center">
-                        {{ session('message') }}
-                    </div>
+                <div class="mb-4 px-4 py-2 text-sm text-white bg-green text-center">
+                    {{ session('message') }}
+                </div>
             @endif
-        <!-- Global message like success -->
+            <!-- Global message like success -->
 
             <!-- Form -->
             <form wire:submit.prevent="submit">
@@ -19,19 +19,19 @@
 
                             <!-- YouTube ID field -->
                             <div>
-                                <x-submission-label for="youTubeIdOrUrl" text="YouTube Stream URL" />
+                                <x-submission-label for="youTubeIdOrUrl" text="YouTube Stream URL"/>
                                 <input id="youTubeIdOrUrl" type="text" wire:model="youTubeIdOrUrl"
                                        placeholder="e.g. https://www.youtube.com/watch?v=1234"
                                        class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest"/>
                                 @error('youTubeIdOrUrl')
-                                <x-input-error :message="$message"/>
+                                <p class="text-red-dark italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- YouTube ID field -->
 
                             <!-- Language code field -->
                             <div class="">
-                                <x-submission-label for="languageCode" text="Language" />
+                                <x-submission-label for="languageCode" text="Language"/>
                                 <select wire:model.defer="languageCode" id="languageCode"
                                         class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest">
                                     @foreach(\App\Models\Language::query()->orderBy('name')->get() as $country)
@@ -40,7 +40,7 @@
                                     @endforeach
                                 </select>
                                 @error('languageCode')
-                                <x-input-error :message="$message"/>
+                                <p class="text-red-dark italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- Language code field -->
@@ -48,12 +48,12 @@
                             <!-- E-mail field -->
                             <div>
 
-                                <x-submission-label for="submittedByEmail" text="Your E-Mail" />
+                                <x-submission-label for="submittedByEmail" text="Your E-Mail"/>
                                 <input wire:model="submittedByEmail" type="text" id="submittedByEmail"
                                        class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest"
                                        placeholder="e.g. tim@larastreamers.com"/>
                                 @error('submittedByEmail')
-                                <x-input-error :message="$message"/>
+                                <p class="text-red-dark italic">{{ $message }}</p>
                                 @enderror
                             </div>
                             <!-- E-mail field -->

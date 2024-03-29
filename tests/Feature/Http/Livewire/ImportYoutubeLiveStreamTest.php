@@ -1,14 +1,14 @@
 <?php
 
 use App\Facades\YouTube;
-use App\Http\Livewire\ImportYouTubeLiveStream;
+use App\Livewire\ImportYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 use Livewire\Livewire;
 
-it('imports upcoming stream from you tube url', function() {
+it('imports upcoming stream from you tube url', function () {
     // Arrange
     $scheduledStartTime = Carbon::tomorrow();
 
@@ -42,7 +42,7 @@ it('imports upcoming stream from you tube url', function() {
     ]);
 });
 
-it('does not import streams which are not upcoming', function() {
+it('does not import streams which are not upcoming', function () {
     // Arrange
     Http::fake();
 
@@ -58,7 +58,7 @@ it('does not import streams which are not upcoming', function() {
     $this->assertDatabaseCount(Stream::class, 0);
 });
 
-it('overrides if a stream is already given', function() {
+it('overrides if a stream is already given', function () {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -86,7 +86,7 @@ it('overrides if a stream is already given', function() {
     ]);
 });
 
-it('shows success message', function() {
+it('shows success message', function () {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -103,7 +103,7 @@ it('shows success message', function() {
         ->assertSee('Stream "1234" was added successfully.');
 });
 
-it('clears form after successful import', function() {
+it('clears form after successful import', function () {
     // Arrange
     YouTube::partialMock()
         ->shouldReceive('videos')
@@ -120,9 +120,9 @@ it('clears form after successful import', function() {
         ->assertSet('youTubeId', '');
 });
 
-it('shows you tube client error message', function() {
+it('shows you tube client error message', function () {
     // Arrange
-    Http::fake(fn () => Http::response([], 500));
+    Http::fake(fn() => Http::response([], 500));
 
     // Arrange & Act & Assert
     Livewire::test(ImportYouTubeLiveStream::class)
@@ -131,7 +131,7 @@ it('shows you tube client error message', function() {
         ->assertSee('YouTube API error: 500');
 });
 
-it('checks properties and method wired to the view', function() {
+it('checks properties and method wired to the view', function () {
     // Arrange & Act & Assert
     Livewire::test(ImportYouTubeLiveStream::class)
         ->assertPropertyWired('youTubeId')
