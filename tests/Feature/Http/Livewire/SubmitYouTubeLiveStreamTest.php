@@ -2,7 +2,7 @@
 
 use App\Actions\Submission\SubmitStreamAction;
 use App\Facades\YouTube;
-use App\Http\Livewire\SubmitYouTubeLiveStream;
+use App\Livewire\SubmitYouTubeLiveStream;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
 use Livewire\Livewire;

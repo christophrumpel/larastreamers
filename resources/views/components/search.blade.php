@@ -1,7 +1,7 @@
 <div class="flex flex-row md:justify-end max-w-6xl md:max-auto">
     <div class="flex flex-col sm:flex-row rounded-lg overflow-hidden shadow-xl">
         <label for="streamer" class="sr-only">Filter by streamer</label>
-        <select wire:model="streamer"
+        <select wire:model.live="streamer"
                 id="streamer"
             class="border-white focus:border-1 focus:border-red rounded-l-lg"
         >

@@ -6,7 +6,7 @@
     "homepage": "https://larastreamers.com",
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "abraham/twitteroauth": "^5.0",
         "calebporzio/sushi": "^2.4",
         "doctrine/dbal": "^3.5",
@@ -16,7 +16,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "league/flysystem-ftp": "^3.0",
-        "livewire/livewire": "^2.11",
+        "livewire/livewire": "^3.0",
         "owenvoke/blade-fontawesome": "^2.2",
         "spatie/data-transfer-object": "^3.7",
         "spatie/icalendar-generator": "^2.3",
@@ -30,7 +30,7 @@
     },
     "require-dev": {
         "brianium/paratest": "^6.4",
-        "christophrumpel/missing-livewire-assertions": "^1.0",
+        "christophrumpel/missing-livewire-assertions": "^2.0",
         "fakerphp/faker": "^1.17",
         "friendsofphp/php-cs-fixer": "^3.6",
         "laravel/sail": "^1.18",

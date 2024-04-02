@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <livewire:import-you-tube-live-stream/>
 
-            <livewire:import-youtube-channel/>
+            <livewire:import-you-tube-channel/>
         </div>
     </div>
 </x-app-layout>

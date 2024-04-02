@@ -11,7 +11,7 @@
         <!-- Global message like success -->
 
             <!-- Form -->
-            <form wire:submit.prevent="submit">
+            <form wire:submit="submit">
                 <div class="overflow-hidden">
                     <div class="bg-white">
 
@@ -20,7 +20,7 @@
                             <!-- YouTube ID field -->
                             <div>
                                 <x-submission-label for="youTubeIdOrUrl" text="YouTube Stream URL" />
-                                <input id="youTubeIdOrUrl" type="text" wire:model="youTubeIdOrUrl"
+                                <input id="youTubeIdOrUrl" type="text" wire:model.live="youTubeIdOrUrl"
                                        placeholder="e.g. https://www.youtube.com/watch?v=1234"
                                        class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest"/>
                                 @error('youTubeIdOrUrl')
@@ -32,7 +32,7 @@
                             <!-- Language code field -->
                             <div class="">
                                 <x-submission-label for="languageCode" text="Language" />
-                                <select wire:model.defer="languageCode" id="languageCode"
+                                <select wire:model="languageCode" id="languageCode"
                                         class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest">
                                     @foreach(\App\Models\Language::query()->orderBy('name')->get() as $country)
                                         <option value="{{ $country->code }}"
@@ -49,7 +49,7 @@
                             <div>
 
                                 <x-submission-label for="submittedByEmail" text="Your E-Mail" />
-                                <input wire:model="submittedByEmail" type="text" id="submittedByEmail"
+                                <input wire:model.live="submittedByEmail" type="text" id="submittedByEmail"
                                        class="mt-1 focus:ring-red focus:border-red block w-full shadow-sm sm:text-sm border-gray-light rounded-md text-gray-darkest"
                                        placeholder="e.g. tim@larastreamers.com"/>
                                 @error('submittedByEmail')
