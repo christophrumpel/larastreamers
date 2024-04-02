@@ -24,7 +24,7 @@
         "spatie/laravel-feed": "^4.2",
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-mailcoach-mailer": "^1.0",
-        "symfony/http-client": "^6.2",
+        "symfony/http-client": "^7.0",
         "symfony/postmark-mailer": "^6.2",
         "vinkla/hashids": "^11.0"
     },
