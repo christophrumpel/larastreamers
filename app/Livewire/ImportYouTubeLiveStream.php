@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Actions\ImportVideoAction;
 use App\Services\YouTube\YouTubeException;
@@ -27,7 +27,7 @@ class ImportYouTubeLiveStream extends Component
             return;
         }
 
-        session()->flash('stream-message', 'Stream "'.$this->youTubeId.'" was added successfully.');
+        session()->flash('stream-message', 'Stream "' . $this->youTubeId . '" was added successfully.');
 
         $this->reset(['youTubeId']);
     }
