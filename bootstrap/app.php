@@ -23,5 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->throttleApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->reportable(function(Throwable $e) {
+            //
+        });
     })->create();
