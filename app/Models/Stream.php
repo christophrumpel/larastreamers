@@ -19,6 +19,9 @@ use Spatie\Feed\FeedItem;
 use Spatie\IcalendarGenerator\Components\Event;
 use Vinkla\Hashids\Facades\Hashids;
 
+/**
+ * @property \Illuminate\Support\Carbon $scheduled_start_time
+ */
 class Stream extends Model implements Feedable
 {
     use HasFactory;
