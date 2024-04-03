@@ -60,11 +60,11 @@
         <div class="flex items-center mt-5">
             <x-button wire:click="confirmLogout" wire:loading.attr="disabled">
                 {{ __('Log Out Other Browser Sessions') }}
-                </x-jet-button>
+            </x-button>
 
-                <x-action-message class="ml-3" on="loggedOut">
-                    {{ __('Done.') }}
-                    </x-jet-action-message>
+            <x-action-message class="ml-3" on="loggedOut">
+                {{ __('Done.') }}
+            </x-action-message>
         </div>
 
         <!-- Log Out Other Devices Confirmation Modal -->
@@ -91,14 +91,14 @@
             <x-slot name="footer">
                 <x-secondary-button wire:click="$toggle('confirmingLogout')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
-                    </x-jet-secondary-button>
+                </x-secondary-button>
 
-                    <x-button class="ml-2"
-                              wire:click="logoutOtherBrowserSessions"
-                              wire:loading.attr="disabled">
-                        {{ __('Log Out Other Browser Sessions') }}
-                        </x-jet-button>
+                <x-button class="ml-2"
+                          wire:click="logoutOtherBrowserSessions"
+                          wire:loading.attr="disabled">
+                    {{ __('Log Out Other Browser Sessions') }}
+                </x-button>
             </x-slot>
-            </x-jet-dialog-modal>
+        </x-dialog-modal>
     </x-slot>
-    </x-jet-action-section>
+</x-action-section>

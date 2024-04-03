@@ -55,29 +55,31 @@
                 <x-confirms-password wire:then="enableTwoFactorAuthentication">
                     <x-button type="button" wire:loading.attr="disabled">
                         {{ __('Enable') }}
-                        </x-jet-button>
-                        </x-jet-confirms-password>
-                        @else
-                            @if ($showingRecoveryCodes)
-                                <x-confirms-password wire:then="regenerateRecoveryCodes">
-                                    <x-secondary-button class="mr-3">
-                                        {{ __('Regenerate Recovery Codes') }}
-                                        </x-jet-secondary-button>
-                                        </x-jet-confirms-password>
-                                        @else
-                                            <x-confirms-password wire:then="showRecoveryCodes">
-                                                <x-secondary-button class="mr-3">
-                                                    {{ __('Show Recovery Codes') }}
-                                                    </x-jet-secondary-button>
-                                                    </x-jet-confirms-password>
-                                                    @endif
+                    </x-button>
+                </x-confirms-password>
+            @else
+                @if ($showingRecoveryCodes)
+                    <x-confirms-password wire:then="regenerateRecoveryCodes">
+                        <x-secondary-button class="mr-3">
+                            {{ __('Regenerate Recovery Codes') }}
+                        </x-secondary-button>
+                    </x-confirms-password>
+                @else
+                    <x-confirms-password wire:then="showRecoveryCodes">
+                        <x-secondary-button class="mr-3">
+                            {{ __('Show Recovery Codes') }}
+                        </x-secondary-button>
+                    </x-confirms-password>
+                @endif
 
-                                                    <x-confirms-password wire:then="disableTwoFactorAuthentication">
-                                                        <x-danger-button wire:loading.attr="disabled">
-                                                            {{ __('Disable') }}
-                                                            </x-jet-danger-button>
-                                                            </x-jet-confirms-password>
+                <x-confirms-password
+                    wire:then="disableTwoFactorAuthentication">
+                    <x-danger-button
+                        wire:loading.attr="disabled">
+                        {{ __('Disable') }}
+                    </x-danger-button>
+                </x-confirms-password>
             @endif
         </div>
     </x-slot>
-    </x-jet-action-section>
+</x-action-section>

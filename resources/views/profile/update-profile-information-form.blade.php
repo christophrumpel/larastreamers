@@ -41,15 +41,15 @@
 
                 <x-secondary-button class="mt-2 mr-2" type="button" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
-                    </x-jet-secondary-button>
+                </x-secondary-button>
 
-                    @if ($this->user->profile_photo_path)
-                        <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                            {{ __('Remove Photo') }}
-                            </x-jet-secondary-button>
-                            @endif
+                @if ($this->user->profile_photo_path)
+                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                        {{ __('Remove Photo') }}
+                    </x-secondary-button>
+                @endif
 
-                            <x-input-error for="photo" class="mt-2"/>
+                <x-input-error for="photo" class="mt-2"/>
             </div>
         @endif
 
@@ -71,10 +71,10 @@
     <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
-            </x-jet-action-message>
+        </x-action-message>
 
-            <x-button wire:loading.attr="disabled" wire:target="photo">
-                {{ __('Save') }}
-                </x-jet-button>
+        <x-button wire:loading.attr="disabled" wire:target="photo">
+            {{ __('Save') }}
+        </x-button>
     </x-slot>
-    </x-jet-form-section>
+</x-form-section>

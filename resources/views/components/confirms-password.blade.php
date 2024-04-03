@@ -15,32 +15,35 @@
 </span>
 
 @once
-<x-jet-dialog-modal wire:model="confirmingPassword">
-    <x-slot name="title">
-        {{ $title }}
-    </x-slot>
+    <x-jet-dialog-modal wire:model="confirmingPassword">
+        <x-slot name="title">
+            {{ $title }}
+        </x-slot>
 
-    <x-slot name="content">
-        {{ $content }}
+        <x-slot name="content">
+            {{ $content }}
 
-        <div class="mt-4" x-data="{}" x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
-            <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" autocomplete="current-password"
-                        x-ref="confirmable_password"
-                        wire:model.defer="confirmablePassword"
-                        wire:keydown.enter="confirmPassword" />
+            <div class="mt-4" x-data="{}"
+                 x-on:confirming-password.window="setTimeout(() => $refs.confirmable_password.focus(), 250)">
+                <x-jet-input type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}"
+                             autocomplete="current-password"
+                             x-ref="confirmable_password"
+                             wire:model.defer="confirmablePassword"
+                             wire:keydown.enter="confirmPassword"/>
 
-            <x-jet-input-error for="confirmable_password" class="mt-2" />
-        </div>
-    </x-slot>
+                <x-jet-input-error for="confirmable_password" class="mt-2"/>
+            </div>
+        </x-slot>
 
-    <x-slot name="footer">
-        <x-jet-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
-            {{ __('Cancel') }}
-        </x-jet-secondary-button>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="stopConfirmingPassword" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+                </x-secondary-button>
 
-        <x-jet-button class="ml-3" dusk="confirm-password-button" wire:click="confirmPassword" wire:loading.attr="disabled">
-            {{ $button }}
-        </x-jet-button>
-    </x-slot>
-</x-jet-dialog-modal>
+                <x-jet-button class="ml-3" dusk="confirm-password-button" wire:click="confirmPassword"
+                              wire:loading.attr="disabled">
+                    {{ $button }}
+                    </x-button>
+        </x-slot>
+        </x-dialog-modal>
 @endonce

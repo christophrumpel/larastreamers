@@ -44,8 +44,8 @@
 
                 <x-button class="ml-4">
                     {{ __('Log in') }}
-                    </x-jet-button>
+                </x-button>
             </div>
         </form>
-        </x-jet-authentication-card>
+    </x-authentication-card>
 </x-guest-layout>

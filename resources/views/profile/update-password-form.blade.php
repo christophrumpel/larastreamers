@@ -33,10 +33,10 @@
     <x-slot name="actions">
         <x-action-message class="mr-3" on="saved">
             {{ __('Saved.') }}
-            </x-jet-action-message>
+        </x-action-message>
 
-            <x-button>
-                {{ __('Save') }}
-                </x-jet-button>
+        <x-button>
+            {{ __('Save') }}
+        </x-button>
     </x-slot>
-    </x-jet-form-section>
+</x-form-section>
