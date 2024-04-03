@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4372c909f6ee94101faa015d07aa2610",
+    "content-hash": "5c1df8e03666e355fe3bf74f403e7042",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -7655,29 +7655,29 @@
         },
         {
             "name": "symfony/postmark-mailer",
-            "version": "v6.4.4",
+            "version": "v7.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/postmark-mailer.git",
-                "reference": "2e73040e6b5ccf35025e86692a2080ef176a0d8d"
+                "reference": "04129b7e4e4e6b1eac7e0ea5513e302fa77a5e45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/postmark-mailer/zipball/2e73040e6b5ccf35025e86692a2080ef176a0d8d",
-                "reference": "2e73040e6b5ccf35025e86692a2080ef176a0d8d",
+                "url": "https://api.github.com/repos/symfony/postmark-mailer/zipball/04129b7e4e4e6b1eac7e0ea5513e302fa77a5e45",
+                "reference": "04129b7e4e4e6b1eac7e0ea5513e302fa77a5e45",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
+                "php": ">=8.2",
                 "psr/event-dispatcher": "^1",
-                "symfony/mailer": "^5.4.21|^6.2.7|^7.0"
+                "symfony/mailer": "^6.4|^7.0"
             },
             "conflict": {
-                "symfony/http-foundation": "<6.2"
+                "symfony/http-foundation": "<6.4"
             },
             "require-dev": {
-                "symfony/http-client": "^6.3|^7.0",
-                "symfony/webhook": "^6.3|^7.0"
+                "symfony/http-client": "^6.4|^7.0",
+                "symfony/webhook": "^6.4|^7.0"
             },
             "type": "symfony-mailer-bridge",
             "autoload": {
@@ -7705,7 +7705,7 @@
             "description": "Symfony Postmark Mailer Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/postmark-mailer/tree/v6.4.4"
+                "source": "https://github.com/symfony/postmark-mailer/tree/v7.0.4"
             },
             "funding": [
                 {
@@ -7721,7 +7721,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-09T11:00:58+00:00"
+            "time": "2024-02-12T11:15:03+00:00"
         },
         {
             "name": "symfony/process",

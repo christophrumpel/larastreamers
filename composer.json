@@ -26,7 +26,7 @@
         "spatie/laravel-login-link": "^1.2",
         "spatie/laravel-mailcoach-mailer": "^1.0",
         "symfony/http-client": "^6.2",
-        "symfony/postmark-mailer": "^6.2",
+        "symfony/postmark-mailer": "^7.0",
         "vinkla/hashids": "^11.0"
     },
     "require-dev": {
