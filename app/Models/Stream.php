@@ -278,7 +278,7 @@ class Stream extends Model implements Feedable
 
             $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-            return $startTime->diffInHours((int)$this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
+            return (int)$startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
         });
     }
 

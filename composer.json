@@ -37,6 +37,7 @@
         "nunomaduro/larastan": "^2.8",
         "nunomaduro/patrol": "^1.1",
         "pestphp/pest": "^2.34",
+        "pestphp/pest-plugin-laravel": "^2.3",
         "phpunit/phpunit": "^10.0",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ray": "^1.35",
