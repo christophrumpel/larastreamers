@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8167f687e489a4ad9b5b8dca423acef1",
+    "content-hash": "4372c909f6ee94101faa015d07aa2610",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -5500,6 +5500,71 @@
                 }
             ],
             "time": "2024-04-02T06:30:22+00:00"
+        },
+        {
+            "name": "spatie/laravel-login-link",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-login-link.git",
+                "reference": "582f9d99462d3ae64ae7653a9443d783b5ec4685"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-login-link/zipball/582f9d99462d3ae64ae7653a9443d783b5ec4685",
+                "reference": "582f9d99462d3ae64ae7653a9443d783b5ec4685",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0",
+                "php": "^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "nunomaduro/collision": "^7.0|^8.0",
+                "orchestra/testbench": "^8.0|^9.0",
+                "pestphp/pest": "^2.34",
+                "pestphp/pest-plugin-laravel": "^1.1|^2.3",
+                "spatie/laravel-ray": "^1.26",
+                "spatie/pest-plugin-snapshots": "^1.1|^2.1",
+                "spatie/phpunit-snapshot-assertions": "^4.2.12|^5.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LoginLink\\LoginLinkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LoginLink\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Quickly login to your local environment",
+            "homepage": "https://github.com/spatie/laravel-login-link",
+            "keywords": [
+                "laravel",
+                "laravel-login-link",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/laravel-login-link/tree/1.2.0"
+            },
+            "time": "2024-03-04T09:46:56+00:00"
         },
         {
             "name": "spatie/laravel-mailcoach-mailer",

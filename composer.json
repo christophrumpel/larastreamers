@@ -23,6 +23,7 @@
         "spatie/laravel-backup": "^8.1",
         "spatie/laravel-feed": "^4.2",
         "spatie/laravel-ignition": "^2.0",
+        "spatie/laravel-login-link": "^1.2",
         "spatie/laravel-mailcoach-mailer": "^1.0",
         "symfony/http-client": "^6.2",
         "symfony/postmark-mailer": "^6.2",
