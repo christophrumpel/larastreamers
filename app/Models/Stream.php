@@ -41,15 +41,18 @@ class Stream extends Model implements Feedable
         'approved_at',
     ];
 
-    protected $casts = [
-        'approved_at' => 'datetime',
-        'scheduled_start_time' => 'datetime',
-        'actual_start_time' => 'datetime',
-        'actual_end_time' => 'datetime',
-        'hidden_at' => 'datetime',
-        'tweeted_at' => 'datetime',
-        'upcoming_tweeted_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'approved_at' => 'datetime',
+            'scheduled_start_time' => 'datetime',
+            'actual_start_time' => 'datetime',
+            'actual_end_time' => 'datetime',
+            'hidden_at' => 'datetime',
+            'tweeted_at' => 'datetime',
+            'upcoming_tweeted_at' => 'datetime',
+        ];
+    }
 
     public function channel(): BelongsTo
     {
@@ -275,7 +278,7 @@ class Stream extends Model implements Feedable
 
             $startTime = $this->actual_start_time ?? $this->scheduled_start_time;
 
-            return $startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
+            return (int)$startTime->diffInHours($this->actual_end_time) . 'h ' . $startTime->diff($this->actual_end_time)->format('%i') . 'm';
         });
     }
 
