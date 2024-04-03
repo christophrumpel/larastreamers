@@ -12,6 +12,8 @@
             </div>
         @endif
 
+        <x-login-link :redirect-url="route('dashboard')"/>
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
