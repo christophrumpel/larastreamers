@@ -6,10 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
-        Schema::table('streams', function (Blueprint $table) {
+        Schema::table('streams', function(Blueprint $table) {
             $table->dropColumn('channel_title');
         });
     }

@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\ImportYouTubeChannel;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
+use App\Livewire\ImportYouTubeChannel;
 use App\Models\Channel;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;

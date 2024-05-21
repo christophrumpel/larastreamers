@@ -1,23 +1,33 @@
-name: Format (PHP)
+name: Format Code
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - '**.php'
+on: [ push ]
 
 jobs:
-  php-cs-fixer:
+  lint:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.3 ]
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Install
-        run: composer install
-
-      - name: Run php-cs-fixer
-        run: ./vendor/bin/php-cs-fixer fix
-
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          commit_message: Apply php-cs-fixer changes
+          php-version: ${{ matrix.php }}
+          extensions: json, dom, curl, libxml, mbstring
+          coverage: none
+
+      - name: Install Pint
+        run: composer global require laravel/pint
+
+      - name: Run Pint
+        run: pint
+
+      - name: Commit linted files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Fixes coding style"

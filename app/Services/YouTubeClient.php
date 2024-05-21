@@ -14,7 +14,7 @@ class YouTubeClient
     public function channel(string $id): ChannelData
     {
         return $this->channels($id)
-            ->whenEmpty(fn () => throw  YouTubeException::unknownChannel($id))
+            ->whenEmpty(fn () => throw YouTubeException::unknownChannel($id))
             ->first();
     }
 

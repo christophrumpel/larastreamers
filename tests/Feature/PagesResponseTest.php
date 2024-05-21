@@ -2,7 +2,7 @@
 
 it('can show the home page', function() {
     $this->get(route('home'))
-         ->assertOk();
+        ->assertOk();
 });
 
 it('can show the feed', function() {

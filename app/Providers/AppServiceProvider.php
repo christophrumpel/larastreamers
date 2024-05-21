@@ -2,15 +2,15 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Http\Request;
-use Illuminate\Cache\RateLimiting\Limit;
 use App\Services\YouTube\YouTubeException;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Http::macro('youtube', function(string $url, array $params = [], string $key = null): Collection {
+        Http::macro('youtube', function(string $url, array $params = [], ?string $key = null): Collection {
             /** @var Factory $this */
             return $this
                 ->asJson()
@@ -55,6 +55,5 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by((string) $request->user()?->id ?: (string) $request->ip());
         });
 
-        
     }
 }

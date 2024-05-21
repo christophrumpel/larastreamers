@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('streams', function (Blueprint $table) {
+        Schema::table('streams', function(Blueprint $table) {
             $table->string('language_code')->default('en')->after('status');
         });
     }

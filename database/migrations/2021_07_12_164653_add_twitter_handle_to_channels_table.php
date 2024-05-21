@@ -8,9 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('channels', function (Blueprint $table) {
+        Schema::table('channels', function(Blueprint $table) {
             $table->string('twitter_handle')->nullable()->after('on_platform_since');
         });
     }
-
 };

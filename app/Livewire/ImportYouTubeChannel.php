@@ -12,6 +12,7 @@ use Livewire\Component;
 class ImportYouTubeChannel extends Component
 {
     public string $youTubeChannelId = '';
+
     public string $languageCode = 'en';
 
     public function getName(): string
@@ -37,7 +38,7 @@ class ImportYouTubeChannel extends Component
 
         dispatch(new ImportYoutubeChannelStreamsJob($this->youTubeChannelId, $this->languageCode));
 
-        session()->flash('channel-message', 'Channel "' . $this->youTubeChannelId . '" was added successfully.');
+        session()->flash('channel-message', 'Channel "'.$this->youTubeChannelId.'" was added successfully.');
 
         $this->reset(['youTubeChannelId', 'languageCode']);
     }

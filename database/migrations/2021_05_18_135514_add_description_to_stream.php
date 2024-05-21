@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('streams', function (Blueprint $table) {
+        Schema::table('streams', function(Blueprint $table) {
             $table->text('description')->nullable()->after('title');
         });
     }

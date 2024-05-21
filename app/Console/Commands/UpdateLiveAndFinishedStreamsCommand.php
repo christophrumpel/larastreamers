@@ -43,7 +43,7 @@ class UpdateLiveAndFinishedStreamsCommand extends Command
 
             if (is_null($streamData)) {
                 $stream->update([
-                    'status'    => StreamData::STATUS_DELETED,
+                    'status' => StreamData::STATUS_DELETED,
                     'hidden_at' => Carbon::now(),
                 ]);
 

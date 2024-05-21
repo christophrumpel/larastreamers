@@ -8,11 +8,17 @@ use Spatie\DataTransferObject\DataTransferObject;
 class ChannelData extends DataTransferObject
 {
     public string $platformId;
+
     public string $youTubeCustomUrl;
+
     public string $name;
+
     public string $description;
+
     public Carbon $onPlatformSince;
+
     public string $thumbnailUrl;
+
     public string $country;
 
     public function prepareForModel(): array

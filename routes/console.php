@@ -1,26 +1,23 @@
 <?php
 
-use Illuminate\Support\Facades\Schedule;
-use Spatie\Backup\Commands\CleanupCommand;
-use Spatie\Backup\Commands\BackupCommand;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\UpdateUpcomingStreamsCommand;
-use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
-use App\Console\Commands\UpdateChannelsCommand;
-use App\Console\Commands\TweetAboutWeeklySummaryCommand;
-use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
-use App\Console\Commands\TweetAboutLiveStreamsCommand;
-use App\Console\Commands\ImportChannelStreamsCommand;
-use App\Console\Commands\ImportChannelsForStreamsCommand;
-use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
 use App\Console\Commands\CheckIfLiveStreamsHaveEndedCommand;
+use App\Console\Commands\CheckIfUpcomingStreamsAreLiveCommand;
+use App\Console\Commands\ImportChannelStreamsCommand;
+use App\Console\Commands\TweetAboutLiveStreamsCommand;
+use App\Console\Commands\TweetAboutUpcomingStreamsCommand;
+use App\Console\Commands\TweetAboutWeeklySummaryCommand;
+use App\Console\Commands\UpdateChannelsCommand;
+use App\Console\Commands\UpdateLiveAndFinishedStreamsCommand;
+use App\Console\Commands\UpdateUpcomingStreamsCommand;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
+use Spatie\Backup\Commands\BackupCommand;
+use Spatie\Backup\Commands\CleanupCommand;
 
-Artisan::command('inspire', function () {
+Artisan::command('inspire', function() {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
-
 
 Schedule::command(CleanupCommand::class)->daily()->at('01:00');
 Schedule::command(BackupCommand::class, ['--only-db', '--disable-notifications'])->daily()->at('02:00');

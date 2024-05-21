@@ -9,13 +9,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('streams', function (Blueprint $table) {
+        Schema::table('streams', function(Blueprint $table) {
             $table->timestamp('approved_at')->nullable()->after('language_code');
             $table->string('submitted_by_email')->nullable()->after('language_code');
         });
 
         Stream::each(function(Stream $stream) {
-             $stream->update(['approved_at' => now()]);
+            $stream->update(['approved_at' => now()]);
         });
     }
 };

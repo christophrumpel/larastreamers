@@ -8,20 +8,33 @@ use Spatie\DataTransferObject\DataTransferObject;
 class StreamData extends DataTransferObject
 {
     public const STATUS_UPCOMING = 'upcoming';
+
     public const STATUS_LIVE = 'live';
+
     public const STATUS_FINISHED = 'finished';
+
     public const STATUS_DELETED = 'deleted';
 
     public string $videoId;
+
     public string $title;
+
     public string $channelId;
+
     public string $channelTitle;
+
     public string $description;
+
     public string $thumbnailUrl;
+
     public Carbon $publishedAt;
+
     public Carbon $plannedStart;
+
     public ?Carbon $actualStartTime;
+
     public ?Carbon $actualEndTime;
+
     public string $status;
 
     public function isLive(): bool

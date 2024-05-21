@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('channels', function (Blueprint $table) {
+        Schema::create('channels', function(Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('platform')->default('youtube');
             $table->string('platform_id');

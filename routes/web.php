@@ -40,7 +40,7 @@ Route::get('/calendar.ics', CalendarController::class)
 Route::get('/stream-{stream}.ics', AddSingleStreamToCalendarController::class)
     ->name('calendar.ics.stream');
 
-Route::middleware('signed')->group(function () {
+Route::middleware('signed')->group(function() {
     Route::get('submission/{stream}/approve', ApproveStreamController::class)->name('stream.approve');
     Route::get('submission/{stream}/reject', RejectStreamController::class)->name('stream.reject');
 });

@@ -27,7 +27,7 @@ class Channel extends Model
         return $query->whereHas('streams', function(Builder $query) {
             /** @var Builder<Stream> $query */
             $query->approved()
-                    ->finished();
+                ->finished();
         });
     }
 
