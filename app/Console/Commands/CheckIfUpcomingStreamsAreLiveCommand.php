@@ -18,10 +18,10 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
         $streams = Stream::query()
             ->approved()
             ->upcoming()
-            ->where('scheduled_start_time', '<=', now()->addMinutes(15))
+            ->where('scheduled_start_time', '<=', now()->addMinutes(30))
             ->get()
             ->keyBy('youtube_id');
-
+        
         if ($streams->isEmpty()) {
             $this->info('There are no streams to update.');
 
@@ -31,7 +31,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
         $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
         $updatesCount = YouTube::videos($streams->keys())
-            ->map(fn (StreamData $streamData) => optional($streams
+            ->map(fn(StreamData $streamData) => optional($streams
                 ->get($streamData->videoId))
                 ->update([
                     'status' => $streamData->status,
@@ -39,7 +39,7 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
             ->filter()
             ->count();
 
-        $this->info($updatesCount.' stream(s) were updated.');
+        $this->info($updatesCount . ' stream(s) were updated.');
 
         return self::SUCCESS;
     }
