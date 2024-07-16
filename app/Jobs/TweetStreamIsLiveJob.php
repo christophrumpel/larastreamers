@@ -17,8 +17,7 @@ class TweetStreamIsLiveJob implements ShouldQueue
 
     public function __construct(
         public Stream $stream,
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {
