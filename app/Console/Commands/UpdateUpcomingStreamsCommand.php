@@ -46,7 +46,7 @@ class UpdateUpcomingStreamsCommand extends Command
                 return;
             }
 
-            (new UpdateStreamAction())->handle($stream, $streamData);
+            (new UpdateStreamAction)->handle($stream, $streamData);
         });
 
         $this->info($streams->count().' stream(s) were updated.');

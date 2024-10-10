@@ -19,7 +19,7 @@ class ApproveStreamAction
         }
 
         $streamData = YouTube::video($stream->youtube_id);
-        (new UpdateStreamAction())->handle($stream, $streamData);
+        (new UpdateStreamAction)->handle($stream, $streamData);
 
         if (is_null($stream->channel_id)) {
             Artisan::call(ImportChannelsForStreamsCommand::class, ['stream' => $stream]);

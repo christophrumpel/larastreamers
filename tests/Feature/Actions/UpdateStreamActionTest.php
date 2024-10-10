@@ -27,7 +27,7 @@ beforeEach(function() {
 
 it('updates a stream', function() {
     // Act
-    $updatedStream = (new UpdateStreamAction())->handle($this->stream, $this->streamData);
+    $updatedStream = (new UpdateStreamAction)->handle($this->stream, $this->streamData);
 
     // Assert
     expect($updatedStream)

@@ -21,7 +21,7 @@ class ImportYouTubeLiveStream extends Component
     public function importStream(): void
     {
         try {
-            (new ImportVideoAction())->handle($this->youTubeId, $this->language, approved: true);
+            (new ImportVideoAction)->handle($this->youTubeId, $this->language, approved: true);
         } catch (YouTubeException $exception) {
             $this->addError('stream', $exception->getMessage());
 

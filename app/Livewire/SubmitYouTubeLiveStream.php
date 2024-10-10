@@ -25,7 +25,7 @@ class SubmitYouTubeLiveStream extends Component
     public function rules(): array
     {
         return [
-            'youTubeIdOrUrl' => ['required', Rule::unique('streams', 'youtube_id'), new YouTubeRule()],
+            'youTubeIdOrUrl' => ['required', Rule::unique('streams', 'youtube_id'), new YouTubeRule],
             'submittedByEmail' => 'required',
         ];
     }
@@ -40,7 +40,7 @@ class SubmitYouTubeLiveStream extends Component
         $this->validate();
 
         $action = app(SubmitStreamAction::class);
-        $action->handle((new YouTubeRule())->determineYoutubeId($this->youTubeIdOrUrl), $this->languageCode, $this->submittedByEmail);
+        $action->handle((new YouTubeRule)->determineYoutubeId($this->youTubeIdOrUrl), $this->languageCode, $this->submittedByEmail);
 
         session()->flash('message', 'You successfully submitted your stream. You will receive an email, if it gets approved.');
         $this->reset(['youTubeIdOrUrl', 'languageCode', 'submittedByEmail']);

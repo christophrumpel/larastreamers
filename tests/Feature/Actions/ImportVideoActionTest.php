@@ -17,7 +17,7 @@ it('adds a channel id if channel already given', function() {
     $channel = Channel::factory()->create(['platform_id' => 'UCNlUCA4VORBx8X-h-rXvXEg']);
 
     // Act
-    $importedStream = (new ImportVideoAction())->handle($youTubeId);
+    $importedStream = (new ImportVideoAction)->handle($youTubeId);
 
     // Assert
     expect($importedStream->channel_id)->toEqual($channel->id);
