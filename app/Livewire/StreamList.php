@@ -20,7 +20,7 @@ class StreamList extends Component
 
         return view('livewire.stream-list', [
             'streamsByDate' => $streams->setCollection(
-                (new SortStreamsByDateAction())->handle($streams->getCollection())
+                (new SortStreamsByDateAction)->handle($streams->getCollection())
             ),
         ]);
     }

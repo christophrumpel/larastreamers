@@ -31,7 +31,7 @@ class TwitterServiceProvider extends ServiceProvider
                 return $app->get(OAuthTwitter::class);
             }
 
-            return new NullTwitter();
+            return new NullTwitter;
         });
     }
 }
