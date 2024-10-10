@@ -8,8 +8,7 @@ class OAuthTwitter implements TwitterInterface
 {
     public function __construct(
         protected TwitterOAuth $twitter,
-    ) {
-    }
+    ) {}
 
     public function tweet(string $text): ?array
     {

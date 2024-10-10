@@ -13,8 +13,7 @@ class StreamRejectedMail extends Mailable
 
     public function __construct(
         public Stream $stream
-    ) {
-    }
+    ) {}
 
     public function build(): StreamRejectedMail
     {

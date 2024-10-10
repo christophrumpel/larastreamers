@@ -16,9 +16,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(public string $youTubeChannelId, public string $languageCode = 'en')
-    {
-    }
+    public function __construct(public string $youTubeChannelId, public string $languageCode = 'en') {}
 
     public function handle(): void
     {
