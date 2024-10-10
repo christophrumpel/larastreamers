@@ -20,12 +20,12 @@
             <div>
                 <a href="{{ $channel->url() }}">
                     <x-icons.youtube
-                        class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white"/>
+                        class="w-7 h-7 mr-2 inline text-gray fill-white stroke-current hover:text-white"/>
                 </a>
                 @if($channel->twitter_handle)
                     <a href="https://twitter.com/{{ $channel->twitter_handle }}">
                         <x-icons.twitter
-                            class="w-6 h-6 mr-2 inline text-gray fill-current stroke-current hover:text-white"/>
+                            class="w-7 h-7 mr-2 inline text-gray fill-white stroke-current hover:text-white"/>
                     </a>
                 @endif
             </div>
