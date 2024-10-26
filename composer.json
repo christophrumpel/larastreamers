@@ -13,7 +13,7 @@
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^11.2",
         "laravel/tinker": "^2.9",
-        "league/flysystem-ftp": "^3.0",
+        "league/flysystem-ftp": "^3.28",
         "livewire/livewire": "^3.3",
         "owenvoke/blade-fontawesome": "^2.6",
         "spatie/data-transfer-object": "^3.7",
