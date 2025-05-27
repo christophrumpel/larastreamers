@@ -19,7 +19,7 @@ return [
             'url' => '',
 
             'title' => 'All upcoming streams',
-            'description' => 'All upcoming streams.', //TODO add some copy
+            'description' => 'All upcoming streams.', // TODO add some copy
             'language' => 'en-US',
 
             /*
