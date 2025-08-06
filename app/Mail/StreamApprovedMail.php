@@ -18,6 +18,7 @@ class StreamApprovedMail extends Mailable
     public function build(): self
     {
         return $this
+            ->from('noreply@larastreamers.com', 'Larastreamers')
             ->subject("The stream you've submitted has been approved")
             ->markdown('mail.approved');
     }

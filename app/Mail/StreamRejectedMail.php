@@ -18,6 +18,7 @@ class StreamRejectedMail extends Mailable
     public function build(): StreamRejectedMail
     {
         return $this
+            ->from('noreply@larastreamers.com', 'Larastreamers')
             ->subject("The stream you've submitted was rejected")
             ->markdown('mail.rejected');
     }

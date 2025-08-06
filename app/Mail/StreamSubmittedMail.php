@@ -18,6 +18,7 @@ class StreamSubmittedMail extends Mailable
     public function build(): self
     {
         return $this
+            ->from('noreply@larastreamers.com', 'Larastreamers')
             ->subject('Stream submitted on Larastreamers')
             ->markdown('mail.submitted');
     }
