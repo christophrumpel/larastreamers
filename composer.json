@@ -12,6 +12,7 @@
         "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^11.2",
+        "laravel/nightwatch": "^1.17",
         "laravel/tinker": "^2.9",
         "league/flysystem-ftp": "^3.0",
         "livewire/livewire": "^3.3",
