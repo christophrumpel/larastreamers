@@ -60,6 +60,24 @@ it('calls the submit action with short youtube url', function() {
         ->call('submit');
 });
 
+it('calls the submit action with youtube live url', function() {
+    // Arrange
+    $liveYoutubeUrl = 'https://www.youtube.com/live/bcnR4NYOw2o';
+    $this->mock(SubmitStreamAction::class)
+        ->shouldReceive('handle')
+        ->withArgs(['bcnR4NYOw2o', 'de', 'test@test.at'])
+        ->once();
+
+    mockYouTubVideoCall();
+
+    // Arrange & Act & Assert
+    Livewire::test(SubmitYouTubeLiveStream::class)
+        ->set('youTubeIdOrUrl', $liveYoutubeUrl)
+        ->set('submittedByEmail', 'test@test.at')
+        ->set('languageCode', 'de')
+        ->call('submit');
+});
+
 it('shows a success message', function() {
     // Arrange
     mockYouTubVideoCall();

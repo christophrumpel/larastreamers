@@ -39,7 +39,7 @@ class YouTubeRule implements Rule
     public function determineYoutubeId(string $youTubeIdOrUrl): string
     {
         if (filter_var($youTubeIdOrUrl, FILTER_VALIDATE_URL)) {
-            preg_match('#(?<=v=|v/|vi=|vi/|youtu.be/)[a-zA-Z0-9_-]{11}#', $youTubeIdOrUrl, $matches);
+            preg_match('#(?<=v=|v/|vi=|vi/|youtu.be/|live/)[a-zA-Z0-9_-]{11}#', $youTubeIdOrUrl, $matches);
             if (! $matches) {
                 return '';
             }
