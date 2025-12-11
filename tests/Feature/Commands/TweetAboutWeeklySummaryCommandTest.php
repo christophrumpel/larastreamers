@@ -49,6 +49,26 @@ it('tweets weekly summary for a multiple streams', function() {
         ->assertLastTweet("Last week, there were 2 streams. 👏 Thanks to all the streamers and viewers. 🙏🏻\n Find more Streams here: ".route('archive'));
 });
 
+it('tweets weekly summary for streams without actual_start_time', function() {
+    // Arrange
+    $startOfLastWeek = Carbon::today()->subWeek()->startOfWeek();
+
+    Stream::factory()
+        ->approved()
+        ->finished()
+        ->create([
+            'scheduled_start_time' => $startOfLastWeek,
+            'actual_start_time' => null, // YouTube didn't populate this field
+        ]);
+
+    // Act
+    $this->artisan(TweetAboutWeeklySummaryCommand::class);
+
+    // Assert
+    Twitter::assertTweetCount(1)
+        ->assertLastTweet("Last week, there was 1 stream. 👏 Thanks to everyone who participated. 🙏🏻\n Find more Streams here: ".route('archive'));
+});
+
 it('does not tweet weekly summary when no streams given', function() {
     // Arrange
     $beforeLastWeek = Carbon::today()->subWeek()->startOfWeek()->subDay();

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Support\Stringable;
@@ -70,10 +71,13 @@ class Stream extends Model implements Feedable
 
     public function scopeFromLastWeek(Builder $query): Builder
     {
-        return $query->whereBetween('actual_start_time', [
-            Carbon::today()->subWeek()->startOfWeek(),
-            Carbon::today()->subWeek()->endOfWeek()->endOfDay(),
-        ]);
+        return $query->whereBetween(
+            DB::raw('COALESCE(actual_start_time, scheduled_start_time)'),
+            [
+                Carbon::today()->subWeek()->startOfWeek(),
+                Carbon::today()->subWeek()->endOfWeek()->endOfDay(),
+            ]
+        );
     }
 
     public static function getFeedItems(): Collection
