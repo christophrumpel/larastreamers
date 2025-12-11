@@ -24,7 +24,7 @@ Schedule::command(BackupCommand::class, ['--only-db', '--disable-notifications']
 Schedule::command(UpdateUpcomingStreamsCommand::class)->hourly();
 Schedule::command(CheckIfUpcomingStreamsAreLiveCommand::class)->everyFiveMinutes();
 Schedule::command(CheckIfLiveStreamsHaveEndedCommand::class)->everyTenMinutes();
-Schedule::command(ImportChannelStreamsCommand::class)->everyTwoHours();
+Schedule::command(ImportChannelStreamsCommand::class)->hourly();
 Schedule::command(UpdateLiveAndFinishedStreamsCommand::class)->daily();
 Schedule::command(UpdateChannelsCommand::class)->weeklyOn(1, '8:00');
 Schedule::command(TweetAboutLiveStreamsCommand::class)->everyMinute();
