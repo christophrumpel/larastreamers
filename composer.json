@@ -50,6 +50,9 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "pestphp/pest-plugin": true
+        },
+        "platform": {
+            "php": "8.3.4"
         }
     },
     "extra": {
