@@ -17,7 +17,7 @@ it('shows all approved streams in calendar', function() {
 
     // Act & Assert
     $this->get(route('calendar.ics'))
-        ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
+        ->assertHeader('Content-Type', 'text/calendar; charset=utf-8')
         ->assertDontSee([
             'SUMMARY:Stream two years old',
             'DESCRIPTION:Stream two years old',
@@ -73,7 +73,7 @@ it('shows only approved streams in calendar', function() {
 
     // Act & Assert
     $this->get(route('calendar.ics'))
-        ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
+        ->assertHeader('Content-Type', 'text/calendar; charset=utf-8')
         ->assertDontSee([
             'SUMMARY:Stream not approved',
         ])
@@ -113,7 +113,7 @@ it('can download one calendar item', function() {
 
     $this
         ->get(route('calendar.ics.stream', $stream))
-        ->assertHeader('Content-Type', 'text/calendar; charset=UTF-8')
+        ->assertHeader('Content-Type', 'text/calendar; charset=utf-8')
         ->assertSeeInOrder([
             'SUMMARY:Single Stream',
             'DESCRIPTION:Single Stream\nMy Channel\nhttps://www.youtube.com/watch?v=1234',
