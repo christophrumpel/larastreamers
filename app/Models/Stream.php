@@ -82,7 +82,7 @@ class Stream extends Model implements Feedable
 
     public static function getFeedItems(): Collection
     {
-        return static::query()->upcoming()->get();
+        return static::query()->approved()->upcoming()->get();
     }
 
     public function tweetStreamIsLiveWasSend(): bool
