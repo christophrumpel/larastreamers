@@ -14,7 +14,13 @@ class ApproveStreamAction
 {
     public function handle(Stream $stream): void
     {
+        // Prevent approving streams that are already approved
         if ($stream->approved_at) {
+            return;
+        }
+
+        // Prevent approving streams that have been explicitly rejected
+        if ($stream->rejected_at) {
             return;
         }
 

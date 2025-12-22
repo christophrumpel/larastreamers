@@ -44,12 +44,14 @@ class Stream extends Model implements Feedable
         'language_code',
         'submitted_by_email',
         'approved_at',
+        'rejected_at',
     ];
 
     protected function casts(): array
     {
         return [
             'approved_at' => 'datetime',
+            'rejected_at' => 'datetime',
             'scheduled_start_time' => 'datetime',
             'actual_start_time' => 'datetime',
             'actual_end_time' => 'datetime',
@@ -276,6 +278,11 @@ class Stream extends Model implements Feedable
     public function isApproved(): bool
     {
         return ! is_null($this->approved_at);
+    }
+
+    public function isRejected(): bool
+    {
+        return ! is_null($this->rejected_at);
     }
 
     public function duration(): Attribute

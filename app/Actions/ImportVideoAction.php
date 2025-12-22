@@ -16,6 +16,15 @@ class ImportVideoAction
     ): Stream {
         $video = YouTube::video($youTubeId);
 
+        // Check if stream exists and handle accordingly
+        $existingStream = Stream::where('youtube_id', $video->videoId)->first();
+        
+        // If stream was previously rejected, don't allow re-import without clearing rejection
+        if ($existingStream && $existingStream->rejected_at && !$approved) {
+            // Keep the rejection, don't overwrite
+            return $existingStream;
+        }
+
         return Stream::updateOrCreate(['youtube_id' => $video->videoId], [
             'channel_id' => Channel::firstWhere('platform_id', $video->channelId)->id ?? null,
             'title' => $video->title,
