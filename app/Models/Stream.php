@@ -71,6 +71,11 @@ class Stream extends Model implements Feedable
         return $query->whereNotNull('approved_at');
     }
 
+    public function scopeRejected(Builder $query): Builder
+    {
+        return $query->whereNotNull('rejected_at');
+    }
+
     public function scopeFromLastWeek(Builder $query): Builder
     {
         return $query->whereBetween(
@@ -186,7 +191,8 @@ class Stream extends Model implements Feedable
     {
         return $query->when($search, function(Builder $builder, ?string $search) {
             // Escape special LIKE characters to prevent wildcard abuse
-            $search = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $search);
+            // Use addcslashes to properly escape LIKE wildcards without double-escaping
+            $search = addcslashes($search, '%_');
             
             $builder->where(function(Builder $query) use ($search) {
                 $query

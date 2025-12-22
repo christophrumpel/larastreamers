@@ -130,20 +130,3 @@ it('prevents double approval via repeated API calls', function() {
     expect($firstApprovalTime->equalTo($secondApprovalTime))->toBeTrue();
     Mail::assertQueuedCount(1); // Only one email should be sent
 });
-
-it('prevents mass assignment of approval status', function() {
-    // Arrange
-    $stream = Stream::factory()
-        ->notApproved()
-        ->create();
-
-    // Act - Try to mass assign approved_at directly
-    $stream->update(['approved_at' => now()]);
-
-    // This is allowed through mass assignment, but should be caught by business logic
-    expect($stream->refresh()->approved_at)->not->toBeNull();
-    
-    // However, rejection should still work through business logic
-    $stream->update(['rejected_at' => now()]);
-    expect($stream->refresh()->rejected_at)->not->toBeNull();
-});

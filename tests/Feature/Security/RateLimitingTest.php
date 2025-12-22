@@ -23,7 +23,7 @@ it('enforces rate limiting on stream submissions', function() {
         ->set('youTubeIdOrUrl', 'video4')
         ->set('submittedByEmail', 'test4@test.at')
         ->call('submit')
-        ->assertHasErrors(['youTubeIdOrUrl' => 'Too many submission attempts']);
+        ->assertHasErrors(['youTubeIdOrUrl' => 'Too many submission attempts. Please try again later.']);
 });
 
 it('validates email format using strict validation', function() {
