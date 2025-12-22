@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::table('streams', function(Blueprint $table) {
             $table->timestamp('rejected_at')->nullable()->after('approved_at');
+            $table->index('rejected_at');
         });
     }
 
     public function down(): void
     {
         Schema::table('streams', function(Blueprint $table) {
+            $table->dropIndex(['rejected_at']);
             $table->dropColumn('rejected_at');
         });
     }
