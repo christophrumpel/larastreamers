@@ -185,6 +185,9 @@ class Stream extends Model implements Feedable
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
         return $query->when($search, function(Builder $builder, ?string $search) {
+            // Escape special LIKE characters to prevent wildcard abuse
+            $search = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $search);
+            
             $builder->where(function(Builder $query) use ($search) {
                 $query
                     ->where('title', 'like', "%$search%")
