@@ -44,9 +44,8 @@ class SubmitYouTubeLiveStream extends Component
         $key = 'stream-submission:' . request()->ip();
         
         if (RateLimiter::tooManyAttempts($key, 3)) {
-            $seconds = RateLimiter::availableIn($key);
             throw ValidationException::withMessages([
-                'youTubeIdOrUrl' => "Too many submission attempts. Please try again in {$seconds} seconds.",
+                'youTubeIdOrUrl' => 'Too many submission attempts. Please try again later.',
             ]);
         }
 

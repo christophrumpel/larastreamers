@@ -6,7 +6,7 @@ use Livewire\Livewire;
 
 it('enforces rate limiting on stream submissions', function() {
     // Arrange
-    mockYouTubVideoCall();
+    mockYouTubeVideoCall();
     RateLimiter::clear('stream-submission:' . request()->ip());
 
     // Act & Assert - First 3 submissions should work
@@ -28,7 +28,7 @@ it('enforces rate limiting on stream submissions', function() {
 
 it('validates email format using strict validation', function() {
     // Arrange
-    mockYouTubVideoCall();
+    mockYouTubeVideoCall();
 
     // Act & Assert - Invalid email should fail
     Livewire::test(SubmitYouTubeLiveStream::class)
@@ -40,7 +40,7 @@ it('validates email format using strict validation', function() {
 
 it('accepts valid email addresses', function() {
     // Arrange
-    mockYouTubVideoCall();
+    mockYouTubeVideoCall();
 
     // Act & Assert
     Livewire::test(SubmitYouTubeLiveStream::class)
@@ -51,7 +51,7 @@ it('accepts valid email addresses', function() {
 });
 
 // Helper
-function mockYouTubVideoCall(string $videoId = null): void
+function mockYouTubeVideoCall(string $videoId = null): void
 {
     \App\Facades\YouTube::partialMock()
         ->shouldReceive('videos')
