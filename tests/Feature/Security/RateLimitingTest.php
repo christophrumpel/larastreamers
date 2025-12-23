@@ -1,13 +1,15 @@
 <?php
 
+use App\Facades\YouTube;
 use App\Livewire\SubmitYouTubeLiveStream;
+use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Livewire;
 
 it('enforces rate limiting on stream submissions', function() {
     // Arrange
     mockYouTubeVideoCall();
-    RateLimiter::clear('stream-submission:' . request()->ip());
+    RateLimiter::clear('stream-submission:'.request()->ip());
 
     // Act & Assert - First 3 submissions should work
     for ($i = 0; $i < 3; $i++) {
@@ -29,6 +31,7 @@ it('enforces rate limiting on stream submissions', function() {
 it('validates email format using strict validation', function() {
     // Arrange
     mockYouTubeVideoCall();
+    RateLimiter::clear('stream-submission:'.request()->ip());
 
     // Act & Assert - Invalid email should fail
     Livewire::test(SubmitYouTubeLiveStream::class)
@@ -41,22 +44,23 @@ it('validates email format using strict validation', function() {
 it('accepts valid email addresses', function() {
     // Arrange
     mockYouTubeVideoCall();
+    RateLimiter::clear('stream-submission:'.request()->ip());
 
     // Act & Assert
     Livewire::test(SubmitYouTubeLiveStream::class)
         ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
-        ->set('submittedByEmail', 'valid@example.com')
+        ->set('submittedByEmail', 'test@gmail.com')
         ->call('submit')
         ->assertHasNoErrors();
 });
 
 // Helper
-function mockYouTubeVideoCall(string $videoId = null): void
+function mockYouTubeVideoCall(?string $videoId = null): void
 {
-    \App\Facades\YouTube::partialMock()
+    YouTube::partialMock()
         ->shouldReceive('videos')
         ->andReturn(collect([
-            \App\Services\YouTube\StreamData::fake(
+            StreamData::fake(
                 videoId: $videoId ?? 'bcnR4NYOw2o',
             ),
         ]));
