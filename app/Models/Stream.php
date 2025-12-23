@@ -189,7 +189,7 @@ class Stream extends Model implements Feedable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->when($search, function(Builder $builder, ?string $search) {
+        return $query->when($search, function(Builder $builder, string $search) {
             // Escape LIKE wildcards (% and _) to prevent wildcard DoS attacks
             $search = addcslashes($search, '%_');
 
