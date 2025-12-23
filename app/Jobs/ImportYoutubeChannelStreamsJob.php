@@ -25,7 +25,7 @@ class ImportYoutubeChannelStreamsJob implements ShouldQueue
         $streams->map(function(StreamData $streamData) {
             // Check if stream exists and was rejected
             $existingStream = Stream::where('youtube_id', $streamData->videoId)->first();
-            
+
             // Don't auto-approve if stream was previously rejected
             if ($existingStream && $existingStream->rejected_at) {
                 return;

@@ -15,7 +15,7 @@ it('prevents approval of rejected streams', function() {
     // Arrange
     Http::fake(fn () => Http::response($this->videoResponse()));
     Mail::fake();
-    
+
     $stream = Stream::factory()
         ->notApproved()
         ->create([
@@ -35,7 +35,7 @@ it('prevents approval of rejected streams', function() {
 it('prevents rejection of already approved streams', function() {
     // Arrange
     Mail::fake();
-    
+
     $stream = Stream::factory()
         ->approved()
         ->create([
@@ -57,7 +57,7 @@ it('prevents rejection of already approved streams', function() {
 it('marks stream as rejected when rejection action is called', function() {
     // Arrange
     Mail::fake();
-    
+
     $stream = Stream::factory()
         ->notApproved()
         ->create([
@@ -110,7 +110,7 @@ it('prevents double approval via repeated API calls', function() {
     // Arrange
     Http::fake(fn () => Http::response($this->videoResponse()));
     Mail::fake();
-    
+
     $stream = Stream::factory()
         ->notApproved()
         ->create([
@@ -121,7 +121,7 @@ it('prevents double approval via repeated API calls', function() {
     $action = app(ApproveStreamAction::class);
     $action->handle($stream);
     $firstApprovalTime = $stream->refresh()->approved_at;
-    
+
     sleep(1);
     $action->handle($stream);
     $secondApprovalTime = $stream->refresh()->approved_at;
