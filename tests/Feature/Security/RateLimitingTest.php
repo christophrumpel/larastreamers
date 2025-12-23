@@ -45,7 +45,7 @@ it('accepts valid email addresses', function() {
     // Act & Assert
     Livewire::test(SubmitYouTubeLiveStream::class)
         ->set('youTubeIdOrUrl', 'bcnR4NYOw2o')
-        ->set('submittedByEmail', 'valid@example.com')
+        ->set('submittedByEmail', 'valid@gmail.com')
         ->call('submit')
         ->assertHasNoErrors();
 });
