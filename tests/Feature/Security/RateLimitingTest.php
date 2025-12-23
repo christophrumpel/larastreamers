@@ -1,6 +1,8 @@
 <?php
 
+use App\Facades\YouTube;
 use App\Livewire\SubmitYouTubeLiveStream;
+use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Livewire;
 
@@ -53,10 +55,10 @@ it('accepts valid email addresses', function() {
 // Helper
 function mockYouTubeVideoCall(?string $videoId = null): void
 {
-    \App\Facades\YouTube::partialMock()
+    YouTube::partialMock()
         ->shouldReceive('videos')
         ->andReturn(collect([
-            \App\Services\YouTube\StreamData::fake(
+            StreamData::fake(
                 videoId: $videoId ?? 'bcnR4NYOw2o',
             ),
         ]));
