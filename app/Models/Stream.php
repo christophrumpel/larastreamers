@@ -193,7 +193,7 @@ class Stream extends Model implements Feedable
             // Escape special LIKE characters to prevent wildcard abuse
             // Use addcslashes to properly escape LIKE wildcards without double-escaping
             $search = addcslashes($search, '%_');
-            
+
             $builder->where(function(Builder $query) use ($search) {
                 $query
                     ->where('title', 'like', "%$search%")

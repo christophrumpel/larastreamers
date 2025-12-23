@@ -7,7 +7,7 @@ use Livewire\Livewire;
 it('enforces rate limiting on stream submissions', function() {
     // Arrange
     mockYouTubeVideoCall();
-    RateLimiter::clear('stream-submission:' . request()->ip());
+    RateLimiter::clear('stream-submission:'.request()->ip());
 
     // Act & Assert - First 3 submissions should work
     for ($i = 0; $i < 3; $i++) {
@@ -51,7 +51,7 @@ it('accepts valid email addresses', function() {
 });
 
 // Helper
-function mockYouTubeVideoCall(string $videoId = null): void
+function mockYouTubeVideoCall(?string $videoId = null): void
 {
     \App\Facades\YouTube::partialMock()
         ->shouldReceive('videos')

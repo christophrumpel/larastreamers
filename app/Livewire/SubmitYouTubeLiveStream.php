@@ -41,8 +41,8 @@ class SubmitYouTubeLiveStream extends Component
     public function submit(): void
     {
         // Rate limiting: max 3 submissions per hour per IP
-        $key = 'stream-submission:' . request()->ip();
-        
+        $key = 'stream-submission:'.request()->ip();
+
         if (RateLimiter::tooManyAttempts($key, 3)) {
             throw ValidationException::withMessages([
                 'youTubeIdOrUrl' => 'Too many submission attempts. Please try again later.',
