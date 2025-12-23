@@ -44,12 +44,14 @@ class Stream extends Model implements Feedable
         'language_code',
         'submitted_by_email',
         'approved_at',
+        'rejected_at',
     ];
 
     protected function casts(): array
     {
         return [
             'approved_at' => 'datetime',
+            'rejected_at' => 'datetime',
             'scheduled_start_time' => 'datetime',
             'actual_start_time' => 'datetime',
             'actual_end_time' => 'datetime',
@@ -67,6 +69,11 @@ class Stream extends Model implements Feedable
     public function scopeApproved(Builder $query): Builder
     {
         return $query->whereNotNull('approved_at');
+    }
+
+    public function scopeRejected(Builder $query): Builder
+    {
+        return $query->whereNotNull('rejected_at');
     }
 
     public function scopeFromLastWeek(Builder $query): Builder
@@ -182,7 +189,10 @@ class Stream extends Model implements Feedable
 
     public function scopeSearch(Builder $query, ?string $search): Builder
     {
-        return $query->when($search, function(Builder $builder, ?string $search) {
+        return $query->when($search, function(Builder $builder, string $search) {
+            // Escape LIKE wildcards (% and _) to prevent wildcard DoS attacks
+            $search = addcslashes($search, '%_');
+
             $builder->where(function(Builder $query) use ($search) {
                 $query
                     ->where('title', 'like', "%$search%")
@@ -276,6 +286,11 @@ class Stream extends Model implements Feedable
     public function isApproved(): bool
     {
         return ! is_null($this->approved_at);
+    }
+
+    public function isRejected(): bool
+    {
+        return ! is_null($this->rejected_at);
     }
 
     public function duration(): Attribute
