@@ -18,6 +18,7 @@ class TweetAboutLiveStreamsCommand extends Command
         $streams = Stream::query()
             ->approved()
             ->where('status', StreamData::STATUS_LIVE)
+            ->scheduledWithinLastHour()
             ->whereNull('tweeted_at')
             ->get()
             ->each(function(Stream $stream) {

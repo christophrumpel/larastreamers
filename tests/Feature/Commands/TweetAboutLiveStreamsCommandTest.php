@@ -109,3 +109,16 @@ it('only tweets streams that are going live once', function() {
     // Assert
     Twitter::assertNoTweetsSent();
 });
+
+it('does not tweet streams that were scheduled more than an hour ago', function() {
+    // Arrange
+    Stream::factory()
+        ->live()
+        ->create(['scheduled_start_time' => now()->subHours(2)]);
+
+    // Act
+    $this->artisan(TweetAboutLiveStreamsCommand::class);
+
+    // Assert
+    Twitter::assertNoTweetsSent();
+});
