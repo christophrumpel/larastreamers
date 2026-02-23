@@ -1,0 +1,91 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^PHPDoc tag @var with type Carbon\\Carbon is not subtype of native type Illuminate\\Support\\Carbon\|null\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: app/Actions/SortStreamsByDateAction.php
+
+		-
+			message: '#^Call to App\\Services\\Twitter\\NullTwitter\:\:tweet\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: app/Console/Commands/TweetAboutWeeklySummaryCommand.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$twitter_handle\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Jobs/TweetStreamIsLiveJob.php
+
+		-
+			message: '#^Call to App\\Services\\Twitter\\NullTwitter\:\:tweet\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: app/Jobs/TweetStreamIsLiveJob.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$twitter_handle\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Jobs/TweetStreamIsUpcomingJob.php
+
+		-
+			message: '#^Call to App\\Services\\Twitter\\NullTwitter\:\:tweet\(\) on a separate line has no effect\.$#'
+			identifier: staticMethod.resultUnused
+			count: 1
+			path: app/Jobs/TweetStreamIsUpcomingJob.php
+
+		-
+			message: '#^PHPDoc tag @var with type Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Stream\> is not subtype of native type Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: app/Models/Channel.php
+
+		-
+			message: '#^Property ''hashid'' does not exist in model\.$#'
+			identifier: rules.modelAppends
+			count: 1
+			path: app/Models/Channel.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/Stream.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/Stream.php
+
+		-
+			message: '#^Property ''profile_photo_url'' does not exist in model\.$#'
+			identifier: rules.modelAppends
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Parameter \$onPlatformSince of class App\\Services\\YouTube\\ChannelData constructor expects Carbon\\Carbon, Carbon\\Carbon\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/YouTubeClient.php
+
+		-
+			message: '#^Parameter \$plannedStart of class App\\Services\\YouTube\\StreamData constructor expects Carbon\\Carbon, Carbon\\Carbon\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/YouTubeClient.php
+
+		-
+			message: '#^Parameter \$publishedAt of class App\\Services\\YouTube\\StreamData constructor expects Carbon\\Carbon, Carbon\\Carbon\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Services/YouTubeClient.php
+
+		-
+			message: '#^Parameter \#1 \$view of function view expects view\-string\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/View/Components/InputError.php

@@ -3,9 +3,8 @@
 namespace App\Services\YouTube;
 
 use Carbon\Carbon;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class StreamData extends DataTransferObject
+class StreamData
 {
     public const STATUS_UPCOMING = 'upcoming';
 
@@ -15,52 +14,50 @@ class StreamData extends DataTransferObject
 
     public const STATUS_DELETED = 'deleted';
 
-    public string $videoId;
-
-    public string $title;
-
-    public string $channelId;
-
-    public string $channelTitle;
-
-    public string $description;
-
-    public string $thumbnailUrl;
-
-    public Carbon $publishedAt;
-
-    public Carbon $plannedStart;
-
-    public ?Carbon $actualStartTime;
-
-    public ?Carbon $actualEndTime;
-
-    public string $status;
+    public function __construct(
+        public readonly string $videoId,
+        public readonly string $title,
+        public readonly string $channelId,
+        public readonly string $channelTitle,
+        public readonly string $description,
+        public readonly string $thumbnailUrl,
+        public readonly Carbon $publishedAt,
+        public readonly Carbon $plannedStart,
+        public readonly ?Carbon $actualStartTime,
+        public readonly ?Carbon $actualEndTime,
+        public readonly string $status,
+    ) {}
 
     public function isLive(): bool
     {
         return $this->status === self::STATUS_LIVE;
     }
 
-    public static function fake(mixed ...$args): self
-    {
-        if (is_array($args[0] ?? null)) {
-            $args = $args[0];
-        }
-
-        return new static(
-            array_merge([
-                'title' => 'My Test Stream',
-                'channelId' => '1234',
-                'channelTitle' => 'My Channel Name',
-                'description' => 'Some description',
-                'thumbnailUrl' => 'my-new-thumbnail-url',
-                'publishedAt' => Carbon::tomorrow(),
-                'plannedStart' => Carbon::tomorrow(),
-                'actualStartTime' => Carbon::tomorrow(),
-                'actualEndTime' => Carbon::tomorrow()->addHour(),
-                'status' => static::STATUS_UPCOMING,
-            ], $args)
+    public static function fake(
+        string $videoId = 'fake-video-id',
+        string $title = 'My Test Stream',
+        string $channelId = '1234',
+        string $channelTitle = 'My Channel Name',
+        string $description = 'Some description',
+        string $thumbnailUrl = 'my-new-thumbnail-url',
+        ?Carbon $publishedAt = null,
+        ?Carbon $plannedStart = null,
+        ?Carbon $actualStartTime = null,
+        ?Carbon $actualEndTime = null,
+        string $status = self::STATUS_UPCOMING,
+    ): self {
+        return new self(
+            videoId: $videoId,
+            title: $title,
+            channelId: $channelId,
+            channelTitle: $channelTitle,
+            description: $description,
+            thumbnailUrl: $thumbnailUrl,
+            publishedAt: $publishedAt ?? Carbon::tomorrow(),
+            plannedStart: $plannedStart ?? Carbon::tomorrow(),
+            actualStartTime: $actualStartTime ?? Carbon::tomorrow(),
+            actualEndTime: $actualEndTime ?? Carbon::tomorrow()->addHour(),
+            status: $status,
         );
     }
 }
