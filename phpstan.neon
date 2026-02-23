@@ -17,5 +17,7 @@ parameters:
         -
             identifier: missingType.generics
 
+    reportUnmatchedIgnoredErrors: false
+
     excludePaths:
         - ./*/*/FileToBeExcluded.php
