@@ -3,23 +3,18 @@
 namespace App\Services\YouTube;
 
 use Carbon\Carbon;
-use Spatie\DataTransferObject\DataTransferObject;
 
-class ChannelData extends DataTransferObject
+class ChannelData
 {
-    public string $platformId;
-
-    public string $youTubeCustomUrl;
-
-    public string $name;
-
-    public string $description;
-
-    public Carbon $onPlatformSince;
-
-    public string $thumbnailUrl;
-
-    public string $country;
+    public function __construct(
+        public readonly string $platformId,
+        public readonly string $youTubeCustomUrl,
+        public readonly string $name,
+        public readonly string $description,
+        public readonly Carbon $onPlatformSince,
+        public readonly string $thumbnailUrl,
+        public readonly string $country,
+    ) {}
 
     public function prepareForModel(): array
     {
@@ -34,23 +29,23 @@ class ChannelData extends DataTransferObject
         ];
     }
 
-    public static function fake(mixed ...$args): self
-    {
-        if (is_array($args[0] ?? null)) {
-            $args = $args[0];
-        }
-
-        return new static(
-            array_merge([
-                'title' => 'My Test Channel',
-                'platform_id' => '1234',
-                'youtube_custom_url' => 'test',
-                'name' => 'My Channel Name',
-                'description' => 'Some description',
-                'thumbnail_url' => 'my-new-thumbnail-url',
-                'on_platform_since' => Carbon::now()->subYears(2),
-                'country' => 'US',
-            ], $args)
+    public static function fake(
+        string $platformId = '1234',
+        string $youTubeCustomUrl = 'test',
+        string $name = 'My Channel Name',
+        string $description = 'Some description',
+        ?Carbon $onPlatformSince = null,
+        string $thumbnailUrl = 'my-new-thumbnail-url',
+        string $country = 'US',
+    ): self {
+        return new self(
+            platformId: $platformId,
+            youTubeCustomUrl: $youTubeCustomUrl,
+            name: $name,
+            description: $description,
+            onPlatformSince: $onPlatformSince ?? Carbon::now()->subYears(2),
+            thumbnailUrl: $thumbnailUrl,
+            country: $country,
         );
     }
 }

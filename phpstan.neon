@@ -1,5 +1,6 @@
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
 
 parameters:
 
@@ -11,10 +12,12 @@ parameters:
 
     ignoreErrors:
         - '#Unsafe usage of new static#'
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
+
+    reportUnmatchedIgnoredErrors: false
 
     excludePaths:
         - ./*/*/FileToBeExcluded.php
-
-    checkMissingIterableValueType: false
-
-    checkGenericClassInNonGenericObjectType: false
