@@ -397,6 +397,11 @@
       return diffs;
     }
     let leftKeys = Object.keys(left);
+    let rightKeys = Object.keys(right);
+    if (isObject(left) && leftKeys.length === rightKeys.length && leftKeys.some((key, i) => key !== rightKeys[i])) {
+      diffs[path] = right;
+      return diffs;
+    }
     Object.entries(right).forEach(([key, value]) => {
       diffs = { ...diffs, ...diff(left[key], right[key], diffs, path === "" ? key : `${path}.${key}`) };
       leftKeys = leftKeys.filter((i) => i !== key);
@@ -1390,6 +1395,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   var alpineAttributeRegex = () => new RegExp(`^${prefixAsString}([^:^.]+)\\b`);
   function toParsedDirectives(transformedAttributeMap, originalAttributeOverride) {
     return ({ name, value }) => {
+      if (name === value)
+        value = "";
       let typeMatch = name.match(alpineAttributeRegex());
       let valueMatch = name.match(/:([a-zA-Z0-9\-_:]+)/);
       let modifiers = name.match(/\.[^.\]]+(?=[^\]]*$)/g) || [];
@@ -2342,7 +2349,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     get raw() {
       return raw;
     },
-    version: "3.15.3",
+    version: "3.15.4",
     flushAndStopDeferringMutations,
     dontAutoEvaluateFunctions,
     disableEffectScheduling,
@@ -4476,16 +4483,27 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let component;
     return new Proxy({}, {
       get(target, property) {
-        if (!component)
-          component = closestComponent(el);
+        if (!component) {
+          try {
+            component = closestComponent(el);
+          } catch (e) {
+            return () => {
+            };
+          }
+        }
         if (["$entangle", "entangle"].includes(property)) {
           return generateEntangleFunction(component, cleanup2);
         }
         return component.$wire[property];
       },
       set(target, property, value) {
-        if (!component)
-          component = closestComponent(el);
+        if (!component) {
+          try {
+            component = closestComponent(el);
+          } catch (e) {
+            return true;
+          }
+        }
         component.$wire[property] = value;
         return true;
       }
@@ -8091,7 +8109,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     function navigateTo(destination, { preserveScroll = false, shouldPushToHistoryState = true }) {
       showProgressBar && showAndStartProgressBar();
       fetchHtmlOrUsePrefetchedHtml(destination, (html, finalDestination) => {
-        fireEventForOtherLibrariesToHookInto("alpine:navigating");
+        let swapCallbacks = [];
+        fireEventForOtherLibrariesToHookInto("alpine:navigating", {
+          onSwap: (callback) => swapCallbacks.push(callback)
+        });
         restoreScroll && storeScrollInformationInHtmlBeforeNavigatingAway();
         cleanupAlpineElementsOnThePageThatArentInsideAPersistedElement();
         updateCurrentPageHtmlInHistoryStateForLaterBackButtonClicks();
@@ -8112,6 +8133,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
               unPackPersistedPopovers(persistedEl);
             });
             !preserveScroll && restoreScrollPositionOrScrollToTop();
+            swapCallbacks.forEach((callback) => callback());
             afterNewScriptsAreDoneLoading(() => {
               andAfterAllThis(() => {
                 setTimeout(() => {
@@ -8148,7 +8170,10 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
       if (prevented)
         return;
       storeScrollInformationInHtmlBeforeNavigatingAway();
-      fireEventForOtherLibrariesToHookInto("alpine:navigating");
+      let swapCallbacks = [];
+      fireEventForOtherLibrariesToHookInto("alpine:navigating", {
+        onSwap: (callback) => swapCallbacks.push(callback)
+      });
       updateCurrentPageHtmlInSnapshotCacheForLaterBackButtonClicks(currentPageUrl, currentPageKey);
       preventAlpineFromPickingUpDomChanges(Alpine3, (andAfterAllThis) => {
         enablePersist && storePersistantElementsForLater((persistedEl) => {
@@ -8163,6 +8188,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             unPackPersistedPopovers(persistedEl);
           });
           restoreScrollPositionOrScrollToTop();
+          swapCallbacks.forEach((callback) => callback());
           andAfterAllThis(() => {
             autofocus && autofocusElementsWithTheAutofocusAttribute();
             nowInitializeAlpineOnTheNewPage(Alpine3);
@@ -8265,7 +8291,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let isInitiallyPresentInUrl = has2(url, name);
     let initialValue = isInitiallyPresentInUrl ? get3(url, name) : initialSeedValue;
     let initialValueMemo = JSON.stringify(initialValue);
-    let exceptValueMemo = [false, null, void 0].includes(except) ? initialSeedValue : JSON.stringify(except);
+    let exceptValueMemo = JSON.stringify(except);
     let hasReturnedToInitialValue = (newValue) => JSON.stringify(newValue) === initialValueMemo;
     let hasReturnedToExceptValue = (newValue) => JSON.stringify(newValue) === exceptValueMemo;
     if (alwaysShow)
@@ -9430,6 +9456,8 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
   function colocateCommitsByComponent(pools, component, foreignComponent) {
     let pool = findPoolWithComponent(pools, component);
     let foreignPool = findPoolWithComponent(pools, foreignComponent);
+    if (!foreignPool)
+      return;
     let foreignCommit = foreignPool.findCommitByComponent(foreignComponent);
     foreignPool.delete(foreignCommit);
     pool.add(foreignCommit);
@@ -9838,8 +9866,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
     let expression = directive3.expression;
     let options = {
       exact: directive3.modifiers.includes("exact"),
-      strict: directive3.modifiers.includes("strict")
+      strict: directive3.modifiers.includes("strict"),
+      ignore: directive3.modifiers.includes("ignore")
     };
+    if (options.ignore)
+      return;
     if (expression.startsWith("#"))
       return;
     if (!el.hasAttribute("href"))

@@ -31,6 +31,7 @@
     "require-dev": {
         "christophrumpel/missing-livewire-assertions": "^2.5",
         "fakerphp/faker": "^1.23",
+        "laravel/boost": "^2.3",
         "laravel/pint": "^1.15",
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
