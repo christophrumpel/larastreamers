@@ -15,3 +15,7 @@ npm-debug.log
 yarn-error.log
 .php-cs-fixer.cache
 phpunit.xml
+.claude/
+.mcp.json
+CLAUDE.md
+boost.json
