@@ -34,7 +34,7 @@ it('can fetch upcoming streams from youtube', function() {
     // Assert
     expect($streams)->toHaveCount(3);
 
-    /** @var \App\Services\YouTube\StreamData $finishedStream */
+    /** @var StreamData $finishedStream */
     $finishedStream = $streams->first();
 
     expect($finishedStream->videoId)->toEqual('gzqJZQyfkaI');
@@ -47,7 +47,7 @@ it('can fetch upcoming streams from youtube', function() {
     expect($finishedStream->actualEndTime->toIso8601String())->toEqual('2031-05-15T11:30:29+00:00');
     expect($finishedStream->status)->toEqual(StreamData::STATUS_FINISHED);
 
-    /** @var \App\Services\YouTube\StreamData $upcomingStream */
+    /** @var StreamData $upcomingStream */
     $upcomingStream = $streams->last();
 
     expect($upcomingStream->videoId)->toEqual('L3O1BbybSgw');

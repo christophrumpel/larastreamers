@@ -3,6 +3,7 @@
 use App\Models\Channel;
 use App\Models\Stream;
 use Illuminate\Support\Carbon;
+use Spatie\IcalendarGenerator\Builders\ComponentBuilder;
 
 it('shows all approved streams in calendar', function() {
     // Arrange
@@ -63,7 +64,7 @@ it('shows all approved streams in calendar', function() {
     // after a specific length, the generated output cuts of the the string
     // so we cannot assert this string anymore
     // that's why the description is not in the string.
-    /** @see \Spatie\IcalendarGenerator\Builders\ComponentBuilder::chipLine() */
+    /** @see ComponentBuilder::chipLine() */
 });
 
 it('shows only approved streams in calendar', function() {

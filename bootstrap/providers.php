@@ -1,8 +1,13 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\FortifyServiceProvider;
+use App\Providers\JetstreamServiceProvider;
+use App\Providers\TwitterServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\FortifyServiceProvider::class,
-    App\Providers\JetstreamServiceProvider::class,
-    App\Providers\TwitterServiceProvider::class,
+    AppServiceProvider::class,
+    FortifyServiceProvider::class,
+    JetstreamServiceProvider::class,
+    TwitterServiceProvider::class,
 ];

@@ -2,9 +2,11 @@
 
 use App\Actions\Submission\ApproveStreamAction;
 use App\Actions\Submission\RejectStreamAction;
+use App\Facades\YouTube;
 use App\Jobs\ImportYoutubeChannelStreamsJob;
 use App\Models\Channel;
 use App\Models\Stream;
+use App\Services\YouTube\StreamData;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Tests\Fakes\YouTubeResponses;
@@ -87,11 +89,11 @@ it('does not auto-import rejected streams via job', function() {
     ]);
 
     // Mock YouTube API response
-    \App\Facades\YouTube::partialMock()
+    YouTube::partialMock()
         ->shouldReceive('upcomingStreams')
         ->with('test-channel-id')
         ->andReturn(collect([
-            \App\Services\YouTube\StreamData::fake(
+            StreamData::fake(
                 videoId: 'rejected-video',
                 channelId: 'test-channel-id',
             ),
