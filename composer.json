@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.4",
         "abraham/twitteroauth": "^5.0",
+        "aws/aws-sdk-php": "^3.388",
         "calebporzio/sushi": "^2.4",
         "doctrine/dbal": "^3.5",
         "guzzlehttp/guzzle": "^7.4",
