@@ -1,7 +1,10 @@
 <?php
 
-uses(\Tests\TestCase::class)->in('Feature', 'Unit');
-uses(\Tests\Fakes\YouTubeResponses::class)->in('Unit');
+use Tests\Fakes\YouTubeResponses;
+use Tests\TestCase;
+
+uses(TestCase::class)->in('Feature', 'Unit');
+uses(YouTubeResponses::class)->in('Unit');
 
 /*
 |--------------------------------------------------------------------------

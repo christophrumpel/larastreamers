@@ -6,7 +6,7 @@ use App\Services\YouTubeClient;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \App\Services\YouTubeClient
+ * @see YouTubeClient
  */
 class YouTube extends Facade
 {
