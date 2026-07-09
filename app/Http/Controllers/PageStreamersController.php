@@ -11,7 +11,7 @@ class PageStreamersController extends Controller
     {
         $channels = Channel::withCount('approvedFinishedStreams')
             ->withApprovedAndFinishedStreams()
-            ->orderBy('approved_finished_streams_count', 'Desc')->get();
+            ->orderBy('approved_finished_streams_count', 'desc')->get();
 
         return view('pages.streamers', ['channels' => $channels]);
     }
