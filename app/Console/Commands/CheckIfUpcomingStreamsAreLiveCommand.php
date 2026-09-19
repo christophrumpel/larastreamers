@@ -2,16 +2,18 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\UpdateStreamAction;
 use App\Facades\YouTube;
 use App\Models\Stream;
 use App\Services\YouTube\StreamData;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class CheckIfUpcomingStreamsAreLiveCommand extends Command
 {
     protected $signature = 'larastreamers:check-if-upcoming-streams-are-live';
 
-    protected $description = 'Check if upcoming streams (next 15min) are already live and set them live.';
+    protected $description = 'Check if upcoming streams (next 30min) are already live and set them live.';
 
     public function handle(): int
     {
@@ -30,16 +32,25 @@ class CheckIfUpcomingStreamsAreLiveCommand extends Command
 
         $this->info("Fetching {$streams->count()} stream(s) from API to update their status.");
 
-        $updatesCount = YouTube::videos($streams->keys())
-            ->map(fn (StreamData $streamData) => optional($streams
-                ->get($streamData->videoId))
-                ->update([
-                    'status' => $streamData->status,
-                ]))
-            ->filter()
-            ->count();
+        $youTubeResponse = YouTube::videos($streams->keys());
 
-        $this->info($updatesCount.' stream(s) were updated.');
+        $streams->each(function(Stream $stream) use ($youTubeResponse) {
+            /** @var StreamData|null $streamData */
+            $streamData = $youTubeResponse->where('videoId', $stream->youtube_id)->first();
+
+            if (is_null($streamData)) {
+                $stream->update([
+                    'status' => StreamData::STATUS_DELETED,
+                    'hidden_at' => Carbon::now(),
+                ]);
+
+                return;
+            }
+
+            (new UpdateStreamAction)->handle($stream, $streamData);
+        });
+
+        $this->info($streams->count().' stream(s) were updated.');
 
         return self::SUCCESS;
     }
