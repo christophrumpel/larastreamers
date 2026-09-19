@@ -166,6 +166,16 @@ trait YouTubeResponses
                                 'width' => 1280,
                                 'height' => 720,
                             ],
+                            'fhd' => [
+                                'url' => 'https://i.ytimg.com/vi/L3O1BbybSgw/fhddefault_live.jpg',
+                                'width' => 1920,
+                                'height' => 1080,
+                            ],
+                            'qhd' => [
+                                'url' => 'https://i.ytimg.com/vi/L3O1BbybSgw/qhddefault_live.jpg',
+                                'width' => 2560,
+                                'height' => 1440,
+                            ],
                         ],
                         'channelTitle' => 'Freek Van der Herten',
                         'categoryId' => '24',

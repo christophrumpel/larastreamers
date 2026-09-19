@@ -30,7 +30,7 @@ class YouTubeClient
             name: data_get($item, 'snippet.title'),
             description: data_get($item, 'snippet.description', ''),
             onPlatformSince: $this->toCarbon(data_get($item, 'snippet.publishedAt')),
-            thumbnailUrl: last(data_get($item, 'snippet.thumbnails'))['url'] ?? null,
+            thumbnailUrl: $this->pickThumbnailUrl(data_get($item, 'snippet.thumbnails', [])),
             country: data_get($item, 'snippet.country', ''),
         ));
     }
@@ -66,13 +66,31 @@ class YouTubeClient
                 channelId: data_get($youTubeVideoDetails, 'snippet.channelId'),
                 channelTitle: data_get($youTubeVideoDetails, 'snippet.channelTitle'),
                 description: data_get($youTubeVideoDetails, 'snippet.description'),
-                thumbnailUrl: last(data_get($youTubeVideoDetails, 'snippet.thumbnails'))['url'] ?? null,
+                thumbnailUrl: $this->pickThumbnailUrl(data_get($youTubeVideoDetails, 'snippet.thumbnails', [])),
                 publishedAt: $this->toCarbon(data_get($youTubeVideoDetails, 'snippet.publishedAt')),
                 plannedStart: $this->getPlannedStart($youTubeVideoDetails),
                 actualStartTime: $this->toCarbon(data_get($youTubeVideoDetails, 'liveStreamingDetails.actualStartTime')),
                 actualEndTime: $this->toCarbon(data_get($youTubeVideoDetails, 'liveStreamingDetails.actualEndTime')),
                 status: $this->getStatusFromYouVideoDetails($youTubeVideoDetails),
             ));
+    }
+
+    /**
+     * YouTube lists thumbnail sizes in an arbitrary order and has started to include
+     * sizes (fhd, qhd) whose URLs are not served by its image CDN, so we pick the
+     * largest size that is known to resolve.
+     *
+     * @param  array<string, array{url?: string}>  $thumbnails
+     */
+    protected function pickThumbnailUrl(array $thumbnails): string
+    {
+        foreach (['maxres', 'standard', 'high', 'medium', 'default'] as $size) {
+            if (! empty($thumbnails[$size]['url'])) {
+                return $thumbnails[$size]['url'];
+            }
+        }
+
+        return '';
     }
 
     protected function getPlannedStart(array $data): ?Carbon
